@@ -3,7 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <title>p5webkit</title>
+  <link rel="stylesheet" href="codemirror/codemirror.css">
+  <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
   <script src="nw.js"></script>
+  <script src="codemirror/codemirror.js"></script>
+  <script src="codemirror/modes/javascript/javascript.js"></script>
+  <script>
+  $(document).ready(function(){
+    var myCodeMirror = CodeMirror(document.body,{
+      value: "void setup(){\n\n};\n\nvoid draw(){\n\n};\n",
+      mode:  "javascript"
+    });
+  })
+  </script>
 </head>
 <body>
   <h1>p5webkit</h1>
