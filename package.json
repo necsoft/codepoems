@@ -1,0 +1,17 @@
+{
+  "name": "p5webkit",
+  "version": "0.0.1",
+  "description": "This an experimental IDE for Processing.",
+  "main": "app/main.html",
+  "author": "necsoft",
+  "repository": "https://github.com/necsoft/p5webkit",
+  "window": {
+    "toolbar": false,
+    "frame": false,
+    "resizable": false
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-stylus": "^0.18.0"
+  }
+}
