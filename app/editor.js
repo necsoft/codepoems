@@ -12,6 +12,8 @@ $(document).ready(function(){
   $button_save = $("#button_save");
   $button_run = $("#button_run");
 
+  var first_open = true;
+
   // Initialize the editor
   var editor = CodeMirror(document.getElementById("editor"),{
     value: "void setup(){\n\n};\n\nvoid draw(){\n\n};\n",
@@ -63,6 +65,5 @@ $(document).ready(function(){
       p5p.run_sketch(process.cwd()+"/app/tmp/sketch/",process.cwd()+"/app/tmp/sketch/build");
     });
   });
-
 
 });

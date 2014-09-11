@@ -1,7 +1,13 @@
+//Soy un archivito de prueba!
+
 void setup(){
-  size(800,600);
-};
+size(800,600);
+colorMode(HSB);
+
+}
+
 
 void draw(){
-	background(random(255));
-};
+background(noise(frameCount*0.05)*255,255,255);
+
+}

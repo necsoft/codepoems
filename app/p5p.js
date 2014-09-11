@@ -11,8 +11,4 @@
      console.log('Child Process STDOUT: '+stdout);
      console.log('Child Process STDERR: '+stderr);
    });
- }
-
- // p5.on('exit', function (code) {
- //   console.log('Child process exited with exit code '+code);
- // });
+ };
