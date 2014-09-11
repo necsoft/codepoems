@@ -16,7 +16,7 @@ $(document).ready(function(){
   var editor = CodeMirror(document.getElementById("editor"),{
     value: "void setup(){\n\n};\n\nvoid draw(){\n\n};\n",
     lineNumbers: true,
-    mode:  "javascript",
+    mode:  "processing",
     keyMap: "sublime",
     autoCloseBrackets: true,
     matchBrackets: true,
