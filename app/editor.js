@@ -2,6 +2,7 @@
 var gui = require("nw.gui");
 var fs = require("fs");
 var p5p = require("./p5p.js");
+var clipboard = gui.Clipboard.get();
 
 
 $(document).ready(function(){
@@ -15,9 +16,10 @@ $(document).ready(function(){
   var first_open = true;
 
   // Initialize the editor
-  var editor = CodeMirror(document.getElementById("editor"),{
+  var editor = CodeMirror.fromTextArea(document.getElementById("editor"),{
     value: "void setup(){\n\n};\n\nvoid draw(){\n\n};\n",
     lineNumbers: true,
+    lineWrapping: true,
     mode:  "processing",
     keyMap: "sublime",
     autoCloseBrackets: true,
@@ -65,5 +67,16 @@ $(document).ready(function(){
       p5p.run_sketch(process.cwd()+"/app/tmp/sketch/",process.cwd()+"/app/tmp/sketch/build");
     });
   });
+
+
+  if(editor.somethingSelected()){
+    console.log("Hay algo seleccionado");
+  }
+
+  CodeMirror.signal(editor,"changes",function(){
+    console.log("cambio");
+  });
+
+
 
 });

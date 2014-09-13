@@ -20,7 +20,7 @@
   <script src="codemirror/addon/edit/closebrackets.js"></script>
   <script src="codemirror/modes/processing/processing.js"></script>
   <script src="codemirror/keymap/sublime.js"></script>
-  <script src="editor.js"></script>
+
 </head>
 <body>
   <a id="button_run">Run</a>
@@ -30,7 +30,11 @@
   <a id="button_exit">Exit</a>
   <br>
   <br>
-  <div id="editor"></div>
-  <input style="display:none;" id="openFile" type="file" />
+  <form>
+    <textarea id="editor" name="editor"></textarea>
+  </form>
+  <input style="display:none;" id="openFile" type="file"/>
+
+  <script src="editor.js"></script>
 </body>
 </html>
