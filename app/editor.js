@@ -1,5 +1,6 @@
 // Dependencies
 var gui = require("nw.gui");
+var win = nw.Window.get();
 var fs = require("fs");
 var p5p = require("./p5p.js");
 var clipboard = gui.Clipboard.get();
@@ -12,6 +13,7 @@ $(document).ready(function(){
   $button_open = $("#button_open");
   $button_save = $("#button_save");
   $button_run = $("#button_run");
+  $button_exit = $("#button_exit");
 
   var first_open = true;
 
@@ -30,6 +32,10 @@ $(document).ready(function(){
     gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
   });
 
+  // Exit button
+  $button_exit.click(function(){
+    win.close(0);
+  });
 
   // Open button
   $button_open.click(function(){
