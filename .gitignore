@@ -12,4 +12,7 @@ results
 build
 node_modules
 .DS_Store
-app/tmp/sketch/*
+
+//Ignoramos el build
+app/tmp/sketch/sketch.pde
+app/tmp/sketch/build/*
