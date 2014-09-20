@@ -101,6 +101,7 @@ $(document).ready(function(){
         project.undeclared_project = false;
         project.name = name;
         project.dir = path.dirname(file_entry);
+        project.root_file = path.dirname(file_entry+path.sep+project.name);
         console.log(project);
         editor.setValue(String(data));
         project.unsaved_project = false;
@@ -113,6 +114,10 @@ $(document).ready(function(){
   // ---------------------------------------------------------------------------
 
   $button_run.click(function(){
+    run();
+  });
+
+  function run(){
     console.log("Voy a ejecutar esto");
     //El contenido del editor actual
     var str = editor.getValue();
@@ -133,17 +138,24 @@ $(document).ready(function(){
         p5p.run_temporal_sketch(project.dir,project.dir+"/build/",project,editor.getValue());
       }else{
         console.log("Some shit happens");
-
       }
     });
-  });
+  }
 
   // ---------------------------------------------------------------------------
   // SAVE & WRITE PROJECT
   // ---------------------------------------------------------------------------
 
+   function save(){
+    if(project.undeclared_project){
+      $("#saveFile").trigger("click");
+    }else{
+      saveOnly();
+    }
+  }
+
   $button_save.click(function(){
-    $("#saveFile").trigger("click");
+    save();
   });
 
   $("#saveFile").change(function(evt){
@@ -169,8 +181,19 @@ $(document).ready(function(){
         });
       }
     });
+  }
 
 
+  function saveOnly(){
+    console.log(project.root_file);
+    fs.writeFile(project.root_file,editor.getValue(),function(err){
+      if (err) {
+        console.log("Write failed: " + err);
+        return;
+      }
+      project.undeclared_project = false;
+      project.unsaved_project = false;
+    });
   }
 
   // ---------------------------------------------------------------------------
@@ -182,5 +205,12 @@ $(document).ready(function(){
     project.unsaved_project = true;
   });
 
+
+  // ---------------------------------------------------------------------------
+  // ADD KEY MAPS
+  // ---------------------------------------------------------------------------
+
+  var map = {"Cmd-S": save,"Cmd-R" : run};
+  editor.addKeyMap(map);
 
 }); // END READY
