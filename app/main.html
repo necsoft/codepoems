@@ -24,19 +24,42 @@
 
 </head>
 <body>
-  <a id="button_run">Run</a>
-  <a id="button_new">New</a>
-  <a id="button_open">Open</a>
-  <a id="button_save">Save</a>
-  <a id="button_exit">Exit</a>
-  <br>
-  <br>
-  <form>
-    <textarea id="editor" name="editor"></textarea>
-  </form>
-  <input style="display:none;" id="openFile" type="file"/>
+	<header>
+		<nav id="mainNav">
+	  		<a id="button_run">Run</a>
+	  		<a id="button_new">New</a>
+	  		<a id="button_open">Open</a>
+	  		<a id="button_save">Save</a>
+			<a id="button_exit">Exit</a>
+		</nav>
+		<div class="run">
+			<ul>
+				<li>
+					<a>
+						<figure>
+							<img src="static/img/play.svg" alt="">
+						</figure>
 
-  <div id="console">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores quasi in minus esse corporis reiciendis atque amet nulla, dolorum vel, possimus, explicabo doloribus eius debitis ea libero perferendis quos quidem.</div>
+					</a>
+				</li>
+				<li>
+					<a>
+						<figure>
+							<img src="static/img/stop.svg" alt="">
+						</figure>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</header>
+	<section id="mainEditor">
+		<form>
+	    	<textarea id="editor" name="editor"></textarea>
+	  	</form>
+	  	<input style="display:none;" id="openFile" type="file"/>
+	</section>
+  <section id="console">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores quasi in minus esse corporis reiciendis atque amet nulla, dolorum vel, possimus, explicabo doloribus eius debitis ea libero perferendis quos quidem.</section>
+
   <script src="editor.js"></script>
 </body>
 </html>
