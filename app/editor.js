@@ -55,6 +55,36 @@ $(document).ready(function(){
     win.close(0);
   });
 
+
+  // ---------------------------------------------------------------------------
+  // NEW
+  // ---------------------------------------------------------------------------
+
+  function new_project(){
+    if(project.unsaved_project){
+      if(confirm("Esta seguro que quiere descartar este proyecto?")){
+        reset_project();
+      }
+    }else if(project.unsaved_project === false){
+      reset_project();
+    }
+
+  }
+
+  function reset_project(){
+    editor.setValue("");
+    project.unsaved_project = true;
+    project.undeclared_project = true;
+    project.name = "sketch";
+    project.dir = "app/tmp/sketch";
+    project.dir_parent = "";
+  }
+
+  // Handle new button
+  $button_new.click(function(){
+    new_project();
+  });
+
   // ---------------------------------------------------------------------------
   // OPEN
   // ---------------------------------------------------------------------------
@@ -118,10 +148,9 @@ $(document).ready(function(){
   });
 
   function run(){
-    console.log("Voy a ejecutar esto");
     //El contenido del editor actual
     var str = editor.getValue();
-    //Lo escribe a una archivo temporal
+    //Lo escribe a un archivo temporal
     fs.writeFile("app/tmp/sketch/sketch.pde", str, function (err) {
       if (err) {
         console.log("Write failed: " + err);
@@ -134,7 +163,6 @@ $(document).ready(function(){
       }else if(project.undeclared_project === false && project.unsaved_project === false){
         p5p.run_sketch(project.dir,project.dir+"/build/");
       }else if(project.undeclared_project === false && project.unsaved_project){
-        //Something
         p5p.run_temporal_sketch(project.dir,project.dir+"/build/",project,editor.getValue());
       }else{
         console.log("Some shit happens");
@@ -146,8 +174,8 @@ $(document).ready(function(){
   // SAVE & WRITE PROJECT
   // ---------------------------------------------------------------------------
 
-   function save(){
-    if(project.undeclared_project){
+  function save(){
+    if(project.undeclared_project === true){
       $("#saveFile").trigger("click");
     }else{
       saveOnly();
@@ -178,6 +206,8 @@ $(document).ready(function(){
             console.log("Write failed: " + err);
             return;
           }
+          project.undeclared_project = false;
+          project.root_file = thePlace+path.sep+name+".pde";
         });
       }
     });
