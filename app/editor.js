@@ -240,7 +240,14 @@ $(document).ready(function(){
   // ADD KEY MAPS
   // ---------------------------------------------------------------------------
 
-  var map = {"Cmd-S": save,"Cmd-R" : run};
-  editor.addKeyMap(map);
+  var map = {
+    "Cmd-S": save,
+    "Ctrl-S": save,
+    "Cmd-R" : run,
+    "Ctrl-R" : run,
+    "Cmd-N" : new_project,
+    "Ctrl-N" : new_project
+    };
+    editor.addKeyMap(map);
 
-}); // END READY
+  }); // END READY
