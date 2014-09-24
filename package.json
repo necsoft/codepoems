@@ -12,6 +12,7 @@
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-contrib-stylus": "^0.18.0",
-    "fluidity": "*"
+    "fluidity": "*",
+    "mkdirp" : "*"
   }
 }
