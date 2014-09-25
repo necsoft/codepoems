@@ -1,34 +1,46 @@
-html
-	height 100%
+html{
+	height 100%;
+}
 
 body{
-  margin:0;
-  overflow:hidden;
-  padding:0;
+	margin:0;
+  	overflow:hidden;
+  	padding:0;
 }
 
 //Esto esta por ahora sobreescribiendo el estilo de Codemirror
 .CodeMirror{
-  height:75%;
-  position:absolute;
-  width:100%;
-  background-color blue
+  	height:75%;
+  	position:absolute;
+  	width:100%;
+  	background-color blue
 }
 
 #console{
-  background-color:#191919;
-  display: block;
-  float: left;
-  height: 25%;
-  margin: 0;
-  overflow:scroll;
-  padding: 0;
-  position: absolute;
-  top: 75%;
-  width: 100%;
-  z-index:-1;
-}
+ 	background-color:#191919;
+  	display: block;
+  	float: left;
+  	height: 25%;
+  	margin: 0;
+  	overflow:scroll;
+  	position: absolute;
+  	top: 75%;
+  	z-index 3;
 
+  	p{
+		color: #7f7e7e;
+		padding: 5px;
+		margin: 0;
+
+		&:nth-child(even){
+			background-color:#1e1e1e;
+		}
+
+		&:nth-child(odd){
+			background-color:#262626;
+		}
+  	}
+}
 
 a{
   color:#fff;
@@ -41,8 +53,6 @@ header{
  	margin:0;
   	padding:0;
   	overflow:hidden;
-
-
 }
 
 #mainNav{
