@@ -1,8 +1,6 @@
-![Imgur](http://i.imgur.com/5ljLnRO.png)
+#Codepoems
 ---
-**p5webkit** is an experimental IDE for processing made with node-webkit. We are trying to create a mix of all our favorites IDEs.
-
-This project is inspired in Atom Editor and Sublime Text.
+This is an experimental IDE for Processing.
 
 ### Be careful
 This is only an experiment for now.
