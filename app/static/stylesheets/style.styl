@@ -1,85 +1,148 @@
-html{
-	height 100%;
-}
+// html{
+// 	height 100%;
+// }
+
+// body{
+// 	margin:0;
+//   	overflow:hidden;
+//   	padding:0;
+// }
+
+// //Esto esta por ahora sobreescribiendo el estilo de Codemirror
+// .CodeMirror{
+//   	height:75%;
+//   	position:absolute;
+//   	width:100%;
+//   	background-color blue
+// }
+
+// #console{
+//  	background-color:#191919;
+//   	display: block;
+//   	float: left;
+//   	height: 25%;
+//   	margin: 0;
+//      overflow-x: hidden;
+//      overflow-y: auto;
+//   	position: absolute;
+//   	top: 75%;
+//   	z-index 3;
+//      width:100%; 
+
+//   	p{
+// 		color: #7f7e7e;
+// 		padding: 5px;
+// 		margin: 0;
+
+// 		&:nth-child(even){
+// 			background-color:#1e1e1e;
+// 		}
+
+// 		&:nth-child(odd){
+// 			background-color:#262626;
+// 		}
+//   	}
+// }
+
+// a{
+//   color:#fff;
+// }
+
+
+// header{
+//      -webkit-app-region:drag;
+//  	background-color:#013642;
+//  	height 55px
+//  	margin:0;
+//   	padding:0;
+//   	overflow:hidden;
+// }
+
+// #mainNav{
+// 	display: inline-block;
+// }
+
+
+// .cm-s-paraiso-dark.CodeMirror,
+// .cm-s-paraiso-dark .CodeMirror-gutters
+// 	background: #353535
+
+// .run
+// 	float right
+
+// 	figure
+// 		background-color #006475
+// 		border-radius 50px
+// 		padding 8px
+// 		margin 8px
+// 		height: 20px;
+// 		width: 20px;
+// 		text-align: center;
+
+
+// 	ul
+// 		margin 0
+// 		padding 0 
+
+// 	li
+// 		list-style none
+// 		float left;
+
+
+
+
+
+
+
+
+
 
 body{
-	margin:0;
-  	overflow:hidden;
-  	padding:0;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  overflow:hidden
 }
 
-//Esto esta por ahora sobreescribiendo el estilo de Codemirror
+
+#mainNav{
+    -webkit-app-region:drag;
+    margin:0;
+    padding:0;
+    width:100%;
+    float:left;
+    height:50px;
+    overflow:hidden;  
+    background-color:#3D3D3D;
+}
+
+#navTextButtons{
+    height:inherit;
+    float:left;
+}
+
+#navIcons{
+    height:inherit; 
+    float:left;
+    
+}
+
+#mainEditor{
+    float:left;
+    width:100%;
+    height:400px;
+}
+
 .CodeMirror{
-  	height:75%;
-  	position:absolute;
-  	width:100%;
-  	background-color blue
+    height:400px;
 }
 
 #console{
- 	background-color:#191919;
-  	display: block;
-  	float: left;
-  	height: 25%;
-  	margin: 0;
-  	overflow:scroll;
-  	position: absolute;
-  	top: 75%;
-  	z-index 3;
-
-  	p{
-		color: #7f7e7e;
-		padding: 5px;
-		margin: 0;
-
-		&:nth-child(even){
-			background-color:#1e1e1e;
-		}
-
-		&:nth-child(odd){
-			background-color:#262626;
-		}
-  	}
+    float:left;
+    width:100%;
+    background-color:#999;
+    height:150px;
+    overflow-y:auto;
 }
-
-a{
-  color:#fff;
-}
-
-
-header{
- 	background-color:#013642;
- 	height 55px
- 	margin:0;
-  	padding:0;
-  	overflow:hidden;
-}
-
-#mainNav{
-	display: inline-block;
-}
-
-
-.cm-s-paraiso-dark.CodeMirror,
-.cm-s-paraiso-dark .CodeMirror-gutters
-	background: #353535
-
-.run
-	float right
-
-	figure
-		background-color #006475
-		border-radius 50px
-		padding 8px
-		margin 8px
-		height: 20px;
-		width: 20px;
-		text-align: center;
-
-	ul
-		margin 0
-		padding 0 
-
-	li
-		list-style none
-		float left;
