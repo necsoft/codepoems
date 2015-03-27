@@ -12,6 +12,7 @@ results
 build
 node_modules
 .DS_Store
+bower_components
 
 //Ignoramos el build
 app/tmp/sketch/sketch.pde
