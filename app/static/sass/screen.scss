@@ -6,45 +6,75 @@ body{
   position: absolute;
   top: 0;
   width: 100%;
+  height: 100%;
   overflow:hidden;
 }
 
 #mainNav{
-    -webkit-app-region:drag;
-    margin:0;
-    padding:0;
-    width:100%;
-    float:left;
-    height:50px;
-    overflow:hidden;  
-    background-color:#3D3D3D;
+  margin:0;
+  padding:0;
+  width:100%;
+  float:left;
+  height:50px;
+  overflow:hidden;  
+  background-color:#3D3D3D;
 }
 
 #navTextButtons{
-    height:inherit;
-    float:left;
+  height:inherit;
+  float:left;
 }
 
 #navIcons{
-    height:inherit; 
-    float:left;
-    
+  height:inherit; 
+  float:left;
+  
 }
 
 #mainEditor{
-    float:left;
-    width:100%;
-    height:400px;
+  float:left;
+  width:100%;
 }
 
 .CodeMirror{
-    height:400px;
+  height:400px;
+}
+
+#upnav{
+  -webkit-app-region:drag;
+  background-color: #000;
+  width:100%;
+  height:20px;
+  cursor:pointer;
 }
 
 #console{
-    float:left;
-    width:100%;
-    background-color:#999;
-    height:150px;
-    overflow-y:auto;
+  float:left;
+  width:100%;
+  height:100%;
+  background-color:#999;  
+  overflow-y:auto;
+  border-top:5px solid #333;
+}
+
+.close_button,.max_button,.min_button{
+  cursor:pointer;
+  width:10px;
+  height:10px;
+  float:left;
+  margin:4px;   
+  border-radius:10px;
+}
+
+
+.close_button{
+  background-color: #F26184;
+}
+
+.max_button{
+  background-color: #75ED64;
+}
+
+.min_button{
+  background-color: #FFE422;
 }

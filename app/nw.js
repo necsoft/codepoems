@@ -14,8 +14,6 @@ $(document).keyup(function(e) {
     }
 });
 
-
-
 //Clipboard FIX OS X
 var nativeMenuBar = new nw.Menu({
     type: "menubar"

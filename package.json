@@ -8,9 +8,10 @@
     "window": {
         "toolbar": false,
         "frame": false,
-        "width": 500,
-        "height": 600,
-        "resizable": false
+        "width": 600,
+        "height": 700,
+        "resizable": false,
+        "always-on-top": true
     },
     "devDependencies": {
         "fluidity": "*",
