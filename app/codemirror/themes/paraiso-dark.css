@@ -1,4 +1,4 @@
-.cm-s-paraiso-dark.CodeMirror {background: #262626; color: #b9b6b0;}
+.cm-s-paraiso-dark.CodeMirror {background: #262626; color: #b9b6b0;font-family:'Consolas',sans-serif;font-size:0.8em;}
 .cm-s-paraiso-dark div.CodeMirror-selected {background: #ffffff !important;}
 .cm-s-paraiso-dark .CodeMirror-gutters {background: #111111; border-right: 0px;}
 .cm-s-paraiso-dark .CodeMirror-guttermarker { color: #ef6155; }

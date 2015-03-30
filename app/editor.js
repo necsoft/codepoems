@@ -12,7 +12,7 @@ var clipboard = gui.Clipboard.get();
 
 var exampleCode = '\
 //----------------------- \n\
-//Welcome to Codepoems \n\
+// Welcome to Codepoems \n\
 //----------------------- \n\
 \n\
 int cantidad = 200;\nboolean garlopa = false;\
@@ -21,7 +21,7 @@ int cantidad = 200;\nboolean garlopa = false;\
 \n}\n\nvoid draw(){\n\tbackground(#3D3D3D);\
 \n\tfor(int i=0;i<cantidad;i++){\
 \n\t\tnoStroke();\n\t\tfill(random(255),random(1,30));\n\t\tellipse(random(width),random(height),i,i);\
-\n\t}\n\tprintln("aloha");\n}';
+\n\t}\n\tprintln("aloha"+frameCount);\n}';
 
 // ---------------------------------------------------------------------------
 // IIFE
@@ -171,7 +171,6 @@ int cantidad = 200;\nboolean garlopa = false;\
                 console.log("Write failed: " + err);
                 return;
             }
-
             //Las tres formas posibles de run
             if (project.undeclared_project) {
                 p5p.run_sketch($, process.cwd() + "/app/tmp/sketch/", process.cwd() + "/app/tmp/sketch/build");

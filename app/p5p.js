@@ -14,23 +14,11 @@
  exports.run_sketch = function($, sketch_dir, sketch_build) {
      $console = $("#console");
      $console.append("<p>Running sketch...</p>");
-     // childProcess.exec('processing-java --sketch=' + sketch_dir + ' --output=' + sketch_build + ' --run --force ', function(error, stdout, stderr) {
-     //     if (error) {
-     //         console.log(error.stack);
-     //         console.log('Error code: ' + error.code);
-     //         console.log('Signal received: ' + error.signal);
-     //     }
-     //     console.log('Child Process STDOUT: ' + stdout);
-     //     $console.append("<p>" + stdout + "</p></br>");
-     //     console.log('Child Process STDERR: ' + stderr);
-     // });
-
      var child = childProcess('processing-java', ["--sketch=" + sketch_dir, "--output=" + sketch_build, "--run", "--force"]);
-
 
      child.stdout.on('data',
          function(data) {
-             $console.append("<p>" + data + "</p>");
+             $console.append("<p> > " + data + "</p>");
              $console.scrollTop(9999999)
          }
      );
@@ -40,8 +28,6 @@
              $console.scrollTop(9999999)
          }
      );
-
-
  };
 
 
@@ -72,7 +58,7 @@
                  //  console.log('Child Process STDOUT: '+stdout);
                  //  console.log('Child Process STDERR: '+stderr);
                  fs.writeFile(the_file, last_file, function(err) {
-                     console.log("Listorti!!!");
+                     //console.log("Listorti!!!");
                  });
              });
          });
