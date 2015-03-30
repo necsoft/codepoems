@@ -21,7 +21,7 @@ int cantidad = 200;\nboolean garlopa = false;\
 \n}\n\nvoid draw(){\n\tbackground(#3D3D3D);\
 \n\tfor(int i=0;i<cantidad;i++){\
 \n\t\tnoStroke();\n\t\tfill(random(255),random(1,30));\n\t\tellipse(random(width),random(height),i,i);\
-\n\t}\n}';
+\n\t}\n\tprintln("aloha");\n}';
 
 // ---------------------------------------------------------------------------
 // IIFE
@@ -174,9 +174,9 @@ int cantidad = 200;\nboolean garlopa = false;\
 
             //Las tres formas posibles de run
             if (project.undeclared_project) {
-                p5p.run_sketch(process.cwd() + "/app/tmp/sketch/", process.cwd() + "/app/tmp/sketch/build");
+                p5p.run_sketch($, process.cwd() + "/app/tmp/sketch/", process.cwd() + "/app/tmp/sketch/build");
             } else if (project.undeclared_project === false && project.unsaved_project === false) {
-                p5p.run_sketch(project.dir, project.dir + "/build/");
+                p5p.run_sketch($, project.dir, project.dir + "/build/");
             } else if (project.undeclared_project === false && project.unsaved_project) {
                 p5p.run_temporal_sketch(project.dir, project.dir + "/build/", project, editor.getValue());
             } else {

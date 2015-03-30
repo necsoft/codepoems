@@ -1,4 +1,4 @@
- var childProcess = require('child_process'),
+ var childProcess = require('child_process').spawn,
      p5;
  var fs = require("fs");
  var path = require("path");
@@ -11,16 +11,37 @@
  //
  // ---------------------------------------------------------------------------
 
- exports.run_sketch = function(sketch_dir, sketch_build) {
-     childProcess.exec('processing-java --sketch=' + sketch_dir + ' --output=' + sketch_build + ' --run --force ', function(error, stdout, stderr) {
-         if (error) {
-             console.log(error.stack);
-             console.log('Error code: ' + error.code);
-             console.log('Signal received: ' + error.signal);
+ exports.run_sketch = function($, sketch_dir, sketch_build) {
+     $console = $("#console");
+     $console.append("<p>Running sketch...</p>");
+     // childProcess.exec('processing-java --sketch=' + sketch_dir + ' --output=' + sketch_build + ' --run --force ', function(error, stdout, stderr) {
+     //     if (error) {
+     //         console.log(error.stack);
+     //         console.log('Error code: ' + error.code);
+     //         console.log('Signal received: ' + error.signal);
+     //     }
+     //     console.log('Child Process STDOUT: ' + stdout);
+     //     $console.append("<p>" + stdout + "</p></br>");
+     //     console.log('Child Process STDERR: ' + stderr);
+     // });
+
+     var child = childProcess('processing-java', ["--sketch=" + sketch_dir, "--output=" + sketch_build, "--run", "--force"]);
+
+
+     child.stdout.on('data',
+         function(data) {
+             $console.append("<p>" + data + "</p>");
+             $console.scrollTop(9999999)
          }
-         //  console.log('Child Process STDOUT: '+stdout);
-         //  console.log('Child Process STDERR: '+stderr);
-     });
+     );
+     child.stderr.on('data',
+         function(data) {
+             $console.append("<p class='consoleError'>" + data + "</p>");
+             $console.scrollTop(9999999)
+         }
+     );
+
+
  };
 
 
@@ -46,6 +67,7 @@
                      console.log(error.stack);
                      console.log('Error code: ' + error.code);
                      console.log('Signal received: ' + error.signal);
+
                  }
                  //  console.log('Child Process STDOUT: '+stdout);
                  //  console.log('Child Process STDERR: '+stderr);

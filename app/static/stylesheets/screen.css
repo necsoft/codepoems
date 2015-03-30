@@ -123,13 +123,25 @@ body {
 #console {
   float: left;
   width: 100%;
-  height: 100%;
+  height: 225px;
   background-color: #1D1D1D;
-  overflow-y: auto;
+  overflow-y: scroll;
   border-top: 5px solid #333;
+  padding-bottom: 350px;
+  color: #333;
+  font-size: 0.8em;
+}
+/* line 63, ../sass/screen.scss */
+#console p {
+  margin-left: 10px;
+}
+/* line 66, ../sass/screen.scss */
+#console .consoleError {
+  color: #F26184;
+  font-weight: 900;
 }
 
-/* line 62, ../sass/screen.scss */
+/* line 72, ../sass/screen.scss */
 .exit_button, .max_button, .min_button {
   cursor: pointer;
   width: 10px;
@@ -139,17 +151,17 @@ body {
   border-radius: 10px;
 }
 
-/* line 72, ../sass/screen.scss */
+/* line 82, ../sass/screen.scss */
 .exit_button {
   background-color: #F26184;
 }
 
-/* line 76, ../sass/screen.scss */
+/* line 86, ../sass/screen.scss */
 .max_button {
   background-color: #75ED64;
 }
 
-/* line 80, ../sass/screen.scss */
+/* line 90, ../sass/screen.scss */
 .min_button {
   background-color: #FFE422;
 }
