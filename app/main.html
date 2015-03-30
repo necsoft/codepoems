@@ -31,31 +31,16 @@
     </ul>
   </header>
 	<header id="mainNav">
-		<nav id="navTextButtons">
-	  		<a id="button_run">Run</a>
-	  		<a id="button_new">New</a>
-	  		<a id="button_open">Open</a>
-	  		<a id="button_save">Save</a>
-			  <!-- <a id="button_exit">Exit</a> -->
-		</nav>
 		<nav id="navIcons">
-			<ul>
-				<li>
-					<a>
-						<figure>
-							<img src="static/img/play.svg" alt="">
-						</figure>
-					</a>
-				</li>
-				<li>
-					<a>
-						<figure>
-							<img src="static/img/stop.svg" alt="">
-						</figure>
-					</a>
-				</li>
-			</ul>
+        <i id="button_run" class="icon-play-circle-fill"></i>
+        <i class="icon-pause-circle-fill"></i>
 		</nav>
+    <nav class="rightIcons">
+      <i class="icon-bug-report"></i>
+      <i class="icon-palette"></i>
+      <i class="icon-tune"></i>
+      <i class="icon-settings"></i>
+    </nav>
 	</header>
 
 	<section id="mainEditor">
@@ -64,10 +49,11 @@
 	</section>
   
   <!-- CONSOLE BLOCK -->
+  <div id="consoleWrap">
   <section id="console">
   </section>
+  </div>
   <!-- CONSOLE BLOCK -->
-
   <script src="editor.js"></script>
 </body>
 </html>

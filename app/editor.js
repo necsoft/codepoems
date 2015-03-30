@@ -15,13 +15,13 @@ var exampleCode = '\
 // Welcome to Codepoems \n\
 //----------------------- \n\
 \n\
-int cantidad = 200;\nboolean garlopa = false;\
+int cantidad = 200;\nboolean unboolean = false;\
 \ncolor colorcito = color(#ff00ff);\
 \n\nvoid setup(){\n\t\size(900,600);\n\tframeRate(10);\
-\n}\n\nvoid draw(){\n\tbackground(#3D3D3D);\
-\n\tfor(int i=0;i<cantidad;i++){\
-\n\t\tnoStroke();\n\t\tfill(random(255),random(1,30));\n\t\tellipse(random(width),random(height),i,i);\
-\n\t}\n\tprintln("aloha"+frameCount);\n}';
+  \n}\n\nvoid draw(){\n\tbackground(#3D3D3D);\
+    \n\tfor(int i=0;i<cantidad;i++){\
+      \n\t\tnoStroke();\n\t\tfill(random(255),random(1,30));\n\t\tellipse(random(width),random(height),i,i);\
+      \n\t}\n\tprintln("aloha"+frameCount);\n}';
 
 // ---------------------------------------------------------------------------
 // IIFE
@@ -44,6 +44,8 @@ int cantidad = 200;\nboolean garlopa = false;\
     $button_run = $("#button_run");
     $button_exit = $(".exit_button");
 
+    $button_chrome_dev = $(".icon-bug-report")
+
     // Initialize the editor
     var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
         lineNumbers: true,
@@ -60,6 +62,12 @@ int cantidad = 200;\nboolean garlopa = false;\
 
     // Pongo el ejemplo de prueba
     editor.setValue(exampleCode);
+
+
+    // Open chrome developer tool
+    $button_chrome_dev.click(function() {
+        win.showDevTools();
+    })
 
     // ---------------------------------------------------------------------------
     // EXIT

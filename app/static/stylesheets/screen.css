@@ -63,7 +63,473 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   display: block;
 }
 
-/* line 3, ../sass/screen.scss */
+@font-face {
+  font-family: 'icomoon';
+  src: url("../fonts/icomoon.eot?-qxtg9p");
+  src: url("../fonts/icomoon.eot?#iefix-qxtg9p") format("embedded-opentype"), url("../fonts/icomoon.woff?-qxtg9p") format("woff"), url("../fonts/icomoon.ttf?-qxtg9p") format("truetype"), url("../fonts/icomoon.svg?-qxtg9p#icomoon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+/* line 12, ../sass/_fonts.scss */
+[class^="icon-"], [class*=" icon-"] {
+  font-family: 'icomoon';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* line 26, ../sass/_fonts.scss */
+.icon-alarm:before {
+  content: "\e600";
+}
+
+/* line 30, ../sass/_fonts.scss */
+.icon-android:before {
+  content: "\e601";
+}
+
+/* line 34, ../sass/_fonts.scss */
+.icon-backup:before {
+  content: "\e602";
+}
+
+/* line 38, ../sass/_fonts.scss */
+.icon-bug-report:before {
+  content: "\e603";
+}
+
+/* line 42, ../sass/_fonts.scss */
+.icon-cached:before {
+  content: "\e604";
+}
+
+/* line 46, ../sass/_fonts.scss */
+.icon-delete:before {
+  content: "\e605";
+}
+
+/* line 50, ../sass/_fonts.scss */
+.icon-description:before {
+  content: "\e606";
+}
+
+/* line 54, ../sass/_fonts.scss */
+.icon-done:before {
+  content: "\e607";
+}
+
+/* line 58, ../sass/_fonts.scss */
+.icon-favorite:before {
+  content: "\e608";
+}
+
+/* line 62, ../sass/_fonts.scss */
+.icon-help:before {
+  content: "\e609";
+}
+
+/* line 66, ../sass/_fonts.scss */
+.icon-highlight-remove:before {
+  content: "\e60a";
+}
+
+/* line 70, ../sass/_fonts.scss */
+.icon-label:before {
+  content: "\e60b";
+}
+
+/* line 74, ../sass/_fonts.scss */
+.icon-label-outline:before {
+  content: "\e60c";
+}
+
+/* line 78, ../sass/_fonts.scss */
+.icon-language:before {
+  content: "\e60d";
+}
+
+/* line 82, ../sass/_fonts.scss */
+.icon-list:before {
+  content: "\e60e";
+}
+
+/* line 86, ../sass/_fonts.scss */
+.icon-report-problem:before {
+  content: "\e60f";
+}
+
+/* line 90, ../sass/_fonts.scss */
+.icon-settings:before {
+  content: "\e610";
+}
+
+/* line 94, ../sass/_fonts.scss */
+.icon-settings-applications:before {
+  content: "\e611";
+}
+
+/* line 98, ../sass/_fonts.scss */
+.icon-settings-ethernet:before {
+  content: "\e612";
+}
+
+/* line 102, ../sass/_fonts.scss */
+.icon-star-rate:before {
+  content: "\e613";
+}
+
+/* line 106, ../sass/_fonts.scss */
+.icon-stars:before {
+  content: "\e614";
+}
+
+/* line 110, ../sass/_fonts.scss */
+.icon-translate:before {
+  content: "\e615";
+}
+
+/* line 114, ../sass/_fonts.scss */
+.icon-equalizer:before {
+  content: "\e616";
+}
+
+/* line 118, ../sass/_fonts.scss */
+.icon-new-releases:before {
+  content: "\e617";
+}
+
+/* line 122, ../sass/_fonts.scss */
+.icon-not-interested:before {
+  content: "\e618";
+}
+
+/* line 126, ../sass/_fonts.scss */
+.icon-pause:before {
+  content: "\e619";
+}
+
+/* line 130, ../sass/_fonts.scss */
+.icon-pause-circle-fill:before {
+  content: "\e61a";
+}
+
+/* line 134, ../sass/_fonts.scss */
+.icon-pause-circle-outline:before {
+  content: "\e61b";
+}
+
+/* line 138, ../sass/_fonts.scss */
+.icon-play-arrow:before {
+  content: "\e61c";
+}
+
+/* line 142, ../sass/_fonts.scss */
+.icon-play-circle-fill:before {
+  content: "\e61d";
+}
+
+/* line 146, ../sass/_fonts.scss */
+.icon-play-circle-outline:before {
+  content: "\e61e";
+}
+
+/* line 150, ../sass/_fonts.scss */
+.icon-stop:before {
+  content: "\e61f";
+}
+
+/* line 154, ../sass/_fonts.scss */
+.icon-subtitles:before {
+  content: "\e620";
+}
+
+/* line 158, ../sass/_fonts.scss */
+.icon-chat:before {
+  content: "\e621";
+}
+
+/* line 162, ../sass/_fonts.scss */
+.icon-dnd-on:before {
+  content: "\e622";
+}
+
+/* line 166, ../sass/_fonts.scss */
+.icon-location-on:before {
+  content: "\e623";
+}
+
+/* line 170, ../sass/_fonts.scss */
+.icon-message:before {
+  content: "\e624";
+}
+
+/* line 174, ../sass/_fonts.scss */
+.icon-messenger:before {
+  content: "\e625";
+}
+
+/* line 178, ../sass/_fonts.scss */
+.icon-sort:before {
+  content: "\e626";
+}
+
+/* line 182, ../sass/_fonts.scss */
+.icon-text-format:before {
+  content: "\e627";
+}
+
+/* line 186, ../sass/_fonts.scss */
+.icon-attach-file:before {
+  content: "\e628";
+}
+
+/* line 190, ../sass/_fonts.scss */
+.icon-format-indent-decrease:before {
+  content: "\e629";
+}
+
+/* line 194, ../sass/_fonts.scss */
+.icon-format-indent-increase:before {
+  content: "\e62a";
+}
+
+/* line 198, ../sass/_fonts.scss */
+.icon-mode-edit:before {
+  content: "\e62b";
+}
+
+/* line 202, ../sass/_fonts.scss */
+.icon-cloud:before {
+  content: "\e62c";
+}
+
+/* line 206, ../sass/_fonts.scss */
+.icon-cloud-done:before {
+  content: "\e62d";
+}
+
+/* line 210, ../sass/_fonts.scss */
+.icon-cloud-download:before {
+  content: "\e62e";
+}
+
+/* line 214, ../sass/_fonts.scss */
+.icon-keyboard-arrow-down:before {
+  content: "\e62f";
+}
+
+/* line 218, ../sass/_fonts.scss */
+.icon-keyboard-arrow-left:before {
+  content: "\e630";
+}
+
+/* line 222, ../sass/_fonts.scss */
+.icon-keyboard-arrow-right:before {
+  content: "\e631";
+}
+
+/* line 226, ../sass/_fonts.scss */
+.icon-keyboard-arrow-up:before {
+  content: "\e632";
+}
+
+/* line 230, ../sass/_fonts.scss */
+.icon-adjust:before {
+  content: "\e633";
+}
+
+/* line 234, ../sass/_fonts.scss */
+.icon-center-focus-weak:before {
+  content: "\e634";
+}
+
+/* line 238, ../sass/_fonts.scss */
+.icon-color-lens:before {
+  content: "\e635";
+}
+
+/* line 242, ../sass/_fonts.scss */
+.icon-colorize:before {
+  content: "\e636";
+}
+
+/* line 246, ../sass/_fonts.scss */
+.icon-lens:before {
+  content: "\e637";
+}
+
+/* line 250, ../sass/_fonts.scss */
+.icon-palette:before {
+  content: "\e638";
+}
+
+/* line 254, ../sass/_fonts.scss */
+.icon-panorama:before {
+  content: "\e639";
+}
+
+/* line 258, ../sass/_fonts.scss */
+.icon-panorama-fisheye:before {
+  content: "\e63a";
+}
+
+/* line 262, ../sass/_fonts.scss */
+.icon-photo-camera:before {
+  content: "\e63b";
+}
+
+/* line 266, ../sass/_fonts.scss */
+.icon-portrait:before {
+  content: "\e63c";
+}
+
+/* line 270, ../sass/_fonts.scss */
+.icon-remove-red-eye:before {
+  content: "\e63d";
+}
+
+/* line 274, ../sass/_fonts.scss */
+.icon-tag-faces:before {
+  content: "\e63e";
+}
+
+/* line 278, ../sass/_fonts.scss */
+.icon-texture:before {
+  content: "\e63f";
+}
+
+/* line 282, ../sass/_fonts.scss */
+.icon-timelapse:before {
+  content: "\e640";
+}
+
+/* line 286, ../sass/_fonts.scss */
+.icon-tune:before {
+  content: "\e641";
+}
+
+/* line 290, ../sass/_fonts.scss */
+.icon-beenhere:before {
+  content: "\e642";
+}
+
+/* line 294, ../sass/_fonts.scss */
+.icon-layers:before {
+  content: "\e643";
+}
+
+/* line 298, ../sass/_fonts.scss */
+.icon-local-cafe:before {
+  content: "\e644";
+}
+
+/* line 302, ../sass/_fonts.scss */
+.icon-local-offer:before {
+  content: "\e645";
+}
+
+/* line 306, ../sass/_fonts.scss */
+.icon-local-see:before {
+  content: "\e646";
+}
+
+/* line 310, ../sass/_fonts.scss */
+.icon-apps:before {
+  content: "\e647";
+}
+
+/* line 314, ../sass/_fonts.scss */
+.icon-arrow-back:before {
+  content: "\e648";
+}
+
+/* line 318, ../sass/_fonts.scss */
+.icon-arrow-drop-down:before {
+  content: "\e649";
+}
+
+/* line 322, ../sass/_fonts.scss */
+.icon-arrow-drop-down-circle:before {
+  content: "\e64a";
+}
+
+/* line 326, ../sass/_fonts.scss */
+.icon-arrow-drop-up:before {
+  content: "\e64b";
+}
+
+/* line 330, ../sass/_fonts.scss */
+.icon-arrow-forward:before {
+  content: "\e64c";
+}
+
+/* line 334, ../sass/_fonts.scss */
+.icon-cancel:before {
+  content: "\e64d";
+}
+
+/* line 338, ../sass/_fonts.scss */
+.icon-check:before {
+  content: "\e64e";
+}
+
+/* line 342, ../sass/_fonts.scss */
+.icon-chevron-left:before {
+  content: "\e64f";
+}
+
+/* line 346, ../sass/_fonts.scss */
+.icon-chevron-right:before {
+  content: "\e650";
+}
+
+/* line 350, ../sass/_fonts.scss */
+.icon-close:before {
+  content: "\e651";
+}
+
+/* line 354, ../sass/_fonts.scss */
+.icon-expand-less:before {
+  content: "\e652";
+}
+
+/* line 358, ../sass/_fonts.scss */
+.icon-expand-more:before {
+  content: "\e653";
+}
+
+/* line 362, ../sass/_fonts.scss */
+.icon-menu:before {
+  content: "\e654";
+}
+
+/* line 366, ../sass/_fonts.scss */
+.icon-more-horiz:before {
+  content: "\e655";
+}
+
+/* line 370, ../sass/_fonts.scss */
+.icon-unfold-less:before {
+  content: "\e656";
+}
+
+/* line 374, ../sass/_fonts.scss */
+.icon-unfold-more:before {
+  content: "\e657";
+}
+
+/* line 378, ../sass/_fonts.scss */
+.icon-star:before {
+  content: "\e658";
+}
+
+/* line 4, ../sass/screen.scss */
 body {
   padding: 0;
   margin: 0;
@@ -76,7 +542,7 @@ body {
   color: #fff;
 }
 
-/* line 15, ../sass/screen.scss */
+/* line 16, ../sass/screen.scss */
 #mainNav {
   margin: 0;
   padding: 0;
@@ -87,30 +553,53 @@ body {
   background-color: #1E1E1E;
 }
 
-/* line 25, ../sass/screen.scss */
-#navTextButtons {
-  height: inherit;
-  float: left;
-}
-
-/* line 30, ../sass/screen.scss */
+/* line 26, ../sass/screen.scss */
 #navIcons {
   height: inherit;
   float: left;
+  margin-top: 5px;
+}
+/* line 31, ../sass/screen.scss */
+#navIcons i {
+  font-size: 2em;
+  margin-right: -5px;
+  cursor: pointer;
+}
+/* line 37, ../sass/screen.scss */
+#navIcons i:hover {
+  color: #CCC;
 }
 
-/* line 36, ../sass/screen.scss */
+/* line 42, ../sass/screen.scss */
+.rightIcons {
+  float: right;
+  text-align: right;
+  margin-top: 12px;
+  margin-right: 5px;
+}
+/* line 47, ../sass/screen.scss */
+.rightIcons i {
+  font-size: 1.2em;
+  color: #666;
+  cursor: pointer;
+}
+/* line 52, ../sass/screen.scss */
+.rightIcons i:hover {
+  color: #fff;
+}
+
+/* line 58, ../sass/screen.scss */
 #mainEditor {
   float: left;
   width: 100%;
 }
 
-/* line 41, ../sass/screen.scss */
+/* line 63, ../sass/screen.scss */
 .CodeMirror {
-  height: 400px;
+  height: 500px;
 }
 
-/* line 45, ../sass/screen.scss */
+/* line 67, ../sass/screen.scss */
 #upnav {
   -webkit-app-region: drag;
   background-color: #383838;
@@ -119,29 +608,37 @@ body {
   cursor: pointer;
 }
 
-/* line 53, ../sass/screen.scss */
+/* line 75, ../sass/screen.scss */
+#consoleWrap {
+  height: 130px;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background-color: #f0f;
+}
+
+/* line 84, ../sass/screen.scss */
 #console {
   float: left;
   width: 100%;
-  height: 225px;
   background-color: #1D1D1D;
-  overflow-y: scroll;
-  border-top: 5px solid #333;
-  padding-bottom: 350px;
+  overflow-y: auto;
+  border-top: 2px solid #111;
+  height: 130px;
   color: #666;
   font-size: 0.7em;
 }
-/* line 63, ../sass/screen.scss */
+/* line 93, ../sass/screen.scss */
 #console p {
   margin-left: 10px;
 }
-/* line 66, ../sass/screen.scss */
+/* line 96, ../sass/screen.scss */
 #console .consoleError {
   color: #F26184;
   font-weight: 900;
 }
 
-/* line 72, ../sass/screen.scss */
+/* line 102, ../sass/screen.scss */
 .exit_button, .max_button, .min_button {
   cursor: pointer;
   width: 10px;
@@ -151,17 +648,34 @@ body {
   border-radius: 10px;
 }
 
-/* line 82, ../sass/screen.scss */
+/* line 112, ../sass/screen.scss */
 .exit_button {
   background-color: #F26184;
 }
 
-/* line 86, ../sass/screen.scss */
+/* line 116, ../sass/screen.scss */
 .max_button {
   background-color: #75ED64;
 }
 
-/* line 90, ../sass/screen.scss */
+/* line 120, ../sass/screen.scss */
 .min_button {
   background-color: #FFE422;
+}
+
+/* line 126, ../sass/screen.scss */
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #333333;
+}
+
+/* line 132, ../sass/screen.scss */
+::-webkit-scrollbar {
+  width: 6px;
+  background-color: #333333;
+}
+
+/* line 138, ../sass/screen.scss */
+::-webkit-scrollbar-thumb {
+  background-color: #000000;
 }

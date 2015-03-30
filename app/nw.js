@@ -8,10 +8,6 @@ $(document).keyup(function(e) {
     if (e.keyCode == 27) {
         win.close();
     }
-    // tab = show dev tool
-    if (e.keyCode == 9) {
-        win.showDevTools();
-    }
 });
 
 

@@ -1,4 +1,5 @@
 @import "compass/reset";
+@import "_fonts.scss";
 
 body{
   padding: 0;
@@ -22,16 +23,37 @@ body{
   background-color:#1E1E1E;
 }
 
-#navTextButtons{
+#navIcons{
   height:inherit;
-  float:left;
+  float:left; 
+  margin-top:5px;
+
+  i{
+    font-size:2em;
+    margin-right:-5px;
+    cursor:pointer;
+  }
+
+  i:hover{
+    color:#CCC;
+  }
 }
 
-#navIcons{
-  height:inherit; 
-  float:left;
-  
+.rightIcons{
+  float:right;
+  text-align:right;
+  margin-top: 12px;
+  margin-right: 5px;
+  i{
+    font-size:1.2em;
+    color:#666;
+    cursor:pointer;
+  } 
+  i:hover{
+    color:#fff;
+  }
 }
+
 
 #mainEditor{
   float:left;
@@ -39,7 +61,7 @@ body{
 }
 
 .CodeMirror{
-  height:400px;
+  height:500px;
 }
 
 #upnav{
@@ -50,15 +72,23 @@ body{
   cursor:pointer;
 }
 
+#consoleWrap{
+  height: 130px;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background-color: #f0f;
+
+}
+
 #console{
-  float:left;
-  width:100%;
-  height:225px;
-  background-color:#1D1D1D;
-  overflow-y:scroll;
-  border-top:5px solid #333;
-  padding-bottom:350px;
-  color:#666;
+  float: left;
+  width: 100%;
+  background-color: #1D1D1D;
+  overflow-y: auto;
+  border-top: 2px solid #111;
+  height: 130px;
+  color: #666;
   font-size: 0.7em;
   p{
     margin-left:10px;
@@ -89,4 +119,23 @@ body{
 
 .min_button{
   background-color: #FFE422;
+}
+
+
+
+::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  background-color: #333333;
+}
+
+::-webkit-scrollbar
+{
+  width: 6px;
+  background-color: #333333;
+}
+
+::-webkit-scrollbar-thumb
+{
+  background-color: #000000;
 }
