@@ -72,9 +72,11 @@ body {
   width: 100%;
   height: 100%;
   overflow: hidden;
+  font-family: "Helvetica" sans-serif;
+  color: #fff;
 }
 
-/* line 13, ../sass/screen.scss */
+/* line 15, ../sass/screen.scss */
 #mainNav {
   margin: 0;
   padding: 0;
@@ -85,30 +87,30 @@ body {
   background-color: #3D3D3D;
 }
 
-/* line 23, ../sass/screen.scss */
+/* line 25, ../sass/screen.scss */
 #navTextButtons {
   height: inherit;
   float: left;
 }
 
-/* line 28, ../sass/screen.scss */
+/* line 30, ../sass/screen.scss */
 #navIcons {
   height: inherit;
   float: left;
 }
 
-/* line 34, ../sass/screen.scss */
+/* line 36, ../sass/screen.scss */
 #mainEditor {
   float: left;
   width: 100%;
 }
 
-/* line 39, ../sass/screen.scss */
+/* line 41, ../sass/screen.scss */
 .CodeMirror {
   height: 400px;
 }
 
-/* line 43, ../sass/screen.scss */
+/* line 45, ../sass/screen.scss */
 #upnav {
   -webkit-app-region: drag;
   background-color: #000;
@@ -117,18 +119,18 @@ body {
   cursor: pointer;
 }
 
-/* line 51, ../sass/screen.scss */
+/* line 53, ../sass/screen.scss */
 #console {
   float: left;
   width: 100%;
   height: 100%;
-  background-color: #999;
+  background-color: #333;
   overflow-y: auto;
   border-top: 5px solid #333;
 }
 
-/* line 60, ../sass/screen.scss */
-.close_button, .max_button, .min_button {
+/* line 62, ../sass/screen.scss */
+.exit_button, .max_button, .min_button {
   cursor: pointer;
   width: 10px;
   height: 10px;
@@ -137,17 +139,17 @@ body {
   border-radius: 10px;
 }
 
-/* line 70, ../sass/screen.scss */
-.close_button {
+/* line 72, ../sass/screen.scss */
+.exit_button {
   background-color: #F26184;
 }
 
-/* line 74, ../sass/screen.scss */
+/* line 76, ../sass/screen.scss */
 .max_button {
   background-color: #75ED64;
 }
 
-/* line 78, ../sass/screen.scss */
+/* line 80, ../sass/screen.scss */
 .min_button {
   background-color: #FFE422;
 }

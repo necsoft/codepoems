@@ -14,13 +14,34 @@ $(document).keyup(function(e) {
     }
 });
 
+
 //Clipboard FIX OS X
-var nativeMenuBar = new nw.Menu({
+var menu = new nw.Menu({
     type: "menubar"
 });
+
+
+//Inicializo los botones del menubar
+var file = new nw.Menu();
+var sketch = new nw.Menu();
+
 try {
-    nativeMenuBar.createMacBuiltin("My App");
-    win.menu = nativeMenuBar;
+    menu.createMacBuiltin("Codepoems", {
+        hideWindow: true
+    });
+    win.menu = menu;
+
+    // Inserto los items del menubar
+    win.menu.insert(new nw.MenuItem({
+        label: 'File',
+        submenu: file
+    }), 1);
+    win.menu.insert(new nw.MenuItem({
+        label: 'Sketch',
+        submenu: sketch
+    }), 2);
+
+
 } catch (ex) {
     console.log(ex.message);
 }

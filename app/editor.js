@@ -11,10 +11,10 @@ var mkdirp = require("mkdirp");
 var clipboard = gui.Clipboard.get();
 
 // ---------------------------------------------------------------------------
-// READY
+// IIFE
 // ---------------------------------------------------------------------------
 
-$(document).ready(function() {
+(function() {
 
     // PROJECT VARS
     var project = {};
@@ -29,7 +29,7 @@ $(document).ready(function() {
     $button_open = $("#button_open");
     $button_save = $("#button_save");
     $button_run = $("#button_run");
-    $button_exit = $("#button_exit");
+    $button_exit = $(".exit_button");
 
     // Initialize the editor
     var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
@@ -250,4 +250,4 @@ $(document).ready(function() {
     };
     editor.addKeyMap(map);
 
-}); // END READY
+})(); // END IIFE

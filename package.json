@@ -6,6 +6,7 @@
     "author": "necsoft",
     "repository": "https://github.com/necsoft/codepoems",
     "window": {
+        "title": "Codepoems",
         "toolbar": false,
         "frame": false,
         "width": 600,
