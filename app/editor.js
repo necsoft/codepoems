@@ -10,6 +10,19 @@ var path = require("path");
 var mkdirp = require("mkdirp");
 var clipboard = gui.Clipboard.get();
 
+var exampleCode = '\
+//----------------------- \n\
+//Welcome to Codepoems \n\
+//----------------------- \n\
+\n\
+int cantidad = 200;\nboolean garlopa = false;\
+\ncolor colorcito = color(#ff00ff);\
+\n\nvoid setup(){\n\t\size(900,600);\n\tframeRate(10);\
+\n}\n\nvoid draw(){\n\tbackground(#3D3D3D);\
+\n\tfor(int i=0;i<cantidad;i++){\
+\n\t\tnoStroke();\n\t\tfill(random(255),random(1,30));\n\t\tellipse(random(width),random(height),i,i);\
+\n\t}\n}';
+
 // ---------------------------------------------------------------------------
 // IIFE
 // ---------------------------------------------------------------------------
@@ -44,6 +57,9 @@ var clipboard = gui.Clipboard.get();
         foldGutter: true,
         gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
     });
+
+    // Pongo el ejemplo de prueba
+    editor.setValue(exampleCode);
 
     // ---------------------------------------------------------------------------
     // EXIT
@@ -103,7 +119,7 @@ var clipboard = gui.Clipboard.get();
         fs.readFile(file_entry, function(err, data) {
             console.log("file_entry" + file_entry);
             var read_errors = false,
-                name = path.basename(file_entry, '.pde'),
+                name = path.basename(file_entry, '.pde '),
                 extension = path.extname(file_entry),
                 separators = file_entry.split(path.sep),
                 parent_folder = separators[separators.length - 2];
