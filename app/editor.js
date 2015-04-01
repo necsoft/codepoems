@@ -1,9 +1,52 @@
 // ---------------------------------------------------------------------------
+// NW
+// ---------------------------------------------------------------------------
+
+var nw = window.require("nw.gui");
+var win = nw.Window.get();
+
+var menu = new nw.Menu({
+    type: "menubar"
+});
+
+var file = new nw.Menu();
+var sketch = new nw.Menu();
+
+//Clipboard FIX OS X
+var menu = new nw.Menu({
+    type: "menubar"
+});
+
+
+//Inicializo los botones del menubar
+var file = new nw.Menu();
+var sketch = new nw.Menu();
+
+try {
+    menu.createMacBuiltin("Codepoems", {
+        hideWindow: true
+    });
+    win.menu = menu;
+
+    // Inserto los items del menubar
+    win.menu.insert(new nw.MenuItem({
+        label: 'File',
+        submenu: file
+    }), 1);
+    win.menu.insert(new nw.MenuItem({
+        label: 'Sketch',
+        submenu: sketch
+    }), 2);
+
+} catch (ex) {
+    console.log(ex.message);
+}
+
+// ---------------------------------------------------------------------------
 // DEPENDENCIES
 // ---------------------------------------------------------------------------
 
 var gui = require("nw.gui");
-var win = nw.Window.get();
 var fs = require("fs");
 var p5p = require("./p5p.js");
 var path = require("path");
@@ -18,10 +61,10 @@ var exampleCode = '\
 int cantidad = 200;\nboolean unboolean = false;\
 \ncolor colorcito = color(#ff00ff);\
 \n\nvoid setup(){\n\t\size(900,600);\n\tframeRate(10);\
-  \n}\n\nvoid draw(){\n\tbackground(#3D3D3D);\
-    \n\tfor(int i=0;i<cantidad;i++){\
-      \n\t\tnoStroke();\n\t\tfill(random(255),random(1,30));\n\t\tellipse(random(width),random(height),i,i);\
-      \n\t}\n\tprintln("aloha"+frameCount);\n}';
+\n}\n\nvoid draw(){\n\tbackground(#3D3D3D);\
+\n\tfor(int i=0;i<cantidad;i++){\
+\n\t\tnoStroke();\n\t\tfill(random(255),random(1,30));\n\t\tellipse(random(width),random(height),i,i);\
+\n\t}\n\tprintln("aloha"+frameCount);\n}';
 
 // ---------------------------------------------------------------------------
 // IIFE
@@ -269,8 +312,12 @@ int cantidad = 200;\nboolean unboolean = false;\
         "Cmd-R": run,
         "Ctrl-R": run,
         "Cmd-N": new_project,
-        "Ctrl-N": new_project
+        "Ctrl-N": new_project,
     };
     editor.addKeyMap(map);
+
+
+
+
 
 })(); // END IIFE
