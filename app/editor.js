@@ -1,50 +1,6 @@
-// ---------------------------------------------------------------------------
-// NW
-// ---------------------------------------------------------------------------
-
-var nw = window.require("nw.gui");
-var win = nw.Window.get();
-
-var menu = new nw.Menu({
-    type: "menubar"
-});
-
-var file = new nw.Menu();
-var sketch = new nw.Menu();
-
-//Clipboard FIX OS X
-var menu = new nw.Menu({
-    type: "menubar"
-});
-
-
-//Inicializo los botones del menubar
-var file = new nw.Menu();
-var sketch = new nw.Menu();
-
-try {
-    menu.createMacBuiltin("Codepoems", {
-        hideWindow: true
-    });
-    win.menu = menu;
-
-    // Inserto los items del menubar
-    win.menu.insert(new nw.MenuItem({
-        label: 'File',
-        submenu: file
-    }), 1);
-    win.menu.insert(new nw.MenuItem({
-        label: 'Sketch',
-        submenu: sketch
-    }), 2);
-
-} catch (ex) {
-    console.log(ex.message);
-}
-
-// ---------------------------------------------------------------------------
-// DEPENDENCIES
-// ---------------------------------------------------------------------------
+/**
+ * DEPENDENCIES
+ */
 
 var gui = require("nw.gui");
 var fs = require("fs");
@@ -53,26 +9,20 @@ var path = require("path");
 var mkdirp = require("mkdirp");
 var clipboard = gui.Clipboard.get();
 
-var exampleCode = '\
-//----------------------- \n\
-// Welcome to Codepoems \n\
-//----------------------- \n\
-\n\
-int cantidad = 200;\nboolean unboolean = false;\
-\ncolor colorcito = color(#ff00ff);\
-\n\nvoid setup(){\n\t\size(900,600);\n\tframeRate(10);\
-\n}\n\nvoid draw(){\n\tbackground(#3D3D3D);\
-\n\tfor(int i=0;i<cantidad;i++){\
-\n\t\tnoStroke();\n\t\tfill(random(255),random(1,30));\n\t\tellipse(random(width),random(height),i,i);\
-\n\t}\n\tprintln("aloha"+frameCount);\n}';
-
-// ---------------------------------------------------------------------------
-// IIFE
-// ---------------------------------------------------------------------------
+/**
+ * IIFE
+ */
 
 (function() {
 
-    // PROJECT VARS
+    var nw = window.require("nw.gui");
+    var win = nw.Window.get();
+
+    // CREATE UI
+    ui_create();
+    ui_save_nodes();
+
+    // PROJECT
     var project = {};
     project.unsaved_project = true;
     project.undeclared_project = true;
@@ -80,16 +30,7 @@ int cantidad = 200;\nboolean unboolean = false;\
     project.dir = "app/tmp/sketch";
     project.dir_parent = "";
 
-    // DOM Nodes
-    $button_new = $("#button_new");
-    $button_open = $("#button_open");
-    $button_save = $("#button_save");
-    $button_run = $("#button_run");
-    $button_exit = $(".exit_button");
-
-    $button_chrome_dev = $(".icon-bug-report")
-
-    // Initialize the editor
+    // INIT CODEMIRROR
     var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
         lineNumbers: true,
         lineWrapping: true,
@@ -103,27 +44,14 @@ int cantidad = 200;\nboolean unboolean = false;\
         gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
     });
 
-    // Pongo el ejemplo de prueba
-    editor.setValue(exampleCode);
-
-
-    // Open chrome developer tool
-    $button_chrome_dev.click(function() {
-        win.showDevTools();
-    })
-
-    // ---------------------------------------------------------------------------
-    // EXIT
-    // ---------------------------------------------------------------------------
-
-    // Exit button
-    $button_exit.click(function() {
-        win.close(0);
+    // SET THE EXAMPLE CODE
+    fs.readFile('app/example.txt', function(err, data) {
+        if (err) throw err;
+        editor.setValue(data.toString());
     });
 
-
     // ---------------------------------------------------------------------------
-    // NEW
+    // OPEN
     // ---------------------------------------------------------------------------
 
     function new_project() {
@@ -134,7 +62,6 @@ int cantidad = 200;\nboolean unboolean = false;\
         } else if (project.unsaved_project === false) {
             reset_project();
         }
-
     }
 
     function reset_project() {
@@ -146,10 +73,6 @@ int cantidad = 200;\nboolean unboolean = false;\
         project.dir_parent = "";
     }
 
-    // Handle new button
-    $button_new.click(function() {
-        new_project();
-    });
 
     // ---------------------------------------------------------------------------
     // OPEN
@@ -209,10 +132,6 @@ int cantidad = 200;\nboolean unboolean = false;\
     // RUN
     // ---------------------------------------------------------------------------
 
-    $button_run.click(function() {
-        run();
-    });
-
     function run() {
         //El contenido del editor actual
         var str = editor.getValue();
@@ -246,10 +165,6 @@ int cantidad = 200;\nboolean unboolean = false;\
             saveOnly();
         }
     }
-
-    $button_save.click(function() {
-        save();
-    });
 
     $("#saveFile").change(function(evt) {
         console.log("Ya seleccionó un lugar y un nombre");
@@ -297,10 +212,8 @@ int cantidad = 200;\nboolean unboolean = false;\
 
     // Se ejecuta cade vez que cambia algo
     CodeMirror.on(editor, "change", function() {
-        //console.log("Cambio algo!");
         project.unsaved_project = true;
     });
-
 
     // ---------------------------------------------------------------------------
     // ADD KEY MAPS
@@ -316,8 +229,101 @@ int cantidad = 200;\nboolean unboolean = false;\
     };
     editor.addKeyMap(map);
 
+    // ---------------------------------------------------------------------------
+    // UI
+    // ---------------------------------------------------------------------------
+
+    // Here I save all the UI nodes
+    function ui_save_nodes() {
+        $button_new = $("#button_new");
+        $button_open = $("#button_open");
+        $button_save = $("#button_save");
+        $button_run = $("#button_run");
+        $button_exit = $(".exit_button");
+        $button_chrome_dev = $(".icon-bug-report");
+    };
+
+    // -----------------------------------------------
+    // Handlers
+    // -----------------------------------------------
+
+    $button_run.click(function() {
+        run();
+    });
+
+    $button_exit.click(function() {
+        win.close();
+    });
+
+    $button_save.click(function() {
+        save();
+    });
+
+    $button_new.click(function() {
+        new_project();
+    });
+
+    $button_chrome_dev.click(function() {
+        win.showDevTools();
+    })
 
 
+    /**
+     * ui_create()
+     *
+     */
+    function ui_create() {
 
+        var menu = new nw.Menu({
+            type: "menubar"
+        });
+
+        try {
+            menu.createMacBuiltin("Codepoems", {
+                hideWindow: true
+            });
+            win.menu = menu;
+        } catch (ex) {
+            console.log(ex.message);
+        }
+
+        /**
+         * Menu Bar items
+         */
+
+        var file = new nw.Menu();
+        var sketch = new nw.Menu();
+
+        // FILE
+        win.menu.insert(new nw.MenuItem({
+            label: 'File',
+            submenu: file
+        }), 1);
+
+        // File -> New
+        file.append(new nw.MenuItem({
+            label: 'New',
+            click: new_project
+        }));
+
+        // File -> Save
+        file.append(new nw.MenuItem({
+            label: 'Save',
+            click: save
+        }));
+
+        // SKETCH
+        win.menu.insert(new nw.MenuItem({
+            label: 'Sketch',
+            submenu: sketch
+        }), 2);
+
+        // Sketch -> Run
+        sketch.append(new nw.MenuItem({
+            label: 'Run',
+            click: run
+        }));
+
+    };
 
 })(); // END IIFE
