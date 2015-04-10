@@ -2,17 +2,16 @@
     "name": "codepoems",
     "version": "0.0.1",
     "description": "This an experimental IDE for Processing.",
-    "main": "app/main.html",
+    "main": "app/app.html",
     "author": "necsoft",
     "repository": "https://github.com/necsoft/codepoems",
     "window": {
         "title": "Codepoems",
-        "toolbar": false,
-        "frame": false,
+        //"toolbar": false,
+        "always-on-top": true,
         "width": 600,
         "height": 700,
-        "resizable": false,
-        "always-on-top": true
+        "resizable": false
     },
     "devDependencies": {
         "fluidity": "*",
