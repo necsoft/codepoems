@@ -1,5 +1,5 @@
 /*
-  p5p.js
+  p5process.js
 
   ejecuta el spawn de processing-java 
 
@@ -19,23 +19,30 @@ var path = require("path");
 //
 // ---------------------------------------------------------------------------
 
-exports.run_sketch = function($, sketch_dir, sketch_build) {
-    $console = $("#console");
-    $console.append("<p>Running sketch...</p>");
-    var child = childProcess('processing-java', ["--sketch=" + sketch_dir, "--output=" + sketch_build, "--run", "--force"]);
+exports.run_sketch = function(sketch_dir, sketch_build) {
+    // $console = $("#console");
+    // $console.append("<p>Running sketch...</p>");
 
-    child.stdout.on('data',
-        function(data) {
-            $console.append("<p> > " + data + "</p>");
-            $console.scrollTop(9999999)
-        }
-    );
-    child.stderr.on('data',
-        function(data) {
-            $console.append("<p class='consoleError'>" + data + "</p>");
-            $console.scrollTop(9999999)
-        }
-    );
+
+    // processing-java --sketch=/Users/necsoft/MIND/PROJECTS/builder-codepoems/codepoems/app/tmp/sketch/ --output=/Users/necsoft/MIND/PROJECTS/builder-codepoems/codepoems/app/tmp/sketch/build/ --force --run
+
+
+    console.log(process.cwd());
+
+    var child = childProcess('processing-java', ["--sketch=" + process.cwd() + sketch_dir, "--output=" + process.cwd() + sketch_build, "--run", "--force"]);
+
+    // child.stdout.on('data',
+    //     function(data) {
+    //         $console.append("<p> > " + data + "</p>");
+    //         $console.scrollTop(9999999)
+    //     }
+    // );
+    // child.stderr.on('data',
+    //     function(data) {
+    //         $console.append("<p class='consoleError'>" + data + "</p>");
+    //         $console.scrollTop(9999999)
+    //     }
+    // );
 };
 
 

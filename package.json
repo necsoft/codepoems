@@ -9,9 +9,8 @@
         "title": "Codepoems",
         //"toolbar": false,
         "always-on-top": true,
-        "width": 600,
-        "height": 700,
-        "resizable": false
+        "width": 300,
+        "height": 200
     },
     "devDependencies": {
         "fluidity": "*",

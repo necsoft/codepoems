@@ -3,27 +3,22 @@
 
   Es el archivo principal de la aplicación, lo primero que se ejecuta. 
 
- */
+  */
 
-var gui = require('nw.gui');
-var ui = require("./ui.js");
+var ui = require('./ui.js');
 
-// Llama a la ventana actual
-global.win = gui.Window.get();
+// App information
+global.app = {};
+global.app.name = "Codepoems";
+global.app.platform = process.platform;
+global.app.projects = [];
+global.app.focused_project = {};
 
-// Aqui vamos a guardar informacion de la aplicación
-var app = {};
+// Create the initial UI
+ui.setupUi();
 
-// Esto se puede llamar desde cualquier project
-global.culo = "algo compartido";
-
-// Capturamos el click en el "New Project"
-$('.new_project').click(function() {
-    //Abrimos un project
-    var new_win = gui.Window.open('project.html', {
-        "always-on-top": true
-    });
-});
-
-
-ui.createUI();
+//Debug app object
+// setTimeout(function() {
+//         console.log(global.app);
+//     },
+//     5000)

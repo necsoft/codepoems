@@ -4,25 +4,89 @@
   tiene que manejar todos los handlers y crear todos los elementos/componentes
   del sistema operativo 
 
- */
+  */
 
-// Este es el project que vamos a considerar como "Activo"
-var project;
+var gui = window.require("nw.gui");
+var win = gui.Window.get();
+var menu;
+var focused_win;
+
+var current_editor;
+
+var p5manager = require('./p5manager.js');
 
 /*
-  createUI()
+  setupUi()
 
-  Se encarga de crear las cosas basicas de UI
+  Se llama desde el app.js para configurar las cosas nativas de la UI.
 
  */
 
-
-exports.createUI = function() {
-
-    var menu = new nw.Menu({
+exports.setupUi = function() {
+    menu = new gui.Menu({
         type: "menubar"
     });
 
+    clipboardFix();
+    createMenuItems();
+}
+
+/*
+  setupHandlers()
+
+  Esta función se llama desde afuera para setear los handlers de una ventana.
+
+ */
+
+
+exports.setupHandlers = function(window, win, editor) {
+    var $ = window.$;
+    focused_win = win;
+    current_editor = editor;
+
+    //Catch Nodes
+    $button_run = $(".button_run");
+    $button_exit = $(".exit_button");
+    $button_chrome_dev_tool = $(".button_chrome_dev_tool");
+
+    //Handlers
+
+    $button_exit.click(function() {
+        actions_quit();
+    });
+
+    $button_run.click(function() {
+        actions_run();
+    });
+
+    $button_chrome_dev_tool.click(function() {
+        actions_chrome_dev_tool();
+    })
+}
+
+
+/*
+  setFocusedWin()
+
+  Se llama cada vez que el project esta en focus.
+
+ */
+
+
+exports.setFocusedWin = function(win) {
+    focused_win = win;
+}
+
+
+/*
+  clipboardFix()
+
+  Esto lo tengo que pulir después pero básicamente es para solucionar el problema de
+  no poder tener copy paste en los textArea.
+
+ */
+
+function clipboardFix() {
     try {
         menu.createMacBuiltin("Codepoems", {
             hideWindow: true
@@ -31,54 +95,138 @@ exports.createUI = function() {
     } catch (ex) {
         console.log(ex.message);
     }
-
-    /*
-      Menu bar items
-     */
-
-    var file = new nw.Menu();
-    var sketch = new nw.Menu();
-
-    // FILE
-    win.menu.insert(new nw.MenuItem({
-        label: 'File',
-        //submenu: file
-    }), 1);
-
-    // File -> New
-    file.append(new nw.MenuItem({
-        label: 'New',
-        //click: new_project
-    }));
-
-    // File -> Save
-    file.append(new nw.MenuItem({
-        label: 'Save',
-        //click: save
-    }));
-
-    // SKETCH
-    win.menu.insert(new nw.MenuItem({
-        label: 'Sketch',
-        //submenu: sketch
-    }), 2);
-
-    // Sketch -> Run
-    sketch.append(new nw.MenuItem({
-        label: 'Run',
-        //click: run
-    }));
-
-};
-
+}
 
 /*
-  activeProject()
+  createMenuItems()
 
-  Lo usamos para setear 
+  Crea los elementos de la UI.
 
  */
 
-exports.activeProject = function(project) {
+function createMenuItems() {
+    fileMenu();
+    sketchMenu();
+}
 
+/*
+  fileMenu()
+
+  Botones de la pestaña de File
+
+ */
+
+function fileMenu() {
+    var file = new gui.Menu();
+    //Create the menu
+    win.menu.insert(new gui.MenuItem({
+        label: 'File',
+        submenu: file
+    }), 1);
+
+    // File -> New Project
+    file.append(new gui.MenuItem({
+        label: 'New Project',
+        click: actions_newProject
+    }));
+
+    // File -> Quit
+    file.append(new gui.MenuItem({
+        label: 'Quit',
+        click: actions_quit
+    }));
+}
+
+/*
+  sketchMenu()
+
+  Los botones de la pestaña de Sketch.
+
+ */
+
+function sketchMenu() {
+    var sketch = new gui.Menu();
+    win.menu.insert(new gui.MenuItem({
+        label: 'Sketch',
+        submenu: sketch
+    }), 2);
+
+    // Sketch -> Run
+    sketch.append(new gui.MenuItem({
+        label: 'Run',
+        click: actions_run
+    }));
+
+    // Sketch -> Stop
+    sketch.append(new gui.MenuItem({
+        label: 'Stop',
+        click: actions_stop
+    }));
+
+}
+
+
+
+/*
+  actions_newProject()
+
+  Abre una ventana y crea un proyecto nuevo de Processing.
+
+ */
+
+
+function actions_newProject() {
+    var new_win = gui.Window.open('project.html', {
+        "frame": false,
+        "width": 600,
+        "height": 700,
+        "resizable": false
+    });
+}
+
+
+/*
+  actions_quit()
+  
+  Cierra todas las ventanas abiertas.
+
+ */
+
+function actions_quit() {
+    focused_win.close();
+}
+
+
+
+/*
+  actions_run()
+
+  Ejecuta el proyecto en focus.
+
+ */
+
+function actions_run() {
+    p5manager.run_project(global.app.focused_project, current_editor);
+}
+
+
+/*
+  actions_stop()
+
+  Detiene el proyecto en focus.
+
+ */
+
+function actions_stop() {
+
+}
+
+
+/*
+  actions_chrome_dev_tool()
+
+ */
+
+function actions_chrome_dev_tool() {
+    focused_win.showDevTools();
 }
