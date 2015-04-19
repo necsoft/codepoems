@@ -7,13 +7,12 @@
   */
 
 var gui = window.require("nw.gui");
+var p5manager = require('./p5manager.js');
 var win = gui.Window.get();
 var menu;
 var focused_win;
-
 var current_editor;
 
-var p5manager = require('./p5manager.js');
 
 /*
   setupUi()
@@ -29,6 +28,8 @@ exports.setupUi = function() {
 
     clipboardFix();
     createMenuItems();
+    actions_newProject();
+    win.close();
 }
 
 /*
@@ -46,6 +47,7 @@ exports.setupHandlers = function(window, win, editor) {
 
     //Catch Nodes
     $button_run = $(".button_run");
+    $button_open = $(".button_open");
     $button_exit = $(".exit_button");
     $button_chrome_dev_tool = $(".button_chrome_dev_tool");
 
@@ -55,13 +57,18 @@ exports.setupHandlers = function(window, win, editor) {
         actions_quit();
     });
 
+    $button_open.click(function() {
+        actions_open($);
+    });
+
     $button_run.click(function() {
         actions_run();
     });
 
     $button_chrome_dev_tool.click(function() {
         actions_chrome_dev_tool();
-    })
+    });
+
 }
 
 
@@ -183,6 +190,25 @@ function actions_newProject() {
         "resizable": false
     });
 }
+
+/*
+  actions_open()
+
+  Usa el input oculto para abrir el trigger 
+
+ */
+
+
+function actions_open($) {
+    //Activa el dialogo.
+    $("#fileDialog").trigger("click");
+
+    $("#fileDialog").change(function(evt) {
+        var file_path = $(this).val()
+        p5manager.open_project(file_path);
+    });
+};
+
 
 
 /*

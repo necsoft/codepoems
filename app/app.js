@@ -16,9 +16,3 @@ global.app.focused_project = {};
 
 // Create the initial UI
 ui.setupUi();
-
-//Debug app object
-// setTimeout(function() {
-//         console.log(global.app);
-//     },
-//     5000)

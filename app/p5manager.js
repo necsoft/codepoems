@@ -13,8 +13,59 @@
   */
 
 var p5process = require('./p5process.js');
-
 var fs = require('fs');
+var path = require('path');
+
+
+/*
+  new_project()
+
+  Crea una ventana y un proyecto nuevo.
+
+  */
+
+exports.new_project = function() {
+
+}
+
+
+/*
+  open_project()
+
+  */
+
+exports.open_project = function(project_path) {
+    if (check_project(project_path)) {
+        console.log("ES UN PROYECTO VALIDO");
+    } else {
+        console.log("NO ES UN PROYECTO VALIDO");
+    };
+};
+
+
+/*
+  check_project()
+
+  Chequea si en el path pasado hay un proyecto válido 
+
+  */
+
+function check_project(file_path) {
+    var p_project = path.parse(file_path);
+
+    console.log(p_project);
+    console.log("Archivo relativo: " + p_project.base);
+    console.log("Carpeta absoluta padre: " + p_project.dir);
+    console.log("Nombre Carpeta padre: " + p_project.dir.split(path.sep).reverse()[0]);
+
+    if (p_project.base.split(".")[0] === p_project.dir.split(path.sep).reverse()[0]) {
+        console.log("Abriste el archivo central");
+        return true;
+    } else {
+        return false;
+    }
+
+}
 
 
 /*
@@ -22,7 +73,7 @@ var fs = require('fs');
 
   Ejecuta un proyecto de processing.
 
- */
+  */
 
 exports.run_project = function(project, editor) {
     var str = editor.getValue();
@@ -45,4 +96,4 @@ exports.run_project = function(project, editor) {
         p5process.run_sketch('/app/tmp/sketch/', '/app/tmp/sketch/build/');
 
     });
-}
+};

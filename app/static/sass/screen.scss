@@ -23,20 +23,49 @@ body{
   background-color:#1E1E1E;
 }
 
+.button_separator{
+  width: 2px;
+  margin: 0 5px 0 10px;
+  background-color: #303030;
+  height: 50%;
+  vertical-align: baseline;
+  display: inline-block;
+}
+
+
+
+.primary_icon{
+  font-size:2em;
+  margin-right:-5px;
+  cursor:pointer;
+}
+
+.primary_icon:hover{
+  color:#CCC;
+}
+
+
+.secondary_icon{
+  font-size: 1em;
+  background-color: #2F2F2F;
+  padding: 4px;
+  margin-right: 0px;
+  vertical-align: super;
+}
+
+.secondary_icon:hover{
+  background-color:#222;
+}
+
 #navIcons{
   height:inherit;
   float:left; 
   margin-top:5px;
-
   i{
-    font-size:2em;
-    margin-right:-5px;
     cursor:pointer;
   }
 
-  i:hover{
-    color:#CCC;
-  }
+
 }
 
 .rightIcons{

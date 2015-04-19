@@ -19,9 +19,9 @@ $(document).ready(function() {
 
     // Create app
     var project = {};
-    project.id = new Date().getTime(); // Temporal unique id for the project
-    project.unsaved_project = true;
-    project.undeclared_project = true;
+    project.id = new Date().getTime(); // Timestamp
+    project.saved_project = false;
+    project.new_project = true;
 
     // Put this project in the global.app.projects
     app.projects.push({
