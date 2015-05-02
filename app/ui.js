@@ -27,9 +27,9 @@ exports.setupUi = function() {
     });
 
     clipboardFix();
-    createMenuItems();
+    //createMenuItems();
     actions_newProject();
-    win.close();
+    win.hide();
 }
 
 /*
@@ -49,6 +49,7 @@ exports.setupHandlers = function(window, win, editor) {
     $button_run = $(".button_run");
     $button_open = $(".button_open");
     $button_exit = $(".exit_button");
+    $button_new = $(".button_new");
     $button_chrome_dev_tool = $(".button_chrome_dev_tool");
 
     //Handlers
@@ -68,6 +69,11 @@ exports.setupHandlers = function(window, win, editor) {
     $button_chrome_dev_tool.click(function() {
         actions_chrome_dev_tool();
     });
+
+    $button_new.click(function() {
+        actions_newProject_2();
+        //p5manager.new_project();
+    })
 
 }
 
@@ -189,7 +195,15 @@ function actions_newProject() {
         "height": 700,
         "resizable": false
     });
+    //p5manager.new_project();
+};
+
+
+
+function actions_newProject_2() {
+    focused_win.window.abrirVentana();
 }
+
 
 /*
   actions_open()
@@ -232,7 +246,8 @@ function actions_quit() {
  */
 
 function actions_run() {
-    p5manager.run_project(global.app.focused_project, current_editor);
+    console.log(global.app.focused_project.editor);
+    //p5manager.run_project(global.app.focused_project, current_editor);
 }
 
 
@@ -254,5 +269,6 @@ function actions_stop() {
  */
 
 function actions_chrome_dev_tool() {
-    focused_win.showDevTools();
+    // focused_win.showDevTools();
+    // win.showDevTools();
 }

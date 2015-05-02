@@ -22,8 +22,6 @@ var path = require("path");
 exports.run_sketch = function(sketch_dir, sketch_build) {
     // $console = $("#console");
     // $console.append("<p>Running sketch...</p>");
-
-
     // processing-java --sketch=/Users/necsoft/MIND/PROJECTS/builder-codepoems/codepoems/app/tmp/sketch/ --output=/Users/necsoft/MIND/PROJECTS/builder-codepoems/codepoems/app/tmp/sketch/build/ --force --run
 
 

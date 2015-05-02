@@ -36,7 +36,7 @@ $(document).ready(function() {
     });
 
     // Initialize Codemirror
-    var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
+    project.editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
         lineNumbers: true,
         lineWrapping: true,
         mode: "processing",
@@ -53,3 +53,17 @@ $(document).ready(function() {
     ui.setupHandlers(window, win, editor);
 
 });
+
+
+
+
+function abrirVentana() {
+
+    console.log("Voy a abrir una ventana");
+    var new_win = gui.Window.open('project.html', {
+        "frame": false,
+        "width": 600,
+        "height": 700,
+        "resizable": false
+    });
+}

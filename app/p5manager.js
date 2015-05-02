@@ -25,7 +25,13 @@ var path = require('path');
   */
 
 exports.new_project = function() {
-
+    var gui = window.require("nw.gui");
+    var new_win = gui.Window.open('project.html', {
+        "frame": false,
+        "width": 600,
+        "height": 700,
+        "resizable": false
+    });
 }
 
 
@@ -56,7 +62,7 @@ function check_project(file_path) {
     console.log(p_project);
     console.log("Archivo relativo: " + p_project.base);
     console.log("Carpeta absoluta padre: " + p_project.dir);
-    console.log("Nombre Carpeta padre: " + p_project.dir.split(path.sep).reverse()[0]);
+    //console.log("Nombre Carpeta padre: " + p_project.dir.split(path.sep).reverse()[0]);
 
     if (p_project.base.split(".")[0] === p_project.dir.split(path.sep).reverse()[0]) {
         console.log("Abriste el archivo central");
