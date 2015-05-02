@@ -7,10 +7,7 @@
     "repository": "https://github.com/necsoft/codepoems",
     "window": {
         "title": "Codepoems",
-        //"toolbar": false,
-        "always-on-top": true,
-        "width": 300,
-        "height": 200
+        "always-on-top": true
     },
     "devDependencies": {
         "fluidity": "*",

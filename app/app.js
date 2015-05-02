@@ -1,7 +1,7 @@
 /*
   app.js
 
-  Es el archivo principal de la aplicación, lo primero que se ejecuta. 
+  This is the main nw.js file.
 
   */
 

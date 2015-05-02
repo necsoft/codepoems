@@ -13,7 +13,6 @@ var menu;
 var focused_win;
 var current_editor;
 
-
 /*
   setupUi()
 
@@ -22,14 +21,9 @@ var current_editor;
  */
 
 exports.setupUi = function() {
-    menu = new gui.Menu({
-        type: "menubar"
-    });
-
-    clipboardFix();
-    //createMenuItems();
-    actions_newProject();
-    win.hide();
+    clipboardFix(); // Add cliboard functionalities.
+    actions_newProject(); // Create new project.
+    win.hide(); // Hide current window.
 }
 
 /*
@@ -45,14 +39,15 @@ exports.setupHandlers = function(window, win, editor) {
     focused_win = win;
     current_editor = editor;
 
-    //Catch Nodes
+    //UI Nodes
+
     $button_run = $(".button_run");
     $button_open = $(".button_open");
     $button_exit = $(".exit_button");
     $button_new = $(".button_new");
     $button_chrome_dev_tool = $(".button_chrome_dev_tool");
 
-    //Handlers
+    //UI Events
 
     $button_exit.click(function() {
         actions_quit();
@@ -94,12 +89,14 @@ exports.setFocusedWin = function(win) {
 /*
   clipboardFix()
 
-  Esto lo tengo que pulir después pero básicamente es para solucionar el problema de
-  no poder tener copy paste en los textArea.
+  Fix the clipboard issue in Mac.
 
  */
 
 function clipboardFix() {
+    menu = new gui.Menu({
+        type: "menubar"
+    });
     try {
         menu.createMacBuiltin("Codepoems", {
             hideWindow: true
@@ -109,75 +106,6 @@ function clipboardFix() {
         console.log(ex.message);
     }
 }
-
-/*
-  createMenuItems()
-
-  Crea los elementos de la UI.
-
- */
-
-function createMenuItems() {
-    fileMenu();
-    sketchMenu();
-}
-
-/*
-  fileMenu()
-
-  Botones de la pestaña de File
-
- */
-
-function fileMenu() {
-    var file = new gui.Menu();
-    //Create the menu
-    win.menu.insert(new gui.MenuItem({
-        label: 'File',
-        submenu: file
-    }), 1);
-
-    // File -> New Project
-    file.append(new gui.MenuItem({
-        label: 'New Project',
-        click: actions_newProject
-    }));
-
-    // File -> Quit
-    file.append(new gui.MenuItem({
-        label: 'Quit',
-        click: actions_quit
-    }));
-}
-
-/*
-  sketchMenu()
-
-  Los botones de la pestaña de Sketch.
-
- */
-
-function sketchMenu() {
-    var sketch = new gui.Menu();
-    win.menu.insert(new gui.MenuItem({
-        label: 'Sketch',
-        submenu: sketch
-    }), 2);
-
-    // Sketch -> Run
-    sketch.append(new gui.MenuItem({
-        label: 'Run',
-        click: actions_run
-    }));
-
-    // Sketch -> Stop
-    sketch.append(new gui.MenuItem({
-        label: 'Stop',
-        click: actions_stop
-    }));
-
-}
-
 
 
 /*

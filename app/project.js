@@ -5,7 +5,6 @@
 
   */
 
-
 var ui = require("./ui.js");
 
 // Esta ventana se la vamos a pasar a ui.js
@@ -54,11 +53,7 @@ $(document).ready(function() {
 
 });
 
-
-
-
 function abrirVentana() {
-
     console.log("Voy a abrir una ventana");
     var new_win = gui.Window.open('project.html', {
         "frame": false,

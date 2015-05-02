@@ -1,6 +1,0 @@
-/*
-  tab.js
-
-  Desde aqui se tiene que inicializar el codemirror de cada tab.
-
- */
