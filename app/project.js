@@ -5,7 +5,7 @@
 
   */
 
-var ui = require("./ui.js");
+var ui = require('./ui.js');
 
 // Esta ventana se la vamos a pasar a ui.js
 var gui = window.require("nw.gui");
@@ -13,7 +13,7 @@ var win = gui.Window.get();
 
 $(document).ready(function() {
 
-    // Reference app
+    // Reference the global app
     var app = global.app;
 
     // Create app

@@ -62,7 +62,7 @@ exports.setupHandlers = function(window, win, editor) {
     });
 
     $button_chrome_dev_tool.click(function() {
-        actions_chrome_dev_tool();
+        actions_devTool();
     });
 
     $button_new.click(function() {
@@ -192,11 +192,11 @@ function actions_stop() {
 
 
 /*
-  actions_chrome_dev_tool()
+  actions_devTool()
 
  */
 
-function actions_chrome_dev_tool() {
+function actions_devTool() {
     // focused_win.showDevTools();
     // win.showDevTools();
 }
