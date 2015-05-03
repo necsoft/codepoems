@@ -11,18 +11,20 @@ var ui = require('./ui.js');
 var gui = window.require("nw.gui");
 var win = gui.Window.get();
 
+// Empty object for this project
+var project = {};
+
+var ctx = this;
+
+// Reference the global app
+var app = global.app;
+
 $(document).ready(function() {
 
-    // Reference the global app
-    var app = global.app;
-
-    // Create app
-    var project = {};
+    // Project configuration
     project.id = new Date().getTime(); // Timestamp
     project.saved_project = false;
     project.new_project = true;
-
-    // Put this project in the global.app.projects
     app.projects.push({
         project
     });
@@ -34,6 +36,22 @@ $(document).ready(function() {
         ui.setFocusedWin(win);
     });
 
+    initCodeMirror();
+
+    // Initialize handlers
+    ui.setupHandlers(window, win, editor, ctx);
+
+
+});
+
+/*
+  initCodeMirror()
+
+  Crea la configuración de CodeMirror.
+
+ */
+
+function initCodeMirror() {
     // Initialize Codemirror
     project.editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
         lineNumbers: true,
@@ -46,19 +64,5 @@ $(document).ready(function() {
         theme: "paraiso-dark",
         foldGutter: true,
         gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
-    });
-
-    // Initialize handlers
-    ui.setupHandlers(window, win, editor);
-
-});
-
-function abrirVentana() {
-    console.log("Voy a abrir una ventana");
-    var new_win = gui.Window.open('project.html', {
-        "frame": false,
-        "width": 600,
-        "height": 700,
-        "resizable": false
     });
 }

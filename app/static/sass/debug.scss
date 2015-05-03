@@ -1,0 +1,29 @@
+body{
+  background-color:#111;
+  color:#fff;
+  font-family:Helvetica;
+  margin:0;
+  padding:0;
+}
+
+
+h1{
+  background-color:#fff;
+  color:#333;
+  margin:0 0 20px 0;
+}
+
+
+ul{
+  font-size: 0.83em;
+  margin: 0;
+  padding-left: 20px;
+  color:#999;
+
+  span{
+    background-color:#fff;
+    color:#333;
+    font-weight: 900;
+    padding:0 2px;
+  }
+}

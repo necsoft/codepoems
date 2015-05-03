@@ -9,7 +9,8 @@
 var gui = window.require("nw.gui");
 var p5manager = require('./p5manager.js');
 var win = gui.Window.get();
-var menu;
+
+var focus_ctx;
 var focused_win;
 var current_editor;
 
@@ -22,8 +23,8 @@ var current_editor;
 
 exports.setupUi = function() {
     clipboardFix(); // Add cliboard functionalities.
-    actions_newProject(); // Create new project.
-    win.hide(); // Hide current window.
+    actions_startInitialProject(); // Create an initial project.
+    //win.hide(); // Hide current window.
 }
 
 /*
@@ -34,12 +35,14 @@ exports.setupUi = function() {
  */
 
 
-exports.setupHandlers = function(window, win, editor) {
-    var $ = window.$;
-    focused_win = win;
-    current_editor = editor;
+exports.setupHandlers = function(window, win, editor, ctx) {
+    var $ = ctx.window.$;
+    focused_win = ctx.window.win;
+    focus_ctx = ctx;
 
-    //UI Nodes
+    /*
+      UI Nodes
+     */
 
     $button_run = $(".button_run");
     $button_open = $(".button_open");
@@ -47,7 +50,9 @@ exports.setupHandlers = function(window, win, editor) {
     $button_new = $(".button_new");
     $button_chrome_dev_tool = $(".button_chrome_dev_tool");
 
-    //UI Events
+    /*
+      UI Handlers
+     */
 
     $button_exit.click(function() {
         actions_quit();
@@ -66,8 +71,7 @@ exports.setupHandlers = function(window, win, editor) {
     });
 
     $button_new.click(function() {
-        actions_newProject_2();
-        //p5manager.new_project();
+        actions_newProject();
     })
 
 }
@@ -94,6 +98,7 @@ exports.setFocusedWin = function(win) {
  */
 
 function clipboardFix() {
+    var menu;
     menu = new gui.Menu({
         type: "menubar"
     });
@@ -109,28 +114,48 @@ function clipboardFix() {
 
 
 /*
-  actions_newProject()
-
-  Abre una ventana y crea un proyecto nuevo de Processing.
+  Actions
+  
+  Here starts the actions.
 
  */
 
 
-function actions_newProject() {
-    var new_win = gui.Window.open('project.html', {
+/*
+  actions_startInitialProject()
+
+  Abre la primer ventana de proyecto, en esta instancia no hay NADA
+  creado todavía.
+
+ */
+
+
+function actions_startInitialProject() {
+    var initial_win = gui.Window.open('project.html', {
         "frame": false,
         "width": 600,
         "height": 700,
         "resizable": false
     });
-    //p5manager.new_project();
 };
 
+/*
+  actions_newProject()
 
+  Este botón se llama cuando se toca desde un project el boton de crear un nuevo project.
+  
+ */
 
-function actions_newProject_2() {
-    focused_win.window.abrirVentana();
-}
+function actions_newProject() {
+    var new_win = focus_ctx.window.gui.Window.open('project.html', {
+        "frame": false,
+        "width": 600,
+        "height": 700,
+        "resizable": false
+    });
+
+};
+
 
 
 /*
@@ -174,8 +199,7 @@ function actions_quit() {
  */
 
 function actions_run() {
-    console.log(global.app.focused_project.editor);
-    //p5manager.run_project(global.app.focused_project, current_editor);
+
 }
 
 
@@ -198,5 +222,6 @@ function actions_stop() {
 
 function actions_devTool() {
     // focused_win.showDevTools();
-    // win.showDevTools();
+    console.log("Mostrar el debug tool.");
+    focus_ctx.window.win.showDevTools();
 }
