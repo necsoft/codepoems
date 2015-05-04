@@ -14,6 +14,7 @@ var win = gui.Window.get();
 // Empty object for this project
 var project = {};
 
+// Save this context
 var ctx = this;
 
 // Reference the global app
@@ -23,11 +24,14 @@ $(document).ready(function() {
 
     // Project configuration
     project.id = new Date().getTime(); // Timestamp
-    project.saved_project = false;
-    project.new_project = true;
+    project.name = "sketch" + project.id;
+    project.saved = false;
+    project.declared = false;
     app.projects.push({
         project
     });
+
+    console.log(project.id)
 
     // Set the focus app
     win.on('focus', function() {
@@ -36,10 +40,14 @@ $(document).ready(function() {
         ui.setFocusedWin(win);
     });
 
+
     initCodeMirror();
 
     // Initialize handlers
     ui.setupHandlers(window, win, editor, ctx);
+
+
+    ui.setupSidebar();
 
 
 });
@@ -63,6 +71,7 @@ function initCodeMirror() {
         showCursorWhenSelecting: true,
         theme: "paraiso-dark",
         foldGutter: true,
-        gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+        gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+        viewportMargin: Infinity
     });
 }

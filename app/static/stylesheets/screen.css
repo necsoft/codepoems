@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* line 5, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -1062,7 +1063,10 @@ body {
   color: #fff;
 }
 
-/* line 16, ../sass/screen.scss */
+/*
+  TOP BLOCK
+ */
+/* line 20, ../sass/screen.scss */
 #mainNav {
   margin: 0;
   padding: 0;
@@ -1073,7 +1077,7 @@ body {
   background-color: #1E1E1E;
 }
 
-/* line 26, ../sass/screen.scss */
+/* line 30, ../sass/screen.scss */
 .button_separator {
   width: 2px;
   margin: 0 5px 0 10px;
@@ -1083,19 +1087,19 @@ body {
   display: inline-block;
 }
 
-/* line 37, ../sass/screen.scss */
+/* line 39, ../sass/screen.scss */
 .primary_icon {
   font-size: 2em;
   margin-right: -5px;
   cursor: pointer;
 }
 
-/* line 43, ../sass/screen.scss */
+/* line 45, ../sass/screen.scss */
 .primary_icon:hover {
   color: #CCC;
 }
 
-/* line 48, ../sass/screen.scss */
+/* line 49, ../sass/screen.scss */
 .secondary_icon {
   font-size: 1em;
   background-color: #2F2F2F;
@@ -1104,52 +1108,41 @@ body {
   vertical-align: super;
 }
 
-/* line 56, ../sass/screen.scss */
+/* line 57, ../sass/screen.scss */
 .secondary_icon:hover {
   background-color: #222;
 }
 
-/* line 60, ../sass/screen.scss */
+/* line 61, ../sass/screen.scss */
 #navIcons {
   height: inherit;
   float: left;
   margin-top: 5px;
 }
-/* line 64, ../sass/screen.scss */
+/* line 65, ../sass/screen.scss */
 #navIcons i {
   cursor: pointer;
 }
 
-/* line 71, ../sass/screen.scss */
+/* line 70, ../sass/screen.scss */
 .rightIcons {
   float: right;
   text-align: right;
   margin-top: 12px;
   margin-right: 5px;
 }
-/* line 76, ../sass/screen.scss */
+/* line 75, ../sass/screen.scss */
 .rightIcons i {
   font-size: 1.2em;
   color: #666;
   cursor: pointer;
 }
-/* line 81, ../sass/screen.scss */
+/* line 80, ../sass/screen.scss */
 .rightIcons i:hover {
   color: #fff;
 }
 
-/* line 87, ../sass/screen.scss */
-#mainEditor {
-  float: left;
-  width: 100%;
-}
-
-/* line 92, ../sass/screen.scss */
-.CodeMirror {
-  height: 500px;
-}
-
-/* line 96, ../sass/screen.scss */
+/* line 85, ../sass/screen.scss */
 #upnav {
   -webkit-app-region: drag;
   background-color: #383838;
@@ -1158,37 +1151,7 @@ body {
   cursor: pointer;
 }
 
-/* line 104, ../sass/screen.scss */
-#consoleWrap {
-  height: 130px;
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  background-color: #f0f;
-}
-
-/* line 113, ../sass/screen.scss */
-#console {
-  float: left;
-  width: 100%;
-  background-color: #1D1D1D;
-  overflow-y: auto;
-  border-top: 2px solid #111;
-  height: 130px;
-  color: #666;
-  font-size: 0.7em;
-}
-/* line 122, ../sass/screen.scss */
-#console p {
-  margin-left: 10px;
-}
-/* line 125, ../sass/screen.scss */
-#console .consoleError {
-  color: #F26184;
-  font-weight: 900;
-}
-
-/* line 131, ../sass/screen.scss */
+/* line 93, ../sass/screen.scss */
 .exit_button, .max_button, .min_button {
   cursor: pointer;
   width: 10px;
@@ -1198,34 +1161,160 @@ body {
   border-radius: 10px;
 }
 
-/* line 141, ../sass/screen.scss */
+/* line 103, ../sass/screen.scss */
 .exit_button {
   background-color: #F26184;
 }
 
-/* line 145, ../sass/screen.scss */
+/* line 107, ../sass/screen.scss */
 .max_button {
   background-color: #75ED64;
 }
 
-/* line 149, ../sass/screen.scss */
+/* line 111, ../sass/screen.scss */
 .min_button {
   background-color: #FFE422;
 }
 
-/* line 155, ../sass/screen.scss */
+/*
+  CENTER BLOCK
+ */
+/* line 120, ../sass/screen.scss */
+#centerBlock {
+  width: 100%;
+  float: left;
+  display: block;
+  overflow: hidden;
+  float: left;
+  height: 70%;
+}
+
+/* line 129, ../sass/screen.scss */
+#sidebar {
+  float: left;
+  width: 25%;
+  height: 100%;
+  background-color: #222;
+  padding-top: 10px;
+}
+/* line 135, ../sass/screen.scss */
+#sidebar ul {
+  cursor: default;
+}
+/* line 138, ../sass/screen.scss */
+#sidebar ul li {
+  margin: -1px 5px;
+  padding: 6px;
+  font-weight: 100;
+}
+/* line 145, ../sass/screen.scss */
+#sidebar ul li:hover {
+  background-color: #000;
+}
+/* line 149, ../sass/screen.scss */
+#sidebar ul .mainFile {
+  font-size: 0.75em;
+  font-weight: 900;
+}
+/* line 154, ../sass/screen.scss */
+#sidebar ul .mainFile:before {
+  content: "▶   ";
+  font-size: 0.4em;
+  color: #fff;
+}
+/* line 160, ../sass/screen.scss */
+#sidebar ul .secondaryFile {
+  font-weight: 100;
+  font-size: 0.7em;
+}
+/* line 165, ../sass/screen.scss */
+#sidebar ul .secondaryFile:before {
+  content: "•  ";
+  color: #0ff;
+}
+/* line 170, ../sass/screen.scss */
+#sidebar ul .active {
+  background-color: #111;
+  color: #ccc;
+}
+/* line 177, ../sass/screen.scss */
+#sidebar .addButton {
+  background-color: transparent;
+  border: 1px solid #333;
+  color: #fff;
+  padding: 7px;
+  margin-left: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  font-weight: 100;
+  outline: none;
+  font-size: 0.8em;
+  transition: background-color 0.1s ease;
+}
+/* line 191, ../sass/screen.scss */
+#sidebar .addButton:hover {
+  background-color: black;
+}
+
+/* line 198, ../sass/screen.scss */
+#mainEditor {
+  float: left;
+  width: 75%;
+}
+
+/* line 205, ../sass/screen.scss */
+.CodeMirror {
+  height: 490px;
+}
+
+/*
+  BOTTOM BLOCK
+ */
+/* line 214, ../sass/screen.scss */
+#consoleWrap {
+  height: 140px;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* line 221, ../sass/screen.scss */
+#console {
+  float: left;
+  width: 100%;
+  background-color: #1D1D1D;
+  overflow-y: auto;
+  border-top: 2px solid #111;
+  height: 140px;
+  color: #666;
+  font-size: 0.7em;
+}
+/* line 230, ../sass/screen.scss */
+#console p {
+  margin-left: 10px;
+}
+/* line 233, ../sass/screen.scss */
+#console .consoleError {
+  color: #F26184;
+  font-weight: 900;
+}
+
+/*
+  SCROLLBARS
+ */
+/* line 245, ../sass/screen.scss */
 ::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: #333333;
 }
 
-/* line 161, ../sass/screen.scss */
+/* line 251, ../sass/screen.scss */
 ::-webkit-scrollbar {
   width: 6px;
   background-color: #333333;
 }
 
-/* line 167, ../sass/screen.scss */
+/* line 257, ../sass/screen.scss */
 ::-webkit-scrollbar-thumb {
   background-color: #000000;
 }

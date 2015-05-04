@@ -24,7 +24,8 @@ var current_editor;
 exports.setupUi = function() {
     clipboardFix(); // Add cliboard functionalities.
     actions_startInitialProject(); // Create an initial project.
-    //win.hide(); // Hide current window.
+    win.hide(); // Hide the debug window
+    //win.close(); // Close debug window
 }
 
 /*
@@ -36,9 +37,11 @@ exports.setupUi = function() {
 
 
 exports.setupHandlers = function(window, win, editor, ctx) {
+
     var $ = ctx.window.$;
     focused_win = ctx.window.win;
     focus_ctx = ctx;
+
 
     /*
       UI Nodes
@@ -77,6 +80,27 @@ exports.setupHandlers = function(window, win, editor, ctx) {
 }
 
 
+
+/*
+  setupSidebar()
+  
+  Se encarga de crear la barra del costado.
+
+ */
+
+exports.setupSidebar = function() {
+    var $ = focus_ctx.window.$;
+    //Main File
+    $(".sidebarFiles").append("<li class='mainFile active'>" + focus_ctx.project.name + ".pde</li>");
+    //Secondary File
+    // $(".sidebarFiles").append("<li class='secondaryFile'>ClasePrueba1.pde</li>");
+    // $(".sidebarFiles").append("<li class='secondaryFile'>ClasePrueba2.pde</li>");
+    // $(".sidebarFiles").append("<li class='secondaryFile'>ClasePrueba3.pde</li>");
+    // $(".sidebarFiles").append("<li class='secondaryFile'>ClasePrueba4.pde</li>");
+    // $(".sidebarFiles").append("<li class='secondaryFile'>ClasePrueba5.pde</li>");
+}
+
+
 /*
   setFocusedWin()
 
@@ -112,7 +136,6 @@ function clipboardFix() {
     }
 }
 
-
 /*
   Actions
   
@@ -133,7 +156,7 @@ function clipboardFix() {
 function actions_startInitialProject() {
     var initial_win = gui.Window.open('project.html', {
         "frame": false,
-        "width": 600,
+        "width": 900,
         "height": 700,
         "resizable": false
     });
@@ -149,11 +172,10 @@ function actions_startInitialProject() {
 function actions_newProject() {
     var new_win = focus_ctx.window.gui.Window.open('project.html', {
         "frame": false,
-        "width": 600,
+        "width": 550,
         "height": 700,
         "resizable": false
     });
-
 };
 
 
@@ -221,7 +243,5 @@ function actions_stop() {
  */
 
 function actions_devTool() {
-    // focused_win.showDevTools();
-    console.log("Mostrar el debug tool.");
     focus_ctx.window.win.showDevTools();
 }

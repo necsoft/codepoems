@@ -13,7 +13,11 @@ body{
   color:#fff;
 }
 
-#mainNav{
+/*
+  TOP BLOCK
+ */
+
+ #mainNav{
   margin:0;
   padding:0;
   width:100%;
@@ -32,8 +36,6 @@ body{
   display: inline-block;
 }
 
-
-
 .primary_icon{
   font-size:2em;
   margin-right:-5px;
@@ -43,7 +45,6 @@ body{
 .primary_icon:hover{
   color:#CCC;
 }
-
 
 .secondary_icon{
   font-size: 1em;
@@ -64,8 +65,6 @@ body{
   i{
     cursor:pointer;
   }
-
-
 }
 
 .rightIcons{
@@ -83,49 +82,12 @@ body{
   }
 }
 
-
-#mainEditor{
-  float:left;
-  width:100%;
-}
-
-.CodeMirror{
-  height:500px;
-}
-
 #upnav{
   -webkit-app-region:drag;
   background-color: #383838;
   width:100%;
   height:20px;
   cursor:pointer;
-}
-
-#consoleWrap{
-  height: 130px;
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  background-color: #f0f;
-
-}
-
-#console{
-  float: left;
-  width: 100%;
-  background-color: #1D1D1D;
-  overflow-y: auto;
-  border-top: 2px solid #111;
-  height: 130px;
-  color: #666;
-  font-size: 0.7em;
-  p{
-    margin-left:10px;
-  }
-  .consoleError{
-    color:#F26184;
-    font-weight: 900;
-  }
 }
 
 .exit_button,.max_button,.min_button{
@@ -151,9 +113,137 @@ body{
 }
 
 
+/*
+  CENTER BLOCK
+ */
 
-::-webkit-scrollbar-track
-{
+ #centerBlock{
+  width:100%;
+  float:left;
+  display: block;
+  overflow:hidden;
+  float: left;
+  height: 70%;
+}
+
+#sidebar{
+  float:left;
+  width:25%;
+  height:100%;
+  background-color:#222;
+  padding-top:10px;
+  ul{
+    cursor:default;
+
+    li{
+
+      margin: -1px 5px;
+      padding: 6px;
+      font-weight: 100;
+    }
+
+    li:hover{
+      background-color:#000;
+    }
+
+    .mainFile{
+      font-size: 0.75em;
+      font-weight: 900;
+    }
+
+    .mainFile:before {
+      content: "▶   ";
+      font-size:0.4em;
+      color: #fff;
+    }
+
+    .secondaryFile{
+      font-weight:100;
+      font-size: 0.7em;
+    }
+
+    .secondaryFile:before {
+      content: "•  ";
+      color: #0ff;
+    }    
+
+    .active{
+      background-color: #111;
+      color:#ccc;
+    }
+  }
+
+
+  .addButton{
+    background-color: rgba(0,0,0,0);
+    border: 1px solid #333;
+    color: #fff;
+    padding: 7px;
+    margin-left: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-weight: 100;
+    outline: none;
+    font-size:0.8em;
+    transition: background-color 0.1s ease;
+  }
+  
+  .addButton:hover{
+    background-color: rgba(0,0,0,1);
+  }
+
+
+}
+
+#mainEditor{
+  float:left;
+  width:75%;
+}
+
+
+// Esto debería setearse dinámicamente en base al tamaño de los componentes.
+.CodeMirror{
+  height:490px;
+}
+
+/*
+  BOTTOM BLOCK
+ */
+
+
+ #consoleWrap{
+  height: 140px;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+#console{
+  float: left;
+  width: 100%;
+  background-color: #1D1D1D;
+  overflow-y: auto;
+  border-top: 2px solid #111;
+  height: 140px;
+  color: #666;
+  font-size: 0.7em;
+  p{
+    margin-left:10px;
+  }
+  .consoleError{
+    color:#F26184;
+    font-weight: 900;
+  }
+}
+
+
+
+/*
+  SCROLLBARS
+ */
+
+ ::-webkit-scrollbar-track
+ {
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
   background-color: #333333;
 }
