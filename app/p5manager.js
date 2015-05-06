@@ -27,7 +27,6 @@ var default_project_label = "sketch";
 var new_window_width = 900;
 var new_window_height = 700;
 
-
 /*
   new_project()
 
@@ -36,15 +35,22 @@ var new_window_height = 700;
   */
 
 exports.newProject = function() {
+
+    // Creamos un proyecto vacio
     var project = {};
     project.id = new Date().getTime();
-    project.name = default_project_label + project.id;
+    project.mainFile = {};
+    project.mainFile.name = default_project_label + project.id;
     project.saved = false;
     project.declared = false;
 
+
+    // Agregamos el proyecto a la lista de proyectos.
     global.app.projects.push({
         project
     });
+
+    // Abrimos la ventana
     var gui = window.require("nw.gui");
     var new_win = gui.Window.open('project.html', {
         "frame": false,
@@ -61,11 +67,7 @@ exports.newProject = function() {
   */
 
 exports.openProject = function(project_path) {
-    if (check_project(project_path)) {
-        //console.log("ES UN PROYECTO VALIDO");
-    } else {
-        //console.log("NO ES UN PROYECTO VALIDO");
-    };
+    check_project(project_path, analyze_project);
 };
 
 
@@ -76,28 +78,39 @@ exports.openProject = function(project_path) {
 
   */
 
-function check_project(p_path) {
+function check_project(p_path, callback) {
 
+    // Path 
     var p_parsed = path.parse(p_path); // Proyecto parseado
     var p_father = p_parsed.dir.split(path.sep).reverse()[0]; // Nombre de la carpeta padre
-    var p_file_name = p_parsed.dir.split(path.sep).reverse()[0]; // Nombre del archivo (sin extension)
-    var p_file_name_absolute = p_path; // Path absoluto al archivo abierto.
-    var p_dir = p_parsed.dir;
+    var p_dir = p_parsed.dir; // Path absoluto a la carpeta padre.
 
-    // En base al archivo que se aca de intentar abrir creamos el path
-    // de como se debería llamar el archivo central, si este archivo existe
-    // podemos deducir que el proyecto es valido.
+    // Creamos el path a un archivo que debería existir.
     var mainFile = p_dir + path.sep + p_father + ".pde";
-    var secondaryFiles = [];
 
-    // Chequea si el archivo existe 
+    // Chequea si ese archivo tentativo existe.
     fs.access(mainFile, fs.R_OK | fs.W_OK, function(err) {
         if (err) {
             window.alert("Este proyecto no es valido.");
         } else {
-            window.alert("Congratulaciones y algarabías, el archivo que acabas de intentar abrir es UN PROYECTO VALIDO DE PROCESSING!!!! CLAP CLAP CLAP")
+            // Llamamos al analyze_project 
+            callback(p_dir, p_father, mainFile);
         };
     });
+
+};
+
+/*
+  analyze_project()
+
+  Se encarga de analizar el proyecto que ya sabemos que es válido, crear los archivos que lo contienen
+  y dejar listo un project válido para mandarselo al nuevo window.
+
+  */
+
+function analyze_project(p_dir, p_father, main_file) {
+
+    var secondaryFiles = [];
 
     // Busco los secondaryFiles
     fs.readdir(p_dir, function(err, files) {
@@ -109,15 +122,69 @@ function check_project(p_path) {
             var is_directory = fs.statSync(p_dir + path.sep + files[i]).isDirectory();
             // Si cumple las condiciones es un 
             if (is_ignored === false && is_directory === false) {
-                secondaryFiles.push(files[i]);
+                // Creamos el objeto en base al path, esto es util despues para cuando
+                // tengamos que saber si el archivo ha sido modificado o no.
+                var this_file = {};
+                this_file.name = files[i];
+                this_file.saved = true;
+                this_file.declared = true;
+                this_file.abs_path = p_dir + path.sep + files[i];
+                secondaryFiles.push(this_file);
             }
         }
-        console.log("Archivos secundarios filtrados:");
-        console.log(secondaryFiles);
     });
 
-    return false;
-};
+    var analyzed_project = {};
+
+    // Creamos el object temporal para pasarle al window.
+    analyzed_project.name = p_father;
+    analyzed_project.id = new Date().getTime();
+    analyzed_project.saved = true;
+    analyzed_project.declared = true;
+
+    analyzed_project.mainFile = {};
+    analyzed_project.mainFile.name = p_father;
+    analyzed_project.mainFile.save = true;
+    analyzed_project.mainFile.declared = true;
+    analyzed_project.mainFile.abs_path = main_file;
+
+    analyzed_project.secondaryFiles = secondaryFiles;
+
+
+    console.log("analyzed_project: ");
+    console.log(analyzed_project);
+
+    open_project_window(analyzed_project);
+}
+
+
+/*
+  open_project_window()
+  
+
+  */
+
+function open_project_window(project) {
+
+    // Agregamos el proyecto a la lista de proyectos.
+    global.app.projects.push({
+        project
+    });
+
+    // Abrimos la ventana
+    var gui = window.require("nw.gui");
+    var new_win = gui.Window.open('project.html', {
+        "frame": false,
+        "width": new_window_width,
+        "height": new_window_height,
+        "resizable": false
+    });
+
+
+}
+
+
+
 
 /*
   run_project()
@@ -126,6 +193,6 @@ function check_project(p_path) {
 
   */
 
-exports.run_project = function(project, editor) {
+exports.runProject = function(project, editor) {
 
 };

@@ -5,7 +5,12 @@
 
   */
 
+
+// Dependencias
+
+var fs = require('fs');
 var ui = require('./ui.js');
+
 
 // Esta ventana se la vamos a pasar a ui.js
 var gui = window.require("nw.gui");
@@ -17,22 +22,22 @@ var project = {};
 // Save this context
 var ctx = this;
 
-// Reference the global app
-var app = global.app;
 
 $(document).ready(function() {
 
     // Get the project
-    project = app.projects[app.projects.length - 1].project;
+    project = global.app.projects[global.app.projects.length - 1].project;
 
     // Set the focus app
     win.on('focus', function() {
         console.log('Project ' + project.id + ' is now focused.');
-        app.focused_project = project;
+        global.app.focused_project = project;
         ui.setFocusedWin(ctx, win);
     });
 
-    initCodeMirror();
+    // Codemirror Stuff
+    initCodeMirrorEditor();
+    initCodeMirrorDocs();
 
     // Initialize handlers
     ui.setupHandlers(window, win, editor, ctx);
@@ -42,13 +47,13 @@ $(document).ready(function() {
 });
 
 /*
-  initCodeMirror()
+  initCodeMirrorEditor();
 
   Crea la configuración de CodeMirror.
 
  */
 
-function initCodeMirror() {
+function initCodeMirrorEditor() {
     // Initialize Codemirror
     project.editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
         lineNumbers: true,
@@ -63,4 +68,26 @@ function initCodeMirror() {
         gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
         viewportMargin: Infinity
     });
+}
+
+
+/*
+  initCodeMirrorDocs
+
+  Le agrega a nuestro MainFile y a nuestros SecondaryFiles un Doc
+  de Codemirror asociado.
+
+*/
+
+
+function initCodeMirrorDocs() {
+
+    if (project.secondaryFiles) {
+        for (var i = 0; i < project.secondaryFiles.length; i++) {
+            //console.log("HOLA");
+        }
+    }
+
+
+
 }

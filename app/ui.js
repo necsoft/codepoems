@@ -90,13 +90,15 @@ exports.setupHandlers = function(window, win, editor, ctx) {
 exports.setSidebar = function() {
     var $ = focus_ctx.window.$;
     //Main File
-    $(".sidebarFiles").append("<li class='mainFile active'>" + focus_ctx.project.name + ".pde</li>");
-    //Secondary File
-    // $(".sidebarFiles").append("<li class='secondaryFile'>ClasePrueba1.pde</li>");
-    // $(".sidebarFiles").append("<li class='secondaryFile'>ClasePrueba2.pde</li>");
-    // $(".sidebarFiles").append("<li class='secondaryFile'>ClasePrueba3.pde</li>");
-    // $(".sidebarFiles").append("<li class='secondaryFile'>ClasePrueba4.pde</li>");
-    // $(".sidebarFiles").append("<li class='secondaryFile'>ClasePrueba5.pde</li>");
+    $(".sidebarFiles").append("<li class='mainFile active'>" + focus_ctx.project.mainFile.name + ".pde</li>");
+
+    //Secondary Files
+    if (focus_ctx.project.secondaryFiles) {
+        for (var i = 0; i < focus_ctx.project.secondaryFiles.length; i++) {
+            $(".sidebarFiles").append("<li class='secondaryFile'>" + focus_ctx.project.secondaryFiles[i].name + "</li>");
+        }
+    }
+
 }
 
 
