@@ -11,7 +11,7 @@ var p5manager = require('./p5manager.js');
 var win = gui.Window.get();
 
 var focus_ctx;
-var focused_win;
+var focus_win;
 var current_editor;
 
 /*
@@ -23,7 +23,7 @@ var current_editor;
 
 exports.setupUi = function() {
     clipboardFix(); // Add cliboard functionalities.
-    actions_startInitialProject(); // Create an initial project.
+    p5manager.newProject(); // Create an initial project.
     win.hide(); // Hide the debug window
     //win.close(); // Close debug window
 }
@@ -39,9 +39,8 @@ exports.setupUi = function() {
 exports.setupHandlers = function(window, win, editor, ctx) {
 
     var $ = ctx.window.$;
-    focused_win = ctx.window.win;
+    focus_win = ctx.window.win;
     focus_ctx = ctx;
-
 
     /*
       UI Nodes
@@ -54,7 +53,7 @@ exports.setupHandlers = function(window, win, editor, ctx) {
     $button_chrome_dev_tool = $(".button_chrome_dev_tool");
 
     /*
-      UI Handlers
+      UI Handlers (Algunos se resuelven aca y otros en p5manager)
      */
 
     $button_exit.click(function() {
@@ -74,21 +73,21 @@ exports.setupHandlers = function(window, win, editor, ctx) {
     });
 
     $button_new.click(function() {
-        actions_newProject();
+        p5manager.newProject();
     })
 
 }
 
 
-
 /*
-  setupSidebar()
+  setSidebar()
   
-  Se encarga de crear la barra del costado.
+  Se encarga de crear la barra del costado en base a la información que tenemos
+  del proyecto actual. Es llamado desde el project.js correspondiente.
 
  */
 
-exports.setupSidebar = function() {
+exports.setSidebar = function() {
     var $ = focus_ctx.window.$;
     //Main File
     $(".sidebarFiles").append("<li class='mainFile active'>" + focus_ctx.project.name + ".pde</li>");
@@ -109,8 +108,9 @@ exports.setupSidebar = function() {
  */
 
 
-exports.setFocusedWin = function(win) {
-    focused_win = win;
+exports.setFocusedWin = function(ctx, win) {
+    focus_ctx = ctx;
+    focus_win = win;
 }
 
 
@@ -131,10 +131,9 @@ function clipboardFix() {
             hideWindow: true
         });
         win.menu = menu;
-    } catch (ex) {
-        console.log(ex.message);
-    }
+    } catch (ex) {}
 }
+
 
 /*
   Actions
@@ -142,42 +141,6 @@ function clipboardFix() {
   Here starts the actions.
 
  */
-
-
-/*
-  actions_startInitialProject()
-
-  Abre la primer ventana de proyecto, en esta instancia no hay NADA
-  creado todavía.
-
- */
-
-
-function actions_startInitialProject() {
-    var initial_win = gui.Window.open('project.html', {
-        "frame": false,
-        "width": 900,
-        "height": 700,
-        "resizable": false
-    });
-};
-
-/*
-  actions_newProject()
-
-  Este botón se llama cuando se toca desde un project el boton de crear un nuevo project.
-  
- */
-
-function actions_newProject() {
-    var new_win = focus_ctx.window.gui.Window.open('project.html', {
-        "frame": false,
-        "width": 550,
-        "height": 700,
-        "resizable": false
-    });
-};
-
 
 
 /*
@@ -189,13 +152,19 @@ function actions_newProject() {
 
 
 function actions_open($) {
-    //Activa el dialogo.
+    // Activa el File Dialog escondido en el project.html
     $("#fileDialog").trigger("click");
 
+    // Captura el evento en el que se selecciona el archivo.
     $("#fileDialog").change(function(evt) {
-        var file_path = $(this).val()
-        p5manager.open_project(file_path);
+        // Guarda el path absoluto del archivo.
+        var file_path = $(this).val();
+        // Manda el path a p5manager que se encarga de validarlo y de abrir un nuevo project.
+        p5manager.openProject(file_path);
+        // Reseteamos el valor del fileDialog para evitar conflictos al abrir dos veces lo mismo.
+        $(this).val("");
     });
+
 };
 
 
@@ -208,7 +177,7 @@ function actions_open($) {
  */
 
 function actions_quit() {
-    focused_win.close();
+    focus_win.close();
 }
 
 
@@ -240,8 +209,10 @@ function actions_stop() {
 /*
   actions_devTool()
 
+  Abre la Chrome Developer Tool para el contexto en foco.
+
  */
 
 function actions_devTool() {
-    focus_ctx.window.win.showDevTools();
+    focus_win.showDevTools();
 }

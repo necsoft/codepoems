@@ -22,33 +22,22 @@ var app = global.app;
 
 $(document).ready(function() {
 
-    // Project configuration
-    project.id = new Date().getTime(); // Timestamp
-    project.name = "sketch" + project.id;
-    project.saved = false;
-    project.declared = false;
-    app.projects.push({
-        project
-    });
-
-    console.log(project.id)
+    // Get the project
+    project = app.projects[app.projects.length - 1].project;
 
     // Set the focus app
     win.on('focus', function() {
         console.log('Project ' + project.id + ' is now focused.');
         app.focused_project = project;
-        ui.setFocusedWin(win);
+        ui.setFocusedWin(ctx, win);
     });
-
 
     initCodeMirror();
 
     // Initialize handlers
     ui.setupHandlers(window, win, editor, ctx);
-
-
-    ui.setupSidebar();
-
+    // Setup the sidebar
+    ui.setSidebar();
 
 });
 

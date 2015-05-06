@@ -136,7 +136,6 @@ body{
     cursor:default;
 
     li{
-
       margin: -1px 5px;
       padding: 6px;
       font-weight: 100;
@@ -147,28 +146,33 @@ body{
     }
 
     .mainFile{
-      font-size: 0.75em;
-      font-weight: 900;
+      font-size: 0.8em;
+      font-weight: 500;
+
+      margin-bottom:5px;
     }
 
     .mainFile:before {
-      content: "▶   ";
-      font-size:0.4em;
-      color: #fff;
+      content: "• ";
+      color: #FF960A;
+      font-size: 1.3em;
+      vertical-align: middle;
     }
 
     .secondaryFile{
-      font-weight:100;
+      //font-weight:100;
       font-size: 0.7em;
     }
 
     .secondaryFile:before {
       content: "•  ";
       color: #0ff;
+      font-size:1em;
     }    
 
     .active{
-      background-color: #111;
+      border: 1px solid #111;
+      border-radius:4px;
       color:#ccc;
     }
   }
@@ -184,7 +188,7 @@ body{
     border-radius: 5px;
     font-weight: 100;
     outline: none;
-    font-size:0.8em;
+    font-size:0.7em;
     transition: background-color 0.1s ease;
   }
   

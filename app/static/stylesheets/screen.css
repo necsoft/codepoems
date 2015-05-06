@@ -1207,37 +1207,40 @@ body {
   padding: 6px;
   font-weight: 100;
 }
-/* line 145, ../sass/screen.scss */
+/* line 144, ../sass/screen.scss */
 #sidebar ul li:hover {
   background-color: #000;
 }
-/* line 149, ../sass/screen.scss */
+/* line 148, ../sass/screen.scss */
 #sidebar ul .mainFile {
-  font-size: 0.75em;
-  font-weight: 900;
+  font-size: 0.8em;
+  font-weight: 500;
+  margin-bottom: 5px;
 }
-/* line 154, ../sass/screen.scss */
+/* line 155, ../sass/screen.scss */
 #sidebar ul .mainFile:before {
-  content: "▶   ";
-  font-size: 0.4em;
-  color: #fff;
+  content: "• ";
+  color: #FF960A;
+  font-size: 1.3em;
+  vertical-align: middle;
 }
-/* line 160, ../sass/screen.scss */
+/* line 162, ../sass/screen.scss */
 #sidebar ul .secondaryFile {
-  font-weight: 100;
   font-size: 0.7em;
 }
-/* line 165, ../sass/screen.scss */
+/* line 167, ../sass/screen.scss */
 #sidebar ul .secondaryFile:before {
   content: "•  ";
   color: #0ff;
+  font-size: 1em;
 }
-/* line 170, ../sass/screen.scss */
+/* line 173, ../sass/screen.scss */
 #sidebar ul .active {
-  background-color: #111;
+  border: 1px solid #111;
+  border-radius: 4px;
   color: #ccc;
 }
-/* line 177, ../sass/screen.scss */
+/* line 181, ../sass/screen.scss */
 #sidebar .addButton {
   background-color: transparent;
   border: 1px solid #333;
@@ -1248,21 +1251,21 @@ body {
   border-radius: 5px;
   font-weight: 100;
   outline: none;
-  font-size: 0.8em;
+  font-size: 0.7em;
   transition: background-color 0.1s ease;
 }
-/* line 191, ../sass/screen.scss */
+/* line 195, ../sass/screen.scss */
 #sidebar .addButton:hover {
   background-color: black;
 }
 
-/* line 198, ../sass/screen.scss */
+/* line 202, ../sass/screen.scss */
 #mainEditor {
   float: left;
   width: 75%;
 }
 
-/* line 205, ../sass/screen.scss */
+/* line 209, ../sass/screen.scss */
 .CodeMirror {
   height: 490px;
 }
@@ -1270,7 +1273,7 @@ body {
 /*
   BOTTOM BLOCK
  */
-/* line 214, ../sass/screen.scss */
+/* line 218, ../sass/screen.scss */
 #consoleWrap {
   height: 140px;
   position: relative;
@@ -1278,7 +1281,7 @@ body {
   overflow: hidden;
 }
 
-/* line 221, ../sass/screen.scss */
+/* line 225, ../sass/screen.scss */
 #console {
   float: left;
   width: 100%;
@@ -1289,11 +1292,11 @@ body {
   color: #666;
   font-size: 0.7em;
 }
-/* line 230, ../sass/screen.scss */
+/* line 234, ../sass/screen.scss */
 #console p {
   margin-left: 10px;
 }
-/* line 233, ../sass/screen.scss */
+/* line 237, ../sass/screen.scss */
 #console .consoleError {
   color: #F26184;
   font-weight: 900;
@@ -1302,19 +1305,19 @@ body {
 /*
   SCROLLBARS
  */
-/* line 245, ../sass/screen.scss */
+/* line 249, ../sass/screen.scss */
 ::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: #333333;
 }
 
-/* line 251, ../sass/screen.scss */
+/* line 255, ../sass/screen.scss */
 ::-webkit-scrollbar {
   width: 6px;
   background-color: #333333;
 }
 
-/* line 257, ../sass/screen.scss */
+/* line 261, ../sass/screen.scss */
 ::-webkit-scrollbar-thumb {
   background-color: #000000;
 }

@@ -1,7 +1,12 @@
 /*
   app.js
 
-  This is the main nw.js file.
+  Este es el archivo que se abre al principio, codepoems esta desarrollado utilizando
+  tres tecnologías en complementación:
+
+  * Node.js
+  * nw.js
+  * Codemirror
 
   */
 
