@@ -12,7 +12,6 @@ var win = gui.Window.get();
 
 var focus_ctx;
 var focus_win;
-var current_editor;
 
 /*
   setupUi()
@@ -22,10 +21,9 @@ var current_editor;
  */
 
 exports.setupUi = function() {
-    clipboardFix(); // Add cliboard functionalities.
-    p5manager.newProject(); // Create an initial project.
-    win.hide(); // Hide the debug window
-    //win.close(); // Close debug window
+    clipboardFix(); // Add clipboard functionalities.
+    p5manager.initialProject(); // Create an initial project.
+    win.close(); // Hide the debug window
 }
 
 /*
@@ -41,6 +39,12 @@ exports.setupHandlers = function(window, win, editor, ctx) {
     var $ = ctx.window.$;
     focus_win = ctx.window.win;
     focus_ctx = ctx;
+
+    global.app.focus_ctx = ctx;
+    global.app.focus_win = focus_win;
+
+    //focus_win.focus()
+    //console.log(focus_win);
 
     /*
       UI Nodes
@@ -99,6 +103,17 @@ exports.setSidebar = function() {
         }
     }
 
+    $(".mainFile").click(function() {
+        focus_ctx.window.swapDoc("main");
+    });
+
+    // Handle para los clicks en la barra lateral
+    $(".secondaryFile").click(function() {
+        console.log("Tocaste un boton de la barra lateral.");
+        // Hacemos el -1 porque index arranca desde 1 y nosotros necesitamos que sea desde 0
+        var index = $(this).index() - 1;
+        focus_ctx.window.swapDoc("secondary", index);
+    });
 }
 
 
@@ -113,6 +128,8 @@ exports.setSidebar = function() {
 exports.setFocusedWin = function(ctx, win) {
     focus_ctx = ctx;
     focus_win = win;
+    global.app.focus_ctx = ctx;
+    global.app.focus_win = win;
 }
 
 

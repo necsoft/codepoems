@@ -28,9 +28,48 @@ var new_window_width = 900;
 var new_window_height = 700;
 
 /*
-  new_project()
+  initialProject()
 
-  Crea una ventana y un proyecto nuevo.
+  La diferencia entre el initialProject y el newProject es que este ptimero
+  se crea en base al gui inicial, los otros son creados en base a la app que esta
+  en foco, esto permite que no tengamos que tener un window escondido
+
+  */
+
+exports.initialProject = function() {
+
+    // Creamos un proyecto vacio
+    var project = {};
+    project.id = new Date().getTime();
+    project.mainFile = {};
+    project.mainFile.name = default_project_label + project.id;
+    project.mainFile.abs_path = "";
+    project.mainFile.saved = false;
+    project.mainFile.declared = true;
+    project.secondaryFiles = [];
+    project.saved = false;
+    project.declared = false;
+
+    // Agregamos el proyecto a la lista de proyectos.
+    global.app.projects.push({
+        project
+    });
+
+    // Abrimos la ventana
+    var gui = window.require("nw.gui");
+    // var win = gui.Window.get();
+    var new_win = gui.Window.open('project.html', {
+        "frame": false,
+        "width": new_window_width,
+        "height": new_window_height,
+        "resizable": false
+    });
+}
+
+/*
+  newProject()
+
+  Similar al initialProject, pero trabaja en base a focus_win.
 
   */
 
@@ -41,6 +80,10 @@ exports.newProject = function() {
     project.id = new Date().getTime();
     project.mainFile = {};
     project.mainFile.name = default_project_label + project.id;
+    project.mainFile.abs_path = "";
+    project.mainFile.saved = false;
+    project.mainFile.declared = true;
+    project.secondaryFiles = [];
     project.saved = false;
     project.declared = false;
 
@@ -51,7 +94,8 @@ exports.newProject = function() {
     });
 
     // Abrimos la ventana
-    var gui = window.require("nw.gui");
+    var gui = global.app.focus_win.window.require("nw.gui");
+    // var win = gui.Window.get();
     var new_win = gui.Window.open('project.html', {
         "frame": false,
         "width": new_window_width,
@@ -134,33 +178,29 @@ function analyze_project(p_dir, p_father, main_file) {
         }
     });
 
-    var analyzed_project = {};
-
     // Creamos el object temporal para pasarle al window.
+    var analyzed_project = {};
     analyzed_project.name = p_father;
     analyzed_project.id = new Date().getTime();
     analyzed_project.saved = true;
     analyzed_project.declared = true;
-
     analyzed_project.mainFile = {};
     analyzed_project.mainFile.name = p_father;
     analyzed_project.mainFile.save = true;
     analyzed_project.mainFile.declared = true;
     analyzed_project.mainFile.abs_path = main_file;
-
     analyzed_project.secondaryFiles = secondaryFiles;
 
-
-    console.log("analyzed_project: ");
-    console.log(analyzed_project);
-
+    // Abrimos la ventana del proyecto pasándole el project.
     open_project_window(analyzed_project);
 }
 
 
 /*
   open_project_window()
-  
+
+  Abre una ventana de un proyecto nuevo, pero lo hace agregando un proyecto
+  que previamente fue analizado.
 
   */
 
@@ -172,7 +212,7 @@ function open_project_window(project) {
     });
 
     // Abrimos la ventana
-    var gui = window.require("nw.gui");
+    var gui = global.app.focus_win.window.require("nw.gui");
     var new_win = gui.Window.open('project.html', {
         "frame": false,
         "width": new_window_width,
@@ -182,8 +222,6 @@ function open_project_window(project) {
 
 
 }
-
-
 
 
 /*

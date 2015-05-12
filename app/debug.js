@@ -1,7 +1,5 @@
 $(document).ready(function() {
 
-    console.log(global.app);
-
     // Refresh Loop
     setInterval(function() {
         $(".debug_currentPlatform").text(global.app.platform);
