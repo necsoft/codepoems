@@ -110,11 +110,15 @@ function initCodeMirrorDocs() {
 }
 
 
+/*
+  swapDoc();
 
+  Se encarga de hacer swap en el editor de CodeMirror.
+
+  */
 
 
 function swapDoc(type, index) {
-    console.log("Voy a swappear un doc secundario");
 
     if (type === "main") {
         project.editor.swapDoc(project.mainFile.doc);
