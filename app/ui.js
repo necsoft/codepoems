@@ -10,8 +10,8 @@ var gui = window.require("nw.gui");
 var p5manager = require('./p5manager.js');
 var win = gui.Window.get();
 
-var focus_ctx;
-var focus_win;
+var focused_ctx;
+var focused_win;
 
 /*
   setupUi()
@@ -37,14 +37,11 @@ exports.setupUi = function() {
 exports.setupHandlers = function(window, win, editor, ctx) {
 
     var $ = ctx.window.$;
-    focus_win = ctx.window.win;
-    focus_ctx = ctx;
+    focused_win = ctx.window.win;
+    focused_ctx = ctx;
 
-    global.app.focus_ctx = ctx;
-    global.app.focus_win = focus_win;
-
-    //focus_win.focus()
-    //console.log(focus_win);
+    global.app.focused_ctx = ctx;
+    global.app.focused_win = focused_win;
 
     /*
       UI Nodes
@@ -52,6 +49,7 @@ exports.setupHandlers = function(window, win, editor, ctx) {
 
     $button_run = $(".button_run");
     $button_open = $(".button_open");
+    $button_save = $(".button_save");
     $button_exit = $(".exit_button");
     $button_new = $(".button_new");
     $button_chrome_dev_tool = $(".button_chrome_dev_tool");
@@ -66,6 +64,10 @@ exports.setupHandlers = function(window, win, editor, ctx) {
 
     $button_open.click(function() {
         actions_open($);
+    });
+
+    $button_save.click(function() {
+        actions_save($);
     });
 
     $button_run.click(function() {
@@ -92,19 +94,19 @@ exports.setupHandlers = function(window, win, editor, ctx) {
  */
 
 exports.setSidebar = function() {
-    var $ = focus_ctx.window.$;
+    var $ = focused_ctx.window.$;
     //Main File
-    $(".sidebarFiles").append("<li class='mainFile active'>" + focus_ctx.project.mainFile.name + ".pde</li>");
+    $(".sidebarFiles").append("<li class='mainFile active'>" + focused_ctx.project.mainFile.name + ".pde</li>");
 
     //Secondary Files
-    if (focus_ctx.project.secondaryFiles) {
-        for (var i = 0; i < focus_ctx.project.secondaryFiles.length; i++) {
-            $(".sidebarFiles").append("<li class='secondaryFile'>" + focus_ctx.project.secondaryFiles[i].name + "</li>");
+    if (focused_ctx.project.secondaryFiles) {
+        for (var i = 0; i < focused_ctx.project.secondaryFiles.length; i++) {
+            $(".sidebarFiles").append("<li class='secondaryFile'>" + focused_ctx.project.secondaryFiles[i].name + "</li>");
         }
     }
 
     $(".mainFile").click(function() {
-        focus_ctx.window.swapDoc("main");
+        focused_ctx.window.swapDoc("main");
     });
 
     // Handle para los clicks en la barra lateral
@@ -112,7 +114,7 @@ exports.setSidebar = function() {
         console.log("Tocaste un boton de la barra lateral.");
         // Hacemos el -1 porque index arranca desde 1 y nosotros necesitamos que sea desde 0
         var index = $(this).index() - 1;
-        focus_ctx.window.swapDoc("secondary", index);
+        focused_ctx.window.swapDoc("secondary", index);
     });
 }
 
@@ -126,10 +128,10 @@ exports.setSidebar = function() {
 
 
 exports.setFocusedWin = function(ctx, win) {
-    focus_ctx = ctx;
-    focus_win = win;
-    global.app.focus_ctx = ctx;
-    global.app.focus_win = win;
+    focused_ctx = ctx;
+    focused_win = win;
+    global.app.focused_ctx = ctx;
+    global.app.focused_win = win;
 }
 
 
@@ -196,7 +198,7 @@ function actions_open($) {
  */
 
 function actions_quit() {
-    focus_win.close();
+    focused_win.close();
 }
 
 
@@ -226,6 +228,26 @@ function actions_stop() {
 
 
 /*
+  actions_save()
+
+  Guarda el proyecto.
+
+ */
+
+function actions_save($) {
+    $("#fileSaveDialog").trigger("click");
+
+    // Captura el evento en el que se selecciona el lugar para guardarlo.
+    $("#fileSaveDialog").change(function(evt) {
+        // Guarda el path absoluto del archivo.
+        var the_path = $(this).val();
+        p5manager.saveProject(the_path, global.app.focused_project);
+        $(this).val("");
+    });
+}
+
+
+/*
   actions_devTool()
 
   Abre la Chrome Developer Tool para el contexto en foco.
@@ -233,5 +255,5 @@ function actions_stop() {
  */
 
 function actions_devTool() {
-    focus_win.showDevTools();
+    focused_win.showDevTools();
 }

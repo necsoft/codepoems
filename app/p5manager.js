@@ -19,6 +19,7 @@
 
 // Dependencies.
 var fs = require('fs');
+var mkdirp = require('mkdirp');
 var path = require('path');
 var util = require('util');
 
@@ -26,6 +27,7 @@ var util = require('util');
 var default_project_label = "sketch";
 var new_window_width = 900;
 var new_window_height = 700;
+
 
 /*
   initialProject()
@@ -69,7 +71,7 @@ exports.initialProject = function() {
 /*
   newProject()
 
-  Similar al initialProject, pero trabaja en base a focus_win.
+  Similar al initialProject, pero trabaja en base a focused_win.
 
   */
 
@@ -94,7 +96,7 @@ exports.newProject = function() {
     });
 
     // Abrimos la ventana
-    var gui = global.app.focus_win.window.require("nw.gui");
+    var gui = global.app.focused_win.window.require("nw.gui");
     // var win = gui.Window.get();
     var new_win = gui.Window.open('project.html', {
         "frame": false,
@@ -186,7 +188,7 @@ function analyze_project(p_dir, p_father, main_file) {
     analyzed_project.declared = true;
     analyzed_project.mainFile = {};
     analyzed_project.mainFile.name = p_father;
-    analyzed_project.mainFile.save = true;
+    analyzed_project.mainFile.saved = true;
     analyzed_project.mainFile.declared = true;
     analyzed_project.mainFile.abs_path = main_file;
     analyzed_project.secondaryFiles = secondaryFiles;
@@ -212,7 +214,7 @@ function open_project_window(project) {
     });
 
     // Abrimos la ventana
-    var gui = global.app.focus_win.window.require("nw.gui");
+    var gui = global.app.focused_win.window.require("nw.gui");
     var new_win = gui.Window.open('project.html', {
         "frame": false,
         "width": new_window_width,
@@ -225,12 +227,67 @@ function open_project_window(project) {
 
 
 /*
-  run_project()
+  runProject()
 
   Ejecuta un proyecto de processing.
 
   */
 
-exports.runProject = function(project, editor) {
+exports.runProject = function(project) {
 
 };
+
+
+/*
+  saveProject()
+
+  Save As -> Guarda un proyecto en una carpeta
+  Save -> Guarda en 
+
+  */
+
+exports.saveProject = function(save_path, project) {
+
+    // En base al path que nos pasan extraemos el nombre del proyecto.
+    var name_saved = save_path.split(path.sep).reverse()[0];
+    var main_path = save_path + path.sep;
+    var main_file = main_path + name_saved + ".pde";
+
+    // Creamos la carpeta con mkdirp porque encontré en varios post de stackoverflow
+    // que era mejor que usar el mkdir nativo de node.
+
+    mkdirp(save_path, function(err) {
+        if (err) {
+            console.error(err);
+        } else {
+            writeMainFile();
+            writeSecondaryFiles();
+        }
+    });
+
+    function writeMainFile() {
+        fs.writeFile(main_file, project.mainFile.doc.getValue(), function(err) {
+            if (err) {
+                console.log(err);
+            } else {
+                // Se crea el archivo primario
+            };
+        });
+    }
+
+    function writeSecondaryFiles() {
+        for (var i = 0; i < project.secondaryFiles.length; i++) {
+            console.log(project.secondaryFiles[i].name);
+            var the_file = project.secondaryFiles[i].name;
+            fs.writeFile(main_path + the_file, project.secondaryFiles[i].doc.getValue(), function(err) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    // Se crea el archivo secundario
+                }
+            });
+        }
+
+    }
+
+}

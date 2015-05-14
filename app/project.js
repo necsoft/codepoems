@@ -10,7 +10,6 @@
 var fs = require('fs');
 var ui = require('./ui.js');
 
-
 // Esta ventana se la vamos a pasar a ui.js
 var gui = window.require("nw.gui");
 var win = gui.Window.get();
@@ -20,8 +19,6 @@ var project = {};
 
 // Save this context
 var ctx = this;
-
-
 
 $(document).ready(function() {
 
@@ -54,7 +51,6 @@ $(document).ready(function() {
   */
 
 function initCodeMirror() {
-    // Initialize Codemirror
     initCodeMirrorDocs();
 }
 
@@ -70,14 +66,13 @@ function initCodeMirror() {
 
 function initCodeMirrorDocs() {
 
-    // Creando el doc del mainFile en caso de que no sea un proyecto declarado
-    // cre
-    if (project.mainFile.abs_path !== "") {
+    if (project.declared) {
+        // Proyecto declarado
         var main_file_content = fs.readFileSync(project.mainFile.abs_path);
         var doc = CodeMirror.Doc(main_file_content.toString(), "processing");
         project.mainFile.doc = doc;
     } else {
-        // Doc default si el 
+        // Proyecto no declarado (el default cuando se abre codepoems)
         var doc = CodeMirror.Doc("\n//Welcome to codepoems!\n\n void setup(){\n\n}\n\n void draw(){\n\n}", "processing");
         project.mainFile.doc = doc;
     }
