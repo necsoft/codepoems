@@ -17,9 +17,25 @@ var win = gui.Window.get();
 // Empty object for this project
 var project = {};
 
+// Editor default config
+var codemirror_config = {
+    lineNumbers: true,
+    lineWrapping: true,
+    mode: "processing",
+    keyMap: "sublime",
+    autoCloseBrackets: true,
+    matchBrackets: true,
+    showCursorWhenSelecting: true,
+    theme: "paraiso-dark",
+    foldGutter: true,
+    gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+    viewportMargin: Infinity
+}
+
 // Save this context
 var ctx = this;
 
+// Document ready
 $(document).ready(function() {
 
     // Get the project
@@ -66,6 +82,7 @@ function initCodeMirror() {
 
 function initCodeMirrorDocs() {
 
+    // Creamos el doc del mainFile
     if (project.declared) {
         // Proyecto declarado
         var main_file_content = fs.readFileSync(project.mainFile.abs_path);
@@ -83,22 +100,8 @@ function initCodeMirrorDocs() {
         project.secondaryFiles[i].doc = CodeMirror.Doc(file_content.toString(), "processing");
     }
 
-    // Editor default config
-    var default_config = {
-        lineNumbers: true,
-        lineWrapping: true,
-        mode: "processing",
-        keyMap: "sublime",
-        autoCloseBrackets: true,
-        matchBrackets: true,
-        showCursorWhenSelecting: true,
-        theme: "paraiso-dark",
-        foldGutter: true,
-        gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-        viewportMargin: Infinity
-    }
-
-    project.editor = CodeMirror.fromTextArea(window.document.getElementById("editor"), default_config);
+    // Creamos el CodeMirror en base al textarea
+    project.editor = CodeMirror.fromTextArea(window.document.getElementById("editor"), codemirror_config);
 
     //Swap the default doc
     project.editor.swapDoc(project.mainFile.doc);
@@ -114,13 +117,10 @@ function initCodeMirrorDocs() {
 
 
 function swapDoc(type, index) {
-
     if (type === "main") {
         project.editor.swapDoc(project.mainFile.doc);
     }
-
     if (type === "secondary") {
         project.editor.swapDoc(project.secondaryFiles[index].doc);
     }
-
 }

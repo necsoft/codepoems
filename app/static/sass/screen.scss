@@ -178,7 +178,7 @@ body{
   }
 
 
-  .addButton{
+  .button_add_file{
     background-color: rgba(0,0,0,0);
     border: 1px solid #333;
     color: #fff;
@@ -192,7 +192,7 @@ body{
     transition: background-color 0.1s ease;
   }
   
-  .addButton:hover{
+  .button_add_file:hover{
     background-color: rgba(0,0,0,1);
   }
 

@@ -43,12 +43,16 @@ exports.initialProject = function() {
     // Creamos un proyecto vacio
     var project = {};
     project.id = new Date().getTime();
+
+    // Main File
     project.mainFile = {};
     project.mainFile.name = default_project_label + project.id;
     project.mainFile.abs_path = "";
     project.mainFile.saved = false;
     project.mainFile.declared = true;
+    // Secondary File
     project.secondaryFiles = [];
+    // Project state
     project.saved = false;
     project.declared = false;
 
@@ -59,7 +63,6 @@ exports.initialProject = function() {
 
     // Abrimos la ventana
     var gui = window.require("nw.gui");
-    // var win = gui.Window.get();
     var new_win = gui.Window.open('project.html', {
         "frame": false,
         "width": new_window_width,
@@ -182,15 +185,18 @@ function analyze_project(p_dir, p_father, main_file) {
 
     // Creamos el object temporal para pasarle al window.
     var analyzed_project = {};
+    // Project state
     analyzed_project.name = p_father;
     analyzed_project.id = new Date().getTime();
     analyzed_project.saved = true;
     analyzed_project.declared = true;
+    // Main File
     analyzed_project.mainFile = {};
     analyzed_project.mainFile.name = p_father;
     analyzed_project.mainFile.saved = true;
     analyzed_project.mainFile.declared = true;
     analyzed_project.mainFile.abs_path = main_file;
+    // Secondary File
     analyzed_project.secondaryFiles = secondaryFiles;
 
     // Abrimos la ventana del proyecto pasándole el project.
@@ -238,15 +244,34 @@ exports.runProject = function(project) {
 };
 
 
+
+
 /*
   saveProject()
 
-  Save As -> Guarda un proyecto en una carpeta
-  Save -> Guarda en 
+  Es el save directo, sin abrir la ventana de dialogo.
+
+ */
+
+
+exports.saveProject = function(project) {
+    var main_file = project.mainFile.abs_path;
+    var main_path = path.dirname(project.mainFile.abs_path) + path.sep;
+    writeFiles(global.app.focused_project, main_file, main_path);
+}
+
+
+/*
+  saveAsProject()
+
+  Esto es todo lo que ocurre cuando alguien hace saveAs:
+
+    * Se analiza el path de save
+    * Se crea la carpeta
 
   */
 
-exports.saveProject = function(save_path, project) {
+exports.saveAsProject = function(save_path, project) {
 
     // En base al path que nos pasan extraemos el nombre del proyecto.
     var name_saved = save_path.split(path.sep).reverse()[0];
@@ -260,34 +285,43 @@ exports.saveProject = function(save_path, project) {
         if (err) {
             console.error(err);
         } else {
-            writeMainFile();
-            writeSecondaryFiles();
+            writeFiles(project, main_file, main_path);
         }
     });
 
-    function writeMainFile() {
-        fs.writeFile(main_file, project.mainFile.doc.getValue(), function(err) {
+}
+
+
+
+/*
+  writeFiles()
+
+  Se encarga de crear los archivos, es llamado tanto por save como por saveAs.
+
+ */
+
+function writeFiles(project, main_file, main_path) {
+
+    // Escribe el mainFile
+    fs.writeFile(main_file, project.mainFile.doc.getValue(), function(err) {
+        if (err) {
+            console.log(err);
+        } else {
+            // Se crea el archivo primario
+        };
+    });
+
+    // Escribe los secondaryFiles
+    for (var i = 0; i < project.secondaryFiles.length; i++) {
+        console.log(project.secondaryFiles[i].name);
+        var the_file = project.secondaryFiles[i].name;
+        fs.writeFile(main_path + the_file, project.secondaryFiles[i].doc.getValue(), function(err) {
             if (err) {
                 console.log(err);
             } else {
-                // Se crea el archivo primario
-            };
+                // Se crea el archivo secundario
+            }
         });
-    }
-
-    function writeSecondaryFiles() {
-        for (var i = 0; i < project.secondaryFiles.length; i++) {
-            console.log(project.secondaryFiles[i].name);
-            var the_file = project.secondaryFiles[i].name;
-            fs.writeFile(main_path + the_file, project.secondaryFiles[i].doc.getValue(), function(err) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    // Se crea el archivo secundario
-                }
-            });
-        }
-
     }
 
 }

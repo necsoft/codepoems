@@ -50,9 +50,11 @@ exports.setupHandlers = function(window, win, editor, ctx) {
     $button_run = $(".button_run");
     $button_open = $(".button_open");
     $button_save = $(".button_save");
+    $button_save_as = $(".button_save_as");
     $button_exit = $(".exit_button");
     $button_new = $(".button_new");
     $button_chrome_dev_tool = $(".button_chrome_dev_tool");
+    $button_add_file = $(".button_add_file")
 
     /*
       UI Handlers (Algunos se resuelven aca y otros en p5manager)
@@ -70,6 +72,10 @@ exports.setupHandlers = function(window, win, editor, ctx) {
         actions_save($);
     });
 
+    $button_save_as.click(function() {
+        actions_save_as($);
+    });
+
     $button_run.click(function() {
         actions_run();
     });
@@ -80,6 +86,10 @@ exports.setupHandlers = function(window, win, editor, ctx) {
 
     $button_new.click(function() {
         p5manager.newProject();
+    })
+
+    $button_add_file.click(function() {
+        actions_add_file();
     })
 
 }
@@ -230,20 +240,42 @@ function actions_stop() {
 /*
   actions_save()
 
-  Guarda el proyecto.
+  Este save es el default, determina en base a si es declarado o no lo
+  que tiene que hacer.
 
  */
 
 function actions_save($) {
+
+    if (global.app.focused_project.declared) {
+        p5manager.saveProject(global.app.focused_project);
+    } else {
+        actions_save_as($);
+    }
+
+}
+
+/*
+  actions_save_as()
+
+  Save as del proyecto, previamente hace algo que es necesario en nw
+  que es hacer el trigger y escuchar el change del dialog.
+
+ */
+
+function actions_save_as($) {
+
+    // Aparece la ventana de File
     $("#fileSaveDialog").trigger("click");
 
     // Captura el evento en el que se selecciona el lugar para guardarlo.
     $("#fileSaveDialog").change(function(evt) {
         // Guarda el path absoluto del archivo.
         var the_path = $(this).val();
-        p5manager.saveProject(the_path, global.app.focused_project);
+        p5manager.saveAsProject(the_path, global.app.focused_project);
         $(this).val("");
     });
+
 }
 
 
@@ -256,4 +288,19 @@ function actions_save($) {
 
 function actions_devTool() {
     focused_win.showDevTools();
+}
+
+
+
+
+
+/*
+  actions_add_file()
+
+  Agrega un archivo al sidebar.
+
+ */
+
+function actions_add_file(){
+  var algo = focused_ctx.prompt("Name of the File");
 }
