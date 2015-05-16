@@ -1,8 +1,17 @@
 /*
   ui.js
   
-  tiene que manejar todos los handlers y crear todos los elementos/componentes
-  del sistema operativo 
+  UI se encarga de manejarle los handlers a la aplicación que este en foco y de crear acciones
+  para los eventos que pueden ocurrir. También se encarga de abrir la ventana inicial al crear
+  la aplicación.
+
+  Entre las tareas que cumple:
+
+  * Capturar todos los handlers
+  * Configurar la UI
+  * Abrir la ventana inicial
+  * Manejar los triggers de open y save
+  * Validar el add file  
 
   */
 
@@ -18,7 +27,7 @@ var focused_win;
 
   Se llama desde el app.js para configurar las cosas nativas de la UI.
 
- */
+  */
 
 exports.setupUi = function() {
     clipboardFix(); // Add clipboard functionalities.
@@ -31,7 +40,7 @@ exports.setupUi = function() {
 
   Esta función se llama desde afuera para setear los handlers de una ventana.
 
- */
+  */
 
 
 exports.setupHandlers = function(window, win, editor, ctx) {
@@ -45,7 +54,7 @@ exports.setupHandlers = function(window, win, editor, ctx) {
 
     /*
       UI Nodes
-     */
+      */
 
     $button_run = $(".button_run");
     $button_open = $(".button_open");
@@ -58,7 +67,7 @@ exports.setupHandlers = function(window, win, editor, ctx) {
 
     /*
       UI Handlers (Algunos se resuelven aca y otros en p5manager)
-     */
+      */
 
     $button_exit.click(function() {
         actions_quit();
@@ -101,10 +110,13 @@ exports.setupHandlers = function(window, win, editor, ctx) {
   Se encarga de crear la barra del costado en base a la información que tenemos
   del proyecto actual. Es llamado desde el project.js correspondiente.
 
- */
+  */
 
 exports.setSidebar = function() {
     var $ = focused_ctx.window.$;
+
+    $(".sidebarFiles").empty();
+
     //Main File
     $(".sidebarFiles").append("<li class='mainFile active'>" + focused_ctx.project.mainFile.name + ".pde</li>");
 
@@ -121,7 +133,6 @@ exports.setSidebar = function() {
 
     // Handle para los clicks en la barra lateral
     $(".secondaryFile").click(function() {
-        console.log("Tocaste un boton de la barra lateral.");
         // Hacemos el -1 porque index arranca desde 1 y nosotros necesitamos que sea desde 0
         var index = $(this).index() - 1;
         focused_ctx.window.swapDoc("secondary", index);
@@ -134,7 +145,7 @@ exports.setSidebar = function() {
 
   Se llama cada vez que el project esta en focus.
 
- */
+  */
 
 
 exports.setFocusedWin = function(ctx, win) {
@@ -150,7 +161,7 @@ exports.setFocusedWin = function(ctx, win) {
 
   Fix the clipboard issue in Mac.
 
- */
+  */
 
 function clipboardFix() {
     var menu;
@@ -171,7 +182,7 @@ function clipboardFix() {
   
   Here starts the actions.
 
- */
+  */
 
 
 /*
@@ -179,7 +190,7 @@ function clipboardFix() {
 
   Usa el input oculto para abrir el trigger 
 
- */
+  */
 
 
 function actions_open($) {
@@ -205,7 +216,7 @@ function actions_open($) {
   
   Cierra todas las ventanas abiertas.
 
- */
+  */
 
 function actions_quit() {
     focused_win.close();
@@ -218,7 +229,7 @@ function actions_quit() {
 
   Ejecuta el proyecto en focus.
 
- */
+  */
 
 function actions_run() {
 
@@ -230,7 +241,7 @@ function actions_run() {
 
   Detiene el proyecto en focus.
 
- */
+  */
 
 function actions_stop() {
 
@@ -243,7 +254,7 @@ function actions_stop() {
   Este save es el default, determina en base a si es declarado o no lo
   que tiene que hacer.
 
- */
+  */
 
 function actions_save($) {
 
@@ -261,7 +272,7 @@ function actions_save($) {
   Save as del proyecto, previamente hace algo que es necesario en nw
   que es hacer el trigger y escuchar el change del dialog.
 
- */
+  */
 
 function actions_save_as($) {
 
@@ -284,23 +295,70 @@ function actions_save_as($) {
 
   Abre la Chrome Developer Tool para el contexto en foco.
 
- */
+  */
 
 function actions_devTool() {
     focused_win.showDevTools();
 }
 
 
-
-
-
 /*
   actions_add_file()
 
-  Agrega un archivo al sidebar.
+  Agrega un archivo al proyecto.
 
- */
+  */
 
-function actions_add_file(){
-  var algo = focused_ctx.prompt("Name of the File");
+function actions_add_file() {
+    var prompt_value = focused_ctx.prompt("Cual es el nombre del archivo que quieres crear?");
+
+    // Booleans de validación
+    var is_empty;
+    var start_with_number;
+    var is_main_file_name;
+    var has_extension;
+
+    // Valida presencia
+    if (prompt_value === "") {
+        is_empty = true;
+        focused_ctx.alert("Tienes que escribir algo");
+        actions_add_file();
+    } else {
+        is_empty = false;
+    }
+
+    // Valida si comienza con numero
+    var start_numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+    var start_with_number = start_numbers.indexOf(prompt_value.charAt(0)) > -1;
+
+    if (start_with_number) {
+        focused_ctx.alert("No puedes nombrar al archivo con un número delante.");
+        actions_add_file();
+    };
+
+    // Valida si el nombre es igual al nombre del mainFile
+    if (global.app.focused_project.mainFile.name + ".pde" === prompt_value) {
+        focused_ctx.alert("No puede llamarse igual al archivo principal del proyecto.");
+        actions_add_file();
+        is_main_file_name = true;
+    } else {
+        is_main_file_name = false;
+    }
+
+    // Valida si se escribió la extensión
+    if (prompt_value.split(".").length > 1 && prompt_value.split(".")[1].length > 2) {
+        has_extension = true;
+    } else {
+        has_extension = false;
+        focused_ctx.alert("Tienes que escribirle una extension.");
+        actions_add_file();
+    }
+
+    // Crea el archivo
+    if (!is_empty && !start_with_number && !is_main_file_name && has_extension) {
+        p5manager.addFileToProject(prompt_value, focused_ctx, global.app.focused_project, function() {
+            focused_ctx.refreshSidebar();
+        });
+    }
+
 }

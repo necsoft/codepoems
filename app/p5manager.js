@@ -1,19 +1,12 @@
 /*
   p5manager.js
   
-  Se encarga de crear , abrir y guardar proyectos de processing.
+  Se encarga de crear , abrir y guardar proyectos de processing. Las tareas de p5manager son las siguientes:
 
-  El workflow es el siguiente:
-
-  [1] Recibimos una petición desde ui.js
-  [2] Creamos las validaciones correspondientes
-  [3] Creamos un proyecto 
-
-
-  Antes estaba trabajando con un p5process pero creo que no va a ser necesario,
-  ya que aca se va a hacer todo el trabajo duro con lo protocolar de un proyecto
-  en processing. Aqui solamente se hacen tareas de IO y validaciones. Una vez hecho
-  esto, creamos 
+  * Abrir un proyecto de processing en base a un path pasado y crear el project pertinente.
+  * Analizar los proyectos que se intenta abrir para determinar si efectivamente son proyectos válidos.
+  * Hacer run (armar un spawn) de los proyectos.
+  * Detener los spawn de los proyectos.
 
   */
 
@@ -32,7 +25,7 @@ var new_window_height = 700;
 /*
   initialProject()
 
-  La diferencia entre el initialProject y el newProject es que este ptimero
+  La diferencia entre el initialProject y el newProject es que este primero
   se crea en base al gui inicial, los otros son creados en base a la app que esta
   en foco, esto permite que no tengamos que tener un window escondido
 
@@ -325,3 +318,35 @@ function writeFiles(project, main_file, main_path) {
     }
 
 }
+
+
+
+
+/*
+  addFileToProject
+ */
+
+exports.addFileToProject = function(name, ctx, project, next) {
+    console.log("Bueno, voy a agregar este archivo porque es valido.");
+    console.log(project);
+    console.log(project.secondaryFiles);
+
+
+    if (!project.saved) {
+        var this_file = {};
+        this_file.name = name;
+        this_file.saved = true;
+        this_file.declared = true;
+        this_file.abs_path = "";
+        this_file.doc = focused_ctx.CodeMirror.Doc("\n//Welcome to codepoems!\n\n void setup(){\n\n}\n\n void draw(){\n\n}", "processing");
+        project.secondaryFiles.push(this_file);
+    }
+    // if (project.declared) {
+    //     this_file.abs_path = p_dir + path.sep + files[i];
+    // } else {
+
+    // }
+    // secondaryFiles.push(this_file);
+
+    return next();
+};

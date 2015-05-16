@@ -1,7 +1,16 @@
 /*
   project.js
 
-  Una instancia concreta de un proyecto.
+  Una instancia concreta de un proyecto. Se crea una por cada ventana que hay de codepoems. Entendemos
+  como proyecto a el conjunto de archivos de processing que forman una aplicación
+
+  El project.js se encarga de:
+
+  * Refrescar el sidebar
+  * Agregar un archivo al proyecto (agregarlo al sidebar y pushear el doc correspondiente)
+  * Hacer swap de los docs
+  * Inicializar los dos 
+  * Poner en foco al contexto
 
   */
 
@@ -123,4 +132,8 @@ function swapDoc(type, index) {
     if (type === "secondary") {
         project.editor.swapDoc(project.secondaryFiles[index].doc);
     }
+}
+
+function refreshSidebar() {
+    ui.setSidebar();
 }
