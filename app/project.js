@@ -218,7 +218,22 @@ function initCodeMirrorDocs() {
         getShaderFiles()[i].doc = CodeMirror.Doc(file_content.toString(), "x-shader/x-fragment");
     }
 
+    for (var i = 0; i < getPlainFiles().length; i++) {
+        if (getPlainFiles()[i].extension === ".json") {
+            var file_content = fs.readFileSync(getPlainFiles()[i].abs_path);
+            getPlainFiles()[i].doc = CodeMirror.Doc(file_content.toString(), "application/ld+json");
+        }
 
+        if (getPlainFiles()[i].extension === ".xml") {
+            var file_content = fs.readFileSync(getPlainFiles()[i].abs_path);
+            getPlainFiles()[i].doc = CodeMirror.Doc(file_content.toString(), "xml");
+        }
+
+        if (getPlainFiles()[i].extension === ".txt") {
+            var file_content = fs.readFileSync(getPlainFiles()[i].abs_path);
+            getPlainFiles()[i].doc = CodeMirror.Doc(file_content.toString(), "");
+        }
+    }
 
     // Creamos el CodeMirror en base al textarea
     project.editor = CodeMirror.fromTextArea(window.document.getElementById("editor"), codemirror_config);
@@ -245,6 +260,9 @@ function swapDoc(type, index) {
     }
     if (type === "shader") {
         project.editor.swapDoc(getShaderFiles()[index].doc);
+    }
+    if (type === "plain") {
+        project.editor.swapDoc(getPlainFiles()[index].doc);
     }
 }
 

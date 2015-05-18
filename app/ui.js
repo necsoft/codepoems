@@ -117,6 +117,7 @@ exports.refreshSidebarHandlers = function(window, win, ctx) {
     $button_sidebar_main_file = $(".mainFile");
     $button_sidebar_secondary_file = $(".secondaryFile");
     $button_sidebar_shader_file = $(".shaderFile");
+    $button_sidebar_plain_file = $(".plainFile");
 
     $button_sidebar_main_file.click(function() {
         actions_sidebar_swap_main_file();
@@ -127,8 +128,11 @@ exports.refreshSidebarHandlers = function(window, win, ctx) {
     })
 
     $button_sidebar_shader_file.click(function() {
-        console.log($(this).index());
         actions_sidebar_swap_shader_file($(this).index());
+    })
+
+    $button_sidebar_plain_file.click(function() {
+        actions_sidebar_swap_plain_file($(this).index());
     })
 
 }
@@ -368,4 +372,8 @@ function actions_sidebar_swap_secondary_file(index) {
 
 function actions_sidebar_swap_shader_file(index) {
     focused_ctx.window.swapDoc("shader", index);
+}
+
+function actions_sidebar_swap_plain_file(index) {
+    focused_ctx.window.swapDoc("plain", index);
 }
