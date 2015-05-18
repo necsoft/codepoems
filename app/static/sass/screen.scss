@@ -132,49 +132,54 @@ body{
   height:100%;
   background-color:#222;
   padding-top:10px;
+  overflow-y:auto;
+  overflow-x:hidden;
+
+   -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
   ul{
     cursor:default;
-
+    // La caja default de cada item
     li{
       margin: -1px 5px;
-      padding: 6px;
-      font-weight: 100;
+      padding: 4px;
+      font-size: 0.75em;
+      font-weight: 500;
+      margin-bottom:2px;
     }
 
     li:hover{
       background-color:#000;
     }
 
-    .mainFile{
-      font-size: 0.8em;
-      font-weight: 500;
 
-      margin-bottom:5px;
+    .mainFile i{
+      color:#37FCFF;
     }
 
-    .mainFile:before {
-      content: "• ";
-      color: #FF960A;
-      font-size: 1.3em;
-      vertical-align: middle;
+    .secondaryFile i{
+      color:#38CCEF;
     }
 
-    .secondaryFile{
-      //font-weight:100;
-      font-size: 0.7em;
+    .imageFile i{
+      color:#FFA600;
     }
-
-    .secondaryFile:before {
-      content: "•  ";
-      color: #0ff;
-      font-size:1em;
-    }    
 
     .active{
       border: 1px solid #111;
       border-radius:4px;
       color:#ccc;
     }
+
+    .groupMainFile, .groupSecondaryFiles, .groupImageFiles, .groupShaderFiles,.groupPlainFiles,.groupAudioFiles{
+      margin-bottom:10px;
+    }
+
   }
 
 
@@ -185,6 +190,7 @@ body{
     padding: 7px;
     margin-left: 10px;
     margin-top: 10px;
+    margin-bottom: 100px;
     border-radius: 5px;
     font-weight: 100;
     outline: none;
@@ -240,6 +246,14 @@ body{
   }
 }
 
+
+/*
+  Codemirror
+ */
+
+ .CodeMirror pre{
+  font-size:1.1em; //Tamaño por default de la fuente
+}
 
 
 /*

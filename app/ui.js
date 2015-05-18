@@ -1,5 +1,5 @@
 /*
-  ui.js
+  > ui.js
   
   UI se encarga de manejarle los handlers a la aplicación que este en foco y de crear acciones
   para los eventos que pueden ocurrir. También se encarga de abrir la ventana inicial al crear
@@ -43,7 +43,7 @@ exports.setupUi = function() {
   */
 
 
-exports.setupHandlers = function(window, win, editor, ctx) {
+exports.setupHandlers = function(window, win, ctx) {
 
     var $ = ctx.window.$;
     focused_win = ctx.window.win;
@@ -63,7 +63,7 @@ exports.setupHandlers = function(window, win, editor, ctx) {
     $button_exit = $(".exit_button");
     $button_new = $(".button_new");
     $button_chrome_dev_tool = $(".button_chrome_dev_tool");
-    $button_add_file = $(".button_add_file")
+    $button_add_file = $(".button_add_file");
 
     /*
       UI Handlers (Algunos se resuelven aca y otros en p5manager)
@@ -99,44 +99,38 @@ exports.setupHandlers = function(window, win, editor, ctx) {
 
     $button_add_file.click(function() {
         actions_add_file();
-    })
+    });
 
 }
 
-
 /*
-  setSidebar()
+  refreshSidebarHandlers()
   
-  Se encarga de crear la barra del costado en base a la información que tenemos
-  del proyecto actual. Es llamado desde el project.js correspondiente.
+  Cuando el sidebar es manipulado, los handlers tienen que volver a crearse.
 
   */
 
-exports.setSidebar = function() {
-    var $ = focused_ctx.window.$;
 
-    $(".sidebarFiles").empty();
+exports.refreshSidebarHandlers = function(window, win, ctx) {
+    var $ = ctx.window.$;
 
-    //Main File
-    $(".sidebarFiles").append("<li class='mainFile active'>" + focused_ctx.project.mainFile.name + ".pde</li>");
+    $button_sidebar_main_file = $(".mainFile");
+    $button_sidebar_secondary_file = $(".secondaryFile");
+    $button_sidebar_shader_file = $(".shaderFile");
 
-    //Secondary Files
-    if (focused_ctx.project.secondaryFiles) {
-        for (var i = 0; i < focused_ctx.project.secondaryFiles.length; i++) {
-            $(".sidebarFiles").append("<li class='secondaryFile'>" + focused_ctx.project.secondaryFiles[i].name + "</li>");
-        }
-    }
-
-    $(".mainFile").click(function() {
-        focused_ctx.window.swapDoc("main");
+    $button_sidebar_main_file.click(function() {
+        actions_sidebar_swap_main_file();
     });
 
-    // Handle para los clicks en la barra lateral
-    $(".secondaryFile").click(function() {
-        // Hacemos el -1 porque index arranca desde 1 y nosotros necesitamos que sea desde 0
-        var index = $(this).index() - 1;
-        focused_ctx.window.swapDoc("secondary", index);
-    });
+    $button_sidebar_secondary_file.click(function() {
+        actions_sidebar_swap_secondary_file($(this).index());
+    })
+
+    $button_sidebar_shader_file.click(function() {
+        console.log($(this).index());
+        actions_sidebar_swap_shader_file($(this).index());
+    })
+
 }
 
 
@@ -361,4 +355,17 @@ function actions_add_file() {
         });
     }
 
+}
+
+
+function actions_sidebar_swap_main_file() {
+    focused_ctx.window.swapDoc("main");
+}
+
+function actions_sidebar_swap_secondary_file(index) {
+    focused_ctx.window.swapDoc("secondary", index);
+}
+
+function actions_sidebar_swap_shader_file(index) {
+    focused_ctx.window.swapDoc("shader", index);
 }

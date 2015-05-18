@@ -1,5 +1,5 @@
 /*
-  project.js
+  > project.js
 
   Una instancia concreta de un proyecto. Se crea una por cada ventana que hay de codepoems. Entendemos
   como proyecto a el conjunto de archivos de processing que forman una aplicación
@@ -13,7 +13,6 @@
   * Poner en foco al contexto
 
   */
-
 
 // Dependencias
 var fs = require('fs');
@@ -30,7 +29,7 @@ var project = {};
 var codemirror_config = {
     lineNumbers: true,
     lineWrapping: true,
-    mode: "processing",
+    mode: ["processing", "clike"],
     keyMap: "sublime",
     autoCloseBrackets: true,
     matchBrackets: true,
@@ -60,13 +59,119 @@ $(document).ready(function() {
     // Codemirror Stuff
     initCodeMirror();
 
-    // Initialize handlers
-    ui.setupHandlers(window, win, editor, ctx);
+    // Create the sidebar
+    refreshSidebar();
 
-    // Setup the sidebar
-    ui.setSidebar();
+    // Initialize handlers
+    ui.setupHandlers(window, win, ctx);
 
 });
+
+
+/*
+  getMainFile()
+
+  Devuelve el archivo principal del proyecto.
+ 
+ */
+
+function getMainFile() {
+    var the_file;
+    $.each(project.files, function(i, file) {
+        if (file.type === "main") {
+            the_file = file;
+        }
+    });
+    return the_file;
+}
+
+/*
+  getSecondaryFiles()
+
+  Devuelve los archivos secundarios de los proyectos.
+ 
+ */
+
+function getSecondaryFiles() {
+    var the_files = [];
+    $.each(project.files, function(i, file) {
+        if (file.type === "secondary") {
+            the_files.push(file);
+        };
+    });
+    return the_files;
+}
+
+
+/*
+  getImageFiles()
+
+  Devuelve todos los assets de imagenes.
+ 
+ */
+
+function getImageFiles() {
+    var the_files = [];
+    $.each(project.files, function(i, file) {
+        if (file.type === "image") {
+            the_files.push(file);
+        };
+    });
+    return the_files;
+}
+
+/*
+  getShaderFiles()
+
+  Devuelve todos los archivos de shader.
+ 
+ */
+
+function getShaderFiles() {
+    var the_files = [];
+    $.each(project.files, function(i, file) {
+        if (file.type === "shader") {
+            the_files.push(file);
+        };
+    });
+    return the_files;
+}
+
+
+/*
+  getAudioFiles()
+
+  Devuelve los archivos secundarios de los proyectos.
+ 
+ */
+
+function getAudioFiles() {
+    var the_files = [];
+    $.each(project.files, function(i, file) {
+        if (file.type === "audio") {
+            the_files.push(file);
+        };
+    });
+    return the_files;
+}
+
+/*
+  getPlainFiles()
+
+  Devuelve los archivos planos, txt, xml y json.
+ 
+ */
+
+function getPlainFiles() {
+    var the_files = [];
+    $.each(project.files, function(i, file) {
+        if (file.type === "txt" || file.type === "json" || file.type === "xml") {
+            the_files.push(file);
+        };
+    });
+    return the_files;
+}
+
 
 /*
   initCodeMirror();
@@ -90,30 +195,36 @@ function initCodeMirror() {
 
 
 function initCodeMirrorDocs() {
-
     // Creamos el doc del mainFile
     if (project.declared) {
-        // Proyecto declarado
-        var main_file_content = fs.readFileSync(project.mainFile.abs_path);
+        // Proyecto declarado (si existe en en el file system, porque fue abierto o porque se guardó)
+        var main_file_content = fs.readFileSync(getMainFile().abs_path);
         var doc = CodeMirror.Doc(main_file_content.toString(), "processing");
-        project.mainFile.doc = doc;
+        getMainFile().doc = doc;
     } else {
         // Proyecto no declarado (el default cuando se abre codepoems)
-        var doc = CodeMirror.Doc("\n//Welcome to codepoems!\n\n void setup(){\n\n}\n\n void draw(){\n\n}", "processing");
-        project.mainFile.doc = doc;
+        var doc = CodeMirror.Doc("\n//Welcome to codepoems!\n\nvoid setup(){\n\n}\n\nvoid draw(){\n\n}", "processing");
+        getMainFile().doc = doc;
     }
 
     // Creando los docs secundarios
-    for (var i = 0; i < project.secondaryFiles.length; i++) {
-        var file_content = fs.readFileSync(project.secondaryFiles[i].abs_path);
-        project.secondaryFiles[i].doc = CodeMirror.Doc(file_content.toString(), "processing");
+    for (var i = 0; i < getSecondaryFiles().length; i++) {
+        var file_content = fs.readFileSync(getSecondaryFiles()[i].abs_path);
+        getSecondaryFiles()[i].doc = CodeMirror.Doc(file_content.toString(), "processing");
     }
+
+    for (var i = 0; i < getShaderFiles().length; i++) {
+        var file_content = fs.readFileSync(getShaderFiles()[i].abs_path);
+        getShaderFiles()[i].doc = CodeMirror.Doc(file_content.toString(), "x-shader/x-fragment");
+    }
+
+
 
     // Creamos el CodeMirror en base al textarea
     project.editor = CodeMirror.fromTextArea(window.document.getElementById("editor"), codemirror_config);
 
     //Swap the default doc
-    project.editor.swapDoc(project.mainFile.doc);
+    project.editor.swapDoc(getMainFile().doc, "processing");
 }
 
 
@@ -127,13 +238,89 @@ function initCodeMirrorDocs() {
 
 function swapDoc(type, index) {
     if (type === "main") {
-        project.editor.swapDoc(project.mainFile.doc);
+        project.editor.swapDoc(getMainFile().doc);
     }
     if (type === "secondary") {
-        project.editor.swapDoc(project.secondaryFiles[index].doc);
+        project.editor.swapDoc(getSecondaryFiles()[index].doc);
+    }
+    if (type === "shader") {
+        project.editor.swapDoc(getShaderFiles()[index].doc);
     }
 }
 
+
+/*
+  refreshSidebar();
+
+  Se encarga de crear el sidebar.
+
+  */
+
 function refreshSidebar() {
-    ui.setSidebar();
+
+    console.log(project);
+
+    // La limpiamos por las dudas
+    $(".sidebarFiles").empty();
+
+
+
+    // Creo los grupos
+    $(".sidebarFiles").append('<div class="groupMainFile"></div>');
+
+    if (getSecondaryFiles().length > 0) {
+        $(".sidebarFiles").append('<div class="groupSecondaryFiles"></div>');
+    }
+
+    if (getImageFiles().length > 0) {
+        $(".sidebarFiles").append('<div class="groupImageFiles"></div>');
+    }
+
+    if (getShaderFiles().length > 0) {
+        $(".sidebarFiles").append('<div class="groupShaderFiles"></div>');
+    }
+
+    if (getPlainFiles().length > 0) {
+        $(".sidebarFiles").append('<div class="groupPlainFiles"></div>');
+    }
+
+    if (getAudioFiles().length > 0) {
+        $(".sidebarFiles").append('<div class="groupAudioFiles"></div>');
+    }
+
+    // Mostrar el archivo primario
+    var main_file = getMainFile();
+    $(".groupMainFile").append("<li class='mainFile active'><i class='icon-description'></i> " + main_file.name + "</li>");
+
+    // Mostrar los archivos secundarios
+    var secondary_files = getSecondaryFiles();
+    for (var i = 0; i < secondary_files.length; i++) {
+        $(".groupSecondaryFiles").append("<li class='secondaryFile'><i class='icon-description'></i> " + secondary_files[i].name + "</li>");
+    }
+
+    // Mostrar las imagenes
+    var images_files = getImageFiles();
+    for (var i = 0; i < images_files.length; i++) {
+        $(".groupImageFiles").append("<li class='imageFile'><i class='icon-insert-photo'></i> " + images_files[i].name + "</li>");
+    }
+
+    // Mostrar los shaders
+    var shader_files = getShaderFiles();
+    for (var i = 0; i < shader_files.length; i++) {
+        $(".groupShaderFiles").append("<li class='shaderFile'><i class='icon-texture'></i> " + shader_files[i].name + "</li>");
+    }
+
+    // Mostrar los archivos planos
+    var plain_files = getPlainFiles();
+    for (var i = 0; i < plain_files.length; i++) {
+        $(".groupPlainFiles").append("<li class='plainFile'><i class='icon-dehaze'></i> " + plain_files[i].name + "</li>");
+    }
+
+    // Mostrar los archivos planos
+    var audio_files = getAudioFiles();
+    for (var i = 0; i < audio_files.length; i++) {
+        $(".groupAudioFiles").append("<li class='audioFile'><i class='icon-volume-up'></i> " + audio_files[i].name + "</li>");
+    }
+
+    ui.refreshSidebarHandlers(window, win, ctx);
 }

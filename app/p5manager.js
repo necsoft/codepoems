@@ -1,5 +1,5 @@
 /*
-  p5manager.js
+  > p5manager.js
   
   Se encarga de crear , abrir y guardar proyectos de processing. Las tareas de p5manager son las siguientes:
 
@@ -15,6 +15,8 @@ var fs = require('fs');
 var mkdirp = require('mkdirp');
 var path = require('path');
 var util = require('util');
+var readdirp = require('readdirp');
+var es = require('event-stream');
 
 // Default variables for projects
 var default_project_label = "sketch";
@@ -33,21 +35,23 @@ var new_window_height = 700;
 
 exports.initialProject = function() {
 
-    // Creamos un proyecto vacio
+    // Creamos el project
     var project = {};
     project.id = new Date().getTime();
-
-    // Main File
-    project.mainFile = {};
-    project.mainFile.name = default_project_label + project.id;
-    project.mainFile.abs_path = "";
-    project.mainFile.saved = false;
-    project.mainFile.declared = true;
-    // Secondary File
-    project.secondaryFiles = [];
-    // Project state
     project.saved = false;
     project.declared = false;
+    project.directory = "";
+    project.files = [];
+
+    // Pusheo el main file
+    project.files.push({
+        type: "main",
+        name: default_project_label + project.id,
+        extension: ".pde",
+        abs_path: "",
+        saved: false,
+        declared: false
+    });
 
     // Agregamos el proyecto a la lista de proyectos.
     global.app.projects.push({
@@ -73,18 +77,23 @@ exports.initialProject = function() {
 
 exports.newProject = function() {
 
-    // Creamos un proyecto vacio
+    // Creamos el project
     var project = {};
     project.id = new Date().getTime();
-    project.mainFile = {};
-    project.mainFile.name = default_project_label + project.id;
-    project.mainFile.abs_path = "";
-    project.mainFile.saved = false;
-    project.mainFile.declared = true;
-    project.secondaryFiles = [];
     project.saved = false;
     project.declared = false;
+    project.direcoty = "";
+    project.files = [];
 
+    // Pusheo el main file
+    project.files.push({
+        type: "main",
+        name: default_project_label + project.id,
+        extension: ".pde",
+        abs_path: "",
+        saved: false,
+        declared: false
+    });
 
     // Agregamos el proyecto a la lista de proyectos.
     global.app.projects.push({
@@ -152,45 +161,134 @@ function check_project(p_path, callback) {
 
 function analyze_project(p_dir, p_father, main_file) {
 
-    var secondaryFiles = [];
+    var analyzed_project = {};
+    analyzed_project.id = new Date().getTime();
+    analyzed_project.name = p_father;
+    analyzed_project.saved = true;
+    analyzed_project.declared = true;
+    analyzed_project.files = [];
+    analyzed_project.directory = p_dir;
 
-    // Busco los secondaryFiles
-    fs.readdir(p_dir, function(err, files) {
-        for (var i = 0; i < files.length; i++) {
-            // Filtro los archivos de sistema y el main.
-            var ignored_files = ['.DS_Store', 'sketch.properties', p_father + ".pde"];
-            var is_ignored = ignored_files.indexOf(files[i]) > -1;
-            // Filtro las carpetas
-            var is_directory = fs.statSync(p_dir + path.sep + files[i]).isDirectory();
-            // Si cumple las condiciones es un 
-            if (is_ignored === false && is_directory === false) {
-                // Creamos el objeto en base al path, esto es util despues para cuando
-                // tengamos que saber si el archivo ha sido modificado o no.
-                var this_file = {};
-                this_file.name = files[i];
-                this_file.saved = true;
-                this_file.declared = true;
-                this_file.abs_path = p_dir + path.sep + files[i];
-                secondaryFiles.push(this_file);
-            }
+    // Searching for PDE
+    readdirp({
+        root: analyzed_project.directory,
+        fileFilter: ['*.pde']
+    }).on('data', function(entry) {
+        if (entry.name === analyzed_project.name + ".pde") {
+            analyzed_project.files.push({
+                type: "main",
+                name: entry.name,
+                extension: ".pde",
+                abs_path: entry.fullPath,
+                saved: true,
+                declared: true
+            });
+        } else {
+            analyzed_project.files.push({
+                type: "secondary",
+                name: entry.name,
+                extension: ".pde",
+                abs_path: entry.fullPath,
+                saved: true,
+                declared: true
+            });
         }
     });
 
-    // Creamos el object temporal para pasarle al window.
-    var analyzed_project = {};
-    // Project state
-    analyzed_project.name = p_father;
-    analyzed_project.id = new Date().getTime();
-    analyzed_project.saved = true;
-    analyzed_project.declared = true;
-    // Main File
-    analyzed_project.mainFile = {};
-    analyzed_project.mainFile.name = p_father;
-    analyzed_project.mainFile.saved = true;
-    analyzed_project.mainFile.declared = true;
-    analyzed_project.mainFile.abs_path = main_file;
-    // Secondary File
-    analyzed_project.secondaryFiles = secondaryFiles;
+    // Searching for Images
+    readdirp({
+        root: analyzed_project.directory,
+        fileFilter: ['*.png', '*.jpg']
+    }).on('data', function(entry) {
+        //console.log(entry);
+        analyzed_project.files.push({
+            type: "image",
+            name: entry.name,
+            extension: "." + entry.name.split(".")[1],
+            abs_path: entry.fullPath,
+            saved: true,
+            declared: true
+        });
+    });
+
+
+    // Searching for Shaders
+    readdirp({
+        root: analyzed_project.directory,
+        fileFilter: '*.glsl'
+    }).on('data', function(entry) {
+        analyzed_project.files.push({
+            type: "shader",
+            name: entry.name,
+            extension: ".glsl",
+            abs_path: entry.fullPath,
+            saved: true,
+            declared: true
+        });
+    });
+
+    // Searching for JSON
+    readdirp({
+        root: analyzed_project.directory,
+        fileFilter: '*.json'
+    }).on('data', function(entry) {
+        analyzed_project.files.push({
+            type: "json",
+            name: entry.name,
+            extension: ".json",
+            abs_path: entry.fullPath,
+            saved: true,
+            declared: true
+        });
+    });
+
+    // Searching for XML
+    readdirp({
+        root: analyzed_project.directory,
+        fileFilter: '*.xml'
+    }).on('data', function(entry) {
+        analyzed_project.files.push({
+            type: "xml",
+            name: entry.name,
+            extension: ".xml",
+            abs_path: entry.fullPath,
+            saved: true,
+            declared: true
+        });
+    });
+
+    // Searching for txt
+    readdirp({
+        root: analyzed_project.directory,
+        fileFilter: '*.txt'
+    }).on('data', function(entry) {
+        analyzed_project.files.push({
+            type: "txt",
+            name: entry.name,
+            extension: ".txt",
+            abs_path: entry.fullPath,
+            saved: true,
+            declared: true
+        });
+    });
+
+    // Searching for audio
+    readdirp({
+        root: analyzed_project.directory,
+        fileFilter: ['*.mp3', '*.wav', '*.ogg']
+    }).on('data', function(entry) {
+        analyzed_project.files.push({
+            type: "audio",
+            name: entry.name,
+            extension: "." + entry.name.split(".")[1],
+            abs_path: entry.fullPath,
+            saved: true,
+            declared: true
+        });
+    });
+
+    console.log("El analized project:");
+    console.log(analyzed_project);
 
     // Abrimos la ventana del proyecto pasándole el project.
     open_project_window(analyzed_project);
@@ -330,7 +428,6 @@ exports.addFileToProject = function(name, ctx, project, next) {
     console.log("Bueno, voy a agregar este archivo porque es valido.");
     console.log(project);
     console.log(project.secondaryFiles);
-
 
     if (!project.saved) {
         var this_file = {};
