@@ -308,7 +308,13 @@ function actions_devTool() {
   */
 
 function actions_add_file() {
-    var prompt_value = focused_ctx.prompt("Cual es el nombre del archivo que quieres crear?");
+    var prompt_value = focused_ctx.prompt("Please put the name of the file, you can create:\n \nPDE\nGLSL\nJSON\nXML\nTXT\n");
+
+    // Si cancelan el prompt
+    if (prompt_value === null) {
+        console.log("Cancelaron");
+        return false;
+    }
 
     // Booleans de validación
     var is_empty;
@@ -335,7 +341,7 @@ function actions_add_file() {
     };
 
     // Valida si el nombre es igual al nombre del mainFile
-    if (global.app.focused_project.mainFile.name + ".pde" === prompt_value) {
+    if (global.app.focused_ctx.getMainFile().name + ".pde" === prompt_value) {
         focused_ctx.alert("No puede llamarse igual al archivo principal del proyecto.");
         actions_add_file();
         is_main_file_name = true;
@@ -344,7 +350,7 @@ function actions_add_file() {
     }
 
     // Valida si se escribió la extensión
-    if (prompt_value.split(".").length > 1 && prompt_value.split(".")[1].length > 2) {
+    if (prompt_value.split(".").length > 1 && prompt_value.split(".")[1].length > 1) {
         has_extension = true;
     } else {
         has_extension = false;
@@ -352,11 +358,10 @@ function actions_add_file() {
         actions_add_file();
     }
 
-    // Crea el archivo
+    // Cumple la validción básica
     if (!is_empty && !start_with_number && !is_main_file_name && has_extension) {
-        p5manager.addFileToProject(prompt_value, focused_ctx, global.app.focused_project, function() {
-            focused_ctx.refreshSidebar();
-        });
+        the_extension = prompt_value.split(".")[1];
+        global.app.focused_ctx.addFileToProject(prompt_value, the_extension);
     }
 
 }

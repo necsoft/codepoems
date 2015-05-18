@@ -419,8 +419,6 @@ function writeFiles(project, main_file, main_path) {
 }
 
 
-
-
 /*
   addFileToProject
  */

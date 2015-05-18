@@ -267,6 +267,79 @@ function swapDoc(type, index) {
 }
 
 
+function addFileToProject(name, extension) {
+
+    if (extension === "pde") {
+        project.files.push({
+            type: "secondary",
+            name: name,
+            extension: "." + extension,
+            abs_path: "",
+            saved: true,
+            declared: false,
+            doc: CodeMirror.Doc("//" + name, "processing")
+        });
+        refreshSidebar();
+    }
+
+    if (extension === "glsl") {
+        project.files.push({
+            type: "shader",
+            name: name,
+            extension: "." + extension,
+            abs_path: "",
+            saved: true,
+            declared: false,
+            doc: CodeMirror.Doc("//" + name, "x-shader/x-fragment")
+        });
+        refreshSidebar();
+    }
+
+    if (extension === "json") {
+        console.log("Voy a agregar un json");
+
+        project.files.push({
+            type: "json",
+            name: name,
+            extension: "." + extension,
+            abs_path: "",
+            saved: true,
+            declared: false,
+            doc: CodeMirror.Doc("//" + name, "application/ld+json")
+        });
+        refreshSidebar();
+    }
+
+    if (extension === "xml") {
+        project.files.push({
+            type: "xml",
+            name: name,
+            extension: "." + extension,
+            abs_path: "",
+            saved: true,
+            declared: false,
+            doc: CodeMirror.Doc("//" + name, "xml")
+        });
+        refreshSidebar();
+    }
+
+    if (extension === "txt") {
+        project.files.push({
+            type: "txt",
+            name: name,
+            extension: "." + extension,
+            abs_path: "",
+            saved: true,
+            declared: false,
+            doc: CodeMirror.Doc("//" + name, "")
+        });
+        refreshSidebar();
+    }
+
+}
+
+
+
 /*
   refreshSidebar();
 
@@ -276,12 +349,8 @@ function swapDoc(type, index) {
 
 function refreshSidebar() {
 
-    console.log(project);
-
     // La limpiamos por las dudas
     $(".sidebarFiles").empty();
-
-
 
     // Creo los grupos
     $(".sidebarFiles").append('<div class="groupMainFile"></div>');
@@ -289,19 +358,15 @@ function refreshSidebar() {
     if (getSecondaryFiles().length > 0) {
         $(".sidebarFiles").append('<div class="groupSecondaryFiles"></div>');
     }
-
     if (getImageFiles().length > 0) {
         $(".sidebarFiles").append('<div class="groupImageFiles"></div>');
     }
-
     if (getShaderFiles().length > 0) {
         $(".sidebarFiles").append('<div class="groupShaderFiles"></div>');
     }
-
     if (getPlainFiles().length > 0) {
         $(".sidebarFiles").append('<div class="groupPlainFiles"></div>');
     }
-
     if (getAudioFiles().length > 0) {
         $(".sidebarFiles").append('<div class="groupAudioFiles"></div>');
     }
@@ -340,5 +405,6 @@ function refreshSidebar() {
         $(".groupAudioFiles").append("<li class='audioFile'><i class='icon-volume-up'></i> " + audio_files[i].name + "</li>");
     }
 
+    // Hacemos un refresh del sidebar.
     ui.refreshSidebarHandlers(window, win, ctx);
 }
