@@ -63,6 +63,7 @@ exports.setupHandlers = function(window, win, ctx) {
     $button_exit = $(".exit_button");
     $button_new = $(".button_new");
     $button_chrome_dev_tool = $(".button_chrome_dev_tool");
+    $button_log_project = $(".button_log_project");
     $button_add_file = $(".button_add_file");
 
     /*
@@ -100,6 +101,13 @@ exports.setupHandlers = function(window, win, ctx) {
     $button_add_file.click(function() {
         actions_add_file();
     });
+
+    $button_log_project.click(function() {
+        console.log("♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦");
+        console.log("THIS IS THE ACTUAL PROJECT");
+        console.log(global.app.focused_project);
+        console.log("♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦");
+    })
 
 }
 
@@ -255,11 +263,13 @@ function actions_stop() {
   */
 
 function actions_save($) {
-
+    //p5manager.silenceSave(the_path, global.app.focused_project, focused_ctx);
+    //console.log(global.app.focused_project);
+    console.log(global.app.focused_project.declared.toString());
     if (global.app.focused_project.declared) {
-        p5manager.saveProject(global.app.focused_project);
+        p5manager.silenceSave(global.app.focused_project, focused_ctx);
     } else {
-        actions_save_as($);
+        //actions_save_as($);
     }
 
 }
@@ -281,7 +291,7 @@ function actions_save_as($) {
     $("#fileSaveDialog").change(function(evt) {
         // Guarda el path absoluto del archivo.
         var the_path = $(this).val();
-        p5manager.saveAsProject(the_path, global.app.focused_project);
+        p5manager.saveAsProject(the_path, global.app.focused_project, focused_ctx);
         $(this).val("");
     });
 
@@ -312,7 +322,6 @@ function actions_add_file() {
 
     // Si cancelan el prompt
     if (prompt_value === null) {
-        console.log("Cancelaron");
         return false;
     }
 
@@ -358,7 +367,7 @@ function actions_add_file() {
         actions_add_file();
     }
 
-    // Cumple la validción básica
+    // Cumple la validación básica
     if (!is_empty && !start_with_number && !is_main_file_name && has_extension) {
         the_extension = prompt_value.split(".")[1];
         global.app.focused_ctx.addFileToProject(prompt_value, the_extension);

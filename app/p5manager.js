@@ -18,6 +18,7 @@ var path = require('path');
 var util = require('util');
 var readdirp = require('readdirp');
 var es = require('event-stream');
+var ncp = require('ncp').ncp;
 
 // Default variables for projects
 var default_project_label = "sketch";
@@ -30,7 +31,8 @@ var new_window_height = 700;
 
   La diferencia entre el initialProject y el newProject es que este primero
   se crea en base al gui inicial, los otros son creados en base a la app que esta
-  en foco, esto permite que no tengamos que tener un window escondido
+  en foco, esto permite que no tengamos que tener un window escondido para poder 
+  crear ventanas nuevas.
 
   */
 
@@ -47,8 +49,9 @@ exports.initialProject = function() {
     // Pusheo el main file
     project.files.push({
         type: "main",
-        name: default_project_label + project.id,
+        name: default_project_label + project.id + ".pde",
         extension: ".pde",
+        rel_path: default_project_label + project.id + ".pde",
         abs_path: "",
         saved: false,
         declared: false
@@ -83,7 +86,7 @@ exports.newProject = function() {
     project.id = new Date().getTime();
     project.saved = false;
     project.declared = false;
-    project.direcoty = "";
+    project.directory = "";
     project.files = [];
 
     // Pusheo el main file
@@ -181,6 +184,7 @@ function analyze_project(p_dir, p_father, main_file) {
                 name: entry.name,
                 extension: ".pde",
                 abs_path: entry.fullPath,
+                rel_path: entry.fullPath.replace(p_dir, ""),
                 saved: true,
                 declared: true
             });
@@ -190,6 +194,7 @@ function analyze_project(p_dir, p_father, main_file) {
                 name: entry.name,
                 extension: ".pde",
                 abs_path: entry.fullPath,
+                rel_path: entry.fullPath.replace(p_dir, ""),
                 saved: true,
                 declared: true
             });
@@ -201,12 +206,12 @@ function analyze_project(p_dir, p_father, main_file) {
         root: analyzed_project.directory,
         fileFilter: ['*.png', '*.jpg']
     }).on('data', function(entry) {
-        //console.log(entry);
         analyzed_project.files.push({
             type: "image",
             name: entry.name,
             extension: "." + entry.name.split(".")[1],
             abs_path: entry.fullPath,
+            rel_path: entry.fullPath.replace(p_dir, ""),
             saved: true,
             declared: true
         });
@@ -223,6 +228,7 @@ function analyze_project(p_dir, p_father, main_file) {
             name: entry.name,
             extension: ".glsl",
             abs_path: entry.fullPath,
+            rel_path: entry.fullPath.replace(p_dir, ""),
             saved: true,
             declared: true
         });
@@ -238,6 +244,7 @@ function analyze_project(p_dir, p_father, main_file) {
             name: entry.name,
             extension: ".json",
             abs_path: entry.fullPath,
+            rel_path: entry.fullPath.replace(p_dir, ""),
             saved: true,
             declared: true
         });
@@ -253,6 +260,7 @@ function analyze_project(p_dir, p_father, main_file) {
             name: entry.name,
             extension: ".xml",
             abs_path: entry.fullPath,
+            rel_path: entry.fullPath.replace(p_dir, ""),
             saved: true,
             declared: true
         });
@@ -268,6 +276,7 @@ function analyze_project(p_dir, p_father, main_file) {
             name: entry.name,
             extension: ".txt",
             abs_path: entry.fullPath,
+            rel_path: entry.fullPath.replace(p_dir, ""),
             saved: true,
             declared: true
         });
@@ -283,13 +292,11 @@ function analyze_project(p_dir, p_father, main_file) {
             name: entry.name,
             extension: "." + entry.name.split(".")[1],
             abs_path: entry.fullPath,
+            rel_path: entry.fullPath.replace(p_dir, ""),
             saved: true,
             declared: true
         });
     });
-
-    console.log("El analized project:");
-    console.log(analyzed_project);
 
     // Abrimos la ventana del proyecto pasándole el project.
     open_project_window(analyzed_project);
@@ -339,18 +346,51 @@ exports.runProject = function(project) {
 
 
 /*
-  saveProject()
+  silenceSave()
 
   Es el save directo, sin abrir la ventana de dialogo.
 
  */
 
 
-exports.saveProject = function(project) {
-    var main_file = project.mainFile.abs_path;
-    var main_path = path.dirname(project.mainFile.abs_path) + path.sep;
-    writeFiles(global.app.focused_project, main_file, main_path);
+exports.silenceSave = function(project, ctx) {
+    writeAllDocToFiles(project);
+};
+
+
+/*
+  writeAllDocToFiles();
+
+  Le pasas un proyecto y se encarga de transformar todos los docs con buffer de CodeMirro
+  en archivo.
+
+ */
+
+
+function writeAllDocToFiles(project) {
+    for (var i = 0; i < project.files.length; i++) {
+        // Primero tengo que ver que sean archivos que tengan un doc de CodeMirror
+        var the_type = project.files[i].type;
+        if (the_type === "glsl" ||
+            the_type === "main" ||
+            the_type === "secondary" ||
+            the_type === "json" ||
+            the_type === "xml" ||
+            the_type === "txt") {
+            // Si es un file con doc, lo escribe.
+            fs.writeFile(project.directory + project.files[i].rel_path, project.files[i].doc.getValue(), function(err) {
+                if (err) {
+                    console.log(err);
+                }
+            });
+        };
+    };
 }
+
+
+
+
+
 
 
 /*
@@ -363,86 +403,85 @@ exports.saveProject = function(project) {
 
   */
 
-exports.saveAsProject = function(save_path, project) {
+exports.saveAsProject = function(save_path, project, ctx) {
 
     // En base al path que nos pasan extraemos el nombre del proyecto.
     var name_saved = save_path.split(path.sep).reverse()[0];
     var main_path = save_path + path.sep;
     var main_file = main_path + name_saved + ".pde";
 
-    // Creamos la carpeta con mkdirp porque encontré en varios post de stackoverflow
-    // que era mejor que usar el mkdir nativo de node.
-
-    mkdirp(save_path, function(err) {
-        if (err) {
-            console.error(err);
-        } else {
-            writeFiles(project, main_file, main_path);
-        }
-    });
-
-}
+    // Hay dos tipos de saveAs, el saveAs cuando el proyecto no existe,
+    // y el saveAs cuando el proyecto existe, la mayor diferencia es que 
+    // en el segundo caso, copiamos la carpeta para asegurarnos que 
+    if (project.declared === false) {
+        saveAsUndeclared();
+    } else {
+        saveAsDeclared();
+    }
 
 
+    function saveAsUndeclared() {
+        console.log("Hago un saveAsUndeclared");
 
-/*
-  writeFiles()
-
-  Se encarga de crear los archivos, es llamado tanto por save como por saveAs.
-
- */
-
-function writeFiles(project, main_file, main_path) {
-
-    // Escribe el mainFile
-    fs.writeFile(main_file, project.mainFile.doc.getValue(), function(err) {
-        if (err) {
-            console.log(err);
-        } else {
-            // Se crea el archivo primario
-        };
-    });
-
-    // Escribe los secondaryFiles
-    for (var i = 0; i < project.secondaryFiles.length; i++) {
-        console.log(project.secondaryFiles[i].name);
-        var the_file = project.secondaryFiles[i].name;
-        fs.writeFile(main_path + the_file, project.secondaryFiles[i].doc.getValue(), function(err) {
+        // Creamos la carpeta nueva
+        mkdirp(save_path, function(err) {
             if (err) {
                 console.log(err);
             } else {
-                // Se crea el archivo secundario
+                for (var i = 0; i < project.files.length; i++) {
+                    // Creamos el main file, que va a cambiar de nombre porque estamos cambiando la carpeta
+                    if (project.files[i].type === "main") {
+                        project.files[i].rel_path = name_saved + ".pde";
+
+                        fs.writeFile(main_path + name_saved + ".pde", project.files[i].doc.getValue(), function(err) {
+                            ctx.getMainFile().name = name_saved + ".pde";
+                            project.declared = true;
+                            // Refrescamos el sidebar para que se vea el cambio.
+                            ctx.refreshSidebar();
+                        });
+                    } else {
+                        // Le guardamos el nuevo path RELATIVO
+                        project.files[i].rel_path = project.files[i].name;
+                        fs.writeFile(main_path + project.files[i].name, project.files[i].doc.getValue(), function(err) {
+                            // Se crea el archivo
+                        });
+                    }
+                };
+                project.directory = save_path;
+                project.saved = true;
+                project.declared = true;
+            };
+        });
+    };
+
+
+
+    function saveAsDeclared() {
+        console.log("Hago un saveAsDeclared");
+        // Copiamos las carpetas
+        ncp(project.directory, main_path, function(err) {
+            if (err) {
+                console.log(err);
             }
+            // Una vez que se termina de copiar la carpeta, cambia el project.directory,
+            // le hago el substring porque le saco el ultimo carecter.
+            console.log("Estoy agegando el project.directory");
+            project.directory = main_path.substring(0, main_path.length - 1);
+            console.log(project.directory);
+
+            // Rename al main file
+            fs.rename(project.directory + path.sep + ctx.getMainFile().name, project.directory + path.sep + name_saved + ".pde", function(err) {
+
+                // Cambio la información
+                ctx.getMainFile().name = name_saved + ".pde";
+                ctx.getMainFile().rel_path = path.sep + name_saved + ".pde";
+
+                // Aca debería hacer un silenceSave?
+                writeAllDocToFiles(project);
+
+                ctx.refreshSidebar();
+            });
         });
     }
 
 }
-
-
-/*
-  addFileToProject
- */
-
-exports.addFileToProject = function(name, ctx, project, next) {
-    console.log("Bueno, voy a agregar este archivo porque es valido.");
-    console.log(project);
-    console.log(project.secondaryFiles);
-
-    if (!project.saved) {
-        var this_file = {};
-        this_file.name = name;
-        this_file.saved = true;
-        this_file.declared = true;
-        this_file.abs_path = "";
-        this_file.doc = focused_ctx.CodeMirror.Doc("\n//Welcome to codepoems!\n\n void setup(){\n\n}\n\n void draw(){\n\n}", "processing");
-        project.secondaryFiles.push(this_file);
-    }
-    // if (project.declared) {
-    //     this_file.abs_path = p_dir + path.sep + files[i];
-    // } else {
-
-    // }
-    // secondaryFiles.push(this_file);
-
-    return next();
-};
