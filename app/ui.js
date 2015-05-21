@@ -263,15 +263,11 @@ function actions_stop() {
   */
 
 function actions_save($) {
-    //p5manager.silenceSave(the_path, global.app.focused_project, focused_ctx);
-    //console.log(global.app.focused_project);
-    console.log(global.app.focused_project.declared.toString());
     if (global.app.focused_project.declared) {
         p5manager.silenceSave(global.app.focused_project, focused_ctx);
     } else {
-        //actions_save_as($);
+        actions_save_as($);
     }
-
 }
 
 /*
