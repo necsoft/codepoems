@@ -17,6 +17,7 @@ bower_components
 #Ignoramos el build
 app/tmp/sketch/sketch.pde
 app/tmp/sketch/build/*
+app/tmp/*
 
 #Ignoramos la cache de Sass
 app/static/.sass-cache

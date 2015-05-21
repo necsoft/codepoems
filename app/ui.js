@@ -238,7 +238,7 @@ function actions_quit() {
   */
 
 function actions_run() {
-
+    p5manager.runProject(global.app.focused_project, focused_ctx);
 }
 
 

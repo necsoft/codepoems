@@ -19,6 +19,8 @@ var util = require('util');
 var readdirp = require('readdirp');
 var es = require('event-stream');
 var ncp = require('ncp').ncp;
+var childProcess = require('child_process').spawn,
+    p5;
 
 // Default variables for projects
 var default_project_label = "sketch";
@@ -330,9 +332,55 @@ function open_project_window(project) {
 
   */
 
-exports.runProject = function(project) {
+exports.runProject = function(project, ctx) {
+
+    if (project.declared) {
+        runDeclaredProject(project, ctx);
+    } else {
+        runUndeclaredProject(project, ctx);
+    }
+};
+
+function runDeclaredProject(project, ctx) {
+    console.log("runDeclaredProject");
+}
+
+function runUndeclaredProject(project, ctx) {
+    mkdirp('./app/tmp/' + ctx.getMainFile().name.split(".")[0], function(err) {
+        for (var i = 0; i < project.files.length; i++) {
+            // Primero tengo que ver que sean archivos que tengan un doc de CodeMirror
+            var the_type = project.files[i].type;
+            if (the_type === "glsl" || the_type === "main" || the_type === "secondary" ||
+                the_type === "json" || the_type === "xml" || the_type === "txt") {
+                fs.writeFile('./app/tmp/' + ctx.getMainFile().name.split(".")[0] + path.sep + project.files[i].rel_path, project.files[i].doc.getValue(), function(err) {
+                    if (err) {
+                        console.log(err);
+                    }
+                });
+            };
+        };
+
+        // Guardamos las carpetas temporales
+        var temporal_dir = process.cwd() + '/app/tmp/' + ctx.getMainFile().name.split(".")[0];
+        var temporal_dir_build = process.cwd() + '/app/tmp/' + ctx.getMainFile().name.split(".")[0] + "/build/";
+        // Corremos el childprocess
+        var child = childProcess('processing-java', ["--sketch=" + temporal_dir, "--output=" + temporal_dir_build, "--run", "--force"]);
+
+        child.stdout.on('data',
+            function(data) {
+                console.log(data.toString());
+            }
+        );
+        child.stderr.on('data',
+            function(data) {
+                console.log(data.toString());
+            }
+        );
+
+    });
 
 };
+
 
 
 
@@ -375,6 +423,7 @@ function writeAllDocToFiles(project) {
                     console.log(err);
                 }
             });
+
         };
     };
 }
