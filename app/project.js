@@ -261,7 +261,7 @@ function addFileToProject(name, extension) {
             type: "secondary",
             name: name,
             extension: "." + extension,
-            abs_path: "",
+            rel_path: "",
             saved: true,
             declared: false,
             doc: CodeMirror.Doc("//" + name, "processing")
@@ -274,7 +274,7 @@ function addFileToProject(name, extension) {
             type: "shader",
             name: name,
             extension: "." + extension,
-            abs_path: "",
+            rel_path: "",
             saved: true,
             declared: false,
             doc: CodeMirror.Doc("//" + name, "x-shader/x-fragment")
@@ -289,7 +289,7 @@ function addFileToProject(name, extension) {
             type: "json",
             name: name,
             extension: "." + extension,
-            abs_path: "",
+            rel_path: "",
             saved: true,
             declared: false,
             doc: CodeMirror.Doc("//" + name, "application/ld+json")
@@ -302,7 +302,7 @@ function addFileToProject(name, extension) {
             type: "xml",
             name: name,
             extension: "." + extension,
-            abs_path: "",
+            rel_path: "",
             saved: true,
             declared: false,
             doc: CodeMirror.Doc("//" + name, "xml")
@@ -315,7 +315,7 @@ function addFileToProject(name, extension) {
             type: "txt",
             name: name,
             extension: "." + extension,
-            abs_path: "",
+            rel_path: "",
             saved: true,
             declared: false,
             doc: CodeMirror.Doc("//" + name, "")

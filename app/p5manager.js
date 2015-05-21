@@ -52,7 +52,6 @@ exports.initialProject = function() {
         name: default_project_label + project.id + ".pde",
         extension: ".pde",
         rel_path: default_project_label + project.id + ".pde",
-        abs_path: "",
         saved: false,
         declared: false
     });
@@ -94,7 +93,6 @@ exports.newProject = function() {
         type: "main",
         name: default_project_label + project.id,
         extension: ".pde",
-        abs_path: "",
         saved: false,
         declared: false
     });
@@ -183,7 +181,7 @@ function analyze_project(p_dir, p_father, main_file) {
                 type: "main",
                 name: entry.name,
                 extension: ".pde",
-                abs_path: entry.fullPath,
+
                 rel_path: entry.fullPath.replace(p_dir, ""),
                 saved: true,
                 declared: true
@@ -193,7 +191,7 @@ function analyze_project(p_dir, p_father, main_file) {
                 type: "secondary",
                 name: entry.name,
                 extension: ".pde",
-                abs_path: entry.fullPath,
+
                 rel_path: entry.fullPath.replace(p_dir, ""),
                 saved: true,
                 declared: true
@@ -210,7 +208,6 @@ function analyze_project(p_dir, p_father, main_file) {
             type: "image",
             name: entry.name,
             extension: "." + entry.name.split(".")[1],
-            abs_path: entry.fullPath,
             rel_path: entry.fullPath.replace(p_dir, ""),
             saved: true,
             declared: true
@@ -227,7 +224,6 @@ function analyze_project(p_dir, p_father, main_file) {
             type: "shader",
             name: entry.name,
             extension: ".glsl",
-            abs_path: entry.fullPath,
             rel_path: entry.fullPath.replace(p_dir, ""),
             saved: true,
             declared: true
@@ -243,7 +239,6 @@ function analyze_project(p_dir, p_father, main_file) {
             type: "json",
             name: entry.name,
             extension: ".json",
-            abs_path: entry.fullPath,
             rel_path: entry.fullPath.replace(p_dir, ""),
             saved: true,
             declared: true
@@ -259,7 +254,6 @@ function analyze_project(p_dir, p_father, main_file) {
             type: "xml",
             name: entry.name,
             extension: ".xml",
-            abs_path: entry.fullPath,
             rel_path: entry.fullPath.replace(p_dir, ""),
             saved: true,
             declared: true
@@ -275,7 +269,6 @@ function analyze_project(p_dir, p_father, main_file) {
             type: "txt",
             name: entry.name,
             extension: ".txt",
-            abs_path: entry.fullPath,
             rel_path: entry.fullPath.replace(p_dir, ""),
             saved: true,
             declared: true
@@ -291,7 +284,6 @@ function analyze_project(p_dir, p_father, main_file) {
             type: "audio",
             name: entry.name,
             extension: "." + entry.name.split(".")[1],
-            abs_path: entry.fullPath,
             rel_path: entry.fullPath.replace(p_dir, ""),
             saved: true,
             declared: true
