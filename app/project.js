@@ -36,6 +36,7 @@ var codemirror_config = {
     showCursorWhenSelecting: true,
     theme: "paraiso-dark",
     foldGutter: true,
+    tabSize: 2,
     gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
     viewportMargin: Infinity
 }
