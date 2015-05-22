@@ -261,7 +261,7 @@ function actions_run() {
 function actions_stop() {
     if (global.app.focused_project.running === true) {
         console.log("Voy a correr el stop del project");
-        p5manager.stopProcess();
+        p5manager.stopProcess(global.app.focused_project);
     } else {
         console.log("No hay ningun proyecto corriendo.");
     }

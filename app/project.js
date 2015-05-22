@@ -52,6 +52,7 @@ $(document).ready(function() {
 
     // Lo uso para 
     project.running = false;
+    project.running_pid = "";
 
     // Set the focus app
     win.on('focus', function() {

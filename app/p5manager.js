@@ -19,8 +19,13 @@ var util = require('util');
 var readdirp = require('readdirp');
 var es = require('event-stream');
 var ncp = require('ncp').ncp;
-var childProcess = require('child_process').spawn,
-    p5process;
+// var childProcess = require('child_process').spawn,
+//     p5process;
+
+var spawn = require('child_process').spawn;
+var p5process;
+var ps = require('ps-node');
+
 
 var child;
 
@@ -378,31 +383,55 @@ function runUndeclaredProject(project, ctx) {
 
         // Corremos el childprocess
         //child = childProcess('processing-java', ["--sketch=" + temporal_dir, "--output=" + temporal_dir_build, "--run", "--force"]);
-        //child.kill();
+
+        p5process = spawn('processing-java', ['--sketch=' + temporal_dir, '--output=' + temporal_dir_build, '--run', '--force'], {
+            detached: true
+        });
+
+        // setTimeout(function() {
+        //     var el_pid = (p5process.pid + 2);
+        //     console.log("este es el pid posta: " + el_pid);
+
+        //     // Matamos el proceso con ps-node
+        //     ps.kill(el_pid, function(err) {
+        //         if (err) {
+        //             throw new Error(err);
+        //         } else {
+        //             console.log('Process %s has been killed!', pid);
+        //         }
+        //     });
+        // }, 6000);
+
+
+
 
 
         // Ahora el proyecto se esta corriendo
         project.running = true;
 
+        // Guardo el pid 
+        project.running_pid = (p5process.pid + 2)
+
         // Se ejecuta cuando recibimos logs normales del proceso
-        child.stdout.on('data',
+        p5process.stdout.on('data',
             function(data) {
                 console.log(data.toString());
             }
         );
 
         // Se ejecuta cuando se recibe algún mensaje de error.
-        child.stderr.on('data',
+        p5process.stderr.on('data',
             function(data) {
                 console.log(data.toString());
             }
         );
 
         // Se ejecuta siempre que se cierra el proceso.
-        child.on('close',
+        p5process.on('close',
             function() {
                 console.log("Se termino el proceso.");
                 project.running = false;
+                project.running_pid = "";
             }
         );
 
@@ -553,10 +582,14 @@ exports.saveAsProject = function(save_path, project, ctx) {
 
 
 
-exports.stopProcess = function() {
-    // console.log("Holu");
-    // console.log(child);
-    // console.log(child.pid);
-    // child.kill('SIGHUP');
-
+exports.stopProcess = function(project) {
+    ps.kill(project.running_pid, function(err) {
+        if (err) {
+            throw new Error(err);
+        } else {
+            console.log('Process %s has been killed!', pid);
+        }
+    });
+    project.running = false;
+    project.running_pid = "";
 }
