@@ -20,7 +20,9 @@ var readdirp = require('readdirp');
 var es = require('event-stream');
 var ncp = require('ncp').ncp;
 var childProcess = require('child_process').spawn,
-    p5;
+    p5process;
+
+var child;
 
 // Default variables for projects
 var default_project_label = "sketch";
@@ -93,8 +95,9 @@ exports.newProject = function() {
     // Pusheo el main file
     project.files.push({
         type: "main",
-        name: default_project_label + project.id,
+        name: default_project_label + project.id + ".pde",
         extension: ".pde",
+        rel_path: default_project_label + project.id + ".pde",
         saved: false,
         declared: false
     });
@@ -343,6 +346,15 @@ exports.runProject = function(project, ctx) {
 
 function runDeclaredProject(project, ctx) {
     console.log("runDeclaredProject");
+
+    // 
+    // 1. Guardarnos la información de los archivos en carpeta.
+    // 2. Hacer un silenceSave
+    // 3. Correr el run en la carpeta
+    // 4. Capturar el stop
+    //
+
+
 }
 
 function runUndeclaredProject(project, ctx) {
@@ -363,17 +375,34 @@ function runUndeclaredProject(project, ctx) {
         // Guardamos las carpetas temporales
         var temporal_dir = process.cwd() + '/app/tmp/' + ctx.getMainFile().name.split(".")[0];
         var temporal_dir_build = process.cwd() + '/app/tmp/' + ctx.getMainFile().name.split(".")[0] + "/build/";
-        // Corremos el childprocess
-        var child = childProcess('processing-java', ["--sketch=" + temporal_dir, "--output=" + temporal_dir_build, "--run", "--force"]);
 
+        // Corremos el childprocess
+        //child = childProcess('processing-java', ["--sketch=" + temporal_dir, "--output=" + temporal_dir_build, "--run", "--force"]);
+        //child.kill();
+
+
+        // Ahora el proyecto se esta corriendo
+        project.running = true;
+
+        // Se ejecuta cuando recibimos logs normales del proceso
         child.stdout.on('data',
             function(data) {
                 console.log(data.toString());
             }
         );
+
+        // Se ejecuta cuando se recibe algún mensaje de error.
         child.stderr.on('data',
             function(data) {
                 console.log(data.toString());
+            }
+        );
+
+        // Se ejecuta siempre que se cierra el proceso.
+        child.on('close',
+            function() {
+                console.log("Se termino el proceso.");
+                project.running = false;
             }
         );
 
@@ -427,11 +456,6 @@ function writeAllDocToFiles(project) {
         };
     };
 }
-
-
-
-
-
 
 
 /*
@@ -524,5 +548,15 @@ exports.saveAsProject = function(save_path, project, ctx) {
             });
         });
     }
+
+}
+
+
+
+exports.stopProcess = function() {
+    // console.log("Holu");
+    // console.log(child);
+    // console.log(child.pid);
+    // child.kill('SIGHUP');
 
 }

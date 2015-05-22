@@ -50,6 +50,9 @@ $(document).ready(function() {
     // Get the project
     project = global.app.projects[global.app.projects.length - 1].project;
 
+    // Lo uso para 
+    project.running = false;
+
     // Set the focus app
     win.on('focus', function() {
         // console.log('Project ' + project.id + ' is now focused.');

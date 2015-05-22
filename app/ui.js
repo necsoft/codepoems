@@ -57,6 +57,7 @@ exports.setupHandlers = function(window, win, ctx) {
       */
 
     $button_run = $(".button_run");
+    $button_stop = $(".button_stop");
     $button_open = $(".button_open");
     $button_save = $(".button_save");
     $button_save_as = $(".button_save_as");
@@ -88,6 +89,10 @@ exports.setupHandlers = function(window, win, ctx) {
 
     $button_run.click(function() {
         actions_run();
+    });
+
+    $button_stop.click(function() {
+        actions_stop();
     });
 
     $button_chrome_dev_tool.click(function() {
@@ -238,7 +243,11 @@ function actions_quit() {
   */
 
 function actions_run() {
-    p5manager.runProject(global.app.focused_project, focused_ctx);
+    if (global.app.focused_project.running === false) {
+        p5manager.runProject(global.app.focused_project, focused_ctx);
+    } else {
+        console.log("Ya hay un proyecto corriendo.");
+    }
 }
 
 
@@ -250,7 +259,12 @@ function actions_run() {
   */
 
 function actions_stop() {
-
+    if (global.app.focused_project.running === true) {
+        console.log("Voy a correr el stop del project");
+        p5manager.stopProcess();
+    } else {
+        console.log("No hay ningun proyecto corriendo.");
+    }
 }
 
 
@@ -258,7 +272,7 @@ function actions_stop() {
   actions_save()
 
   Este save es el default, determina en base a si es declarado o no lo
-  que tiene que hacer.
+  que tiene que hacer. 
 
   */
 
