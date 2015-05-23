@@ -363,6 +363,8 @@ function runDeclaredProject(project, ctx) {
 }
 
 function runUndeclaredProject(project, ctx) {
+
+    // Creamos la carpeta temporal
     mkdirp('./app/tmp/' + ctx.getMainFile().name.split(".")[0], function(err) {
         for (var i = 0; i < project.files.length; i++) {
             // Primero tengo que ver que sean archivos que tengan un doc de CodeMirror
@@ -381,30 +383,10 @@ function runUndeclaredProject(project, ctx) {
         var temporal_dir = process.cwd() + '/app/tmp/' + ctx.getMainFile().name.split(".")[0];
         var temporal_dir_build = process.cwd() + '/app/tmp/' + ctx.getMainFile().name.split(".")[0] + "/build/";
 
-        // Corremos el childprocess
-        //child = childProcess('processing-java', ["--sketch=" + temporal_dir, "--output=" + temporal_dir_build, "--run", "--force"]);
-
+        // Spawn al processing-java
         p5process = spawn('processing-java', ['--sketch=' + temporal_dir, '--output=' + temporal_dir_build, '--run', '--force'], {
             detached: true
         });
-
-        // setTimeout(function() {
-        //     var el_pid = (p5process.pid + 2);
-        //     console.log("este es el pid posta: " + el_pid);
-
-        //     // Matamos el proceso con ps-node
-        //     ps.kill(el_pid, function(err) {
-        //         if (err) {
-        //             throw new Error(err);
-        //         } else {
-        //             console.log('Process %s has been killed!', pid);
-        //         }
-        //     });
-        // }, 6000);
-
-
-
-
 
         // Ahora el proyecto se esta corriendo
         project.running = true;
@@ -513,6 +495,12 @@ exports.saveAsProject = function(save_path, project, ctx) {
         saveAsDeclared();
     }
 
+    /*
+      saveAsUndeclared()
+      
+      Este es el save que se ejecuta cuando un proyecto no tiene carpeta.
+
+     */
 
     function saveAsUndeclared() {
         console.log("Hago un saveAsUndeclared");
@@ -548,6 +536,13 @@ exports.saveAsProject = function(save_path, project, ctx) {
         });
     };
 
+    /*
+      saveAsDeclared()
+      
+      Este es el save para los proyectos que ya estan guardados pero hay que guardarlos
+      en otra carpeta.
+
+     */
 
 
     function saveAsDeclared() {
@@ -581,6 +576,13 @@ exports.saveAsProject = function(save_path, project, ctx) {
 }
 
 
+/*
+  stopProcess()
+
+  Hace kill en el running_pid. Actualmente esta estrategia no esta testeada en otras
+  plataformas.
+
+  */
 
 exports.stopProcess = function(project) {
     ps.kill(project.running_pid, function(err) {
