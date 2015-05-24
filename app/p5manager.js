@@ -343,7 +343,6 @@ function open_project_window(project) {
   */
 
 exports.runProject = function(project, ctx) {
-
     if (project.declared) {
         runDeclaredProject(project, ctx);
     } else {
@@ -362,23 +361,37 @@ function runDeclaredProject(project, ctx) {
     //
 
 
+    console.log("El directory de este proyecto es:" + project.directory);
+
+
+    mkdirp(project.directory + path.sep + "backup", function() {
+        for (var i = 0; i < project.files.length; i++) {
+            var the_type = project.files[i].type;
+
+        };
+    })
+
+
+
+
+
 }
 
 function runUndeclaredProject(project, ctx) {
 
     // Creamos la carpeta temporal
     mkdirp('./app/tmp/' + ctx.getMainFile().name.split(".")[0], function(err) {
-        for (var i = 0; i < project.files.length; i++) {
-            // Primero tengo que ver que sean archivos que tengan un doc de CodeMirror
-            var the_type = project.files[i].type;
-            if (the_type === "glsl" || the_type === "main" || the_type === "secondary" ||
-                the_type === "json" || the_type === "xml" || the_type === "txt") {
-                fs.writeFile('./app/tmp/' + ctx.getMainFile().name.split(".")[0] + path.sep + project.files[i].rel_path, project.files[i].doc.getValue(), function(err) {
-                    if (err) {
-                        console.log(err);
-                    }
-                });
-            };
+
+        var buffered_files = ctx.getBufferedFiles();
+        console.log(buffered_files);
+
+        for (var i = 0; i < buffered_files.length; i++) {
+            console.log("Holus");
+            fs.writeFile('./app/tmp/' + ctx.getMainFile().name.split(".")[0] + path.sep + buffered_files[i].rel_path, buffered_files[i].doc.getValue(), function(err) {
+                if (err) {
+                    console.log(err);
+                }
+            });
         };
 
         // Guardamos las carpetas temporales

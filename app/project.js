@@ -177,6 +177,32 @@ function getPlainFiles() {
     return the_files;
 }
 
+
+/*
+  getBufferedFiles()
+
+  Devuelve todos los archivos que tienen un buffer asociado.
+ 
+ */
+
+function getBufferedFiles() {
+    var the_files = [];
+    $.each(project.files, function(i, file) {
+        if (file.type === "main" || file.type === "secondary" || file.type === "shader" || file.type === "txt" || file.type === "json" || file.type === "xml") {
+            the_files.push(file);
+        };
+    });
+    return the_files;
+}
+
+
+
+
+
+
+
+
+
 /*
   initCodeMirrorDocs();
 
@@ -195,7 +221,7 @@ function initCodeMirrorDocs() {
         getMainFile().doc = doc;
     } else {
         // Proyecto no declarado (el default cuando se abre codepoems)
-        var doc = CodeMirror.Doc("\n//Welcome to codepoems!\n\nvoid setup(){\n\n}\n\nvoid draw(){\n\n}", "processing");
+        var doc = CodeMirror.Doc("void setup(){\r\n  size(800,800);\r\n  background(0);\r\n}\r\n\r\nvoid draw(){\r\n  colorMode(HSB);\r\n  float tam = noise(frameCount*0.05)*width*1.5;\r\n  fill(noise(frameCount*0.01)*255,255,255,60);\r\n  rectMode(CENTER);\r\n  \/\/stroke(100,noise(frameCount*0.1)*20);\r\n  strokeWeight(noise(frameCount*0.02)*10+10);\r\n  rect(width\/2,height\/2,tam,tam);\r\n}", "processing");
         getMainFile().doc = doc;
     }
 
