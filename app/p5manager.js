@@ -26,6 +26,8 @@ var spawn = require('child_process').spawn;
 var p5process;
 var ps = require('ps-node');
 
+// Kill dependency for windows
+var kill = require('tree-kill');
 
 var child;
 
@@ -585,6 +587,10 @@ exports.saveAsProject = function(save_path, project, ctx) {
   */
 
 exports.stopProcess = function(project) {
+
+    // En windows es:
+    // kill(p5process.pid, 'SIGKILL');
+
     ps.kill(project.running_pid, function(err) {
         if (err) {
             throw new Error(err);
