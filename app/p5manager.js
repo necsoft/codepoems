@@ -383,10 +383,7 @@ function runUndeclaredProject(project, ctx) {
     mkdirp('./app/tmp/' + ctx.getMainFile().name.split(".")[0], function(err) {
 
         var buffered_files = ctx.getBufferedFiles();
-        console.log(buffered_files);
-
         for (var i = 0; i < buffered_files.length; i++) {
-            console.log("Holus");
             fs.writeFile('./app/tmp/' + ctx.getMainFile().name.split(".")[0] + path.sep + buffered_files[i].rel_path, buffered_files[i].doc.getValue(), function(err) {
                 if (err) {
                     console.log(err);
