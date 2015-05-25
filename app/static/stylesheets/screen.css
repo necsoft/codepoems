@@ -1381,34 +1381,40 @@ body {
   height: 140px;
   position: relative;
   width: 100%;
-  overflow: hidden;
+  overflow-y: scroll;
+  background-color: #1D1D1D;
 }
 
-/* line 231, ../sass/screen.scss */
+/* line 232, ../sass/screen.scss */
 #console {
   float: left;
   width: 100%;
-  background-color: #1D1D1D;
-  overflow-y: auto;
   border-top: 2px solid #111;
-  height: 140px;
   color: #666;
   font-size: 0.7em;
 }
-/* line 240, ../sass/screen.scss */
+/* line 239, ../sass/screen.scss */
 #console p {
-  margin-left: 10px;
+  margin-left: 5px;
+  margin-top: 5px;
 }
-/* line 243, ../sass/screen.scss */
+/* line 247, ../sass/screen.scss */
+#console .consoleMessage {
+  color: #ffffff;
+}
+/* line 251, ../sass/screen.scss */
 #console .consoleError {
-  color: #F26184;
-  font-weight: 900;
+  background-color: #DA3A61;
+  color: #fff;
+  padding: 5px;
+  font-weight: 100;
+  font-size: 1.1em;
 }
 
 /*
   Codemirror
  */
-/* line 254, ../sass/screen.scss */
+/* line 266, ../sass/screen.scss */
 .CodeMirror pre {
   font-size: 1.1em;
 }
@@ -1416,19 +1422,19 @@ body {
 /*
   SCROLLBARS
  */
-/* line 263, ../sass/screen.scss */
+/* line 275, ../sass/screen.scss */
 ::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: #333333;
 }
 
-/* line 269, ../sass/screen.scss */
+/* line 281, ../sass/screen.scss */
 ::-webkit-scrollbar {
   width: 6px;
   background-color: #333333;
 }
 
-/* line 275, ../sass/screen.scss */
+/* line 287, ../sass/screen.scss */
 ::-webkit-scrollbar-thumb {
   background-color: #000000;
 }

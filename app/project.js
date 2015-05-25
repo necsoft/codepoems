@@ -70,6 +70,11 @@ $(document).ready(function() {
     // Initialize handlers
     ui.setupHandlers(window, win, ctx);
 
+
+    writeToConsole("asdfasdfasdfs");
+
+
+
 });
 
 
@@ -425,4 +430,44 @@ function refreshSidebar() {
 
     // Hacemos un refresh del sidebar.
     ui.refreshSidebarHandlers(window, win, ctx);
+}
+
+
+
+
+/*
+  
+  writeToConsole();
+
+
+ */
+
+
+
+function writeToConsole(msg, type) {
+
+    if (type === "message") {
+        $("#console").append("<p class='consoleMessage'>" + msg + "</p>");
+    }
+
+    if (type === "error") {
+        $("#console").append("<p class='consoleError'>" + msg + "</p>");
+    }
+
+    // Set the console scrollbar to the bottom.
+    $("#consoleWrap").scrollTop($("#console").height());
+}
+
+
+
+/*
+
+  clearConsole();
+
+*/
+
+
+
+function clearConsole() {
+    $("#console").empty();
 }

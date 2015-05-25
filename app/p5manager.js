@@ -444,6 +444,7 @@ function runP5process(ctx, project, sketch_dir, build_dir) {
     p5process.stdout.on('data',
         function(data) {
             console.log(data.toString());
+            ctx.writeToConsole(data.toString(), "message");
         }
     );
 
@@ -451,6 +452,8 @@ function runP5process(ctx, project, sketch_dir, build_dir) {
     p5process.stderr.on('data',
         function(data) {
             console.log(data.toString());
+            ctx.writeToConsole(data.toString(), "error");
+
         }
     );
 
@@ -470,8 +473,9 @@ function runP5process(ctx, project, sketch_dir, build_dir) {
                     var file_content = fs.readFileSync(project.directory + path.sep + "backup" + path.sep + buffered_files[i].rel_path);
                     // Escribimos los archivos con lo que backupeamos.
                     fs.writeFileSync(project.directory + buffered_files[i].rel_path, file_content);
-                    // Borramos la carpeta de backup.
+                    // Borramos la carpeta de backup y build
                     rimraf(backup_directory, function() {});
+                    rimraf(project.directory + path.sep + "build", function() {});
                 };
             }
 
@@ -627,7 +631,7 @@ exports.saveAsProject = function(save_path, project, ctx) {
 
                 // Aca debería hacer un silenceSave?
                 writeAllDocToFiles(project);
-
+                // Refresco el sidebar
                 ctx.refreshSidebar();
             });
         });

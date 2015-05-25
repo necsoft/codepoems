@@ -245,6 +245,7 @@ function actions_quit() {
 function actions_run() {
     if (global.app.focused_project.running === false) {
         p5manager.runProject(global.app.focused_project, focused_ctx);
+        focused_ctx.clearConsole();
     } else {
         console.log("Ya hay un proyecto corriendo.");
     }
