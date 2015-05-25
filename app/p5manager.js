@@ -19,15 +19,11 @@ var util = require('util');
 var readdirp = require('readdirp');
 var es = require('event-stream');
 var ncp = require('ncp').ncp;
-// var childProcess = require('child_process').spawn,
-//     p5process;
-
+var rimraf = require('rimraf');
 var spawn = require('child_process').spawn;
 var p5process;
 var ps = require('ps-node');
-
-// Kill dependency for windows
-var kill = require('tree-kill');
+var kill = require('tree-kill'); // Kill dependency for windows
 
 var child;
 
@@ -183,17 +179,20 @@ function analyze_project(p_dir, p_father, main_file) {
     analyzed_project.files = [];
     analyzed_project.directory = p_dir;
 
+    // Array de carpetas ignoradas.
+    var filtered_folders = ['!.git', '!node_modules', '!backup'];
+
     // Searching for PDE
     readdirp({
         root: analyzed_project.directory,
-        fileFilter: ['*.pde']
+        fileFilter: ['*.pde'],
+        directoryFilter: filtered_folders
     }).on('data', function(entry) {
         if (entry.name === analyzed_project.name + ".pde") {
             analyzed_project.files.push({
                 type: "main",
                 name: entry.name,
                 extension: ".pde",
-
                 rel_path: entry.fullPath.replace(p_dir, ""),
                 saved: true,
                 declared: true
@@ -203,7 +202,6 @@ function analyze_project(p_dir, p_father, main_file) {
                 type: "secondary",
                 name: entry.name,
                 extension: ".pde",
-
                 rel_path: entry.fullPath.replace(p_dir, ""),
                 saved: true,
                 declared: true
@@ -214,7 +212,8 @@ function analyze_project(p_dir, p_father, main_file) {
     // Searching for Images
     readdirp({
         root: analyzed_project.directory,
-        fileFilter: ['*.png', '*.jpg']
+        fileFilter: ['*.png', '*.jpg'],
+        directoryFilter: filtered_folders
     }).on('data', function(entry) {
         analyzed_project.files.push({
             type: "image",
@@ -230,7 +229,8 @@ function analyze_project(p_dir, p_father, main_file) {
     // Searching for Shaders
     readdirp({
         root: analyzed_project.directory,
-        fileFilter: '*.glsl'
+        fileFilter: '*.glsl',
+        directoryFilter: filtered_folders
     }).on('data', function(entry) {
         analyzed_project.files.push({
             type: "shader",
@@ -245,7 +245,8 @@ function analyze_project(p_dir, p_father, main_file) {
     // Searching for JSON
     readdirp({
         root: analyzed_project.directory,
-        fileFilter: '*.json'
+        fileFilter: '*.json',
+        directoryFilter: filtered_folders
     }).on('data', function(entry) {
         analyzed_project.files.push({
             type: "json",
@@ -260,7 +261,8 @@ function analyze_project(p_dir, p_father, main_file) {
     // Searching for XML
     readdirp({
         root: analyzed_project.directory,
-        fileFilter: '*.xml'
+        fileFilter: '*.xml',
+        directoryFilter: filtered_folders
     }).on('data', function(entry) {
         analyzed_project.files.push({
             type: "xml",
@@ -275,7 +277,8 @@ function analyze_project(p_dir, p_father, main_file) {
     // Searching for txt
     readdirp({
         root: analyzed_project.directory,
-        fileFilter: '*.txt'
+        fileFilter: '*.txt',
+        directoryFilter: filtered_folders
     }).on('data', function(entry) {
         analyzed_project.files.push({
             type: "txt",
@@ -290,7 +293,8 @@ function analyze_project(p_dir, p_father, main_file) {
     // Searching for audio
     readdirp({
         root: analyzed_project.directory,
-        fileFilter: ['*.mp3', '*.wav', '*.ogg']
+        fileFilter: ['*.mp3', '*.wav', '*.ogg'],
+        directoryFilter: filtered_folders
     }).on('data', function(entry) {
         analyzed_project.files.push({
             type: "audio",
@@ -363,19 +367,23 @@ function runDeclaredProject(project, ctx) {
 
     console.log("El directory de este proyecto es:" + project.directory);
 
-
     mkdirp(project.directory + path.sep + "backup", function() {
-        for (var i = 0; i < project.files.length; i++) {
-            var the_type = project.files[i].type;
+        var buffered_files = ctx.getBufferedFiles();
+        var backup_directory = project.directory + path.sep + "backup" + path.sep;
 
+        for (var i = 0; i < buffered_files.length; i++) {
+            // Leemos los viejos archivos viejos
+            var file_content = fs.readFileSync(project.directory + path.sep + buffered_files[i].rel_path);
+            // Guardamos esos archivos en la carpeta de backup
+            fs.writeFileSync(backup_directory + buffered_files[i].rel_path, file_content);
         };
-    })
 
+        // Guardamos todos los archivos, porque ya los backupeamos.
+        writeAllDocToFiles(project);
+        runP5process(ctx, project, project.directory, project.directory + path.sep + "build");
+    });
 
-
-
-
-}
+};
 
 function runUndeclaredProject(project, ctx) {
 
@@ -395,39 +403,8 @@ function runUndeclaredProject(project, ctx) {
         var temporal_dir = process.cwd() + '/app/tmp/' + ctx.getMainFile().name.split(".")[0];
         var temporal_dir_build = process.cwd() + '/app/tmp/' + ctx.getMainFile().name.split(".")[0] + "/build/";
 
-        // Spawn al processing-java
-        p5process = spawn('processing-java', ['--sketch=' + temporal_dir, '--output=' + temporal_dir_build, '--run', '--force'], {
-            detached: true
-        });
-
-        // Ahora el proyecto se esta corriendo
-        project.running = true;
-
-        // Guardo el pid 
-        project.running_pid = (p5process.pid + 2)
-
-        // Se ejecuta cuando recibimos logs normales del proceso
-        p5process.stdout.on('data',
-            function(data) {
-                console.log(data.toString());
-            }
-        );
-
-        // Se ejecuta cuando se recibe algún mensaje de error.
-        p5process.stderr.on('data',
-            function(data) {
-                console.log(data.toString());
-            }
-        );
-
-        // Se ejecuta siempre que se cierra el proceso.
-        p5process.on('close',
-            function() {
-                console.log("Se termino el proceso.");
-                project.running = false;
-                project.running_pid = "";
-            }
-        );
+        // Corremos el proceso.
+        runP5process(ctx, project, temporal_dir, temporal_dir_build);
 
     });
 
@@ -436,6 +413,74 @@ function runUndeclaredProject(project, ctx) {
 
 
 
+/*
+
+  runP5process()
+
+  Se encarga de correr el processing-java, hay dos tipos de run, pero ambos usan la
+  misma funcion. Recibe un proyecto, una carpeta de sketch y un build_dir, esto se puede
+  mejorar a futuro, pero por ahora funciona bien.
+
+ */
+
+
+function runP5process(ctx, project, sketch_dir, build_dir) {
+
+    // Corremos el proceso para ejecutar processing por terminal
+    p5process = spawn('processing-java', ['--sketch=' + sketch_dir, '--output=' + build_dir, '--run', '--force'], {
+        detached: true
+    });
+
+    // Ahora el proyecto es marcado como running
+    project.running = true;
+
+    // Guardamos el PID en el que esta corriendo (ESTO SOLO FUNCIONA ASI EN MAC)
+    project.running_pid = (p5process.pid + 2);
+
+
+    // Process handlers
+
+    // Se ejecuta cuando recibimos logs normales del proceso
+    p5process.stdout.on('data',
+        function(data) {
+            console.log(data.toString());
+        }
+    );
+
+    // Se ejecuta cuando se recibe algún mensaje de error.
+    p5process.stderr.on('data',
+        function(data) {
+            console.log(data.toString());
+        }
+    );
+
+    // Se ejecuta siempre que se cierra el proceso.
+    p5process.on('close',
+        function() {
+            console.log("Se termino el proceso.");
+            // 
+            project.running = false;
+            project.running_pid = "";
+            // Restauramos los archivos backupeados (en caso de que sea un proyecto declarado)
+            if (project.declared) {
+                var backup_directory = project.directory + path.sep + "backup" + path.sep;
+                var buffered_files = ctx.getBufferedFiles();
+                for (var i = 0; i < buffered_files.length; i++) {
+                    // Leemos los archivos backupeados.
+                    var file_content = fs.readFileSync(project.directory + path.sep + "backup" + path.sep + buffered_files[i].rel_path);
+                    // Escribimos los archivos con lo que backupeamos.
+                    fs.writeFileSync(project.directory + buffered_files[i].rel_path, file_content);
+                    // Borramos la carpeta de backup.
+                    rimraf(backup_directory, function() {});
+                };
+            }
+
+
+        }
+    );
+
+
+}
 
 /*
   silenceSave()
@@ -455,6 +500,9 @@ exports.silenceSave = function(project, ctx) {
 
   Le pasas un proyecto y se encarga de transformar todos los docs con buffer de CodeMirro
   en archivo.
+
+
+  ESTO HAY QUE PASARLO PARA QUE USE BUFERED_FILES DEL CTX
 
  */
 
