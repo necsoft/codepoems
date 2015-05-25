@@ -29,8 +29,8 @@ var child;
 
 // Default variables for projects
 var default_project_label = "sketch";
-var new_window_width = 900;
-var new_window_height = 700;
+var new_window_width = 700;
+var new_window_height = 600;
 
 
 /*
@@ -74,7 +74,9 @@ exports.initialProject = function() {
         "frame": false,
         "width": new_window_width,
         "height": new_window_height,
-        "resizable": false
+        "resizable": true,
+        "min_width": 600,
+        "min_height": 600,
     });
 }
 

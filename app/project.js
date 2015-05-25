@@ -78,6 +78,17 @@ $(document).ready(function() {
 
 });
 
+// Resize de la ventana
+$(window).resize(function() {
+    console.log("Estas haciendo resize");
+    console.log($(window).height());
+
+    var height_topbar = $("#upnav").height() + $("#mainNav").height();
+
+    $("#centerBlock,.CodeMirror, #mainEditor").height(($(window).height() - height_topbar) * 0.70);
+    $("#consoleWrap").height(($(window).height() - height_topbar) * 0.30);
+});
+
 
 /*
   getMainFile()
