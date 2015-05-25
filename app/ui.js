@@ -52,6 +52,18 @@ exports.setupHandlers = function(window, win, ctx) {
     global.app.focused_ctx = ctx;
     global.app.focused_win = focused_win;
 
+    // Keymaps
+
+    var map = {
+        "Cmd-R": actions_run,
+        "Cmd-O": actions_open,
+        "Cmd-S": actions_save,
+        "Cmd-N": p5manager.newProject,
+        "Cmd-W": actions_quit
+    };
+
+    global.app.focused_project.editor.addKeyMap(map);
+
     /*
       UI Nodes
       */
@@ -115,6 +127,14 @@ exports.setupHandlers = function(window, win, ctx) {
     })
 
 }
+
+
+
+
+
+
+
+
 
 /*
   refreshSidebarHandlers()
