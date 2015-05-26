@@ -36,10 +36,9 @@ var codemirror_config = {
     showCursorWhenSelecting: true,
     theme: "paraiso-dark",
     foldGutter: true,
-    autohint: true,
     tabSize: 2,
     extraKeys: {
-        "Cmd-Space": "autocomplete"
+        "Ctrl-Space": "autocomplete"
     },
     gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
     viewportMargin: Infinity,
