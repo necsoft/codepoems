@@ -1266,19 +1266,34 @@ body {
 }
 
 /* line 107, ../sass/screen.scss */
+.exit_button:hover {
+  background-color: #d8416c;
+}
+
+/* line 111, ../sass/screen.scss */
 .max_button {
   background-color: #75ED64;
 }
 
-/* line 111, ../sass/screen.scss */
+/* line 115, ../sass/screen.scss */
+.max_button:hover {
+  background-color: #65d629;
+}
+
+/* line 119, ../sass/screen.scss */
 .min_button {
   background-color: #FFE422;
+}
+
+/* line 123, ../sass/screen.scss */
+.min_button:hover {
+  background-color: #e8ca18;
 }
 
 /*
   CENTER BLOCK
  */
-/* line 120, ../sass/screen.scss */
+/* line 132, ../sass/screen.scss */
 #centerBlock {
   width: 100%;
   float: left;
@@ -1287,7 +1302,7 @@ body {
   height: 70%;
 }
 
-/* line 129, ../sass/screen.scss */
+/* line 141, ../sass/screen.scss */
 #sidebar {
   float: left;
   width: 25%;
@@ -1303,11 +1318,11 @@ body {
   -ms-user-select: none;
   user-select: none;
 }
-/* line 145, ../sass/screen.scss */
+/* line 157, ../sass/screen.scss */
 #sidebar ul {
   cursor: default;
 }
-/* line 148, ../sass/screen.scss */
+/* line 160, ../sass/screen.scss */
 #sidebar ul li {
   margin: -1px 5px;
   padding: 4px;
@@ -1315,33 +1330,33 @@ body {
   font-weight: 500;
   margin-bottom: 2px;
 }
-/* line 156, ../sass/screen.scss */
+/* line 168, ../sass/screen.scss */
 #sidebar ul li:hover {
   background-color: #000;
 }
-/* line 161, ../sass/screen.scss */
+/* line 173, ../sass/screen.scss */
 #sidebar ul .mainFile i {
   color: #37FCFF;
 }
-/* line 165, ../sass/screen.scss */
+/* line 177, ../sass/screen.scss */
 #sidebar ul .secondaryFile i {
   color: #38CCEF;
 }
-/* line 169, ../sass/screen.scss */
+/* line 181, ../sass/screen.scss */
 #sidebar ul .imageFile i {
   color: #FFA600;
 }
-/* line 173, ../sass/screen.scss */
+/* line 185, ../sass/screen.scss */
 #sidebar ul .active {
   border: 1px solid #111;
   border-radius: 4px;
   color: #ccc;
 }
-/* line 179, ../sass/screen.scss */
+/* line 191, ../sass/screen.scss */
 #sidebar ul .groupMainFile, #sidebar ul .groupSecondaryFiles, #sidebar ul .groupImageFiles, #sidebar ul .groupShaderFiles, #sidebar ul .groupPlainFiles, #sidebar ul .groupAudioFiles {
   margin-bottom: 10px;
 }
-/* line 186, ../sass/screen.scss */
+/* line 198, ../sass/screen.scss */
 #sidebar .button_add_file {
   background-color: transparent;
   border: 1px solid #333;
@@ -1356,18 +1371,18 @@ body {
   font-size: 0.7em;
   transition: background-color 0.1s ease;
 }
-/* line 201, ../sass/screen.scss */
+/* line 213, ../sass/screen.scss */
 #sidebar .button_add_file:hover {
   background-color: black;
 }
 
-/* line 208, ../sass/screen.scss */
+/* line 220, ../sass/screen.scss */
 #mainEditor {
   float: left;
   width: 75%;
 }
 
-/* line 215, ../sass/screen.scss */
+/* line 227, ../sass/screen.scss */
 .CodeMirror {
   height: 490px;
 }
@@ -1375,7 +1390,7 @@ body {
 /*
   BOTTOM BLOCK
  */
-/* line 224, ../sass/screen.scss */
+/* line 236, ../sass/screen.scss */
 #consoleWrap {
   height: 140px;
   position: relative;
@@ -1384,7 +1399,7 @@ body {
   background-color: #1D1D1D;
 }
 
-/* line 232, ../sass/screen.scss */
+/* line 244, ../sass/screen.scss */
 #console {
   float: left;
   width: 100%;
@@ -1392,16 +1407,16 @@ body {
   color: #666;
   font-size: 0.7em;
 }
-/* line 239, ../sass/screen.scss */
+/* line 251, ../sass/screen.scss */
 #console p {
   margin-left: 5px;
   margin-top: 5px;
 }
-/* line 247, ../sass/screen.scss */
+/* line 259, ../sass/screen.scss */
 #console .consoleMessage {
   color: #ffffff;
 }
-/* line 251, ../sass/screen.scss */
+/* line 263, ../sass/screen.scss */
 #console .consoleError {
   background-color: #DA3A61;
   color: #fff;
@@ -1413,7 +1428,7 @@ body {
 /*
   Codemirror
  */
-/* line 266, ../sass/screen.scss */
+/* line 278, ../sass/screen.scss */
 .CodeMirror pre {
   font-size: 1.1em;
 }
@@ -1421,19 +1436,19 @@ body {
 /*
   SCROLLBARS
  */
-/* line 275, ../sass/screen.scss */
+/* line 287, ../sass/screen.scss */
 ::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: #222222;
 }
 
-/* line 281, ../sass/screen.scss */
+/* line 293, ../sass/screen.scss */
 ::-webkit-scrollbar {
   width: 6px;
   background-color: #333333;
 }
 
-/* line 287, ../sass/screen.scss */
+/* line 299, ../sass/screen.scss */
 ::-webkit-scrollbar-thumb {
   background-color: #000000;
 }

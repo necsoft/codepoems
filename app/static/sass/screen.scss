@@ -104,12 +104,24 @@ body{
   background-color: #F26184;
 }
 
+.exit_button:hover{
+  background-color: #d8416c;
+}
+
 .max_button{
   background-color: #75ED64;
 }
 
+.max_button:hover{
+  background-color: #65d629;
+}
+
 .min_button{
   background-color: #FFE422;
+}
+
+.min_button:hover{
+  background-color: #e8ca18;
 }
 
 

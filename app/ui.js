@@ -73,6 +73,8 @@ exports.setupHandlers = function(window, win, ctx) {
     $button_open = $(".button_open");
     $button_save = $(".button_save");
     $button_save_as = $(".button_save_as");
+    $button_min = $(".min_button");
+    $button_max = $(".max_button");
     $button_exit = $(".exit_button");
     $button_new = $(".button_new");
     $button_chrome_dev_tool = $(".button_chrome_dev_tool");
@@ -86,6 +88,15 @@ exports.setupHandlers = function(window, win, ctx) {
     $button_exit.click(function() {
         actions_quit();
     });
+
+    $button_min.click(function() {
+        actions_min();
+    });
+
+    $button_max.click(function() {
+        actions_max();
+    });
+
 
     $button_open.click(function() {
         actions_open($);
@@ -251,6 +262,29 @@ function actions_open($) {
 
 function actions_quit() {
     focused_win.close();
+}
+
+/*
+  actions_quit()
+  
+  Cierra todas las ventanas abiertas.
+
+  */
+
+function actions_min() {
+    console.log("Minimize!");
+    focused_win.minimize();
+}
+
+/*
+  actions_quit()
+  
+  Cierra todas las ventanas abiertas.
+
+  */
+
+function actions_max() {
+    focused_win.maximize();
 }
 
 

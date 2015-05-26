@@ -29,7 +29,7 @@ var child;
 
 // Default variables for projects
 var default_project_label = "sketch";
-var new_window_width = 700;
+var new_window_width = 750;
 var new_window_height = 600;
 
 
@@ -75,7 +75,7 @@ exports.initialProject = function() {
         "width": new_window_width,
         "height": new_window_height,
         "resizable": true,
-        "min_width": 600,
+        "min_width": 750,
         "min_height": 600,
     });
 }
@@ -119,7 +119,9 @@ exports.newProject = function() {
         "frame": false,
         "width": new_window_width,
         "height": new_window_height,
-        "resizable": false
+        "resizable": true,
+        "min_width": 750,
+        "min_height": 600,
     });
 }
 
@@ -334,7 +336,9 @@ function open_project_window(project) {
         "frame": false,
         "width": new_window_width,
         "height": new_window_height,
-        "resizable": false
+        "resizable": true,
+        "min_width": 750,
+        "min_height": 600,
     });
 
 
@@ -439,6 +443,7 @@ function runP5process(ctx, project, sketch_dir, build_dir) {
     // Guardamos el PID en el que esta corriendo (ESTO SOLO FUNCIONA ASI EN MAC)
     project.running_pid = (p5process.pid + 2);
 
+    console.log(p5process);
 
     // Process handlers
 
