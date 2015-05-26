@@ -36,9 +36,13 @@ var codemirror_config = {
     showCursorWhenSelecting: true,
     theme: "paraiso-dark",
     foldGutter: true,
+    autohint: true,
     tabSize: 2,
+    extraKeys: {
+        "Cmd-Space": "autocomplete"
+    },
     gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-    viewportMargin: Infinity
+    viewportMargin: Infinity,
 }
 
 // Save this context
@@ -71,23 +75,28 @@ $(document).ready(function() {
     // Initialize handlers
     ui.setupHandlers(window, win, ctx);
 
+    //
+    responsiveComponents();
 
-    writeToConsole("asdfasdfasdfs");
 
 
 
+
+
+    writeToConsole("Welcome to Codepoems!", "message");
 });
 
 // Resize de la ventana
 $(window).resize(function() {
-    console.log("Estas haciendo resize");
-    console.log($(window).height());
+    responsiveComponents();
+});
 
+function responsiveComponents() {
     var height_topbar = $("#upnav").height() + $("#mainNav").height();
-
     $("#centerBlock,.CodeMirror, #mainEditor").height(($(window).height() - height_topbar) * 0.70);
     $("#consoleWrap").height(($(window).height() - height_topbar) * 0.30);
-});
+}
+
 
 
 /*
@@ -275,6 +284,13 @@ function initCodeMirrorDocs() {
 
     //Swap the default doc
     project.editor.swapDoc(getMainFile().doc, "processing");
+
+
+
+    // project.editor.on('keyup', function() {
+    //     project.editor.showHint();
+    // });
+
 }
 
 

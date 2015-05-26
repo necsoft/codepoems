@@ -1424,7 +1424,7 @@ body {
 /* line 275, ../sass/screen.scss */
 ::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: #333333;
+  background-color: #222222;
 }
 
 /* line 281, ../sass/screen.scss */
