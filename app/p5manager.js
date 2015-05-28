@@ -29,8 +29,10 @@ var child;
 
 // Default variables for projects
 var default_project_label = "sketch";
-var new_window_width = 750;
-var new_window_height = 600;
+var new_window_width = 900;
+var new_window_height = 700;
+var min_window_width = 900;
+var min_window_height = 700;
 
 
 /*
@@ -75,8 +77,8 @@ exports.initialProject = function() {
         "width": new_window_width,
         "height": new_window_height,
         "resizable": true,
-        "min_width": 750,
-        "min_height": 600,
+        "min_width": min_window_width,
+        "min_height": min_window_height,
     });
 }
 
@@ -120,8 +122,8 @@ exports.newProject = function() {
         "width": new_window_width,
         "height": new_window_height,
         "resizable": true,
-        "min_width": 750,
-        "min_height": 600,
+        "min_width": min_window_width,
+        "min_height": min_window_height,
     });
 }
 
@@ -337,8 +339,8 @@ function open_project_window(project) {
         "width": new_window_width,
         "height": new_window_height,
         "resizable": true,
-        "min_width": 750,
-        "min_height": 600,
+        "min_width": min_window_width,
+        "min_height": min_window_height,
     });
 
 

@@ -423,36 +423,44 @@ function refreshSidebar() {
 
     // Mostrar el archivo primario
     var main_file = getMainFile();
-    $(".groupMainFile").append("<li class='mainFile active'><i class='icon-description'></i> " + main_file.name + "</li>");
+    $(".groupMainFile").append("<li class='mainFile active'><i class='icon-002'></i> " + main_file.name + "</li>");
 
     // Mostrar los archivos secundarios
     var secondary_files = getSecondaryFiles();
     for (var i = 0; i < secondary_files.length; i++) {
-        $(".groupSecondaryFiles").append("<li class='secondaryFile'><i class='icon-description'></i> " + secondary_files[i].name + "</li>");
+        $(".groupSecondaryFiles").append("<li class='secondaryFile'><i class='icon-002'></i> " + secondary_files[i].name + "</li>");
     }
 
     // Mostrar las imagenes
     var images_files = getImageFiles();
     for (var i = 0; i < images_files.length; i++) {
-        $(".groupImageFiles").append("<li class='imageFile'><i class='icon-insert-photo'></i> " + images_files[i].name + "</li>");
+        $(".groupImageFiles").append("<li class='imageFile'><i class='icon-004'></i> " + images_files[i].name + "</li>");
     }
 
     // Mostrar los shaders
     var shader_files = getShaderFiles();
     for (var i = 0; i < shader_files.length; i++) {
-        $(".groupShaderFiles").append("<li class='shaderFile'><i class='icon-texture'></i> " + shader_files[i].name + "</li>");
+        $(".groupShaderFiles").append("<li class='shaderFile'><i class='icon-008'></i> " + shader_files[i].name + "</li>");
     }
 
     // Mostrar los archivos planos
     var plain_files = getPlainFiles();
     for (var i = 0; i < plain_files.length; i++) {
-        $(".groupPlainFiles").append("<li class='plainFile'><i class='icon-dehaze'></i> " + plain_files[i].name + "</li>");
+        if (plain_files[i].name.split(".")[1] === "xml") {
+            $(".groupPlainFiles").append("<li class='plainFile'><i class='icon-005'></i> " + plain_files[i].name + "</li>");
+        }
+        if (plain_files[i].name.split(".")[1] === "txt") {
+            $(".groupPlainFiles").append("<li class='plainFile'><i class='icon-006'></i> " + plain_files[i].name + "</li>");
+        }
+        if (plain_files[i].name.split(".")[1] === "xml") {
+            $(".groupPlainFiles").append("<li class='plainFile'><i class='icon-003'></i> " + plain_files[i].name + "</li>");
+        }
     }
 
     // Mostrar los archivos planos
     var audio_files = getAudioFiles();
     for (var i = 0; i < audio_files.length; i++) {
-        $(".groupAudioFiles").append("<li class='audioFile'><i class='icon-volume-up'></i> " + audio_files[i].name + "</li>");
+        $(".groupAudioFiles").append("<li class='audioFile'><i class='icon-007'></i> " + audio_files[i].name + "</li>");
     }
 
     // Hacemos un refresh del sidebar.
