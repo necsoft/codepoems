@@ -324,7 +324,7 @@ function addFileToProject(name, extension) {
             type: "secondary",
             name: name,
             extension: "." + extension,
-            rel_path: "/" + name,
+            rel_path: "" + name,
             saved: true,
             declared: false,
             doc: CodeMirror.Doc("//" + name, "processing")

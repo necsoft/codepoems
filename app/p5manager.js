@@ -462,7 +462,6 @@ function runP5process(ctx, project, sketch_dir, build_dir) {
         function(data) {
             console.log(data.toString());
             ctx.writeToConsole(data.toString(), "error");
-
         }
     );
 
@@ -481,7 +480,7 @@ function runP5process(ctx, project, sketch_dir, build_dir) {
                     // Leemos los archivos backupeados.
                     var file_content = fs.readFileSync(project.directory + path.sep + "backup" + path.sep + buffered_files[i].rel_path);
                     // Escribimos los archivos con lo que backupeamos.
-                    fs.writeFileSync(project.directory + buffered_files[i].rel_path, file_content);
+                    fs.writeFileSync(project.directory + path.sep + buffered_files[i].rel_path, file_content);
                     // Borramos la carpeta de backup y build
                     rimraf(backup_directory, function() {});
                     rimraf(project.directory + path.sep + "build", function() {});
@@ -531,7 +530,8 @@ function writeAllDocToFiles(project) {
             the_type === "xml" ||
             the_type === "txt") {
             // Si es un file con doc, lo escribe.
-            fs.writeFile(project.directory + project.files[i].rel_path, project.files[i].doc.getValue(), function(err) {
+            console.log("Estoy guardando:" + project.directory + path.sep + project.files[i].rel_path);
+            fs.writeFile(project.directory + path.sep + project.files[i].rel_path, project.files[i].doc.getValue(), function(err) {
                 if (err) {
                     console.log(err);
                 }
