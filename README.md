@@ -1,20 +1,12 @@
 #Codepoems
-This is an experimental IDE for Processing.
+This is an experimental IDE for Processing. Be careful, this is only an experiment for now.
 
-#### Be careful
-This is only an experiment for now.
+# Building
 
-# Installing dependencies
-First, you have to install the dependencies of the projects.
 ```
-$ git clone https://github.com/necsoft/codepoems
-$ npm install
-$ bower install
+    # Building for OSX64
+    npm run build_osx64
 ```
-
-# Using nw
-Codepoems is built on top of nw (ex node-webkit), in order to run the app you have to download nw from http://nwjs.io/.
-
 
 #License
 

@@ -19,8 +19,9 @@ app/tmp/sketch/sketch.pde
 app/tmp/sketch/build/*
 app/tmp/*
 
-#Aqui estan los builds
-dist/
+#Aqui estan los builds y el cache del builder
+build/
+cache/
 
 #Ignoramos la cache de Sass
 app/static/.sass-cache
