@@ -5,7 +5,7 @@
 You need to have node-webkit-builder in order to run these commands
 
 
-## Building for OSX64
+#### Building for OSX64
 ```
 npm run build_osx64
 ```
