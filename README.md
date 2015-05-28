@@ -1,11 +1,12 @@
 #Codepoems
-This is an experimental IDE for Processing. Be careful, this is only an experiment for now.
+>This is an experimental IDE for Processing. Be careful, this is only an experiment for now.
 
 # Building
-You need to have node-webkit-builder in order to run this command:
+You need to have node-webkit-builder in order to run these commands
 
+
+## Building for OSX64
 ```
-# Building for OSX64
 npm run build_osx64
 ```
 
