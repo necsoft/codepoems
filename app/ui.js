@@ -140,13 +140,6 @@ exports.setupHandlers = function(window, win, ctx) {
 }
 
 
-
-
-
-
-
-
-
 /*
   refreshSidebarHandlers()
   

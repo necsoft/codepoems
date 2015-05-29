@@ -74,13 +74,8 @@ $(document).ready(function() {
     // Initialize handlers
     ui.setupHandlers(window, win, ctx);
 
-    //
+    // Setea los elementos responsive
     responsiveComponents();
-
-
-
-
-
 
     writeToConsole("Welcome to Codepoems!", "message");
 });
@@ -90,14 +85,12 @@ $(window).resize(function() {
     responsiveComponents();
 });
 
-
+// Se ejecuta al principio y cada vez que se hace resize de la ventana
 function responsiveComponents() {
     var height_topbar = $("#upnav").height() + $("#mainNav").height();
     $("#centerBlock,.CodeMirror, #mainEditor").height(($(window).height() - height_topbar) * 0.70);
     $("#consoleWrap").height(($(window).height() - height_topbar) * 0.30);
 }
-
-
 
 /*
   getMainFile()
@@ -222,13 +215,6 @@ function getBufferedFiles() {
 }
 
 
-
-
-
-
-
-
-
 /*
   initCodeMirrorDocs();
 
@@ -285,12 +271,6 @@ function initCodeMirrorDocs() {
     //Swap the default doc
     project.editor.swapDoc(getMainFile().doc, "processing");
 
-
-
-    // project.editor.on('keyup', function() {
-    //     project.editor.showHint();
-    // });
-
 }
 
 
@@ -317,6 +297,13 @@ function swapDoc(type, index) {
     }
 }
 
+/*
+  addFileToProject();
+
+  Agrega un archivo al proyecto, y luego actualiza el sidebar.
+  También se encarga de la validación del tipo de archivo que tiene que agregar.
+
+  */
 
 function addFileToProject(name, extension) {
 
@@ -472,9 +459,10 @@ function refreshSidebar() {
 
 
 /*
-  
   writeToConsole();
 
+  Escribe algo en la consola del proyecto, hay diferentes tipos de mensajes
+  y cada uno tiene su propio estilo.
 
  */
 
@@ -482,10 +470,12 @@ function refreshSidebar() {
 
 function writeToConsole(msg, type) {
 
+    // Normal messages
     if (type === "message") {
         $("#console").append("<p class='consoleMessage'>" + msg + "</p>");
     }
 
+    // Error messages
     if (type === "error") {
         $("#console").append("<p class='consoleError'>" + msg + "</p>");
     }
@@ -497,12 +487,11 @@ function writeToConsole(msg, type) {
 
 
 /*
-
   clearConsole();
 
+  Limpia la consola, para que no queden los logs viejos del anterior run.
+
 */
-
-
 
 function clearConsole() {
     $("#console").empty();

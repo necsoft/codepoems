@@ -510,11 +510,8 @@ exports.silenceSave = function(project, ctx) {
 /*
   writeAllDocToFiles();
 
-  Le pasas un proyecto y se encarga de transformar todos los docs con buffer de CodeMirro
+  Le pasas un proyecto y se encarga de transformar todos los docs con buffer de CodeMirror
   en archivo.
-
-
-  ESTO HAY QUE PASARLO PARA QUE USE BUFERED_FILES DEL CTX
 
  */
 
@@ -561,7 +558,9 @@ exports.saveAsProject = function(save_path, project, ctx) {
 
     // Hay dos tipos de saveAs, el saveAs cuando el proyecto no existe,
     // y el saveAs cuando el proyecto existe, la mayor diferencia es que 
-    // en el segundo caso, copiamos la carpeta para asegurarnos que 
+    // en el segundo caso, copiamos la carpeta para asegurarnos que si hay
+    // archivos que no esten trackeados se copien igual.
+
     if (project.declared === false) {
         saveAsUndeclared();
     } else {
