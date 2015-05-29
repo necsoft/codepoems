@@ -90,6 +90,7 @@ $(window).resize(function() {
     responsiveComponents();
 });
 
+
 function responsiveComponents() {
     var height_topbar = $("#upnav").height() + $("#mainNav").height();
     $("#centerBlock,.CodeMirror, #mainEditor").height(($(window).height() - height_topbar) * 0.70);
@@ -506,3 +507,39 @@ function writeToConsole(msg, type) {
 function clearConsole() {
     $("#console").empty();
 }
+
+
+
+
+// Pruebas con el autocomplete
+
+// CodeMirror.registerHelper("hint", "asdasd", {
+//     "value": "hola!!!"
+// });
+
+
+// CodeMirror.commands.autocomplete = function(cm) {
+//     // var doc = cm.getDoc();
+//     // var POS = doc.getCursor();
+//     // var mode = CodeMirror.innerMode(cm.getMode(), cm.getTokenAt(POS).state).mode.name;
+//     console.log("Estas llamando al autocomplete");
+
+
+//     console.log(cm);
+//     console.log(project.editor.getCursor());
+
+
+//     //console.log(CodeMirror.hint);
+//     //CodeMirror.showHint(cm, CodeMirror.hint.processing);
+//     CodeMirror.showHint(cm, CodeMirror.hint.auto);
+
+
+
+//     // if (mode == 'xml') { //html depends on xml
+//     //     //CodeMirror.showHint(cm, CodeMirror.hint.html);
+//     // } else if (mode == 'javascript') {
+//     //     //CodeMirror.showHint(cm, CodeMirror.hint.javascript);
+//     // } else if (mode == 'css') {
+//     //     //CodeMirror.showHint(cm, CodeMirror.hint.css);
+//     // }
+// };
