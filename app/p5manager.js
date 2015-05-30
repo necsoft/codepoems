@@ -536,6 +536,7 @@ function writeAllDocToFiles(project) {
 
         };
     };
+    project.saved = true;
 }
 
 
@@ -641,6 +642,9 @@ exports.saveAsProject = function(save_path, project, ctx) {
                 writeAllDocToFiles(project);
                 // Refresco el sidebar
                 ctx.refreshSidebar();
+
+                //
+
             });
         });
     }

@@ -57,7 +57,7 @@ exports.setupHandlers = function(window, win, ctx) {
     var map = {
         "Cmd-R": actions_run,
         "Cmd-O": actions_open,
-        "Cmd-S": actions_save,
+        "Cmd-S": save_keymap,
         "Cmd-N": p5manager.newProject,
         "Cmd-W": actions_quit
     };
@@ -213,6 +213,18 @@ function clipboardFix() {
 
 
 /*
+  save_keymap()
+
+  Fix temporal para solucionar el save con shortcut.
+
+  */
+
+function save_keymap() {
+    var $ = global.app.focused_ctx.window.$;
+    actions_save($);
+}
+
+/*
   Actions
   
   Here starts the actions.
@@ -254,7 +266,15 @@ function actions_open($) {
   */
 
 function actions_quit() {
-    focused_win.close();
+    if (global.app.focused_project.saved) {
+        focused_win.close();
+    } else {
+
+        var confirm_exit = focused_ctx.confirm("Este proyecto no ha sido guardado, quieres descartarlo?");
+        if (confirm_exit) {
+            focused_win.close();
+        }
+    }
 }
 
 /*
@@ -327,7 +347,7 @@ function actions_stop() {
 function actions_save($) {
     if (global.app.focused_project.declared) {
         p5manager.silenceSave(global.app.focused_project, focused_ctx);
-    } else {
+    } else if (global.app.focused_project.declared === false) {
         actions_save_as($);
     }
 }

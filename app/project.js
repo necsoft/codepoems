@@ -78,6 +78,13 @@ $(document).ready(function() {
     responsiveComponents();
 
     writeToConsole("Welcome to Codepoems!", "message");
+
+    // On change
+    CodeMirror.on(project.editor, "change", function() {
+        console.log("Cambio algo!");
+        project.saved = false;
+    });
+
 });
 
 // Resize de la ventana
@@ -312,7 +319,7 @@ function addFileToProject(name, extension) {
             type: "secondary",
             name: name,
             extension: "." + extension,
-            rel_path: "" + name,
+            rel_path: name,
             saved: true,
             declared: false,
             doc: CodeMirror.Doc("//" + name, "processing")
@@ -325,7 +332,7 @@ function addFileToProject(name, extension) {
             type: "shader",
             name: name,
             extension: "." + extension,
-            rel_path: "/" + name,
+            rel_path: name,
             saved: true,
             declared: false,
             doc: CodeMirror.Doc("//" + name, "x-shader/x-fragment")
@@ -496,6 +503,29 @@ function writeToConsole(msg, type) {
 function clearConsole() {
     $("#console").empty();
 }
+
+
+
+
+
+
+
+
+
+/*
+  CodeMirror on "change"
+
+ */
+
+// CodeMirror.on(project.editor, "change", function() {
+//     // console.log("Cambio algo!");
+//     // project.saved = false;
+// });
+
+
+
+
+
 
 
 
