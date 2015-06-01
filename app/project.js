@@ -441,6 +441,7 @@ function refreshSidebar() {
     // Mostrar los archivos planos
     var plain_files = getPlainFiles();
     for (var i = 0; i < plain_files.length; i++) {
+        // Chequeamos las extesiones
         if (plain_files[i].name.split(".")[1] === "xml") {
             $(".groupPlainFiles").append("<li class='plainFile'><i class='icon-005'></i> " + plain_files[i].name + "</li>");
         }

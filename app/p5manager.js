@@ -520,7 +520,7 @@ function writeAllDocToFiles(project) {
     for (var i = 0; i < project.files.length; i++) {
         // Primero tengo que ver que sean archivos que tengan un doc de CodeMirror
         var the_type = project.files[i].type;
-        if (the_type === "glsl" ||
+        if (the_type === "shader" ||
             the_type === "main" ||
             the_type === "secondary" ||
             the_type === "json" ||
