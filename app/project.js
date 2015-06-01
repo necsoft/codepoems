@@ -16,6 +16,7 @@
 
 // Dependencias
 var fs = require('fs');
+var path = require('path');
 var ui = require('./ui.js');
 
 // Esta ventana se la vamos a pasar a ui.js
@@ -235,7 +236,7 @@ function initCodeMirrorDocs() {
     // Creamos el doc del mainFile
     if (project.declared) {
         // Proyecto declarado (si existe en en el file system, porque fue abierto o porque se guardó)
-        var main_file_content = fs.readFileSync(project.directory + getMainFile().rel_path);
+        var main_file_content = fs.readFileSync(project.directory + path.sep + getMainFile().rel_path);
         var doc = CodeMirror.Doc(main_file_content.toString(), "processing");
         getMainFile().doc = doc;
     } else {
@@ -246,28 +247,28 @@ function initCodeMirrorDocs() {
 
     // Creando los docs secundarios
     for (var i = 0; i < getSecondaryFiles().length; i++) {
-        var file_content = fs.readFileSync(project.directory + getSecondaryFiles()[i].rel_path);
+        var file_content = fs.readFileSync(project.directory + path.sep + getSecondaryFiles()[i].rel_path);
         getSecondaryFiles()[i].doc = CodeMirror.Doc(file_content.toString(), "processing");
     }
 
     for (var i = 0; i < getShaderFiles().length; i++) {
-        var file_content = fs.readFileSync(project.directory + getShaderFiles()[i].rel_path);
+        var file_content = fs.readFileSync(project.directory + path.sep + getShaderFiles()[i].rel_path);
         getShaderFiles()[i].doc = CodeMirror.Doc(file_content.toString(), "x-shader/x-fragment");
     }
 
     for (var i = 0; i < getPlainFiles().length; i++) {
         if (getPlainFiles()[i].extension === ".json") {
-            var file_content = fs.readFileSync(project.directory + getPlainFiles()[i].rel_path);
+            var file_content = fs.readFileSync(project.directory + path.sep + getPlainFiles()[i].rel_path);
             getPlainFiles()[i].doc = CodeMirror.Doc(file_content.toString(), "application/ld+json");
         }
 
         if (getPlainFiles()[i].extension === ".xml") {
-            var file_content = fs.readFileSync(project.directory + getPlainFiles()[i].rel_path);
+            var file_content = fs.readFileSync(project.directory + path.sep + getPlainFiles()[i].rel_path);
             getPlainFiles()[i].doc = CodeMirror.Doc(file_content.toString(), "xml");
         }
 
         if (getPlainFiles()[i].extension === ".txt") {
-            var file_content = fs.readFileSync(project.directory + getPlainFiles()[i].rel_path);
+            var file_content = fs.readFileSync(project.directory + path.sep + getPlainFiles()[i].rel_path);
             getPlainFiles()[i].doc = CodeMirror.Doc(file_content.toString(), "");
         }
     }

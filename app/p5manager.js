@@ -185,6 +185,9 @@ function analyze_project(p_dir, p_father, main_file) {
     analyzed_project.files = [];
     analyzed_project.directory = p_dir;
 
+    //
+    p_dir = p_dir + path.sep;
+
     // Array de carpetas ignoradas.
     var filtered_folders = ['!.git', '!node_modules', '!backup'];
 
