@@ -347,7 +347,7 @@ function addFileToProject(name, extension) {
             type: "json",
             name: name,
             extension: "." + extension,
-            rel_path: "/" + name,
+            rel_path: name,
             saved: true,
             declared: false,
             doc: CodeMirror.Doc("//" + name, "application/ld+json")
@@ -360,7 +360,7 @@ function addFileToProject(name, extension) {
             type: "xml",
             name: name,
             extension: "." + extension,
-            rel_path: "/" + name,
+            rel_path: name,
             saved: true,
             declared: false,
             doc: CodeMirror.Doc("//" + name, "xml")
@@ -373,7 +373,7 @@ function addFileToProject(name, extension) {
             type: "txt",
             name: name,
             extension: "." + extension,
-            rel_path: "/" + name,
+            rel_path: name,
             saved: true,
             declared: false,
             doc: CodeMirror.Doc("//" + name, "")

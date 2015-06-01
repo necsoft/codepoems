@@ -527,7 +527,6 @@ function writeAllDocToFiles(project) {
             the_type === "xml" ||
             the_type === "txt") {
             // Si es un file con doc, lo escribe.
-            console.log("Estoy guardando:" + project.directory + path.sep + project.files[i].rel_path);
             fs.writeFile(project.directory + path.sep + project.files[i].rel_path, project.files[i].doc.getValue(), function(err) {
                 if (err) {
                     console.log(err);
