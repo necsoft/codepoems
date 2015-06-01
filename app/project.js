@@ -447,7 +447,7 @@ function refreshSidebar() {
         if (plain_files[i].name.split(".")[1] === "txt") {
             $(".groupPlainFiles").append("<li class='plainFile'><i class='icon-006'></i> " + plain_files[i].name + "</li>");
         }
-        if (plain_files[i].name.split(".")[1] === "xml") {
+        if (plain_files[i].name.split(".")[1] === "json") {
             $(".groupPlainFiles").append("<li class='plainFile'><i class='icon-003'></i> " + plain_files[i].name + "</li>");
         }
     }
