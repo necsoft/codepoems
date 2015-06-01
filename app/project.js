@@ -82,7 +82,7 @@ $(document).ready(function() {
 
     // On change
     CodeMirror.on(project.editor, "change", function() {
-        console.log("Cambio algo!");
+        //console.log("Cambio algo!");
         project.saved = false;
     });
 
@@ -505,62 +505,3 @@ function writeToConsole(msg, type) {
 function clearConsole() {
     $("#console").empty();
 }
-
-
-
-
-
-
-
-
-
-/*
-  CodeMirror on "change"
-
- */
-
-// CodeMirror.on(project.editor, "change", function() {
-//     // console.log("Cambio algo!");
-//     // project.saved = false;
-// });
-
-
-
-
-
-
-
-
-
-// Pruebas con el autocomplete
-
-// CodeMirror.registerHelper("hint", "asdasd", {
-//     "value": "hola!!!"
-// });
-
-
-// CodeMirror.commands.autocomplete = function(cm) {
-//     // var doc = cm.getDoc();
-//     // var POS = doc.getCursor();
-//     // var mode = CodeMirror.innerMode(cm.getMode(), cm.getTokenAt(POS).state).mode.name;
-//     console.log("Estas llamando al autocomplete");
-
-
-//     console.log(cm);
-//     console.log(project.editor.getCursor());
-
-
-//     //console.log(CodeMirror.hint);
-//     //CodeMirror.showHint(cm, CodeMirror.hint.processing);
-//     CodeMirror.showHint(cm, CodeMirror.hint.auto);
-
-
-
-//     // if (mode == 'xml') { //html depends on xml
-//     //     //CodeMirror.showHint(cm, CodeMirror.hint.html);
-//     // } else if (mode == 'javascript') {
-//     //     //CodeMirror.showHint(cm, CodeMirror.hint.javascript);
-//     // } else if (mode == 'css') {
-//     //     //CodeMirror.showHint(cm, CodeMirror.hint.css);
-//     // }
-// };

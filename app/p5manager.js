@@ -29,11 +29,14 @@ var child;
 
 // Default variables for projects
 var default_project_label = "sketch";
-var new_window_width = 900;
-var new_window_height = 700;
-var min_window_width = 900;
-var min_window_height = 700;
-
+var default_window_conf = {
+    "frame": false,
+    "width": 900,
+    "height": 700,
+    "resizable": true,
+    "min_width": 900,
+    "min_height": 700,
+}
 
 /*
   initialProject()
@@ -72,14 +75,7 @@ exports.initialProject = function() {
 
     // Abrimos la ventana
     var gui = window.require("nw.gui");
-    var new_win = gui.Window.open('project.html', {
-        "frame": false,
-        "width": new_window_width,
-        "height": new_window_height,
-        "resizable": true,
-        "min_width": min_window_width,
-        "min_height": min_window_height,
-    });
+    var new_win = gui.Window.open('project.html', default_window_conf);
 }
 
 /*
@@ -117,14 +113,7 @@ exports.newProject = function() {
     // Abrimos la ventana
     var gui = global.app.focused_win.window.require("nw.gui");
     // var win = gui.Window.get();
-    var new_win = gui.Window.open('project.html', {
-        "frame": false,
-        "width": new_window_width,
-        "height": new_window_height,
-        "resizable": true,
-        "min_width": min_window_width,
-        "min_height": min_window_height,
-    });
+    var new_win = gui.Window.open('project.html', default_window_conf);
 }
 
 
@@ -337,15 +326,7 @@ function open_project_window(project) {
 
     // Abrimos la ventana
     var gui = global.app.focused_win.window.require("nw.gui");
-    var new_win = gui.Window.open('project.html', {
-        "frame": false,
-        "width": new_window_width,
-        "height": new_window_height,
-        "resizable": true,
-        "min_width": min_window_width,
-        "min_height": min_window_height,
-    });
-
+    var new_win = gui.Window.open('project.html', default_window_conf);
 
 }
 
@@ -365,19 +346,23 @@ exports.runProject = function(project, ctx) {
     }
 };
 
+/*
+  runDeclaredProject()
+
+  Este es el run de los proyectos que no necesitan ejecutarse en la carpeta temporal
+  porque y estan declarados en alguna parte del filesystem.
+
+  Esta es la secuencia utilizada:
+
+  1. Guardarnos la información de los archivos en carpeta.
+  2. Hacer un silenceSave
+  3. Correr el run en la carpeta
+  4. Capturar el stop
+
+  */
+
 function runDeclaredProject(project, ctx) {
-    console.log("runDeclaredProject");
-
-    // 
-    // 1. Guardarnos la información de los archivos en carpeta.
-    // 2. Hacer un silenceSave
-    // 3. Correr el run en la carpeta
-    // 4. Capturar el stop
-    //
-
-
-    console.log("El directory de este proyecto es:" + project.directory);
-
+    // Creamos la carpeta de backup
     mkdirp(project.directory + path.sep + "backup", function() {
         var buffered_files = ctx.getBufferedFiles();
         var backup_directory = project.directory + path.sep + "backup" + path.sep;
@@ -395,6 +380,13 @@ function runDeclaredProject(project, ctx) {
     });
 
 };
+
+/*
+  runUndeclaredProject()
+
+  Este es el run de los proyectos no declarados, estos se ejecutan en una carpeta temporal.
+
+  */
 
 function runUndeclaredProject(project, ctx) {
 
@@ -447,8 +439,6 @@ function runP5process(ctx, project, sketch_dir, build_dir) {
 
     // Guardamos el PID en el que esta corriendo (ESTO SOLO FUNCIONA ASI EN MAC)
     project.running_pid = (p5process.pid + 2);
-
-    console.log(p5process);
 
     // Process handlers
 
@@ -644,8 +634,6 @@ exports.saveAsProject = function(save_path, project, ctx) {
                 writeAllDocToFiles(project);
                 // Refresco el sidebar
                 ctx.refreshSidebar();
-
-                //
 
             });
         });

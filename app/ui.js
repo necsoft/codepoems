@@ -64,10 +64,7 @@ exports.setupHandlers = function(window, win, ctx) {
 
     global.app.focused_project.editor.addKeyMap(map);
 
-    /*
-      UI Nodes
-      */
-
+    // UI Nodes
     $button_run = $(".button_run");
     $button_stop = $(".button_stop");
     $button_open = $(".button_open");
@@ -81,9 +78,7 @@ exports.setupHandlers = function(window, win, ctx) {
     $button_log_project = $(".button_log_project");
     $button_add_file = $(".button_add_file");
 
-    /*
-      UI Handlers (Algunos se resuelven aca y otros en p5manager)
-      */
+    // UI Handlers
 
     $button_exit.click(function() {
         actions_quit();
@@ -96,7 +91,6 @@ exports.setupHandlers = function(window, win, ctx) {
     $button_max.click(function() {
         actions_max();
     });
-
 
     $button_open.click(function() {
         actions_open($);
@@ -131,10 +125,8 @@ exports.setupHandlers = function(window, win, ctx) {
     });
 
     $button_log_project.click(function() {
-        console.log("♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦");
-        console.log("THIS IS THE ACTUAL PROJECT");
+        console.log("THIS IS THE ACTUAL PROJECT:");
         console.log(global.app.focused_project);
-        console.log("♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦");
     })
 
 }
@@ -269,7 +261,6 @@ function actions_quit() {
     if (global.app.focused_project.saved) {
         focused_win.close();
     } else {
-
         var confirm_exit = focused_ctx.confirm("Este proyecto no ha sido guardado, quieres descartarlo?");
         if (confirm_exit) {
             focused_win.close();
@@ -285,7 +276,6 @@ function actions_quit() {
   */
 
 function actions_min() {
-    console.log("Minimize!");
     focused_win.minimize();
 }
 
@@ -453,6 +443,12 @@ function actions_add_file() {
 
 }
 
+/*
+  actions_sidebar_swap
+  
+  Se encarga de modificar el buffer actual que se esta mostrando en el editor.
+
+  */
 
 function actions_sidebar_swap_main_file() {
     focused_ctx.window.swapDoc("main");
