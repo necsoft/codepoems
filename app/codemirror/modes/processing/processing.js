@@ -1,4 +1,4 @@
-//modificacion del modo clike para adaptarlo a processing.
+//modificacion del modo processing para adaptarlo a processing.
 
 // CodeMirror, copyright (c) by Marijn Haverbeke and others
 // Distributed under an MIT license: http://codemirror.net/LICENSE
@@ -13,7 +13,7 @@
 })(function(CodeMirror) {
     "use strict";
 
-    CodeMirror.defineMode("clike", function(config, parserConfig) {
+    CodeMirror.defineMode("processing", function(config, parserConfig) {
         var indentUnit = config.indentUnit,
             statementIndentUnit = parserConfig.statementIndentUnit || indentUnit,
             dontAlignCalls = parserConfig.dontAlignCalls,
@@ -28,8 +28,6 @@
         var isOperatorChar = /[+\-*&%=<>!?|\/]/;
 
         var curPunc;
-
-
 
         /*
          Levanta los tokens y los parsea.
@@ -94,7 +92,7 @@
             }
             if (builtin.propertyIsEnumerable(cur)) {
                 if (blockKeywords.propertyIsEnumerable(cur)) curPunc = "newstatement";
-                return "builtinasdasd";
+                return "builtin";
             }
             if (atoms.propertyIsEnumerable(cur)) {
                 return "atom";
@@ -281,7 +279,7 @@
     }
 
     def("processing", {
-        name: "clike",
+        name: "processing",
         keywords: words("abstract assert boolean break byte case catch char class color const continue default " +
             "do double else enum extends final finally float for goto if implements import " +
             "instanceof int interface long native new package private protected public " +

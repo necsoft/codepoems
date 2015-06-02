@@ -137,3 +137,12 @@
   color: #E24E80;
   font-weight: bold;
 }
+
+
+/*
+  PARA LOS XML Y JSON 
+ */
+
+.cm-s-codepoems-dark span.cm-tag {color: #DE935F;}
+.cm-s-codepoems-dark span.cm-link {color: #B294BB;}
+.cm-s-codepoems-dark span.cm-property, .cm-s-codepoems-dark span.cm-attribute {color: #3e999f;}
