@@ -1,0 +1,139 @@
+/*
+  codepoems-dark.css
+
+  Creado con la ayuda de:
+  https://tmtheme-editor.herokuapp.com
+
+ */
+
+
+/*
+
+  Estructura
+
+ */
+
+/* Estructura básica del CodeMirror */
+.cm-s-codepoems-dark.CodeMirror {
+    background: #222;
+    font-family: 'Consolas',sans-serif;
+    font-size: 1em;
+}
+
+/* Este es el color de la selección*/
+.cm-s-codepoems-dark div.CodeMirror-selected {
+    background: #373b41 !important;
+}
+
+/* El color de fondo de la barra a la izquierda que tiene los numeros */
+.cm-s-codepoems-dark .CodeMirror-gutters {
+    background: #111;
+    border-right: 1px solid #222;
+}
+
+/* Este es el color de la flecha de la barra a la izquierda*/
+.cm-s-codepoems-dark .CodeMirror-guttermarker-subtle {
+    color: #999;
+}
+
+/* Este es el color del texto que indica la altura */
+.cm-s-codepoems-dark .CodeMirror-linenumber {
+    color: #454545;
+    font-size: 0.7em;
+    padding-top:3px;
+}
+
+/* Color del cursor */
+.cm-s-codepoems-dark .CodeMirror-cursor {
+    border-left: 2px solid #fff !important;
+}
+
+/* Este es le color de la linea activa */
+.cm-s-codepoems-dark .CodeMirror-activeline-background {
+    background: #333 !important;
+}
+
+/* Este es el color de los brackets que matchean */
+.cm-s-codepoems-dark .CodeMirror-matchingbracket {
+    text-decoration: underline;
+    color: white !important;
+}
+
+/* El color de las llaves */
+.cm-s-codepoems-dark span.cm-bracket {
+    color: #ccc;
+}
+
+
+/*
+
+  Tokens
+
+ */
+
+/* Foreground */
+.cm-s-codepoems-dark.CodeMirror {
+  color: #C5C8C6;
+}
+
+/* Color de los strings */
+.cm-s-codepoems-dark span.cm-string {
+    color: #F0C674;
+}
+
+/* Comentarios */
+.cm-s-codepoems-dark span.cm-comment {
+    color: #666;
+}
+
+/* Builtin */
+.cm-s-codepoems-dark span.cm-builtin {
+    color: #81A2BE;
+    font-weight: bold;
+}
+
+/* Keyword */ 
+.cm-s-codepoems-dark span.cm-keyword {
+    color: #CC6666;
+}
+
+/* Keyword */
+.cm-s-codepoems-dark span.cm-variable {
+    color: #ccc;
+}
+
+/* Keyword */
+.cm-s-codepoems-dark span.cm-variable-2 {
+    color: #3e999f;
+}
+
+/* Este es el color de los atoms, el true y el false*/
+.cm-s-codepoems-dark span.cm-atom {
+    color: #c7d352;
+}
+
+/* El color de los numeros */
+.cm-s-codepoems-dark span.cm-number {
+    color: #DE935F;
+}
+
+/* El color de los operadores */
+.cm-s-codepoems-dark span.cm-operator {
+    color: #c7d352;
+}
+
+/* Este es el color de los blockKeyword*/
+.cm-s-codepoems-dark span.cm-blockKeyword {
+    color: #B294BB;
+}
+
+/* Este es el color de los outerBlockKeyword*/
+.cm-s-codepoems-dark span.cm-outerBlockKeyword {
+    color: #8ABEB7;
+}
+
+/* Contant keywords */
+.cm-s-codepoems-dark span.cm-constantKeyword{
+  color: #E24E80;
+  font-weight: bold;
+}

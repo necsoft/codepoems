@@ -30,12 +30,13 @@ var project = {};
 var codemirror_config = {
     lineNumbers: true,
     lineWrapping: true,
-    mode: ["processing", "clike"],
+    mode: "processing",
     keyMap: "sublime",
     autoCloseBrackets: true,
     matchBrackets: true,
     showCursorWhenSelecting: true,
-    theme: "paraiso-dark",
+    styleActiveLine: true,
+    theme: "codepoems-dark",
     foldGutter: true,
     tabSize: 2,
     extraKeys: {
