@@ -55,9 +55,12 @@ $(document).ready(function() {
     // Get the project
     project = global.app.projects[global.app.projects.length - 1].project;
 
-    // Lo uso para 
+    // Lo uso para saber si este proyecto tiene un proces corriendo.
     project.running = false;
     project.running_pid = "";
+    // Me guardo el contexto para que se puedan modificar el lote
+    project.ctx = ctx;
+
     global.app.focused_project = project;
 
     // Set the focus app

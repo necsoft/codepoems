@@ -74,6 +74,7 @@ exports.setupHandlers = function(window, win, ctx) {
     $button_max = $(".max_button");
     $button_exit = $(".exit_button");
     $button_new = $(".button_new");
+    $button_settings = $(".button_settings");
     $button_chrome_dev_tool = $(".button_chrome_dev_tool");
     $button_log_project = $(".button_log_project");
     $button_add_file = $(".button_add_file");
@@ -118,7 +119,11 @@ exports.setupHandlers = function(window, win, ctx) {
 
     $button_new.click(function() {
         p5manager.newProject();
-    })
+    });
+
+    $button_settings.click(function() {
+        actions_settings();
+    });
 
     $button_add_file.click(function() {
         actions_add_file();
@@ -127,7 +132,7 @@ exports.setupHandlers = function(window, win, ctx) {
     $button_log_project.click(function() {
         console.log("THIS IS THE ACTUAL PROJECT:");
         console.log(global.app.focused_project);
-    })
+    });
 
 }
 
@@ -365,6 +370,21 @@ function actions_save_as($) {
 
 }
 
+/*
+  actions_settings()
+
+  Abre la ventana de configuración de Codepoems
+
+  */
+
+function actions_settings() {
+    console.log("Voy a mostrar el setting");
+
+    // Llamo a la función.
+    exports.actions_change_font_size(10 + (Math.random() * 20));
+
+}
+
 
 /*
   actions_devTool()
@@ -464,4 +484,30 @@ function actions_sidebar_swap_shader_file(index) {
 
 function actions_sidebar_swap_plain_file(index) {
     focused_ctx.window.swapDoc("plain", index);
+}
+
+
+
+
+
+
+
+/*
+  actions_change_font_size();
+
+  Se encarga de tomar todos los proyectos y asignarles el nuevo tamaño de fuente
+  seteado por el usuario.
+
+ */
+
+
+exports.actions_change_font_size = function(px) {
+
+    // If you need it
+    //var actual_font_size = focused_ctx.$('.CodeMirror-lines').css('font-size').split("px")[0];
+
+    for (var i = 0; i < global.app.projects.length; i++) {
+        var this_ctx = global.app.projects[i].project.ctx.$('.cm-s-codepoems-dark').css('font-size', px + 'px');
+    }
+
 }
