@@ -23,6 +23,6 @@
         "tree-kill": "^0.1.1"
     },
     "scripts": {
-        "build_osx64": "nwbuild --version 0.12.2 --platforms osx64 -o ./build/ ./"
+        "build_osx64": "rm -rf build/ && nwbuild --version 0.12.2 --platforms osx64 -o ./build/ ./"
     }
 }
