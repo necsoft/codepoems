@@ -132,6 +132,9 @@ exports.setupHandlers = function(window, win, ctx) {
     $button_log_project.click(function() {
         console.log("THIS IS THE ACTUAL PROJECT:");
         console.log(global.app.focused_project);
+
+        console.log("THIS IS THE ACTUAL GLOBAL APP");
+        console.log(global.app);
     });
 
 }
@@ -373,15 +376,32 @@ function actions_save_as($) {
 /*
   actions_settings()
 
-  Abre la ventana de configuración de Codepoems
+  Abre la ventana de configuración de Codepoems.
 
   */
 
 function actions_settings() {
-    console.log("Voy a mostrar el setting");
+
+    // Primero tenemos que saber si la ventana ya esta abierta para
+    // no abrir dos ventanas.
+
+    if (global.app.settings_window_active === true) {
+        console.log("Ya hay un settings abierto");
+        global.app.settings_window.show();
+    } else {
+        console.log("No hay un settings abierto, lo voy a abrir");
+        // Abrimos la ventana
+        var gui = global.app.focused_win.window.require("nw.gui");
+        // var win = gui.Window.get();
+        global.app.settings_window = gui.Window.open('win_settings.html', {
+            "toolbar": false,
+            "width": 430,
+            "height": 600
+        });
+    }
 
     // Llamo a la función.
-    exports.actions_change_font_size(10 + (Math.random() * 20));
+    //exports.actions_change_font_size(10 + (Math.random() * 20));
 
 }
 
