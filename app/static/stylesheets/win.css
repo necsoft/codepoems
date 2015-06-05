@@ -1,8 +1,102 @@
 /* line 1, ../sass/win.scss */
 body {
-  background-color: #000;
+  background-color: #222;
   margin: 0;
   padding: 0;
   font-family: Helvetica;
   color: #ccc;
+}
+
+/* line 15, ../sass/win.scss */
+.container {
+  margin: 0 auto;
+  width: 90%;
+}
+
+/* line 20, ../sass/win.scss */
+p {
+  font-size: 0.7em;
+}
+
+/*
+  
+  Common style
+
+ */
+/* line 31, ../sass/win.scss */
+input[type=text] {
+  height: 20px;
+  outline: none;
+  background-color: #000;
+  border: 1px solid #333;
+  color: #eee;
+}
+
+/*
+  
+  Settings window
+
+ */
+/* line 46, ../sass/win.scss */
+.font_size_input {
+  width: 10%;
+}
+
+/* line 50, ../sass/win.scss */
+.plus_button, .minus_button {
+  background-color: #222;
+  border: 1px solid #444;
+  color: #fff;
+  margin: 0 5px;
+  outline: none;
+  cursor: pointer;
+}
+
+/* line 59, ../sass/win.scss */
+.plus_button:hover, .minus_button:hover {
+  background-color: #333;
+}
+
+/* line 63, ../sass/win.scss */
+.font_size_input, .plus_button, .minus_button {
+  line-height: 1em;
+}
+
+/* line 67, ../sass/win.scss */
+.default_template_textarea {
+  width: 100%;
+  height: 200px;
+  background-color: #222;
+  border: 1px solid #444;
+  resize: none;
+  color: #eee;
+  outline: none;
+}
+
+/* line 78, ../sass/win.scss */
+.save_default_template {
+  background-color: #333;
+  border: 1px solid #444;
+  color: #EEE;
+  text-transform: uppercase;
+  font-size: 0.6em;
+  padding: 10px 5px;
+  cursor: pointer;
+  outline: none;
+}
+
+/* line 89, ../sass/win.scss */
+.save_default_template:hover {
+  background-color: #222;
+}
+
+/* line 94, ../sass/win.scss */
+select {
+  background-color: #333;
+  width: 300px;
+  color: #EEE;
+  border: 1px solid #333;
+  outline: none;
+  text-transform: uppercase;
+  height: 20px;
 }

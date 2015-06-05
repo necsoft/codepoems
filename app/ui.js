@@ -16,6 +16,7 @@
   */
 
 var gui = window.require("nw.gui");
+var fs = require("fs");
 var p5manager = require('./p5manager.js');
 var win = gui.Window.get();
 
@@ -37,9 +38,7 @@ exports.setupUi = function() {
 
 /*
   setupHandlers()
-
-  Esta función se llama desde afuera para setear los handlers de una ventana.
-
+Esta función se llama desde afuera para setear los handlers de una ventana.
   */
 
 
@@ -48,6 +47,8 @@ exports.setupHandlers = function(window, win, ctx) {
     var $ = ctx.window.$;
     focused_win = ctx.window.win;
     focused_ctx = ctx;
+
+    setDefaultSettings();
 
     global.app.focused_ctx = ctx;
     global.app.focused_win = focused_win;
@@ -172,6 +173,14 @@ exports.refreshSidebarHandlers = function(window, win, ctx) {
         actions_sidebar_swap_plain_file($(this).index());
     })
 
+};
+
+
+
+
+function setDefaultSettings() {
+    exports.actions_change_font_size(global.app.settings.font_size);
+    exports.actions_change_theme(global.app.settings.theme);
 }
 
 
@@ -396,7 +405,8 @@ function actions_settings() {
         global.app.settings_window = gui.Window.open('win_settings.html', {
             "toolbar": false,
             "width": 430,
-            "height": 600
+            "height": 600,
+            "resizable": false
         });
     }
 
@@ -508,10 +518,6 @@ function actions_sidebar_swap_plain_file(index) {
 
 
 
-
-
-
-
 /*
   actions_change_font_size();
 
@@ -522,12 +528,28 @@ function actions_sidebar_swap_plain_file(index) {
 
 
 exports.actions_change_font_size = function(px) {
-
-    // If you need it
-    //var actual_font_size = focused_ctx.$('.CodeMirror-lines').css('font-size').split("px")[0];
-
     for (var i = 0; i < global.app.projects.length; i++) {
-        var this_ctx = global.app.projects[i].project.ctx.$('.cm-s-codepoems-dark').css('font-size', px + 'px');
+        var this_ctx = global.app.projects[i].project.ctx.$('.CodeMirror-lines').css('font-size', px + 'px');
     }
+}
 
+
+
+exports.actions_change_theme = function(theme) {
+    for (var i = 0; i < global.app.projects.length; i++) {
+        var this_ctx = global.app.projects[i].project.ctx.$("head").append('<link rel="stylesheet" href="codemirror/themes/' + theme + '.css">');
+        global.app.projects[i].project.editor.setOption("theme", theme);
+    }
+}
+
+
+/*
+  action_save_default_settings();
+
+  Esta acción la llamamos luego de que queremos que la data que de guardado en nuestro archivo de settings.
+
+ */
+
+exports.action_save_default_settings = function() {
+    fs.writeFileSync("app/settings.json", JSON.stringify(global.app.settings));
 }

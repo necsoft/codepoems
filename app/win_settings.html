@@ -2,13 +2,32 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Config</title>
-  <script src="win_settings.js"></script>
-  <link rel="stylesheet" href="static/stylesheets/win.css">
+  <title>Codepoems - Settings</title>
+
   <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="win_settings.js"></script>
+
+  <link rel="stylesheet" href="static/stylesheets/win.css">
 </head>
 <body>
-  <h1>Codepoems Settings</h1>
-  <p>Esta es una ventana de config muy fea por ahora pero algo es algo.</p>
+
+  <div class="container">
+    <h1>Settings</h1>
+  
+    <h3>Font Size</h3>
+    <button class="minus_button">-</button><input type="text" class="font_size_input" readonly><button class="plus_button">+</button>
+
+    <h3>Theme colour</h3>
+    <select name="theme" class="select_theme">
+      <option value="codepoems-dark">Codepoems Dark</option>
+      <option value="monokai">Monokai</option>
+    </select>
+
+    <h3>Default Template</h3>
+    <p>Esto es lo que aparece por default al abrir Codepoems</p>
+    <textarea class="default_template_textarea" value="hola"></textarea>
+    <input type="submit" class="save_default_template" value="Save as default Template"></div>
+  </div>
+
 </body>
 </html>

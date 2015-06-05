@@ -1,0 +1,156 @@
+/*
+  monokai.css
+
+  Creado con la ayuda de:
+  https://tmtheme-editor.herokuapp.com
+
+ */
+
+
+/*
+
+  Estructura
+
+ */
+
+/* Estructura básica del CodeMirror */
+.cm-s-monokai.CodeMirror {
+    background: #272822;
+    font-family: 'Consolas',sans-serif;
+    font-size: 1em;
+}
+
+/* Este es el color de la selección*/
+.cm-s-monokai div.CodeMirror-selected {
+    background: #373b41 !important;
+}
+
+/* El color de fondo de la barra a la izquierda que tiene los numeros */
+.cm-s-monokai .CodeMirror-gutters {
+    background: #111;
+    border-right: 1px solid #222;
+}
+
+/* Este es el color de la flecha de la barra a la izquierda*/
+.cm-s-monokai .CodeMirror-guttermarker-subtle {
+    color: #999;
+}
+
+/* Este es el color del texto que indica la altura */
+.cm-s-monokai .CodeMirror-linenumber {
+    color: #454545;
+    font-size: 0.7em;
+    padding-top:3px;
+}
+
+/* Color del cursor */
+.cm-s-monokai .CodeMirror-cursor {
+    border-left: 2px solid #fff !important;
+}
+
+/* Este es le color de la linea activa */
+.cm-s-monokai .CodeMirror-activeline-background {
+    background: #272727 !important;
+}
+
+/* Este es el color de los brackets que matchean */
+.cm-s-monokai .CodeMirror-matchingbracket {
+    text-decoration: underline;
+    color: white !important;
+}
+
+/* El color de las llaves */
+.cm-s-monokai span.cm-bracket {
+    color: #ccc;
+}
+
+
+/*
+
+  Tokens
+
+ */
+
+/* Foreground */
+.cm-s-monokai.CodeMirror {
+  color: #F8F8F2;
+}
+
+/* Color de los strings */
+.cm-s-monokai span.cm-string {
+    color: #FD971F;
+}
+
+/* Comentarios */
+.cm-s-monokai span.cm-comment {
+    color: #75715E;
+}
+
+/* Builtin */
+.cm-s-monokai span.cm-builtin {
+    color: #F92672;
+    font-weight: bold;
+}
+
+/* Keyword */ 
+.cm-s-monokai span.cm-keyword {
+    color: #66D9EF;
+}
+
+/* Keyword */
+.cm-s-monokai span.cm-variable {
+    color: #ccc;
+}
+
+/* Keyword */
+.cm-s-monokai span.cm-variable-2 {
+    color: #3e999f;
+}
+
+/* Este es el color de los atoms, el true y el false*/
+.cm-s-monokai span.cm-atom {
+    color: #c7d352;
+}
+
+/* El color de los numeros */
+.cm-s-monokai span.cm-number {
+    color: #A6E22E;
+}
+
+/* El color de los operadores */
+.cm-s-monokai span.cm-operator {
+    color: #66D9EF;
+}
+
+/* Este es el color de los blockKeyword*/
+.cm-s-monokai span.cm-blockKeyword {
+    color: #AE81FF;
+}
+
+/* Este es el color de los outerBlockKeyword*/
+.cm-s-monokai span.cm-outerBlockKeyword {
+    color: #66D9EF;
+}
+
+/* Contant keywords */
+.cm-s-monokai span.cm-constantKeyword{
+  color: #AE81FF;
+  font-weight: bold;
+}
+
+
+/*
+  PARA LOS XML Y JSON 
+ */
+
+.cm-s-monokai span.cm-tag {color: #DE935F;}
+.cm-s-monokai span.cm-link {color: #B294BB;}
+.cm-s-monokai span.cm-property, .cm-s-monokai span.cm-attribute {color: #3e999f;}
+
+
+/**/
+
+
+.cm-s-monokai{
+  transition: all 0.2s ease;
+}

@@ -245,7 +245,7 @@ function initCodeMirrorDocs() {
         getMainFile().doc = doc;
     } else {
         // Proyecto no declarado (el default cuando se abre codepoems)
-        var doc = CodeMirror.Doc("\n//Welcome to codepoems!\n\nvoid setup(){\n\n}\n\nvoid draw(){\n\n}", "processing");
+        var doc = CodeMirror.Doc(global.app.settings.default_template, "processing");
         getMainFile().doc = doc;
     }
 
