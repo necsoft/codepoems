@@ -295,7 +295,7 @@
         blockKeywords: words("catch do else finally for if switch try while"),
         outerBlockKeywords: words("void class"),
         atoms: words("true false null"),
-        constantKeywords: words("HALF_PI PI QUARTER_PI TAU TWO_PI width height frameCount"),
+        constantKeywords: words("HALF_PI PI QUARTER_PI TAU TWO_PI width height frameCount HSB RGB"),
         builtin: words(
             //Structure 
             "draw exit loop noLoop popStyle pushStyle redraw setup " +

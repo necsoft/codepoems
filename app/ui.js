@@ -180,7 +180,16 @@ exports.refreshSidebarHandlers = function(window, win, ctx) {
 
 function setDefaultSettings() {
     exports.actions_change_font_size(global.app.settings.font_size);
-    exports.actions_change_theme(global.app.settings.theme);
+    //exports.actions_change_theme(global.app.settings.theme);
+
+
+
+    global.app.focused_project.ctx.$("head").append('<link rel="stylesheet" title="theme" href="codemirror/themes/' + global.app.settings.theme + '.css">');
+    global.app.focused_project.editor.setOption("theme", global.app.settings.theme);
+
+    // Set default theme crea el nodo
+
+
 }
 
 
@@ -537,7 +546,10 @@ exports.actions_change_font_size = function(px) {
 
 exports.actions_change_theme = function(theme) {
     for (var i = 0; i < global.app.projects.length; i++) {
-        var this_ctx = global.app.projects[i].project.ctx.$("head").append('<link rel="stylesheet" href="codemirror/themes/' + theme + '.css">');
+
+
+        global.app.projects[i].project.ctx.$('link[title="theme"]').attr('href', "codemirror/themes/" + theme + ".css");
+        //var this_ctx = global.app.projects[i].project.ctx.$("head").append('<link rel="stylesheet" href="codemirror/themes/' + theme + '.css">');
         global.app.projects[i].project.editor.setOption("theme", theme);
     }
 }

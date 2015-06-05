@@ -299,3 +299,33 @@ div.CodeMirror-cursors {
     visibility: hidden;
   }
 }
+
+
+
+
+/*
+
+  Fix para mejorar la transición de themes y fuentes.
+
+ */
+
+
+.CodeMirror {
+  background: #222;
+  transition: all 0.7s ease;
+  font-family:Consolas;
+}
+
+.CodeMirror-gutters {
+  background: #111;
+  border-right: 1px solid #222;
+}
+
+.CodeMirror-linenumber {
+  color: #454545;
+  font-size: 0.7em;
+  padding-top:3px;
+}
+.CodeMirror-activeline-background {
+  background-color:#333;
+}
