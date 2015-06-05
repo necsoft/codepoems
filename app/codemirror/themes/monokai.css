@@ -143,9 +143,9 @@
   PARA LOS XML Y JSON 
  */
 
-.cm-s-monokai span.cm-tag {color: #DE935F;}
-.cm-s-monokai span.cm-link {color: #B294BB;}
-.cm-s-monokai span.cm-property, .cm-s-monokai span.cm-attribute {color: #3e999f;}
+.cm-s-monokai span.cm-tag {color: #F92672;}
+.cm-s-monokai span.cm-link {color: #66D9EF;}
+.cm-s-monokai span.cm-property, .cm-s-monokai span.cm-attribute {color: #A6E22E;}
 
 
 /**/
