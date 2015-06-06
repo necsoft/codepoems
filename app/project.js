@@ -309,6 +309,28 @@ function swapDoc(type, index) {
     }
 }
 
+
+/*
+
+  swapDocByName()
+
+  Recibe un nombre de archivo, se fija si esta y si esta lo swapea.
+
+ */
+
+function swapByName(name, callback) {
+
+    var the_files = project.files;
+
+    for (var i = 0; i < the_files.length; i++) {
+        if (the_files[i].name === name) {
+            project.editor.swapDoc(project.files[i].doc);
+            callback();
+        }
+    }
+}
+
+
 /*
   addFileToProject();
 
@@ -491,6 +513,8 @@ function writeToConsole(msg, type) {
     // Error messages
     if (type === "error") {
         $("#console").append("<p class='consoleError'>" + msg + "</p>");
+        errorHighlighter(msg);
+
     }
 
     // Set the console scrollbar to the bottom.
@@ -508,4 +532,53 @@ function writeToConsole(msg, type) {
 
 function clearConsole() {
     $("#console").empty();
+}
+
+
+
+/*
+  errorHighlighter();
+
+  El errorHighlighter se encarga de hacer el regex para entender el error que ocurrió y aplicar el
+  estilo a esa linea.
+
+ */
+
+
+
+function errorHighlighter(msg) {
+
+    var missing_semicolon = /Syntax error, maybe a missing semicolon/;
+
+    if (missing_semicolon.test(msg)) {
+        console.log("Es un error de semicolon");
+        var error_file = msg.split(":")[0];
+        var error_line = msg.split(":")[1];
+        console.log("El archivo del error es: " + error_file);
+        console.log("La linea del error es: " + error_line);
+
+
+
+        console.log(error_file);
+        swapByName(error_file, function() {
+            console.log("Ahora!");
+            //project.editor.addLineClass(error_line, "background", "error");
+            //$(".CodeMirror-linebackground").removeClass('error');
+            project.editor.addLineClass(parseInt(error_line) - 2, "wrap", "error");
+            project.last_error_line = parseInt(error_line) - 2;
+        });
+
+    }
+}
+
+
+
+
+
+
+
+
+
+function clearErrors() {
+    project.editor.removeLineClass(project.last_error_line, "wrap", "error");
 }

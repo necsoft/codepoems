@@ -326,9 +326,11 @@ function actions_max() {
   */
 
 function actions_run() {
+
     if (global.app.focused_project.running === false) {
         p5manager.runProject(global.app.focused_project, focused_ctx);
         focused_ctx.clearConsole();
+        focused_ctx.clearErrors();
     } else {
         console.log("Ya hay un proyecto corriendo.");
     }
