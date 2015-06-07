@@ -551,9 +551,14 @@ function errorHighlighter(msg) {
 
     // Tipos de errores
     var missing_semicolon = /Syntax error, maybe a missing semicolon/;
+    var missing_parenthesis = /maybe a missing right parenthesis/;
     var missing_argument = /is not applicable for the arguments/;
+
+    var too_many_brackets = /found one too many {/;
     var unexpected_token = /unexpected token/;
     var too_much_push = /more than 32 times/;
+
+    var hex_error = /must be exactly 6 hex digits/;
 
     // Este regex busca un nombre de archivo 
     var r_error_file = /([^\s]+)(.pde)/;
@@ -570,7 +575,7 @@ function errorHighlighter(msg) {
         var error_file = msg.match(r_error_file)[0];
         // Hacemos el swap editor al archivo que tiene el error.
         swapByName(error_file, function() {
-            //project.editor.addLineClass(parseInt(error_line - 2), "background", "error");
+            project.editor.addLineClass(parseInt(error_line - 2), "gutter", "error");
             project.last_error_line = parseInt(error_line - 2);
             project.last_error_file = error_file;
         });
@@ -583,7 +588,7 @@ function errorHighlighter(msg) {
         var error_file = msg.match(r_error_file)[0];
         // Hacemos el swap editor al archivo que tiene el error.
         swapByName(error_file, function() {
-            project.editor.addLineClass(parseInt(error_line - 1), "background", "error");
+            project.editor.addLineClass(parseInt(error_line - 1), "gutter", "error");
             project.last_error_line = parseInt(error_line - 1);
             project.last_error_file = error_file;
         });
@@ -596,7 +601,7 @@ function errorHighlighter(msg) {
         var error_file = msg.match(r_error_file)[0];
         // Hacemos el swap editor al archivo que tiene el error.
         swapByName(error_file, function() {
-            project.editor.addLineClass(parseInt(error_line - 1), "background", "error");
+            project.editor.addLineClass(parseInt(error_line - 1), "gutter", "error");
             project.last_error_line = parseInt(error_line - 1);
             project.last_error_file = error_file;
         });
@@ -610,11 +615,39 @@ function errorHighlighter(msg) {
         var error_file = msg.match(r_error_file)[0];
         // Hacemos el swap editor al archivo que tiene el error.
         swapByName(error_file, function() {
-            project.editor.addLineClass(parseInt(error_line), "background", "error");
+            project.editor.addLineClass(parseInt(error_line), "gutter", "error");
             project.last_error_line = parseInt(error_line);
             project.last_error_file = error_file;
         });
     }
+
+    // HEX COLOURS ERROR
+    if (hex_error.test(msg)) {
+        var error_location = msg.match(r_error_location)[0];
+        var error_line = error_location.split(":")[0];
+        var error_file = msg.match(r_error_file)[0];
+        // Hacemos el swap editor al archivo que tiene el error.
+        swapByName(error_file, function() {
+            project.editor.addLineClass(parseInt(error_line - 1), "gutter", "error");
+            project.last_error_line = parseInt(error_line - 1);
+            project.last_error_file = error_file;
+        });
+    }
+
+    if (missing_parenthesis.test(msg)) {
+        var error_location = msg.match(r_error_location)[0];
+        var error_line = error_location.split(":")[0];
+        var error_file = msg.match(r_error_file)[0];
+        // Hacemos el swap editor al archivo que tiene el error.
+        swapByName(error_file, function() {
+            project.editor.addLineClass(parseInt(error_line - 1), "gutter", "error");
+            project.last_error_line = parseInt(error_line - 1);
+            project.last_error_file = error_file;
+        });
+    }
+
+
+
 
 
 
@@ -636,8 +669,7 @@ function errorHighlighter(msg) {
 
 
 function clearErrors() {
-
     if (project.last_error_line) {
-        project.editor.removeLineClass(project.last_error_line, "background", "error");
+        project.editor.removeLineClass(project.last_error_line, "gutter", "error");
     }
 }

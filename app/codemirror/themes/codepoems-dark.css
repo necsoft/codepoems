@@ -152,6 +152,5 @@
 
 
 .error{
-  background-color: rgba(150, 3, 14, 0.32);
-  border: 1px solid rgba(255, 0, 0, 0.40);
+  border: 2px solid rgba(255, 0, 0, 0.40);
 }

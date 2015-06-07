@@ -150,3 +150,7 @@
 
 /**/
 
+
+.error{
+  border: 2px solid rgba(255, 0, 0, 0.40);
+}
