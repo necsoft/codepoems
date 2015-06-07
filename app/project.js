@@ -548,14 +548,16 @@ function clearConsole() {
 
 function errorHighlighter(msg) {
 
-    var missing_semicolon = /Syntax error, maybe a missing semicolon/;
 
+    // Tipos de errores
+    var missing_semicolon = /Syntax error, maybe a missing semicolon/;
     var missing_argument = /is not applicable for the arguments/;
+    var unexpected_token = /unexpected token/;
 
     // Este regex busca un nombre de archivo 
     var r_error_file = /([^\s]+)(.pde)/;
 
-    // Busca el nn:nn:nn:nn que da el l
+    // Busca el nn:nn:nn:nn que da el log
     var r_error_location = /([0-9]+)(:[0-9]+)(:[0-9]+)(:[0-9]+)/;
 
 
@@ -586,9 +588,18 @@ function errorHighlighter(msg) {
         });
     }
 
-
-
-
+    // UNEXPECTED TOKEN
+    if (unexpected_token.test(msg)) {
+        var error_location = msg.match(r_error_location)[0];
+        var error_line = error_location.split(":")[0];
+        var error_file = msg.match(r_error_file)[0];
+        // Hacemos el swap editor al archivo que tiene el error.
+        swapByName(error_file, function() {
+            project.editor.addLineClass(parseInt(error_line - 1), "wrap", "error");
+            project.last_error_line = parseInt(error_line - 1);
+            project.last_error_file = error_file;
+        });
+    }
 }
 
 
@@ -596,7 +607,13 @@ function errorHighlighter(msg) {
 
 
 
+/*
+  clearErrors();
 
+  Limpia las clases error que hay en el editor.
+  ESTO HAY QUE MEJORARLO!
+
+ */
 
 
 function clearErrors() {
