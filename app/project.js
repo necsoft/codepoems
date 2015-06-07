@@ -570,7 +570,7 @@ function errorHighlighter(msg) {
         var error_file = msg.match(r_error_file)[0];
         // Hacemos el swap editor al archivo que tiene el error.
         swapByName(error_file, function() {
-            project.editor.addLineClass(parseInt(error_line - 2), "wrap", "error");
+            //project.editor.addLineClass(parseInt(error_line - 2), "background", "error");
             project.last_error_line = parseInt(error_line - 2);
             project.last_error_file = error_file;
         });
@@ -583,7 +583,7 @@ function errorHighlighter(msg) {
         var error_file = msg.match(r_error_file)[0];
         // Hacemos el swap editor al archivo que tiene el error.
         swapByName(error_file, function() {
-            project.editor.addLineClass(parseInt(error_line - 1), "wrap", "error");
+            project.editor.addLineClass(parseInt(error_line - 1), "background", "error");
             project.last_error_line = parseInt(error_line - 1);
             project.last_error_file = error_file;
         });
@@ -596,7 +596,7 @@ function errorHighlighter(msg) {
         var error_file = msg.match(r_error_file)[0];
         // Hacemos el swap editor al archivo que tiene el error.
         swapByName(error_file, function() {
-            project.editor.addLineClass(parseInt(error_line - 1), "wrap", "error");
+            project.editor.addLineClass(parseInt(error_line - 1), "background", "error");
             project.last_error_line = parseInt(error_line - 1);
             project.last_error_file = error_file;
         });
@@ -610,7 +610,7 @@ function errorHighlighter(msg) {
         var error_file = msg.match(r_error_file)[0];
         // Hacemos el swap editor al archivo que tiene el error.
         swapByName(error_file, function() {
-            project.editor.addLineClass(parseInt(error_line), "wrap", "error");
+            project.editor.addLineClass(parseInt(error_line), "background", "error");
             project.last_error_line = parseInt(error_line);
             project.last_error_file = error_file;
         });
@@ -636,5 +636,8 @@ function errorHighlighter(msg) {
 
 
 function clearErrors() {
-    project.editor.removeLineClass(project.last_error_line, "wrap", "error");
+
+    if (project.last_error_line) {
+        project.editor.removeLineClass(project.last_error_line, "background", "error");
+    }
 }
