@@ -70,6 +70,11 @@ $(document).ready(function() {
         ui.setFocusedWin(ctx, win);
     });
 
+    // Fix para el drag
+    $(".upnav").click(function() {
+        $(".upnav").css('-webkit-app-region', 'drag');
+    });
+
     // Codemirror Stuff
     initCodeMirrorDocs();
 
