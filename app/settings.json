@@ -1,1 +1,1 @@
-{"font_size":15,"default_template":"// Welcome to codepoems\n\n\nvoid setup(){\n\tsize(1000,500);\n}\n\nvoid draw(){\n\tcolorMode(HSB);\n\tbackground(random(255),255,255);\n}","theme":"monokai"}
+{"font_size":15,"default_template":"// Welcome to codepoems\n\n\nvoid setup(){\n\tsize(1000,500);\n}\n\nvoid draw(){\n\tcolorMode(HSB);\n\tbackground(random(255),255,255);\n}","theme":"codepoems-dark"}

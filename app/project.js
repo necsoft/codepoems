@@ -634,6 +634,7 @@ function errorHighlighter(msg) {
         });
     }
 
+    // MISSING PARENTHESIS
     if (missing_parenthesis.test(msg)) {
         var error_location = msg.match(r_error_location)[0];
         var error_line = error_location.split(":")[0];
