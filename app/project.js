@@ -553,6 +553,7 @@ function errorHighlighter(msg) {
     var missing_semicolon = /Syntax error, maybe a missing semicolon/;
     var missing_argument = /is not applicable for the arguments/;
     var unexpected_token = /unexpected token/;
+    var too_much_push = /more than 32 times/;
 
     // Este regex busca un nombre de archivo 
     var r_error_file = /([^\s]+)(.pde)/;
@@ -600,6 +601,24 @@ function errorHighlighter(msg) {
             project.last_error_file = error_file;
         });
     }
+
+
+    // PUSH MATRIX LIKE ERRORS
+    if (too_much_push.test(msg)) {
+        var error_location = msg.match(r_error_location)[0];
+        var error_line = error_location.split(":")[0];
+        var error_file = msg.match(r_error_file)[0];
+        // Hacemos el swap editor al archivo que tiene el error.
+        swapByName(error_file, function() {
+            project.editor.addLineClass(parseInt(error_line), "wrap", "error");
+            project.last_error_line = parseInt(error_line);
+            project.last_error_file = error_file;
+        });
+    }
+
+
+
+
 }
 
 
