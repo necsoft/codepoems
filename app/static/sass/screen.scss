@@ -11,6 +11,10 @@ body {
   overflow: hidden;
   font-family: "Helvetica" sans-serif;
   color: #fff;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 /*
@@ -146,9 +150,6 @@ body {
     overflow-x: hidden;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
     user-select: none;
     ul {
       cursor: default;
@@ -245,6 +246,9 @@ body {
   width: 100%;
   overflow-y: scroll;
   background-color: #1D1D1D;
+  -webkit-touch-callout: initial;
+  -webkit-user-select: initial;
+  user-select: initial;
 }
 
 #console {

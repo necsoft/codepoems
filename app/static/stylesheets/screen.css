@@ -1210,12 +1210,15 @@ body {
   overflow: hidden;
   font-family: "Helvetica" sans-serif;
   color: #fff;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 /*
   TOP BLOCK
  */
-/* line 20, ../sass/screen.scss */
+/* line 24, ../sass/screen.scss */
 #mainNav {
   margin: 0;
   padding: 0;
@@ -1226,7 +1229,7 @@ body {
   background-color: #1E1E1E;
 }
 
-/* line 30, ../sass/screen.scss */
+/* line 34, ../sass/screen.scss */
 .button_separator {
   width: 2px;
   margin: 0 5px 0 10px;
@@ -1236,19 +1239,19 @@ body {
   display: inline-block;
 }
 
-/* line 39, ../sass/screen.scss */
+/* line 43, ../sass/screen.scss */
 .primary_icon {
   font-size: 2em;
   margin-right: -5px;
   cursor: pointer;
 }
 
-/* line 45, ../sass/screen.scss */
+/* line 49, ../sass/screen.scss */
 .primary_icon:hover {
   color: #CCC;
 }
 
-/* line 49, ../sass/screen.scss */
+/* line 53, ../sass/screen.scss */
 .secondary_icon {
   font-size: 1em;
   background-color: #2F2F2F;
@@ -1257,41 +1260,41 @@ body {
   vertical-align: super;
 }
 
-/* line 57, ../sass/screen.scss */
+/* line 61, ../sass/screen.scss */
 .secondary_icon:hover {
   background-color: #222;
 }
 
-/* line 61, ../sass/screen.scss */
+/* line 65, ../sass/screen.scss */
 #navIcons {
   height: inherit;
   float: left;
   margin-top: 5px;
 }
-/* line 65, ../sass/screen.scss */
+/* line 69, ../sass/screen.scss */
 #navIcons i {
   cursor: pointer;
 }
 
-/* line 70, ../sass/screen.scss */
+/* line 74, ../sass/screen.scss */
 .rightIcons {
   float: right;
   text-align: right;
   margin-top: 12px;
   margin-right: 5px;
 }
-/* line 75, ../sass/screen.scss */
+/* line 79, ../sass/screen.scss */
 .rightIcons i {
   font-size: 1.2em;
   color: #666;
   cursor: pointer;
 }
-/* line 80, ../sass/screen.scss */
+/* line 84, ../sass/screen.scss */
 .rightIcons i:hover {
   color: #fff;
 }
 
-/* line 85, ../sass/screen.scss */
+/* line 89, ../sass/screen.scss */
 .upnav {
   -webkit-app-region: drag;
   background-color: #383838;
@@ -1300,7 +1303,7 @@ body {
   cursor: pointer;
 }
 
-/* line 93, ../sass/screen.scss */
+/* line 97, ../sass/screen.scss */
 .exit_button, .max_button, .min_button {
   cursor: pointer;
   width: 10px;
@@ -1310,32 +1313,32 @@ body {
   border-radius: 10px;
 }
 
-/* line 102, ../sass/screen.scss */
+/* line 106, ../sass/screen.scss */
 .exit_button {
   background-color: #F26184;
 }
 
-/* line 106, ../sass/screen.scss */
+/* line 110, ../sass/screen.scss */
 .exit_button:hover {
   background-color: #d8416c;
 }
 
-/* line 110, ../sass/screen.scss */
+/* line 114, ../sass/screen.scss */
 .max_button {
   background-color: #75ED64;
 }
 
-/* line 114, ../sass/screen.scss */
+/* line 118, ../sass/screen.scss */
 .max_button:hover {
   background-color: #65d629;
 }
 
-/* line 118, ../sass/screen.scss */
+/* line 122, ../sass/screen.scss */
 .min_button {
   background-color: #FFE422;
 }
 
-/* line 122, ../sass/screen.scss */
+/* line 126, ../sass/screen.scss */
 .min_button:hover {
   background-color: #e8ca18;
 }
@@ -1343,7 +1346,7 @@ body {
 /*
   CENTER BLOCK
  */
-/* line 130, ../sass/screen.scss */
+/* line 134, ../sass/screen.scss */
 #centerBlock {
   width: 100%;
   float: left;
@@ -1352,7 +1355,7 @@ body {
   height: 70%;
 }
 
-/* line 139, ../sass/screen.scss */
+/* line 143, ../sass/screen.scss */
 #sidebar {
   float: left;
   width: 25%;
@@ -1363,16 +1366,13 @@ body {
   overflow-x: hidden;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
-/* line 153, ../sass/screen.scss */
+/* line 154, ../sass/screen.scss */
 #sidebar ul {
   cursor: default;
 }
-/* line 156, ../sass/screen.scss */
+/* line 157, ../sass/screen.scss */
 #sidebar ul li {
   font-size: 0.7em;
   color: #999;
@@ -1381,7 +1381,7 @@ body {
   color: #ccc;
   margin: 1px 6px;
 }
-/* line 165, ../sass/screen.scss */
+/* line 166, ../sass/screen.scss */
 #sidebar ul li i {
   font-size: 1.83em;
   vertical-align: middle;
@@ -1389,15 +1389,15 @@ body {
   margin-right: 3px;
   display: inline-block;
 }
-/* line 172, ../sass/screen.scss */
+/* line 173, ../sass/screen.scss */
 #sidebar ul li:hover {
   background-color: #000;
 }
-/* line 205, ../sass/screen.scss */
+/* line 206, ../sass/screen.scss */
 #sidebar ul .groupMainFile, #sidebar ul .groupSecondaryFiles, #sidebar ul .groupImageFiles, #sidebar ul .groupShaderFiles, #sidebar ul .groupPlainFiles, #sidebar ul .groupAudioFiles {
   margin-bottom: 6px;
 }
-/* line 209, ../sass/screen.scss */
+/* line 210, ../sass/screen.scss */
 #sidebar .button_add_file {
   background-color: transparent;
   border: 1px solid #333;
@@ -1412,18 +1412,18 @@ body {
   font-size: 0.7em;
   transition: background-color 0.1s ease;
 }
-/* line 223, ../sass/screen.scss */
+/* line 224, ../sass/screen.scss */
 #sidebar .button_add_file:hover {
   background-color: black;
 }
 
-/* line 228, ../sass/screen.scss */
+/* line 229, ../sass/screen.scss */
 #mainEditor {
   float: left;
   width: 75%;
 }
 
-/* line 234, ../sass/screen.scss */
+/* line 235, ../sass/screen.scss */
 .CodeMirror {
   height: 490px;
 }
@@ -1431,16 +1431,19 @@ body {
 /*
   BOTTOM BLOCK
  */
-/* line 242, ../sass/screen.scss */
+/* line 243, ../sass/screen.scss */
 #consoleWrap {
   height: 140px;
   position: relative;
   width: 100%;
   overflow-y: scroll;
   background-color: #1D1D1D;
+  -webkit-touch-callout: initial;
+  -webkit-user-select: initial;
+  user-select: initial;
 }
 
-/* line 250, ../sass/screen.scss */
+/* line 254, ../sass/screen.scss */
 #console {
   float: left;
   width: 100%;
@@ -1448,16 +1451,16 @@ body {
   color: #666;
   font-size: 0.7em;
 }
-/* line 256, ../sass/screen.scss */
+/* line 260, ../sass/screen.scss */
 #console p {
   margin-left: 5px;
   margin-top: 5px;
 }
-/* line 260, ../sass/screen.scss */
+/* line 264, ../sass/screen.scss */
 #console .consoleMessage {
   color: #ffffff;
 }
-/* line 263, ../sass/screen.scss */
+/* line 267, ../sass/screen.scss */
 #console .consoleError {
   background-color: #DA3A61;
   color: #fff;
@@ -1469,7 +1472,7 @@ body {
 /*
   Codemirror
  */
-/* line 278, ../sass/screen.scss */
+/* line 282, ../sass/screen.scss */
 .CodeMirror-hints {
   left: 281.484375px;
   width: 300px;
@@ -1478,12 +1481,12 @@ body {
   border: 1px solid #444;
 }
 
-/* line 286, ../sass/screen.scss */
+/* line 290, ../sass/screen.scss */
 .CodeMirror-hint-active {
   background: #000;
 }
 
-/* line 290, ../sass/screen.scss */
+/* line 294, ../sass/screen.scss */
 .CodeMirror-hint {
   color: #999999;
   font-family: Helvetica;
@@ -1500,19 +1503,19 @@ body {
 /*
   SCROLLBARS
  */
-/* line 308, ../sass/screen.scss */
+/* line 312, ../sass/screen.scss */
 ::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: #222222;
 }
 
-/* line 313, ../sass/screen.scss */
+/* line 317, ../sass/screen.scss */
 ::-webkit-scrollbar {
   width: 6px;
   background-color: #333333;
 }
 
-/* line 318, ../sass/screen.scss */
+/* line 322, ../sass/screen.scss */
 ::-webkit-scrollbar-thumb {
   background-color: #000000;
 }
