@@ -17,6 +17,7 @@
 }
 .CodeMirror pre {
   padding: 0 4px; /* Horizontal padding of content */
+  transition: all 0.3s ease;
 }
 
 .CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler {
@@ -312,7 +313,6 @@ div.CodeMirror-cursors {
 
 .CodeMirror {
   background: #222;
-  transition: all 0.7s ease;
   font-family:Consolas;
 }
 
