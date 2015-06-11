@@ -34,7 +34,7 @@ var default_window_conf = {
     "width": 900,
     "height": 700,
     "resizable": true,
-    "min_width": 900,
+    "min_width": 700,
     "min_height": 700,
 }
 

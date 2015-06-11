@@ -29,7 +29,7 @@ var project = {};
 // Editor default config
 var codemirror_config = {
     lineNumbers: true,
-    lineWrapping: true,
+    lineWrapping: false,
     mode: "processing",
     keyMap: "sublime",
     autoCloseBrackets: true,
