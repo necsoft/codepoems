@@ -1,3 +1,4 @@
+![](http://i.imgur.com/LdRYNfs.png?1)
 #Codepoems
 >This is an experimental IDE for Processing. Be careful, this is only an experiment for now.
 
