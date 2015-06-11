@@ -445,7 +445,6 @@ function runP5process(ctx, project, sketch_dir, build_dir) {
     // Se ejecuta cuando recibimos logs normales del proceso
     p5process.stdout.on('data',
         function(data) {
-            console.log(data.toString());
             ctx.writeToConsole(data.toString(), "message");
         }
     );
@@ -453,8 +452,12 @@ function runP5process(ctx, project, sketch_dir, build_dir) {
     // Se ejecuta cuando se recibe algún mensaje de error.
     p5process.stderr.on('data',
         function(data) {
-            console.log(data.toString());
-            ctx.writeToConsole(data.toString(), "error");
+            var not_error = /(using the default display instead|other error)/;
+            if (not_error.test(data) === false) {
+                ctx.writeToConsole(data.toString(), "error");
+            } else {
+                ctx.writeToConsole(data.toString(), "message");
+            }
         }
     );
 
