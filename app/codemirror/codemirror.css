@@ -4,7 +4,6 @@
   /* Set height, width, borders, and global font properties here */
   font-family: monospace;
   background:#000000;
-  overflow-x:scroll;
 }
 .CodeMirror-scroll {
   /* Set scrolling behaviour here */
@@ -174,7 +173,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
 }
 .CodeMirror-vscrollbar {
   right: 0; top: 0;
-  overflow-x: scroll;
+  overflow-x: hidden;
   overflow-y: scroll;
 }
 .CodeMirror-hscrollbar {
@@ -252,7 +251,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
 .CodeMirror-widget {}
 
 .CodeMirror-wrap .CodeMirror-scroll {
-  overflow-x: scroll;
+  overflow-x: hidden;
 }
 
 .CodeMirror-measure {
