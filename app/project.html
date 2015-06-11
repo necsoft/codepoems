@@ -11,6 +11,9 @@
   <!-- Codepoems Styles -->
   <link rel="stylesheet" href="static/stylesheets/screen.css">
 
+  <!-- Tooltip style -->
+  <link rel="stylesheet" href="../bower_components/hint.css/hint.css"></link>
+
   <!-- Bower Components -->
   <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 
@@ -48,15 +51,15 @@
       <i class="primary_icon button_run icon-play-circle-fill"></i> 
       <i class="primary_icon button_stop icon-pause-circle-fill"></i>
       <span class="button_separator"></span>
-      <i class="secondary_icon button_new icon-description"></i>
-      <i class="secondary_icon button_open icon-folder"></i>
-      <i class="secondary_icon button_save icon-save"></i>
-      <i class="secondary_icon button_save_as icon-save-as"></i>
+      <span class="hint--bottom" data-hint="New Project"><i class="secondary_icon button_new icon-description"></i></span>
+      <span class="hint--bottom" data-hint="Open Project"><i class="secondary_icon button_open icon-folder"></i></span>
+      <span class="hint--bottom" data-hint="Save"><i class="secondary_icon button_save icon-save"></i></span>
+      <span class="hint--bottom" data-hint="Save as"><i class="secondary_icon button_save_as icon-save-as"></i></span>
     </nav>
     <nav class="rightIcons">
-      <i class="button_log_project icon-landscape"></i>
-      <i class="button_chrome_dev_tool icon-bug-report"></i>
-      <i class="button_settings icon-settings"></i>
+      <span class="hint--left" data-hint="Log project (DEBUG)"><i class="button_log_project icon-landscape"></i></span>
+      <span class="hint--left" data-hint="Chrome dev tool"><i class="button_chrome_dev_tool icon-bug-report"></i></span>
+      <span class="hint--left" data-hint="Settings"><i class="button_settings icon-settings"></i></span>
     </nav>
   </header>
   <div id="centerBlock">

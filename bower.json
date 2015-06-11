@@ -1,20 +1,21 @@
 {
-    "name": "codepoems",
-    "version": "0.0.0",
-    "homepage": "https://github.com/necsoft/codepoems",
-    "authors": [
-        "necsoft <necsoftdesign@gmail.com>"
-    ],
-    "description": "Experimental IDE for Processing",
-    "license": "MIT",
-    "ignore": [
-        "**/.*",
-        "node_modules",
-        "bower_components",
-        "test",
-        "tests"
-    ],
-    "devDependencies": {
-        "jquery": "~2.1.3"
-    }
+  "name": "codepoems",
+  "version": "0.0.0",
+  "homepage": "https://github.com/necsoft/codepoems",
+  "authors": [
+    "necsoft <necsoftdesign@gmail.com>"
+  ],
+  "description": "Experimental IDE for Processing",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "jquery": "~2.1.3",
+    "hint.css": "~1.3.4"
+  }
 }
