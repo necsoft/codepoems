@@ -23,6 +23,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-save-as:before {
+  content: "\e6df";
+}
+
 .icon-001:before {
   content: "\e6d5";
 }
