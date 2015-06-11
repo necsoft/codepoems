@@ -16,7 +16,7 @@
 /* Estructura básica del CodeMirror */
 .cm-s-codepoems-dark.CodeMirror {
     background: #222;
-    font-family: 'Consolas',sans-serif;
+    font-family: 'Inconsolata';
     font-size: 1em;
 }
 

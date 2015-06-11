@@ -16,7 +16,7 @@
 /* Estructura básica del CodeMirror */
 .cm-s-monokai.CodeMirror {
     background: #272822;
-    font-family: 'Consolas',sans-serif;
+    font-family: 'Inconsolata';
     font-size: 1em;
 }
 

@@ -313,7 +313,7 @@ div.CodeMirror-cursors {
 
 .CodeMirror {
   background: #222;
-  font-family:Consolas;
+  font-family:"Inconsolata";
 }
 
 .CodeMirror-gutters {
