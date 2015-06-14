@@ -1,32 +1,26 @@
 /*
   > ui.js
-  
-  UI se encarga de manejarle los handlers a la aplicación que este en foco y de crear acciones
-  para los eventos que pueden ocurrir. También se encarga de abrir la ventana inicial al crear
-  la aplicación.
 
-  Entre las tareas que cumple:
-
-  * Capturar todos los handlers
-  * Configurar la UI
-  * Abrir la ventana inicial
-  * Manejar los triggers de open y save
-  * Validar el add file  
+  It handles the UI of Codepoems, every window with this file. Here I define the
+  actual focused project
 
   */
 
+// Dependencies
 var gui = window.require("nw.gui");
 var fs = require("fs");
 var p5manager = require('./p5manager.js');
 var win = gui.Window.get();
 
+
+// Shortcut to global properties
 var focused_ctx;
 var focused_win;
 
 /*
   setupUi()
 
-  Se llama desde el app.js para configurar las cosas nativas de la UI.
+  This is the first method we call.
 
   */
 
@@ -133,10 +127,10 @@ exports.setupHandlers = function(window, win, ctx) {
     });
 
     $button_log_project.click(function() {
-        console.log("THIS IS THE ACTUAL PROJECT:");
+        console.log("global.app.focused_project");
         console.log(global.app.focused_project);
 
-        console.log("THIS IS THE ACTUAL GLOBAL APP");
+        console.log("global.app");
         console.log(global.app);
     });
 
@@ -182,16 +176,8 @@ exports.refreshSidebarHandlers = function(window, win, ctx) {
 
 function setDefaultSettings() {
     exports.actions_change_font_size(global.app.settings.font_size);
-    //exports.actions_change_theme(global.app.settings.theme);
-
-
-
     global.app.focused_project.ctx.$("head").append('<link rel="stylesheet" title="theme" href="codemirror/themes/' + global.app.settings.theme + '.css">');
     global.app.focused_project.editor.setOption("theme", global.app.settings.theme);
-
-    // Set default theme crea el nodo
-
-
 }
 
 
