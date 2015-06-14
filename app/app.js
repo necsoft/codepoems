@@ -1,12 +1,7 @@
 /*
   app.js
 
-  Este es el archivo que se abre al principio, codepoems esta desarrollado utilizando
-  tres tecnologías en complementación:
-
-  * Node.js
-  * nw.js
-  * Codemirror
+  This is the main file of the app.
 
   */
 
@@ -19,7 +14,7 @@ global.app.platform = process.platform;
 global.app.projects = [];
 global.app.focused_project = {};
 
-// Leemos los settings por default
+// Write the default settings
 global.app.settings = require('./settings.json');
 
 // Create the initial UI

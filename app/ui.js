@@ -38,7 +38,9 @@ exports.setupUi = function() {
 
 /*
   setupHandlers()
-Esta función se llama desde afuera para setear los handlers de una ventana.
+
+  Esta función se llama desde afuera para setear los handlers de una ventana.
+  
   */
 
 
