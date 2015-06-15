@@ -1,32 +1,23 @@
 /*
   > project.js
 
-  Una instancia concreta de un proyecto. Se crea una por cada ventana que hay de codepoems. Entendemos
-  como proyecto a el conjunto de archivos de processing que forman una aplicación
-
-  El project.js se encarga de:
-
-  * Refrescar el sidebar
-  * Agregar un archivo al proyecto (agregarlo al sidebar y pushear el doc correspondiente)
-  * Hacer swap de los docs
-  * Inicializar los dos 
-  * Poner en foco al contexto
+  This is a simple instance of a project.
 
   */
 
-// Dependencias
+// Dependencies
 var fs = require('fs');
 var path = require('path');
 var ui = require('./ui.js');
 
-// Esta ventana se la vamos a pasar a ui.js
+// Nwjs window
 var gui = window.require("nw.gui");
 var win = gui.Window.get();
 
 // Empty object for this project
 var project = {};
 
-// Editor default config
+// CodeMirror editor default config
 var codemirror_config = {
     lineNumbers: true,
     lineWrapping: false,
@@ -55,22 +46,20 @@ $(document).ready(function() {
     // Get the project
     project = global.app.projects[global.app.projects.length - 1].project;
 
-    // Lo uso para saber si este proyecto tiene un proces corriendo.
+    // Project info
     project.running = false;
     project.running_pid = "";
-    // Me guardo el contexto para que se puedan modificar el lote
     project.ctx = ctx;
 
     global.app.focused_project = project;
 
-    // Set the focus app
+    // Handle the app on focus
     win.on('focus', function() {
-        // console.log('Project ' + project.id + ' is now focused.');
         global.app.focused_project = project;
         ui.setFocusedWin(ctx, win);
     });
 
-    // Fix para el drag
+    // Fix for the drag topbar
     $(".upnav").click(function() {
         $(".upnav").css('-webkit-app-region', 'drag');
     });
@@ -84,25 +73,31 @@ $(document).ready(function() {
     // Initialize handlers
     ui.setupHandlers(window, win, ctx);
 
-    // Setea los elementos responsive
+    // Check the actual size of the windows and set the style for that size
     responsiveComponents();
 
+    // Welcome message :)
     writeToConsole("Welcome to Codepoems!", "message");
 
-    // On change
+    // Handle the editor on change
     CodeMirror.on(project.editor, "change", function() {
-        //console.log("Cambio algo!");
         project.saved = false;
     });
 
 });
 
-// Resize de la ventana
+// Handle the resize of the window
 $(window).resize(function() {
     responsiveComponents();
 });
 
-// Se ejecuta al principio y cada vez que se hace resize de la ventana
+/*
+  responsiveComponents()
+
+  I use this one for create the proportions of the DOM elements.
+
+ */
+
 function responsiveComponents() {
     var height_topbar = $("#upnav").height() + $("#mainNav").height();
     $("#centerBlock,.CodeMirror, #mainEditor").height(($(window).height() - height_topbar) * 0.70);
@@ -112,7 +107,7 @@ function responsiveComponents() {
 /*
   getMainFile()
 
-  Devuelve el archivo principal del proyecto.
+  Returns the main PDE file.
  
  */
 
@@ -129,7 +124,7 @@ function getMainFile() {
 /*
   getSecondaryFiles()
 
-  Devuelve los archivos secundarios de los proyectos.
+  Returns the secondary PDE files
  
  */
 
@@ -147,7 +142,7 @@ function getSecondaryFiles() {
 /*
   getImageFiles()
 
-  Devuelve todos los assets de imagenes.
+  Returns the image files.
  
  */
 
@@ -164,7 +159,7 @@ function getImageFiles() {
 /*
   getShaderFiles()
 
-  Devuelve todos los archivos de shader.
+  Returns the shader files
  
  */
 
@@ -182,7 +177,7 @@ function getShaderFiles() {
 /*
   getAudioFiles()
 
-  Devuelve los archivos secundarios de los proyectos.
+  Returns the audio files.
  
  */
 
@@ -199,7 +194,7 @@ function getAudioFiles() {
 /*
   getPlainFiles()
 
-  Devuelve los archivos planos, txt, xml y json.
+  Return the plain files (TXT, JSON, XML)
  
  */
 
@@ -217,7 +212,7 @@ function getPlainFiles() {
 /*
   getBufferedFiles()
 
-  Devuelve todos los archivos que tienen un buffer asociado.
+  Returns the files with a CodeMirror buffer associated.
  
  */
 
@@ -235,14 +230,13 @@ function getBufferedFiles() {
 /*
   initCodeMirrorDocs();
 
-  Le agrega a nuestro MainFile y a nuestros SecondaryFiles un Doc
-  de Codemirror asociado.
+  Creates the CodeMirrror buffers.
 
   */
 
 
 function initCodeMirrorDocs() {
-    // Creamos el doc del mainFile
+    // Main file buffer
     if (project.declared) {
         // Proyecto declarado (si existe en en el file system, porque fue abierto o porque se guardó)
         var main_file_content = fs.readFileSync(project.directory + path.sep + getMainFile().rel_path);
@@ -254,17 +248,19 @@ function initCodeMirrorDocs() {
         getMainFile().doc = doc;
     }
 
-    // Creando los docs secundarios
+    // Create the secondary 
     for (var i = 0; i < getSecondaryFiles().length; i++) {
         var file_content = fs.readFileSync(project.directory + path.sep + getSecondaryFiles()[i].rel_path);
         getSecondaryFiles()[i].doc = CodeMirror.Doc(file_content.toString(), "processing");
     }
 
+    // Create the shader buffers
     for (var i = 0; i < getShaderFiles().length; i++) {
         var file_content = fs.readFileSync(project.directory + path.sep + getShaderFiles()[i].rel_path);
         getShaderFiles()[i].doc = CodeMirror.Doc(file_content.toString(), "x-shader/x-fragment");
     }
 
+    // Create the plain buffers (TXT, XML & JSON)
     for (var i = 0; i < getPlainFiles().length; i++) {
         if (getPlainFiles()[i].extension === ".json") {
             var file_content = fs.readFileSync(project.directory + path.sep + getPlainFiles()[i].rel_path);
@@ -282,7 +278,7 @@ function initCodeMirrorDocs() {
         }
     }
 
-    // Creamos el CodeMirror en base al textarea
+    // Set the text area as a CodeMirror editor
     project.editor = CodeMirror.fromTextArea(window.document.getElementById("editor"), codemirror_config);
 
     //Swap the default doc
@@ -294,7 +290,7 @@ function initCodeMirrorDocs() {
 /*
   swapDoc();
 
-  Se encarga de hacer swap en el editor de CodeMirror.
+  Swaps the actual editor.
 
   */
 
@@ -319,7 +315,7 @@ function swapDoc(type, index) {
 
   swapDocByName()
 
-  Recibe un nombre de archivo, se fija si esta y si esta lo swapea.
+  Swap by name, I use this one when we check the errors of the project.
 
  */
 
@@ -339,8 +335,7 @@ function swapByName(name, callback) {
 /*
   addFileToProject();
 
-  Agrega un archivo al proyecto, y luego actualiza el sidebar.
-  También se encarga de la validación del tipo de archivo que tiene que agregar.
+  Add and validate a buffer to the project.
 
   */
 
@@ -420,18 +415,19 @@ function addFileToProject(name, extension) {
 /*
   refreshSidebar();
 
-  Se encarga de crear el sidebar.
+  Refresh the sidebar DOM elements.
 
   */
 
 function refreshSidebar() {
 
-    // La limpiamos por las dudas
+    // Clean the sidebar
     $(".sidebarFiles").empty();
 
-    // Creo los grupos
+    // Create the mainFile group
     $(".sidebarFiles").append('<div class="groupMainFile"></div>');
 
+    // Create the groups if there are files
     if (getSecondaryFiles().length > 0) {
         $(".sidebarFiles").append('<div class="groupSecondaryFiles"></div>');
     }
@@ -448,32 +444,32 @@ function refreshSidebar() {
         $(".sidebarFiles").append('<div class="groupAudioFiles"></div>');
     }
 
-    // Mostrar el archivo primario
+    // Create the mainFile
     var main_file = getMainFile();
     $(".groupMainFile").append("<li class='mainFile active'><i class='icon-002'></i> " + main_file.name + "</li>");
 
-    // Mostrar los archivos secundarios
+    // Create the secondary files
     var secondary_files = getSecondaryFiles();
     for (var i = 0; i < secondary_files.length; i++) {
         $(".groupSecondaryFiles").append("<li class='secondaryFile'><i class='icon-002'></i> " + secondary_files[i].name + "</li>");
     }
 
-    // Mostrar las imagenes
+    // Create the images
     var images_files = getImageFiles();
     for (var i = 0; i < images_files.length; i++) {
         $(".groupImageFiles").append("<li class='imageFile'><i class='icon-004'></i> " + images_files[i].name + "</li>");
     }
 
-    // Mostrar los shaders
+    // Create the shaders
     var shader_files = getShaderFiles();
     for (var i = 0; i < shader_files.length; i++) {
         $(".groupShaderFiles").append("<li class='shaderFile'><i class='icon-008'></i> " + shader_files[i].name + "</li>");
     }
 
-    // Mostrar los archivos planos
+    // Create the plain files
     var plain_files = getPlainFiles();
     for (var i = 0; i < plain_files.length; i++) {
-        // Chequeamos las extesiones
+        // Check the extensions
         if (plain_files[i].name.split(".")[1] === "xml") {
             $(".groupPlainFiles").append("<li class='plainFile'><i class='icon-005'></i> " + plain_files[i].name + "</li>");
         }
@@ -485,13 +481,13 @@ function refreshSidebar() {
         }
     }
 
-    // Mostrar los archivos planos
+    // Create the plain files
     var audio_files = getAudioFiles();
     for (var i = 0; i < audio_files.length; i++) {
         $(".groupAudioFiles").append("<li class='audioFile'><i class='icon-007'></i> " + audio_files[i].name + "</li>");
     }
 
-    // Hacemos un refresh del sidebar.
+    // Refresh the sidebar
     ui.refreshSidebarHandlers(window, win, ctx);
 }
 
@@ -501,8 +497,7 @@ function refreshSidebar() {
 /*
   writeToConsole();
 
-  Escribe algo en la consola del proyecto, hay diferentes tipos de mensajes
-  y cada uno tiene su propio estilo.
+  Write a message to the console, it can be an error mesasge or a normal message.
 
  */
 
@@ -531,7 +526,7 @@ function writeToConsole(msg, type) {
 /*
   clearConsole();
 
-  Limpia la consola, para que no queden los logs viejos del anterior run.
+  Clean the sonsole.
 
 */
 
@@ -544,8 +539,8 @@ function clearConsole() {
 /*
   errorHighlighter();
 
-  El errorHighlighter se encarga de hacer el regex para entender el error que ocurrió y aplicar el
-  estilo a esa linea.
+  Here I check the error messages and highlight the correct line using
+  regex. There are differents levels of highlighting, some errors 
 
  */
 
@@ -554,21 +549,19 @@ function clearConsole() {
 function errorHighlighter(msg) {
 
 
-    // Tipos de errores
+    // Kind of errors (There are more, I have to improve this)
     var missing_semicolon = /Syntax error, maybe a missing semicolon/;
     var missing_parenthesis = /maybe a missing right parenthesis/;
     var missing_argument = /is not applicable for the arguments/;
-
     var too_many_brackets = /found one too many {/;
     var unexpected_token = /unexpected token/;
     var too_much_push = /more than 32 times/;
-
     var hex_error = /must be exactly 6 hex digits/;
 
-    // Este regex busca un nombre de archivo 
+    // Search for the file name in the log message
     var r_error_file = /([^\s]+)(.pde)/;
 
-    // Busca el nn:nn:nn:nn que da el log
+    // Search for the location of the error  in the log message
     var r_error_location = /([0-9]+)(:[0-9]+)(:[0-9]+)(:[0-9]+)/;
 
 
@@ -578,7 +571,7 @@ function errorHighlighter(msg) {
         var error_location = msg.match(r_error_location)[0];
         var error_line = error_location.split(":")[0];
         var error_file = msg.match(r_error_file)[0];
-        // Hacemos el swap editor al archivo que tiene el error.
+        // Swap the document
         swapByName(error_file, function() {
             project.editor.addLineClass(parseInt(error_line - 2), "gutter", "error");
             project.last_error_line = parseInt(error_line - 2);
@@ -591,7 +584,7 @@ function errorHighlighter(msg) {
         var error_location = msg.match(r_error_location)[0];
         var error_line = error_location.split(":")[0];
         var error_file = msg.match(r_error_file)[0];
-        // Hacemos el swap editor al archivo que tiene el error.
+        // Swap the document
         swapByName(error_file, function() {
             project.editor.addLineClass(parseInt(error_line - 1), "gutter", "error");
             project.last_error_line = parseInt(error_line - 1);
@@ -604,7 +597,7 @@ function errorHighlighter(msg) {
         var error_location = msg.match(r_error_location)[0];
         var error_line = error_location.split(":")[0];
         var error_file = msg.match(r_error_file)[0];
-        // Hacemos el swap editor al archivo que tiene el error.
+        // Swap the document
         swapByName(error_file, function() {
             project.editor.addLineClass(parseInt(error_line - 1), "gutter", "error");
             project.last_error_line = parseInt(error_line - 1);
@@ -618,7 +611,7 @@ function errorHighlighter(msg) {
         var error_location = msg.match(r_error_location)[0];
         var error_line = error_location.split(":")[0];
         var error_file = msg.match(r_error_file)[0];
-        // Hacemos el swap editor al archivo que tiene el error.
+        // Swap the document
         swapByName(error_file, function() {
             project.editor.addLineClass(parseInt(error_line), "gutter", "error");
             project.last_error_line = parseInt(error_line);
@@ -631,7 +624,7 @@ function errorHighlighter(msg) {
         var error_location = msg.match(r_error_location)[0];
         var error_line = error_location.split(":")[0];
         var error_file = msg.match(r_error_file)[0];
-        // Hacemos el swap editor al archivo que tiene el error.
+        // Swap the document
         swapByName(error_file, function() {
             project.editor.addLineClass(parseInt(error_line - 1), "gutter", "error");
             project.last_error_line = parseInt(error_line - 1);
@@ -644,7 +637,7 @@ function errorHighlighter(msg) {
         var error_location = msg.match(r_error_location)[0];
         var error_line = error_location.split(":")[0];
         var error_file = msg.match(r_error_file)[0];
-        // Hacemos el swap editor al archivo que tiene el error.
+        // Swap the document
         swapByName(error_file, function() {
             project.editor.addLineClass(parseInt(error_line - 1), "gutter", "error");
             project.last_error_line = parseInt(error_line - 1);
@@ -652,24 +645,15 @@ function errorHighlighter(msg) {
         });
     }
 
-
-
-
-
-
-
 }
-
-
-
 
 
 
 /*
   clearErrors();
-
-  Limpia las clases error que hay en el editor.
-  ESTO HAY QUE MEJORARLO!
+  
+  Clear the highlighted errores, I HAVE TO IMPROVE THIS because it doesn't clean
+  the whole tree of files.
 
  */
 
