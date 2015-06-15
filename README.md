@@ -21,5 +21,5 @@ bower install
 npm run build_osx64
 ```
 
-### Get in touch
+# Get in touch
 Feel free to talk with me [@necsoft](https://twitter.com/necsoft), I would love to hear your opinions!
