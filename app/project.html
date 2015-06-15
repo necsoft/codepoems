@@ -10,19 +10,15 @@
   <link rel="stylesheet" href="codemirror/addon/hint/show-hint.css">
   <!-- Codepoems Styles -->
   <link rel="stylesheet" href="static/stylesheets/screen.css">
-
   <!-- Tooltip style -->
   <link rel="stylesheet" href="../bower_components/hint.css/hint.css"></link>
-
   <!-- Bower Components -->
   <script src="../bower_components/jquery/dist/jquery.min.js"></script>
-
   <!-- Codemirror -->
   <script src="codemirror/codemirror.js"></script>
-
-  <!-- Inconsolata -->
+  <!-- Inconsolata webfont -->
   <link href='http://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>
-  
+  <!-- Codemirror addons -->
   <script src="codemirror/addon/search/searchcursor.js"></script>
   <script src="codemirror/addon/search/search.js"></script>
   <script src="codemirror/addon/fold/foldcode.js"></script>
@@ -38,9 +34,9 @@
   <script src="codemirror/modes/javascript/javascript.js"></script>
   <script src="codemirror/modes/xml/xml.js"></script>
   <script src="codemirror/keymap/sublime.js"></script>
-
 </head>
 <body>
+  <!-- UPNAV -->
   <header class="upnav" style="-webkit-app-region: drag">
     <ul>
       <li class="exit_button"></li>
@@ -48,6 +44,7 @@
       <li class="max_button"></li>
     </ul>
   </header>
+  <!-- MAIN NAV -->
   <header id="mainNav">
     <nav id="navIcons">
       <i class="primary_icon button_run icon-play-circle-fill"></i> 
@@ -64,6 +61,7 @@
       <span class="hint--left" data-hint="Settings"><i class="button_settings icon-settings"></i></span>
     </nav>
   </header>
+  <!-- CENTER BLOCK -->
   <div id="centerBlock">
     <section id="sidebar">
       <ul class="sidebarFiles">
@@ -77,7 +75,6 @@
     </section>
 
   </div>
-  
   <!-- CONSOLE BLOCK -->
   <div id="consoleWrap">
     <section id="console">
