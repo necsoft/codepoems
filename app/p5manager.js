@@ -1,12 +1,7 @@
 /*
   > p5manager.js
   
-  Se encarga de crear , abrir y guardar proyectos de processing. Las tareas de p5manager son las siguientes:
-
-  * Abrir un proyecto de processing en base a un path pasado y crear el project pertinente.
-  * Analizar los proyectos que se intenta abrir para determinar si efectivamente son proyectos válidos.
-  * Hacer run (armar un spawn) de los proyectos.
-  * Detener los spawn de los proyectos.
+  Deals with the Processing projects
 
   */
 
@@ -24,7 +19,6 @@ var spawn = require('child_process').spawn;
 var p5process;
 var ps = require('ps-node');
 var kill = require('tree-kill'); // Kill dependency for windows
-
 var child;
 
 // Default variables for projects
@@ -41,24 +35,21 @@ var default_window_conf = {
 /*
   initialProject()
 
-  La diferencia entre el initialProject y el newProject es que este primero
-  se crea en base al gui inicial, los otros son creados en base a la app que esta
-  en foco, esto permite que no tengamos que tener un window escondido para poder 
-  crear ventanas nuevas.
+  The initial project is the first project when we open Codepoems.
 
   */
 
 exports.initialProject = function() {
 
-    // Creamos el project
+    // Create the project object
     var project = {};
-    project.id = new Date().getTime();
+    project.id = new Date().getTime(); // Id -> Timestamp
     project.saved = false;
     project.declared = false;
     project.directory = "";
     project.files = [];
 
-    // Pusheo el main file
+    // Push the main file
     project.files.push({
         type: "main",
         name: default_project_label + project.id + ".pde",
@@ -68,12 +59,12 @@ exports.initialProject = function() {
         declared: false
     });
 
-    // Agregamos el proyecto a la lista de proyectos.
+    // Add to the global list of projects.
     global.app.projects.push({
         project
     });
 
-    // Abrimos la ventana
+    // Open the window
     var gui = window.require("nw.gui");
     var new_win = gui.Window.open('project.html', default_window_conf);
 }
@@ -81,21 +72,21 @@ exports.initialProject = function() {
 /*
   newProject()
 
-  Similar al initialProject, pero trabaja en base a focused_win.
+  Create a new project.
 
   */
 
 exports.newProject = function() {
 
-    // Creamos el project
+    // Create the project object
     var project = {};
-    project.id = new Date().getTime();
+    project.id = new Date().getTime(); // Id -> Timestamp
     project.saved = false;
     project.declared = false;
     project.directory = "";
     project.files = [];
 
-    // Pusheo el main file
+    // Push the main file
     project.files.push({
         type: "main",
         name: default_project_label + project.id + ".pde",
@@ -105,20 +96,21 @@ exports.newProject = function() {
         declared: false
     });
 
-    // Agregamos el proyecto a la lista de proyectos.
+    // Push the project
     global.app.projects.push({
         project
     });
 
-    // Abrimos la ventana
+    // Open the window
     var gui = global.app.focused_win.window.require("nw.gui");
-    // var win = gui.Window.get();
     var new_win = gui.Window.open('project.html', default_window_conf);
 }
 
 
 /*
   open_project()
+
+  Open a project, first check if it is valid.
 
   */
 
@@ -130,26 +122,27 @@ exports.openProject = function(project_path) {
 /*
   check_project()
 
-  Chequea si en el path apunta a un proyecto válido de processing.
+  Check if the path is a valid project.
 
   */
 
 function check_project(p_path, callback) {
 
-    // Path 
-    var p_parsed = path.parse(p_path); // Proyecto parseado
-    var p_father = p_parsed.dir.split(path.sep).reverse()[0]; // Nombre de la carpeta padre
-    var p_dir = p_parsed.dir; // Path absoluto a la carpeta padre.
-
-    // Creamos el path a un archivo que debería existir.
+    // Parsing the path 
+    var p_parsed = path.parse(p_path);
+    // Name of the father folder
+    var p_father = p_parsed.dir.split(path.sep).reverse()[0];
+    // Name of the dir
+    var p_dir = p_parsed.dir;
+    // This is the tentative file
     var mainFile = p_dir + path.sep + p_father + ".pde";
 
-    // Chequea si ese archivo tentativo existe.
+    // If the tentative file exists, this is a valid project
     fs.access(mainFile, fs.R_OK | fs.W_OK, function(err) {
         if (err) {
-            window.alert("Este proyecto no es valido.");
+            window.alert("This isn't a valid project.");
         } else {
-            // Llamamos al analyze_project 
+            // If this is a valid project we call analyze_project()
             callback(p_dir, p_father, mainFile);
         };
     });
@@ -159,8 +152,7 @@ function check_project(p_path, callback) {
 /*
   analyze_project()
 
-  Se encarga de analizar el proyecto que ya sabemos que es válido, crear los archivos que lo contienen
-  y dejar listo un project válido para mandarselo al nuevo window.
+  Analyze and create the project 
 
   */
 
@@ -173,11 +165,9 @@ function analyze_project(p_dir, p_father, main_file) {
     analyzed_project.declared = true;
     analyzed_project.files = [];
     analyzed_project.directory = p_dir;
-
-    //
     p_dir = p_dir + path.sep;
 
-    // Array de carpetas ignoradas.
+    // Ignored folders
     var filtered_folders = ['!.git', '!node_modules', '!backup'];
 
     // Searching for PDE
@@ -304,7 +294,7 @@ function analyze_project(p_dir, p_father, main_file) {
         });
     });
 
-    // Abrimos la ventana del proyecto pasándole el project.
+    // Open the window with the analyzed project
     open_project_window(analyzed_project);
 }
 
@@ -312,19 +302,18 @@ function analyze_project(p_dir, p_father, main_file) {
 /*
   open_project_window()
 
-  Abre una ventana de un proyecto nuevo, pero lo hace agregando un proyecto
-  que previamente fue analizado.
+  Here we push the analyzed project and open the new window.
 
   */
 
 function open_project_window(project) {
 
-    // Agregamos el proyecto a la lista de proyectos.
+    // Push the project to the list of projects
     global.app.projects.push({
         project
     });
 
-    // Abrimos la ventana
+    // Open the window
     var gui = global.app.focused_win.window.require("nw.gui");
     var new_win = gui.Window.open('project.html', default_window_conf);
 
@@ -334,11 +323,13 @@ function open_project_window(project) {
 /*
   runProject()
 
-  Ejecuta un proyecto de processing.
+  Runs a processing project.
 
   */
 
 exports.runProject = function(project, ctx) {
+
+    // Check if it is a 
     if (project.declared) {
         runDeclaredProject(project, ctx);
     } else {
@@ -349,33 +340,32 @@ exports.runProject = function(project, ctx) {
 /*
   runDeclaredProject()
 
-  Este es el run de los proyectos que no necesitan ejecutarse en la carpeta temporal
-  porque y estan declarados en alguna parte del filesystem.
+  This is the run for the declared projects (with a folder in the filesystem).
 
-  Esta es la secuencia utilizada:
-
-  1. Guardarnos la información de los archivos en carpeta.
-  2. Hacer un silenceSave
-  3. Correr el run en la carpeta
-  4. Capturar el stop
+  1. Backup the actual old files.
+  2. Save
+  3. Spawn the processing-java in the directory
+  4. Catch the stop and revert the backup.
 
   */
 
 function runDeclaredProject(project, ctx) {
-    // Creamos la carpeta de backup
+    // Create the backup directory
     mkdirp(project.directory + path.sep + "backup", function() {
+        // Get the buffered files
         var buffered_files = ctx.getBufferedFiles();
+        // Save the backup directory
         var backup_directory = project.directory + path.sep + "backup" + path.sep;
-
+        // Iterate the buffered files
         for (var i = 0; i < buffered_files.length; i++) {
-            // Leemos los viejos archivos viejos
+            // Read the old files
             var file_content = fs.readFileSync(project.directory + path.sep + buffered_files[i].rel_path);
             // Guardamos esos archivos en la carpeta de backup
             fs.writeFileSync(backup_directory + buffered_files[i].rel_path, file_content);
         };
-
-        // Guardamos todos los archivos, porque ya los backupeamos.
+        // Silence save
         writeAllDocToFiles(project);
+        // Spawn the processing-java process
         runP5process(ctx, project, project.directory, project.directory + path.sep + "build");
     });
 
@@ -384,17 +374,19 @@ function runDeclaredProject(project, ctx) {
 /*
   runUndeclaredProject()
 
-  Este es el run de los proyectos no declarados, estos se ejecutan en una carpeta temporal.
+  This is the run for undeclared project (with no declared folders in the filesystem)
 
   */
 
 function runUndeclaredProject(project, ctx) {
 
-    // Creamos la carpeta temporal
+    // Create the temporal folder
     mkdirp('./app/tmp/' + ctx.getMainFile().name.split(".")[0], function(err) {
-
+        // Get the buffered files
         var buffered_files = ctx.getBufferedFiles();
+        // Iterate the buffered files
         for (var i = 0; i < buffered_files.length; i++) {
+            // Write the temporal file
             fs.writeFile('./app/tmp/' + ctx.getMainFile().name.split(".")[0] + path.sep + buffered_files[i].rel_path, buffered_files[i].doc.getValue(), function(err) {
                 if (err) {
                     console.log(err);
@@ -402,11 +394,11 @@ function runUndeclaredProject(project, ctx) {
             });
         };
 
-        // Guardamos las carpetas temporales
+        // Temporal dirs
         var temporal_dir = process.cwd() + '/app/tmp/' + ctx.getMainFile().name.split(".")[0];
         var temporal_dir_build = process.cwd() + '/app/tmp/' + ctx.getMainFile().name.split(".")[0] + "/build/";
 
-        // Corremos el proceso.
+        // Spawn the processing-java process
         runP5process(ctx, project, temporal_dir, temporal_dir_build);
 
     });
@@ -420,36 +412,36 @@ function runUndeclaredProject(project, ctx) {
 
   runP5process()
 
-  Se encarga de correr el processing-java, hay dos tipos de run, pero ambos usan la
-  misma funcion. Recibe un proyecto, una carpeta de sketch y un build_dir, esto se puede
-  mejorar a futuro, pero por ahora funciona bien.
+  Run the processing-java CLI and catch the incoming messages.
 
  */
 
 
 function runP5process(ctx, project, sketch_dir, build_dir) {
 
-    // Corremos el proceso para ejecutar processing por terminal
+    // Spawn processing-java
     p5process = spawn('processing-java', ['--sketch=' + sketch_dir, '--output=' + build_dir, '--run', '--force'], {
         detached: true
     });
 
-    // Ahora el proyecto es marcado como running
+    // Set the actual status of the project
     project.running = true;
 
-    // Guardamos el PID en el que esta corriendo (ESTO SOLO FUNCIONA ASI EN MAC)
+    // Here I save the PID, this is a fix for the stop process.
+    // I have to improve this, but I can't find a relationship beetween this
+    // process and the processing-java
     project.running_pid = (p5process.pid + 2);
 
-    // Process handlers
 
-    // Se ejecuta cuando recibimos logs normales del proceso
+
+    // Handle the incoming data
     p5process.stdout.on('data',
         function(data) {
             ctx.writeToConsole(data.toString(), "message");
         }
     );
 
-    // Se ejecuta cuando se recibe algún mensaje de error.
+    // Handle the incoming errors
     p5process.stderr.on('data',
         function(data) {
             var not_error = /(using the default display instead|other error)/;
@@ -461,23 +453,22 @@ function runP5process(ctx, project, sketch_dir, build_dir) {
         }
     );
 
-    // Se ejecuta siempre que se cierra el proceso.
+    // Handle the close of the app
     p5process.on('close',
         function() {
-            console.log("Se termino el proceso.");
-            // 
             project.running = false;
             project.running_pid = "";
-            // Restauramos los archivos backupeados (en caso de que sea un proyecto declarado)
+
+            // If it is a declared projects, restore the backup files.
             if (project.declared) {
                 var backup_directory = project.directory + path.sep + "backup" + path.sep;
                 var buffered_files = ctx.getBufferedFiles();
                 for (var i = 0; i < buffered_files.length; i++) {
-                    // Leemos los archivos backupeados.
+                    // Read the backup files
                     var file_content = fs.readFileSync(project.directory + path.sep + "backup" + path.sep + buffered_files[i].rel_path);
-                    // Escribimos los archivos con lo que backupeamos.
+                    // Write the files
                     fs.writeFileSync(project.directory + path.sep + buffered_files[i].rel_path, file_content);
-                    // Borramos la carpeta de backup y build
+                    // Delete the backup file
                     rimraf(backup_directory, function() {});
                     rimraf(project.directory + path.sep + "build", function() {});
                 };
@@ -493,7 +484,7 @@ function runP5process(ctx, project, sketch_dir, build_dir) {
 /*
   silenceSave()
 
-  Es el save directo, sin abrir la ventana de dialogo.
+  Save without dialog boxes.
 
  */
 
@@ -506,15 +497,14 @@ exports.silenceSave = function(project, ctx) {
 /*
   writeAllDocToFiles();
 
-  Le pasas un proyecto y se encarga de transformar todos los docs con buffer de CodeMirror
-  en archivo.
+  Write the associated file with the buffer contents.
 
  */
 
 
 function writeAllDocToFiles(project) {
     for (var i = 0; i < project.files.length; i++) {
-        // Primero tengo que ver que sean archivos que tengan un doc de CodeMirror
+        // Check if it is file with an associated buffer
         var the_type = project.files[i].type;
         if (the_type === "shader" ||
             the_type === "main" ||
@@ -522,7 +512,7 @@ function writeAllDocToFiles(project) {
             the_type === "json" ||
             the_type === "xml" ||
             the_type === "txt") {
-            // Si es un file con doc, lo escribe.
+            // Write the file
             fs.writeFile(project.directory + path.sep + project.files[i].rel_path, project.files[i].doc.getValue(), function(err) {
                 if (err) {
                     console.log(err);
@@ -538,51 +528,47 @@ function writeAllDocToFiles(project) {
 /*
   saveAsProject()
 
-  Esto es todo lo que ocurre cuando alguien hace saveAs:
-
-    * Se analiza el path de save
-    * Se crea la carpeta
+  Save as the project
 
   */
 
 exports.saveAsProject = function(save_path, project, ctx) {
 
-    // En base al path que nos pasan extraemos el nombre del proyecto.
+    // Parse the save path
     var name_saved = save_path.split(path.sep).reverse()[0];
     var main_path = save_path + path.sep;
     var main_file = main_path + name_saved + ".pde";
 
-    // Hay dos tipos de saveAs, el saveAs cuando el proyecto no existe,
-    // y el saveAs cuando el proyecto existe, la mayor diferencia es que 
-    // en el segundo caso, copiamos la carpeta para asegurarnos que si hay
-    // archivos que no esten trackeados se copien igual.
-
     if (project.declared === false) {
+        // Create a folder and write the files
         saveAsUndeclared();
     } else {
+        // Copy the folder and rename the main file
         saveAsDeclared();
     }
 
     /*
       saveAsUndeclared()
       
-      Este es el save que se ejecuta cuando un proyecto no tiene carpeta.
+      This is the save when the project hasn't an associated folder.
+
+      1. Create the folder
+      2. Create the files
 
      */
 
     function saveAsUndeclared() {
-        console.log("Hago un saveAsUndeclared");
-
-        // Creamos la carpeta nueva
+        // Create the folder
         mkdirp(save_path, function(err) {
             if (err) {
                 console.log(err);
             } else {
                 for (var i = 0; i < project.files.length; i++) {
-                    // Creamos el main file, que va a cambiar de nombre porque estamos cambiando la carpeta
+                    // Create the main file
                     if (project.files[i].type === "main") {
+                        // Set the rel path of this file
                         project.files[i].rel_path = name_saved + ".pde";
-
+                        // Write the file
                         fs.writeFile(main_path + name_saved + ".pde", project.files[i].doc.getValue(), function(err) {
                             ctx.getMainFile().name = name_saved + ".pde";
                             project.declared = true;
@@ -590,13 +576,14 @@ exports.saveAsProject = function(save_path, project, ctx) {
                             ctx.refreshSidebar();
                         });
                     } else {
-                        // Le guardamos el nuevo path RELATIVO
+                        // Save the new relative path
                         project.files[i].rel_path = project.files[i].name;
                         fs.writeFile(main_path + project.files[i].name, project.files[i].doc.getValue(), function(err) {
-                            // Se crea el archivo
+
                         });
                     }
                 };
+                // Refresh the project status
                 project.directory = save_path;
                 project.saved = true;
                 project.declared = true;
@@ -607,15 +594,16 @@ exports.saveAsProject = function(save_path, project, ctx) {
     /*
       saveAsDeclared()
       
-      Este es el save para los proyectos que ya estan guardados pero hay que guardarlos
-      en otra carpeta.
+      This is the save for declared projects.
+
+      1. Copy the folder
+      2. Rename the main file
+      3. Write the files
 
      */
 
-
     function saveAsDeclared() {
-        console.log("Hago un saveAsDeclared");
-        // Copiamos las carpetas
+        // Copy the folder
         ncp(project.directory, main_path, function(err) {
             if (err) {
                 console.log(err);
@@ -628,14 +616,12 @@ exports.saveAsProject = function(save_path, project, ctx) {
 
             // Rename al main file
             fs.rename(project.directory + path.sep + ctx.getMainFile().name, project.directory + path.sep + name_saved + ".pde", function(err) {
-
-                // Cambio la información
+                // Update the main file
                 ctx.getMainFile().name = name_saved + ".pde";
                 ctx.getMainFile().rel_path = path.sep + name_saved + ".pde";
-
-                // Aca debería hacer un silenceSave?
+                // Save the files
                 writeAllDocToFiles(project);
-                // Refresco el sidebar
+                // Refresh the sidebar
                 ctx.refreshSidebar();
 
             });
@@ -648,14 +634,13 @@ exports.saveAsProject = function(save_path, project, ctx) {
 /*
   stopProcess()
 
-  Hace kill en el running_pid. Actualmente esta estrategia no esta testeada en otras
-  plataformas.
+  Stop the processing-java process by PID
 
   */
 
 exports.stopProcess = function(project) {
 
-    // En windows es:
+    // Windows:
     // kill(p5process.pid, 'SIGKILL');
 
     ps.kill(project.running_pid, function(err) {
