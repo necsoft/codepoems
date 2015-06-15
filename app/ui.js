@@ -40,12 +40,13 @@ exports.setupHandlers = function(window, win, ctx) {
     focused_win = ctx.window.win;
     focused_ctx = ctx;
 
+    // Read the settings.json
     setDefaultSettings();
 
     global.app.focused_ctx = ctx;
     global.app.focused_win = focused_win;
 
-    // Keymaps
+    // Keymaps (only for OS X)
     var map = {
         "Cmd-R": actions_run,
         "Cmd-O": actions_open,
@@ -54,9 +55,13 @@ exports.setupHandlers = function(window, win, ctx) {
         "Cmd-W": actions_quit
     };
 
+    // Add the actual keymap
     global.app.focused_project.editor.addKeyMap(map);
 
-    // UI Nodes
+    /*
+      UI selectors
+     */
+
     $button_run = $(".button_run");
     $button_stop = $(".button_stop");
     $button_open = $(".button_open");
@@ -257,7 +262,7 @@ function actions_open($) {
     $("#fileDialog").change(function(evt) {
         // Save the absolute path
         var file_path = $(this).val();
-        // Manda el path a p5manager que se encarga de validarlo y de abrir un nuevo project.
+        // Send the path to p5manager
         p5manager.openProject(file_path);
         // Reset the input value
         $(this).val("");
@@ -375,7 +380,7 @@ function actions_save_as($) {
 
     // Handles the change of the dialog
     $("#fileSaveDialog").change(function(evt) {
-        // Guarda el path absoluto del archivo.
+        // Save the abs path
         var the_path = $(this).val();
         // Calls the p5manager action
         p5manager.saveAsProject(the_path, global.app.focused_project, focused_ctx);
@@ -448,7 +453,7 @@ function actions_add_file() {
     // Validates presence
     if (prompt_value === "") {
         is_empty = true;
-        focused_ctx.alert("Tienes que escribir algo");
+        focused_ctx.alert("You have to write something");
         actions_add_file();
     } else {
         is_empty = false;
@@ -459,13 +464,13 @@ function actions_add_file() {
     var start_with_number = start_numbers.indexOf(prompt_value.charAt(0)) > -1;
 
     if (start_with_number) {
-        focused_ctx.alert("No puedes nombrar al archivo con un número delante.");
+        focused_ctx.alert("You can't name a file with a number in the first character.");
         actions_add_file();
     };
 
     // Validates if the name is different to the main file
     if (global.app.focused_ctx.getMainFile().name + ".pde" === prompt_value) {
-        focused_ctx.alert("No puede llamarse igual al archivo principal del proyecto.");
+        focused_ctx.alert("That is the name of the main file. Please choose other name");
         actions_add_file();
         is_main_file_name = true;
     } else {
@@ -477,7 +482,7 @@ function actions_add_file() {
         has_extension = true;
     } else {
         has_extension = false;
-        focused_ctx.alert("Tienes que escribirle una extension.");
+        focused_ctx.alert("You have to write an extension.");
         actions_add_file();
     }
 
