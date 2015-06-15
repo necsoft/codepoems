@@ -1,7 +1,7 @@
 ![](http://i.imgur.com/LdRYNfs.png?1)
 #Codepoems
 An experimental IDE for the amazing [Processing Language.](https://www.processing.org/). 
-![](http://i.imgur.com/nPAydJD.png)
+![](http://i.imgur.com/u53Y6J6.png)
 
 # Features (some I currently working on)
 *	Live documentation
