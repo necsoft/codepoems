@@ -6,21 +6,17 @@
 
   */
 
-// Dependencies
 var gui = window.require("nw.gui");
 var fs = require("fs");
 var p5manager = require('./p5manager.js');
 var win = gui.Window.get();
-
-
-// Shortcut to global properties
 var focused_ctx;
 var focused_win;
 
 /*
   setupUi()
 
-  This is the first method we call.
+  This is the first method we call when we open Codepoems.
 
   */
 
@@ -33,7 +29,7 @@ exports.setupUi = function() {
 /*
   setupHandlers()
 
-  Esta función se llama desde afuera para setear los handlers de una ventana.
+  Setup the initial handlers of the current project.
   
   */
 
@@ -50,7 +46,6 @@ exports.setupHandlers = function(window, win, ctx) {
     global.app.focused_win = focused_win;
 
     // Keymaps
-
     var map = {
         "Cmd-R": actions_run,
         "Cmd-O": actions_open,
@@ -76,7 +71,9 @@ exports.setupHandlers = function(window, win, ctx) {
     $button_log_project = $(".button_log_project");
     $button_add_file = $(".button_add_file");
 
-    // UI Handlers
+    /*
+      UI Handlers  
+     */
 
     $button_exit.click(function() {
         actions_quit();
@@ -126,10 +123,11 @@ exports.setupHandlers = function(window, win, ctx) {
         actions_add_file();
     });
 
+
+    // This is a temporal debug function
     $button_log_project.click(function() {
         console.log("global.app.focused_project");
         console.log(global.app.focused_project);
-
         console.log("global.app");
         console.log(global.app);
     });
@@ -140,7 +138,7 @@ exports.setupHandlers = function(window, win, ctx) {
 /*
   refreshSidebarHandlers()
   
-  Cuando el sidebar es manipulado, los handlers tienen que volver a crearse.
+  Refresh all the sidebar handlers.
 
   */
 
@@ -172,7 +170,13 @@ exports.refreshSidebarHandlers = function(window, win, ctx) {
 };
 
 
+/*
+  setDefaultSettings()
 
+  Set the default settings of the editor, we get this info from the
+  settings.json
+
+ */
 
 function setDefaultSettings() {
     exports.actions_change_font_size(global.app.settings.font_size);
@@ -184,10 +188,9 @@ function setDefaultSettings() {
 /*
   setFocusedWin()
 
-  Se llama cada vez que el project esta en focus.
+  It is called when the project is in focus.
 
   */
-
 
 exports.setFocusedWin = function(ctx, win) {
     focused_ctx = ctx;
@@ -221,7 +224,7 @@ function clipboardFix() {
 /*
   save_keymap()
 
-  Fix temporal para solucionar el save con shortcut.
+  Temporal path for the save keymap.
 
   */
 
@@ -241,22 +244,22 @@ function save_keymap() {
 /*
   actions_open()
 
-  Usa el input oculto para abrir el trigger 
+  It triggers the hidden input file in the project html.
 
   */
 
 
 function actions_open($) {
-    // Activa el File Dialog escondido en el project.html
+    // Open the file dialog box
     $("#fileDialog").trigger("click");
 
-    // Captura el evento en el que se selecciona el archivo.
+    // Handle the change of the dialog box
     $("#fileDialog").change(function(evt) {
-        // Guarda el path absoluto del archivo.
+        // Save the absolute path
         var file_path = $(this).val();
         // Manda el path a p5manager que se encarga de validarlo y de abrir un nuevo project.
         p5manager.openProject(file_path);
-        // Reseteamos el valor del fileDialog para evitar conflictos al abrir dos veces lo mismo.
+        // Reset the input value
         $(this).val("");
     });
 
@@ -267,7 +270,7 @@ function actions_open($) {
 /*
   actions_quit()
   
-  Cierra todas las ventanas abiertas.
+  Quits the current focused project.
 
   */
 
@@ -283,9 +286,9 @@ function actions_quit() {
 }
 
 /*
-  actions_quit()
+  actions_min()
   
-  Cierra todas las ventanas abiertas.
+  Minimize the focused project.
 
   */
 
@@ -294,9 +297,9 @@ function actions_min() {
 }
 
 /*
-  actions_quit()
+  actions_max()
   
-  Cierra todas las ventanas abiertas.
+  Maximize the focused project
 
   */
 
@@ -309,18 +312,18 @@ function actions_max() {
 /*
   actions_run()
 
-  Ejecuta el proyecto en focus.
+  Run the focused project
 
   */
 
 function actions_run() {
-
+    // Validates if there is a project running
     if (global.app.focused_project.running === false) {
         p5manager.runProject(global.app.focused_project, focused_ctx);
         focused_ctx.clearConsole();
         focused_ctx.clearErrors();
     } else {
-        console.log("Ya hay un proyecto corriendo.");
+        console.log("There is a project running.");
     }
 }
 
@@ -328,16 +331,16 @@ function actions_run() {
 /*
   actions_stop()
 
-  Detiene el proyecto en focus.
+  Stops the focused project.
 
   */
 
 function actions_stop() {
+    // Validates if there is a project running
     if (global.app.focused_project.running === true) {
-        console.log("Voy a correr el stop del project");
         p5manager.stopProcess(global.app.focused_project);
     } else {
-        console.log("No hay ningun proyecto corriendo.");
+        console.log("There is no project running.");
     }
 }
 
@@ -345,8 +348,8 @@ function actions_stop() {
 /*
   actions_save()
 
-  Este save es el default, determina en base a si es declarado o no lo
-  que tiene que hacer. 
+  This is the save action, it validates if we need a silence save or a
+  save as dialog.
 
   */
 
@@ -361,21 +364,22 @@ function actions_save($) {
 /*
   actions_save_as()
 
-  Save as del proyecto, previamente hace algo que es necesario en nw
-  que es hacer el trigger y escuchar el change del dialog.
+  Save as action. 
 
   */
 
 function actions_save_as($) {
 
-    // Aparece la ventana de File
+    // Triggers the save dialog box
     $("#fileSaveDialog").trigger("click");
 
-    // Captura el evento en el que se selecciona el lugar para guardarlo.
+    // Handles the change of the dialog
     $("#fileSaveDialog").change(function(evt) {
         // Guarda el path absoluto del archivo.
         var the_path = $(this).val();
+        // Calls the p5manager action
         p5manager.saveAsProject(the_path, global.app.focused_project, focused_ctx);
+        // Reset the value
         $(this).val("");
     });
 
@@ -384,23 +388,19 @@ function actions_save_as($) {
 /*
   actions_settings()
 
-  Abre la ventana de configuración de Codepoems.
+  Open the setting windows.
 
   */
 
 function actions_settings() {
 
-    // Primero tenemos que saber si la ventana ya esta abierta para
-    // no abrir dos ventanas.
-
+    // Check if the window is actually opened
     if (global.app.settings_window_active === true) {
-        console.log("Ya hay un settings abierto");
+        // If the window is opened, show it
         global.app.settings_window.show();
     } else {
-        console.log("No hay un settings abierto, lo voy a abrir");
-        // Abrimos la ventana
+        // Open the window
         var gui = global.app.focused_win.window.require("nw.gui");
-        // var win = gui.Window.get();
         global.app.settings_window = gui.Window.open('win_settings.html', {
             "toolbar": false,
             "width": 430,
@@ -409,16 +409,14 @@ function actions_settings() {
         });
     }
 
-    // Llamo a la función.
-    //exports.actions_change_font_size(10 + (Math.random() * 20));
-
 }
 
 
 /*
   actions_devTool()
 
-  Abre la Chrome Developer Tool para el contexto en foco.
+  Open the Chrome Developer Tool, this is very useful for me because I am using a frameless button
+  and I don't have the button.
 
   */
 
@@ -430,25 +428,24 @@ function actions_devTool() {
 /*
   actions_add_file()
 
-  Agrega un archivo al proyecto.
+  Validate the action of creating a file.
 
   */
 
 function actions_add_file() {
     var prompt_value = focused_ctx.prompt("Please put the name of the file, you can create:\n \nPDE\nGLSL\nJSON\nXML\nTXT\n");
 
-    // Si cancelan el prompt
+    // If the prompt is canceled
     if (prompt_value === null) {
         return false;
     }
 
-    // Booleans de validación
     var is_empty;
     var start_with_number;
     var is_main_file_name;
     var has_extension;
 
-    // Valida presencia
+    // Validates presence
     if (prompt_value === "") {
         is_empty = true;
         focused_ctx.alert("Tienes que escribir algo");
@@ -457,7 +454,7 @@ function actions_add_file() {
         is_empty = false;
     }
 
-    // Valida si comienza con numero
+    // Validates if not start with a number
     var start_numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
     var start_with_number = start_numbers.indexOf(prompt_value.charAt(0)) > -1;
 
@@ -466,7 +463,7 @@ function actions_add_file() {
         actions_add_file();
     };
 
-    // Valida si el nombre es igual al nombre del mainFile
+    // Validates if the name is different to the main file
     if (global.app.focused_ctx.getMainFile().name + ".pde" === prompt_value) {
         focused_ctx.alert("No puede llamarse igual al archivo principal del proyecto.");
         actions_add_file();
@@ -475,7 +472,7 @@ function actions_add_file() {
         is_main_file_name = false;
     }
 
-    // Valida si se escribió la extensión
+    // Validates presence of the extension
     if (prompt_value.split(".").length > 1 && prompt_value.split(".")[1].length > 1) {
         has_extension = true;
     } else {
@@ -484,7 +481,7 @@ function actions_add_file() {
         actions_add_file();
     }
 
-    // Cumple la validación básica
+    // Validates all
     if (!is_empty && !start_with_number && !is_main_file_name && has_extension) {
         the_extension = prompt_value.split(".")[1];
         global.app.focused_ctx.addFileToProject(prompt_value, the_extension);
@@ -495,7 +492,7 @@ function actions_add_file() {
 /*
   actions_sidebar_swap
   
-  Se encarga de modificar el buffer actual que se esta mostrando en el editor.
+  I use the swapDoc for change CodeMirror doc and the mode.
 
   */
 
@@ -520,8 +517,7 @@ function actions_sidebar_swap_plain_file(index) {
 /*
   actions_change_font_size();
 
-  Se encarga de tomar todos los proyectos y asignarles el nuevo tamaño de fuente
-  seteado por el usuario.
+  It injects the font-size of the editor.
 
  */
 
@@ -533,13 +529,16 @@ exports.actions_change_font_size = function(px) {
 }
 
 
+/*
+  actions_change_theme();
+
+  It injects the stylesheet of the theme.
+
+ */
 
 exports.actions_change_theme = function(theme) {
     for (var i = 0; i < global.app.projects.length; i++) {
-
-
         global.app.projects[i].project.ctx.$('link[title="theme"]').attr('href', "codemirror/themes/" + theme + ".css");
-        //var this_ctx = global.app.projects[i].project.ctx.$("head").append('<link rel="stylesheet" href="codemirror/themes/' + theme + '.css">');
         global.app.projects[i].project.editor.setOption("theme", theme);
     }
 }
@@ -548,7 +547,7 @@ exports.actions_change_theme = function(theme) {
 /*
   action_save_default_settings();
 
-  Esta acción la llamamos luego de que queremos que la data que de guardado en nuestro archivo de settings.
+  Here we write the setting.json with the actual settings.
 
  */
 
