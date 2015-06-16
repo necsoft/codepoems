@@ -1,6 +1,15 @@
 ![](http://i.imgur.com/LdRYNfs.png?1)
 #Codepoems
 An experimental IDE for the amazing [Processing Language.](https://www.processing.org/). 
+![](http://i.imgur.com/u53Y6J6.png)
+
+# Features (some I currently working on)
+*	Live documentation
+*	Autocomplete
+*	Media Viewer
+*	Multiple Themes
+*	Sublime text bindings
+*	Open multiple formats (GLSL,JSON,TXT & XML)
 
 # About 
 This is an experimental tool that I created for personal purpose in my projects on [hinecsoft.com](hinecsoft.com).
