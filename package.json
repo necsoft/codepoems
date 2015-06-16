@@ -8,9 +8,9 @@
     "window": {
         "title": "Codepoems",
         "always-on-top": true,
-        "width": 450,
-        "height": 300,
-        "toolbar": true
+        "toolbar": false,
+        "frame": false,
+        "show": false
     },
     "dependencies": {
         "event-stream": "^3.3.1",
