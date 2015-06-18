@@ -30,9 +30,9 @@ var codemirror_config = {
     theme: "codepoems-dark",
     foldGutter: true,
     tabSize: 2,
-    extraKeys: {
-        "Ctrl-Space": "autocomplete"
-    },
+    // extraKeys: {
+    //     "Ctrl-Space": "autocomplete"
+    // },
     gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
     viewportMargin: Infinity,
 }
