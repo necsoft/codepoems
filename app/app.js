@@ -14,6 +14,12 @@ global.app.platform = process.platform;
 global.app.projects = [];
 global.app.focused_project = {};
 
+// Windows
+global.app.settings_window_active = false;
+global.app.live_documentation_window_active = false;
+global.app.examples_window_active = false;
+global.app.p5_modules_window_active = false;
+
 // Write the default settings
 global.app.settings = require('./settings.json');
 

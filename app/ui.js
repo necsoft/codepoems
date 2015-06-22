@@ -72,6 +72,9 @@ exports.setupHandlers = function(window, win, ctx) {
     $button_exit = $(".exit_button");
     $button_new = $(".button_new");
     $button_settings = $(".button_settings");
+    $button_live_documentation = $(".button_live_documentation");
+    $button_p5_modules = $(".button_p5_modules");
+    $button_examples = $(".button_examples");
     $button_chrome_dev_tool = $(".button_chrome_dev_tool");
     $button_log_project = $(".button_log_project");
     $button_add_file = $(".button_add_file");
@@ -118,6 +121,18 @@ exports.setupHandlers = function(window, win, ctx) {
 
     $button_new.click(function() {
         p5manager.newProject();
+    });
+
+    $button_live_documentation.click(function() {
+        actions_live_documentation();
+    });
+
+    $button_examples.click(function() {
+        actions_examples();
+    });
+
+    $button_p5_modules.click(function() {
+        actions_p5_modules();
     });
 
     $button_settings.click(function() {
@@ -407,6 +422,79 @@ function actions_settings() {
         // Open the window
         var gui = global.app.focused_win.window.require("nw.gui");
         global.app.settings_window = gui.Window.open('win_settings.html', {
+            "toolbar": false,
+            "width": 430,
+            "height": 600,
+            "resizable": false
+        });
+    }
+
+}
+
+
+/*
+  actions_examples()
+
+ */
+
+function actions_examples() {
+    console.log("Mostrar examples");
+
+    if (global.app.examples_window_active === true) {
+        global.app.examples_window.show();
+    } else {
+        // Open the window
+        var gui = global.app.focused_win.window.require("nw.gui");
+        global.app.examples_window = gui.Window.open('win_examples.html', {
+            "toolbar": false,
+            "width": 430,
+            "height": 600,
+            "resizable": false
+        });
+    }
+
+}
+
+
+/*
+  actions_p5_modules()
+
+*/
+
+function actions_p5_modules() {
+    console.log("Mostrar p5 modules");
+
+    if (global.app.p5_modules_window_active === true) {
+        global.app.p5_modules_window.show();
+    } else {
+        // Open the window
+        var gui = global.app.focused_win.window.require("nw.gui");
+        global.app.p5_modules_window = gui.Window.open('win_p5_modules.html', {
+            "toolbar": false,
+            "width": 430,
+            "height": 600,
+            "resizable": false
+        });
+    }
+
+
+}
+
+
+/*
+  actions_live_documentation()
+
+*/
+
+function actions_live_documentation() {
+    console.log("Mostrar live documentation");
+
+    if (global.app.live_documentation_window_active === true) {
+        global.app.live_documentation_window.show();
+    } else {
+        // Open the window
+        var gui = global.app.focused_win.window.require("nw.gui");
+        global.app.live_documentation_window = gui.Window.open('win_live_documentation.html', {
             "toolbar": false,
             "width": 430,
             "height": 600,
