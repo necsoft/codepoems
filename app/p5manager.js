@@ -128,6 +128,9 @@ exports.openProject = function(project_path) {
 
 function check_project(p_path, callback) {
 
+    console.log("Estoy chequeandolo");
+    console.log(p_path);
+
     // Parsing the path 
     var p_parsed = path.parse(p_path);
     // Name of the father folder
@@ -141,9 +144,11 @@ function check_project(p_path, callback) {
     fs.access(mainFile, fs.R_OK | fs.W_OK, function(err) {
         if (err) {
             window.alert("This isn't a valid project.");
+            console.log("Es un proyecto invalido");
         } else {
             // If this is a valid project we call analyze_project()
             callback(p_dir, p_father, mainFile);
+            console.log("Es un proyecto valido");
         };
     });
 

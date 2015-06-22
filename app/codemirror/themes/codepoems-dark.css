@@ -148,9 +148,17 @@
 .cm-s-codepoems-dark span.cm-property, .cm-s-codepoems-dark span.cm-attribute {color: #3e999f;}
 
 
-/**/
+/*
+  ERROR
+ */
 
 
 .error{
   border: 2px solid rgba(255, 0, 0, 0.40);
 }
+
+
+
+
+
+

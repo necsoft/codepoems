@@ -1509,17 +1509,28 @@ body {
  */
 /* line 311, ../sass/screen.scss */
 ::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
   background-color: #222222;
 }
 
 /* line 316, ../sass/screen.scss */
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
   background-color: #333333;
 }
 
-/* line 321, ../sass/screen.scss */
+/* line 322, ../sass/screen.scss */
 ::-webkit-scrollbar-thumb {
   background-color: #000000;
+}
+
+/* line 327, ../sass/screen.scss */
+::-webkit-scrollbar-corner, ::-webkit-scrollbar-track-piece {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* line 331, ../sass/screen.scss */
+::-webkit-scrollbar {
+  background-color: #f0f;
 }

@@ -7,13 +7,13 @@ body {
   color: #ccc;
 }
 
-/* line 15, ../sass/win.scss */
+/* line 9, ../sass/win.scss */
 .container {
   margin: 0 auto;
   width: 90%;
 }
 
-/* line 20, ../sass/win.scss */
+/* line 14, ../sass/win.scss */
 p {
   font-size: 0.7em;
 }
@@ -23,7 +23,7 @@ p {
   Common style
 
  */
-/* line 31, ../sass/win.scss */
+/* line 25, ../sass/win.scss */
 input[type=text] {
   height: 20px;
   outline: none;
@@ -37,12 +37,12 @@ input[type=text] {
   Settings window
 
  */
-/* line 46, ../sass/win.scss */
+/* line 40, ../sass/win.scss */
 .font_size_input {
   width: 10%;
 }
 
-/* line 50, ../sass/win.scss */
+/* line 44, ../sass/win.scss */
 .plus_button, .minus_button {
   background-color: #222;
   border: 1px solid #444;
@@ -52,17 +52,17 @@ input[type=text] {
   cursor: pointer;
 }
 
-/* line 59, ../sass/win.scss */
+/* line 53, ../sass/win.scss */
 .plus_button:hover, .minus_button:hover {
   background-color: #333;
 }
 
-/* line 63, ../sass/win.scss */
+/* line 57, ../sass/win.scss */
 .font_size_input, .plus_button, .minus_button {
   line-height: 1em;
 }
 
-/* line 67, ../sass/win.scss */
+/* line 61, ../sass/win.scss */
 .default_template_textarea {
   width: 100%;
   height: 200px;
@@ -73,7 +73,7 @@ input[type=text] {
   outline: none;
 }
 
-/* line 78, ../sass/win.scss */
+/* line 72, ../sass/win.scss */
 .save_default_template {
   background-color: #333;
   border: 1px solid #444;
@@ -85,12 +85,12 @@ input[type=text] {
   outline: none;
 }
 
-/* line 89, ../sass/win.scss */
+/* line 83, ../sass/win.scss */
 .save_default_template:hover {
   background-color: #222;
 }
 
-/* line 94, ../sass/win.scss */
+/* line 88, ../sass/win.scss */
 select {
   background-color: #333;
   width: 300px;
@@ -99,4 +99,23 @@ select {
   outline: none;
   text-transform: uppercase;
   height: 20px;
+}
+
+/*
+  
+  Examples window
+
+ */
+/* line 107, ../sass/win.scss */
+.example_button {
+  background-color: #282828;
+  margin: 4px 10px;
+  padding: 5px;
+  font-size: 0.7em;
+  cursor: pointer;
+}
+
+/* line 115, ../sass/win.scss */
+.example_button:hover {
+  background-color: #333;
 }
