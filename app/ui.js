@@ -344,6 +344,8 @@ function actions_run() {
         focused_ctx.clearErrors();
     } else {
         console.log("There is a project running.");
+        actions_stop();
+        actions_run();
     }
 }
 
