@@ -12,7 +12,7 @@ An experimental IDE for the amazing [Processing Language.](https://www.processin
 *	Open multiple formats (GLSL,JSON,TXT & XML)
 
 # About 
-This is an experimental tool that I created for personal purpose in my projects on [http://hinecsoft.com](hinecsoft.com).
+This is an experimental tool that I created for personal purpose in my projects on [hinecsoft.com](http://hinecsoft.com).
 
 This is my first open source project, I apologize for the newbie stuff. This is an opportunity to continue learning.
 
