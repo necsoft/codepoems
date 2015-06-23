@@ -193,8 +193,9 @@ exports.refreshSidebarHandlers = function(window, win, ctx) {
 /*
   setDefaultSettings()
 
-  Set the default settings of the editor, we get this info from the
-  settings.json
+  Set the
+  default settings of the editor, we get this info from the
+   settings.json
 
  */
 
@@ -203,6 +204,23 @@ function setDefaultSettings() {
     global.app.focused_project.ctx.$("head").append('<link rel="stylesheet" title="theme" href="codemirror/themes/' + global.app.settings.theme + '.css">');
     global.app.focused_project.editor.setOption("theme", global.app.settings.theme);
 }
+
+/*
+  removeThisProject()
+
+  Remove this project
+
+ */
+
+function removeThisProject(id, callback) {
+    for (var i = 0; i < global.app.projects.length; i++) {
+        if (global.app.projects[i].project.id == id) {
+            global.app.projects.splice(i, 1);
+            callback();
+        }
+    }
+}
+
 
 
 /*
@@ -296,11 +314,27 @@ function actions_open($) {
 
 function actions_quit() {
     if (global.app.focused_project.saved) {
-        focused_win.close();
+        removeThisProject(global.app.focused_project.id, function() {
+            console.log(global.app.projects.length());
+            if (global.app.projects.length < 1) {
+                action_close_secondary_windows();
+                focused_win.close();
+            } else {
+                focused_win.close();
+            }
+
+        });
     } else {
         var confirm_exit = focused_ctx.confirm("Este proyecto no ha sido guardado, quieres descartarlo?");
         if (confirm_exit) {
-            focused_win.close();
+            removeThisProject(global.app.focused_project.id, function() {
+                if (global.app.projects.length < 1) {
+                    action_close_secondary_windows();
+                    focused_win.close();
+                } else {
+                    focused_win.close();
+                }
+            })
         }
     }
 }
@@ -648,4 +682,32 @@ exports.actions_change_theme = function(theme) {
 
 exports.action_save_default_settings = function() {
     fs.writeFileSync("app/settings.json", JSON.stringify(global.app.settings));
+}
+
+
+/*
+  action_close_secondary_windows();
+
+  Here we write the setting.json with the actual settings.
+
+ */
+
+function action_close_secondary_windows() {
+
+    if (global.app.settings_window) {
+        global.app.settings_window.close();
+    }
+
+    if (global.app.live_documentation_window) {
+        global.app.live_documentation_window.close();
+    }
+
+    if (global.app.examples_window) {
+        global.app.examples_window.close();
+    }
+
+    if (global.app.p5_modules_window) {
+        global.app.p5_modules_window.close();
+    }
+
 }
