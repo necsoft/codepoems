@@ -84,6 +84,11 @@ $(document).ready(function() {
         project.saved = false;
     });
 
+    // Get the selected text
+    CodeMirror.on(project.editor, "cursorActivity", function() {
+        ui.refresh_live_documentation(project.editor.getSelection().replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&"));
+    });
+
 });
 
 // Handle the resize of the window

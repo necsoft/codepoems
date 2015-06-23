@@ -1,20 +1,19 @@
-body{
-  background-color:#222;
-  margin:0;
-  padding:0;
-  font-family:Helvetica;
-  color:#ccc;
+body {
+    background-color: #222;
+    margin: 0;
+    padding: 0;
+    font-family: Helvetica;
+    color: #ccc;
 }
 
-.container{
-  margin: 0 auto;
-  width:90%;
+.container {
+    margin: 0 auto;
+    width: 90%;
 }
 
-p{
-  font-size:0.7em;
+p {
+    font-size: 0.7em;
 }
-
 
 /*
   
@@ -22,12 +21,12 @@ p{
 
  */
 
-input[type=text]{
-  height: 20px;
-  outline: none;
-  background-color: #000;
-  border: 1px solid #333;
-  color: #eee;
+input[type=text] {
+    height: 20px;
+    outline: none;
+    background-color: #000;
+    border: 1px solid #333;
+    color: #eee;
 }
 
 /*
@@ -36,66 +35,61 @@ input[type=text]{
 
  */
 
-
-.font_size_input{
-  width:10%;
+.font_size_input {
+    width: 10%;
 }
 
-.plus_button,.minus_button{
-  background-color:#222;
-  border:1px solid #444;
-  color:#fff;
-  margin:0 5px;
-  outline:none;
-  cursor:pointer;
+.plus_button, .minus_button {
+    background-color: #222;
+    border: 1px solid #444;
+    color: #fff;
+    margin: 0 5px;
+    outline: none;
+    cursor: pointer;
 }
 
-.plus_button:hover,.minus_button:hover{
-  background-color:#333;
+.plus_button:hover, .minus_button:hover {
+    background-color: #333;
 }
 
-.font_size_input,.plus_button,.minus_button{
-  line-height:1em;
+.font_size_input, .plus_button, .minus_button {
+    line-height: 1em;
 }
 
-.default_template_textarea{
-  width:100%;
-  height:200px;
-  background-color:#222;
-  border: 1px solid #444;
-  resize:none;
-  color:#eee;
-  outline:none;
-
+.default_template_textarea {
+    width: 100%;
+    height: 200px;
+    background-color: #222;
+    border: 1px solid #444;
+    resize: none;
+    color: #eee;
+    outline: none;
 }
 
-.save_default_template{
-  background-color: #333;
-  border: 1px solid #444;
-  color: #EEE;
-  text-transform: uppercase;
-  font-size: 0.6em;
-  padding: 10px 5px;
-  cursor:pointer;
-  outline:none;
+.save_default_template {
+    background-color: #333;
+    border: 1px solid #444;
+    color: #EEE;
+    text-transform: uppercase;
+    font-size: 0.6em;
+    padding: 10px 5px;
+    cursor: pointer;
+    outline: none;
 }
 
-.save_default_template:hover{
-  background-color:#222;
+.save_default_template:hover {
+    background-color: #222;
 }
 
-
-select{
-  background-color: #333;
-  width: 300px;
-  color: #EEE;
-  border: 1px solid #333;
-  outline: none;
-  text-transform:uppercase;
-  height:20px;
+select {
+    background-color: #333;
+    width: 300px;
+    color: #EEE;
+    border: 1px solid #333;
+    outline: none;
+    text-transform: uppercase;
+    height: 20px;
 }
-
-
 
 /*
   
@@ -103,20 +97,52 @@ select{
 
  */
 
-
-.example_button{
-  background-color: #282828;
-  margin: 4px 10px;
-  padding: 5px;
-  font-size: 0.7em;
-  cursor: pointer;
+.example_button {
+    background-color: #282828;
+    margin: 4px 10px;
+    padding: 5px;
+    font-size: 0.7em;
+    cursor: pointer;
 }
 
-.example_button:hover{
-  background-color: #333;
+.example_button:hover {
+    background-color: #333;
 }
 
+/*
+ 
+  Live Documentation window
+ 
+ */
 
+.doc_container {
+    padding: 5px;
+}
+
+.title {
+    color: #fff;
+    font-size: 1.5em;
+    font-weight: 100;
+}
+
+.description {
+    font-size: 0.7em;
+}
+
+.example {
+    width: 100%;
+    height: 100px;
+    float: left;
+    margin-bottom: 20px;
+    .example_img {
+        width: 30%;
+        float: left;
+    }
+    .example_code {
+        float: left;
+        width: 70%;
+    }
+}
 
 /*
   
@@ -125,25 +151,24 @@ select{
  */
 
 ::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
-  background-color: #333;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+    background-color: #333;
 }
 
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-  background-color: #333333;
+    width: 6px;
+    height: 6px;
+    background-color: #333333;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #000000;
+    background-color: #000000;
 }
 
-
-::-webkit-scrollbar-corner,::-webkit-scrollbar-track-piece {
-  background-color:rgba(255,255,255,0.1);
+::-webkit-scrollbar-corner, ::-webkit-scrollbar-track-piece {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
-::-webkit-scrollbar{
-  background-color:#f0f;
+::-webkit-scrollbar {
+    background-color: #f0f;
 }

@@ -23,7 +23,7 @@ p {
   Common style
 
  */
-/* line 25, ../sass/win.scss */
+/* line 24, ../sass/win.scss */
 input[type=text] {
   height: 20px;
   outline: none;
@@ -37,12 +37,12 @@ input[type=text] {
   Settings window
 
  */
-/* line 40, ../sass/win.scss */
+/* line 38, ../sass/win.scss */
 .font_size_input {
   width: 10%;
 }
 
-/* line 44, ../sass/win.scss */
+/* line 42, ../sass/win.scss */
 .plus_button, .minus_button {
   background-color: #222;
   border: 1px solid #444;
@@ -52,17 +52,17 @@ input[type=text] {
   cursor: pointer;
 }
 
-/* line 53, ../sass/win.scss */
+/* line 51, ../sass/win.scss */
 .plus_button:hover, .minus_button:hover {
   background-color: #333;
 }
 
-/* line 57, ../sass/win.scss */
+/* line 55, ../sass/win.scss */
 .font_size_input, .plus_button, .minus_button {
   line-height: 1em;
 }
 
-/* line 61, ../sass/win.scss */
+/* line 59, ../sass/win.scss */
 .default_template_textarea {
   width: 100%;
   height: 200px;
@@ -73,7 +73,7 @@ input[type=text] {
   outline: none;
 }
 
-/* line 72, ../sass/win.scss */
+/* line 69, ../sass/win.scss */
 .save_default_template {
   background-color: #333;
   border: 1px solid #444;
@@ -85,12 +85,12 @@ input[type=text] {
   outline: none;
 }
 
-/* line 83, ../sass/win.scss */
+/* line 80, ../sass/win.scss */
 .save_default_template:hover {
   background-color: #222;
 }
 
-/* line 88, ../sass/win.scss */
+/* line 84, ../sass/win.scss */
 select {
   background-color: #333;
   width: 300px;
@@ -106,7 +106,7 @@ select {
   Examples window
 
  */
-/* line 107, ../sass/win.scss */
+/* line 100, ../sass/win.scss */
 .example_button {
   background-color: #282828;
   margin: 4px 10px;
@@ -115,9 +115,49 @@ select {
   cursor: pointer;
 }
 
-/* line 115, ../sass/win.scss */
+/* line 108, ../sass/win.scss */
 .example_button:hover {
   background-color: #333;
+}
+
+/*
+ 
+  Live Documentation window
+ 
+ */
+/* line 118, ../sass/win.scss */
+.doc_container {
+  padding: 5px;
+}
+
+/* line 122, ../sass/win.scss */
+.title {
+  color: #fff;
+  font-size: 1.5em;
+  font-weight: 100;
+}
+
+/* line 128, ../sass/win.scss */
+.description {
+  font-size: 0.7em;
+}
+
+/* line 132, ../sass/win.scss */
+.example {
+  width: 100%;
+  height: 100px;
+  float: left;
+  margin-bottom: 20px;
+}
+/* line 137, ../sass/win.scss */
+.example .example_img {
+  width: 30%;
+  float: left;
+}
+/* line 141, ../sass/win.scss */
+.example .example_code {
+  float: left;
+  width: 70%;
 }
 
 /*
@@ -125,30 +165,30 @@ select {
   Scrollbars
 
  */
-/* line 127, ../sass/win.scss */
+/* line 153, ../sass/win.scss */
 ::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
   background-color: #333;
 }
 
-/* line 132, ../sass/win.scss */
+/* line 158, ../sass/win.scss */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
   background-color: #333333;
 }
 
-/* line 138, ../sass/win.scss */
+/* line 164, ../sass/win.scss */
 ::-webkit-scrollbar-thumb {
   background-color: #000000;
 }
 
-/* line 143, ../sass/win.scss */
+/* line 168, ../sass/win.scss */
 ::-webkit-scrollbar-corner, ::-webkit-scrollbar-track-piece {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* line 147, ../sass/win.scss */
+/* line 172, ../sass/win.scss */
 ::-webkit-scrollbar {
   background-color: #f0f;
 }

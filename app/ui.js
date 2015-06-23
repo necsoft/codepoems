@@ -473,7 +473,6 @@ function actions_settings() {
  */
 
 function actions_examples() {
-    console.log("Mostrar examples");
 
     if (global.app.examples_window_active === true) {
         global.app.examples_window.show();
@@ -497,7 +496,6 @@ function actions_examples() {
 */
 
 function actions_p5_modules() {
-    console.log("Mostrar p5 modules");
 
     if (global.app.p5_modules_window_active === true) {
         global.app.p5_modules_window.show();
@@ -522,7 +520,6 @@ function actions_p5_modules() {
 */
 
 function actions_live_documentation() {
-    console.log("Mostrar live documentation");
 
     if (global.app.live_documentation_window_active === true) {
         global.app.live_documentation_window.show();
@@ -709,4 +706,14 @@ function action_close_secondary_windows() {
         global.app.p5_modules_window.close();
     }
 
+}
+
+
+
+exports.refresh_live_documentation = function(selectedText) {
+    if (global.app.live_documentation_window) {
+        // console.log(global.app.live_documentation_window);
+        //global.app.live_documentation_window.window.ctx.culo();
+        global.app.live_documentation_window.window.searchInDocumentation(selectedText);
+    }
 }
