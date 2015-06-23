@@ -315,7 +315,6 @@ function actions_open($) {
 function actions_quit() {
     if (global.app.focused_project.saved) {
         removeThisProject(global.app.focused_project.id, function() {
-            console.log(global.app.projects.length());
             if (global.app.projects.length < 1) {
                 action_close_secondary_windows();
                 focused_win.close();
