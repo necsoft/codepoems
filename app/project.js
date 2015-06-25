@@ -86,7 +86,9 @@ $(document).ready(function() {
 
     // Get the selected text
     CodeMirror.on(project.editor, "cursorActivity", function() {
-        ui.refresh_live_documentation(project.editor.getSelection().replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&"));
+        // Sanitized version
+        // ui.refresh_live_documentation(project.editor.getSelection().replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&"));
+        ui.refresh_live_documentation(project.editor.getSelection());
     });
 
 });
