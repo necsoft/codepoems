@@ -20,7 +20,7 @@ win.on('close', function() {
     this.close(true);
 });
 
-win.showDevTools();
+//win.showDevTools();
 
 var doc_data;
 

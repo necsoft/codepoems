@@ -23,6 +23,7 @@
         "tree-kill": "^0.1.1"
     },
     "scripts": {
-        "build_osx64": "rm -rf build/ && nwbuild --version 0.12.2 --macIcns ./icon/codepoems.icns --platforms osx64 -o ./build/ ./"
+        "build_osx64": "rm -rf build/osx64/ && nwbuild --version 0.12.2 --macIcns ./icon/codepoems.icns --platforms osx64 -o ./build/ ./",
+        "build_win64": "rm -rf build/win64/ && nwbuild --version 0.12.2 --winIco ./icon/codepoems.ico --platforms win64 -o ./build/ ./"
     }
 }
