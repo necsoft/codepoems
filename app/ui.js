@@ -52,7 +52,8 @@ exports.setupHandlers = function(window, win, ctx) {
         "Cmd-O": actions_open,
         "Cmd-S": save_keymap,
         "Cmd-N": p5manager.newProject,
-        "Cmd-W": actions_quit
+        "Cmd-W": actions_quit,
+        "F12": actions_devTool
     };
 
     // Add the actual keymap
