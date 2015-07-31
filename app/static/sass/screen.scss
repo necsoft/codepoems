@@ -2,332 +2,333 @@
 @import "_fonts.scss";
 
 body {
-  padding: 0;
-  margin: 0;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  font-family: "Helvetica" sans-serif;
-  color: #fff;
-
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  user-select: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: "Helvetica" sans-serif;
+    color: #fff;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 /*
   TOP BLOCK
  */
 
- #mainNav {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  float: left;
-  height: 50px;
-  background-color: #1E1E1E;
+#mainNav {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    float: left;
+    height: 50px;
+    background-color: #1E1E1E;
 }
 
 .button_separator {
-  width: 2px;
-  margin: 0 5px 0 10px;
-  background-color: #303030;
-  height: 50%;
-  vertical-align: baseline;
-  display: inline-block;
+    width: 2px;
+    margin: 0 5px 0 10px;
+    background-color: #303030;
+    height: 50%;
+    vertical-align: baseline;
+    display: inline-block;
 }
 
 .primary_icon {
-  font-size: 2em;
-  margin-right: -5px;
-  cursor: pointer;
+    font-size: 2em;
+    margin-right: -5px;
+    cursor: pointer;
 }
 
 .primary_icon:hover {
-  color: #CCC;
+    color: #CCC;
 }
 
 .secondary_icon {
-  font-size: 1em;
-  background-color: #2F2F2F;
-  padding: 4px;
-  margin-right: 0px;
-  vertical-align: super;
+    font-size: 1em;
+    background-color: #2F2F2F;
+    padding: 4px;
+    margin-right: 0px;
+    vertical-align: super;
 }
 
 .secondary_icon:hover {
-  background-color: #222;
+    background-color: #222;
 }
 
 #navIcons {
-  height: inherit;
-  float: left;
-  margin-top: 5px;
-  i {
-    cursor: pointer;
-  }
+    height: inherit;
+    float: left;
+    margin-top: 5px;
+    i {
+        cursor: pointer;
+    }
 }
 
 .rightIcons {
-  float: right;
-  text-align: right;
-  margin-top: 12px;
-  margin-right: 5px;
-  i {
-    font-size: 1.2em;
-    color: #666;
-    cursor: pointer;
-  }
-  i:hover {
-    color: #fff;
-  }
+    float: right;
+    text-align: right;
+    margin-top: 12px;
+    margin-right: 5px;
+    i {
+        font-size: 1.2em;
+        color: #666;
+        cursor: pointer;
+    }
+    i:hover {
+        color: #fff;
+    }
 }
 
 .upnav {
-  -webkit-app-region: drag;
-  background-color: #383838;
-  width: 100%;
-  height: 20px;
-  cursor: pointer;
+    -webkit-app-region: drag;
+    background-color: #383838;
+    width: 100%;
+    height: 20px;
+    cursor: pointer;
 }
 
 .exit_button, .max_button, .min_button {
-  cursor: pointer;
-  width: 10px;
-  height: 10px;
-  float: left;
-  margin: 4px;
-  border-radius: 10px;
+    cursor: pointer;
+    width: 10px;
+    height: 10px;
+    float: left;
+    margin: 4px;
+    border-radius: 10px;
 }
 
 .exit_button {
-  background-color: #F26184;
+    background-color: #F26184;
 }
 
 .exit_button:hover {
-  background-color: #d8416c;
+    background-color: #d8416c;
 }
 
 .max_button {
-  background-color: #75ED64;
+    background-color: #75ED64;
 }
 
 .max_button:hover {
-  background-color: #65d629;
+    background-color: #65d629;
 }
 
 .min_button {
-  background-color: #FFE422;
+    background-color: #FFE422;
 }
 
 .min_button:hover {
-  background-color: #e8ca18;
+    background-color: #e8ca18;
 }
 
 /*
   CENTER BLOCK
  */
 
- #centerBlock {
-  width: 100%;
-  float: left;
-  display: block;
+#centerBlock {
+    width: 100%;
+    float: left;
+    display: block;
     //overflow:hidden;
     float: left;
     height: 70%;
-  }
+}
 
-  #sidebar {
+#sidebar {
     float: left;
-    width: 25%;
+    width: 198px;
     height: 100%;
     background-color: #222;
     padding-top: 10px;
     overflow-y: auto;
     overflow-x: hidden;
+    position: relative;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     user-select: none;
     ul {
-      cursor: default;
+        cursor: default;
         // La caja default de cada item
         li {
-          font-size: 0.7em;
-          color: #999;
-          padding: 3px;
+            font-size: 0.7em;
+            color: #999;
+            padding: 3px;
             //border: 1px solid #333;
             border-radius: 4px;
             color: #ccc;
             margin: 1px 6px;
-          }
-          li i {
+        }
+        li i {
             font-size: 1.83em;
             vertical-align: middle;
             margin-top: -4px;
             margin-right: 3px;
             display: inline-block;
-          }
-          li:hover {
+        }
+        li:hover {
             background-color: #000;
-          }
-
-          .mainFile i {
+        }
+        .mainFile i {
             //color: #45f4c6;
-
-          }
-          .secondaryFile i {
+       
+        }
+        .secondaryFile i {
             //color: #45f4c6;
-
-          }
-          .imageFile i {
+       
+        }
+        .imageFile i {
             //color: #f4f923;
-          }
-
-          .shaderFile{
+       
+        }
+        .shaderFile {
             //color: #ff008c;
-          }
-
-          .plainFile{
+       
+        }
+        .plainFile {
             //color: #f76126;
-          }
-
-
-
-          .active {
+       
+        }
+        .active {
             // border: 1px solid #333;
             // border-radius: 4px;
             // color: #ccc;
             // margin: 0 10px;
-
-          }
-          .groupMainFile, .groupSecondaryFiles, .groupImageFiles, .groupShaderFiles, .groupPlainFiles, .groupAudioFiles {
+       
+        }
+        .groupMainFile, .groupSecondaryFiles, .groupImageFiles, .groupShaderFiles, .groupPlainFiles, .groupAudioFiles {
             margin-bottom: 6px;
-          }
         }
-        .button_add_file {
-          background-color: rgba(0, 0, 0, 0);
-          border: 1px solid #333;
-          color: #fff;
-          padding: 7px;
-          margin-left: 10px;
-          margin-top: 10px;
-          margin-bottom: 100px;
-          border-radius: 5px;
-          font-weight: 100;
-          outline: none;
-          font-size: 0.7em;
-          transition: background-color 0.1s ease;
-        }
-        .button_add_file:hover {
-          background-color: rgba(0, 0, 0, 1);
-        }
-      }
+    }
+    .button_add_file {
+        background-color: rgba(0, 0, 0, 0);
+        border: 1px solid #333;
+        color: #fff;
+        padding: 7px;
+        margin-left: 10px;
+        margin-top: 10px;
+        margin-bottom: 100px;
+        border-radius: 5px;
+        font-weight: 100;
+        outline: none;
+        font-size: 0.7em;
+        transition: background-color 0.1s ease;
+    }
+    .button_add_file:hover {
+        background-color: rgba(0, 0, 0, 1);
+    }
+}
 
-      #mainEditor {
-        float: left;
-        width: 75%;
-      }
+.sidebar_resize_control {
+    background-color: #333;
+    height: 100%;
+    width: 2px;
+    float: left;
+    cursor: ew-resize;
+}
+
+#mainEditor {
+    float: left;
+    width: 700px;
+}
 
 // Esto debería setearse dinámicamente en base al tamaño de los componentes.
 .CodeMirror {
-  height: 490px;
+    height: 490px;
 }
 
 /*
   BOTTOM BLOCK
  */
 
- #consoleWrap {
-  height: 140px;
-  position: relative;
-  width: 100%;
-  overflow-y: scroll;
-  background-color: #1D1D1D;
-  -webkit-touch-callout: initial;
-  -webkit-user-select: initial;
-  user-select: initial;
+#consoleWrap {
+    height: 140px;
+    position: relative;
+    width: 100%;
+    overflow-y: scroll;
+    background-color: #1D1D1D;
+    -webkit-touch-callout: initial;
+    -webkit-user-select: initial;
+    user-select: initial;
 }
 
 #console {
-  float: left;
-  width: 100%;
-  border-top: 2px solid #111;
-  color: #666;
-  font-size: 0.7em;
-  p {
-    margin-left: 5px;
-    margin-top: 5px;
-  }
-  .consoleMessage {
-    color: #ffffff;
-  }
-  .consoleError {
-    background-color: #DA3A61;
-    color: #fff;
-    padding: 5px;
-    font-weight: 100;
-    font-size: 1.1em;
-  }
+    float: left;
+    width: 100%;
+    border-top: 2px solid #111;
+    color: #666;
+    font-size: 0.7em;
+    p {
+        margin-left: 5px;
+        margin-top: 5px;
+    }
+    .consoleMessage {
+        color: #ffffff;
+    }
+    .consoleError {
+        background-color: #DA3A61;
+        color: #fff;
+        padding: 5px;
+        font-weight: 100;
+        font-size: 1.1em;
+    }
 }
 
 /*
   Codemirror
  */
 
-
-
-  .CodeMirror-hints{
+.CodeMirror-hints {
     left: 281.484375px;
-    width:300px;
+    width: 300px;
     top: 144px;
     background-color: #333;
     border: 1px solid #444;
-  }
+}
 
-  .CodeMirror-hint-active{
+.CodeMirror-hint-active {
     background: #000;
-  }
+}
 
-  .CodeMirror-hint{
-  color: #999999;
-  font-family: Helvetica;
-  font-size: 0.8em;
-
-  margin: 0;
-  /* padding: 0 4px; */
-  border-radius: 2px;
-  max-width:none;
-  /* overflow: hidden; */
-  white-space: pre;
-  cursor: pointer;
-  }
+.CodeMirror-hint {
+    color: #999999;
+    font-family: Helvetica;
+    font-size: 0.8em;
+    margin: 0;
+    /* padding: 0 4px; */
+    border-radius: 2px;
+    max-width: none;
+    /* overflow: hidden; */
+    white-space: pre;
+    cursor: pointer;
+}
 
 /*
   SCROLLBARS
  */
 
 ::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
-  background-color: #222222;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+    background-color: #222222;
 }
 
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-  background-color: #333333;
+    width: 6px;
+    height: 6px;
+    background-color: #333333;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #000000;
+    background-color: #000000;
 }
 
-
-::-webkit-scrollbar-corner,::-webkit-scrollbar-track-piece {
-  background-color:rgba(0,0,0,0.1);
+::-webkit-scrollbar-corner, ::-webkit-scrollbar-track-piece {
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
-::-webkit-scrollbar{
-  background-color:#f0f;
+::-webkit-scrollbar {
+    background-color: #f0f;
 }

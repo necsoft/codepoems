@@ -73,6 +73,8 @@ $(document).ready(function() {
     // Check the actual size of the windows and set the style for that size
     responsiveComponents();
 
+    resizablePanels();
+
     // Welcome message :)
     writeToConsole("Welcome to Codepoems!", "message");
 
@@ -106,6 +108,57 @@ function responsiveComponents() {
     var height_topbar = $("#upnav").height() + $("#mainNav").height();
     $("#centerBlock,.CodeMirror, #mainEditor").height(($(window).height() - height_topbar) * 0.70);
     $("#consoleWrap").height(($(window).height() - height_topbar) * 0.30);
+
+    // Resize del textarea
+    $("#mainEditor").width($(window).width() - $("#sidebar").width() - 2);
+}
+
+/*
+  responsiveComponents()
+
+  Check if you are trying to resize some panel.
+
+ */
+
+function resizablePanels() {
+
+    var resizing_sidebar;
+
+    $(".sidebar_resize_control").mousedown(function() {
+        console.log("Tocado el sidebar");
+        resizing_sidebar = true;
+    });
+
+    $("body").mousemove(function(e) {
+        if (resizing_sidebar) {
+            //console.log("Moviendo!!!!!" + e.pageX);
+
+            var w = $(window).width();
+            var m_x = e.pageX;
+
+
+            var sidebar_size = m_x - 2;
+            var text_area_size = w - m_x;
+
+
+            if (sidebar_size > 180 && sidebar_size < 300) {
+                $("#sidebar").width(sidebar_size);
+                $("#mainEditor").width(text_area_size);
+            }
+
+
+
+        }
+    })
+
+    $("body").mouseup(function() {
+        if (resizing_sidebar) {
+            console.log("Dragueo el sidebar");
+            resizing_sidebar = false;
+        };
+    });
+
+
 }
 
 /*
