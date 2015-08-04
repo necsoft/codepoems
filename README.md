@@ -33,5 +33,11 @@ bower install
 npm run build_osx64
 ```
 
+#### Compiling Stylesheets
+I am currently using Sass+Compass for the stylesheets. You can use ``compass watch`` in the ``app/static/`` folder.
+
+# I need volunteers
+If you think you can help me with, please send your pull requests!
+
 # Get in touch
 Feel free to talk with me [@necsoft](https://twitter.com/necsoft), I would love to hear your opinions!
