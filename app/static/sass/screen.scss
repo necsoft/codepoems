@@ -1,6 +1,18 @@
 @import "compass/reset";
 @import "_fonts.scss";
 
+
+
+/*
+  Variables
+ */
+
+
+$upnav_height: 20px;
+$mainnav_height: 50px;
+
+
+
 body {
     padding: 0;
     margin: 0;
@@ -25,7 +37,7 @@ body {
     padding: 0;
     width: 100%;
     float: left;
-    height: 50px;
+    height: $mainnav_height;
     background-color: #1E1E1E;
 }
 
@@ -88,7 +100,7 @@ body {
     -webkit-app-region: drag;
     background-color: #383838;
     width: 100%;
-    height: 20px;
+    height: $upnav_height;
     cursor: pointer;
 }
 
@@ -133,9 +145,6 @@ body {
     width: 100%;
     float: left;
     display: block;
-    //overflow:hidden;
-    float: left;
-    height: 70%;
 }
 
 #sidebar {
@@ -143,13 +152,17 @@ body {
     width: 198px;
     height: 100%;
     background-color: #222;
-    padding-top: 10px;
     overflow-y: auto;
     overflow-x: hidden;
     position: relative;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     user-select: none;
+
+    .sidebarFiles{
+      padding-top: 20px;
+    }
+
     ul {
         cursor: default;
         // La caja default de cada item
@@ -174,15 +187,15 @@ body {
         }
         .mainFile i {
             //color: #45f4c6;
-       
+
         }
         .secondaryFile i {
             //color: #45f4c6;
-       
+
         }
         .imageFile i {
             //color: #f4f923;
-       
+
         }
         .shaderFile {
             //color: #ff008c;
@@ -223,7 +236,7 @@ body {
 }
 
 .sidebar_resize_control {
-    background-color: #333;
+    background-color: #303030;
     height: 100%;
     width: 2px;
     float: left;
@@ -235,17 +248,20 @@ body {
     width: 700px;
 }
 
-// Esto debería setearse dinámicamente en base al tamaño de los componentes.
-.CodeMirror {
-    height: 490px;
-}
 
 /*
   BOTTOM BLOCK
  */
 
+.console_resize_control {
+    width: 100%;
+    height: 2px;
+    background-color: #111;
+    float: left;
+    cursor: ns-resize;
+}
+
 #consoleWrap {
-    height: 140px;
     position: relative;
     width: 100%;
     overflow-y: scroll;
@@ -258,9 +274,9 @@ body {
 #console {
     float: left;
     width: 100%;
-    border-top: 2px solid #111;
     color: #666;
     font-size: 0.7em;
+    padding-bottom: 35px;
     p {
         margin-left: 5px;
         margin-top: 5px;
@@ -280,6 +296,10 @@ body {
 /*
   Codemirror
  */
+
+.CodeMirror {
+    height:600px;
+}
 
 .CodeMirror-hints {
     left: 281.484375px;
@@ -310,25 +330,4 @@ body {
   SCROLLBARS
  */
 
-::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
-    background-color: #222222;
-}
-
-::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-    background-color: #333333;
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: #000000;
-}
-
-::-webkit-scrollbar-corner, ::-webkit-scrollbar-track-piece {
-    background-color: rgba(0, 0, 0, 0.1);
-}
-
-::-webkit-scrollbar {
-    background-color: #f0f;
-}
+@import "_scrollbars.scss";

@@ -21,6 +21,14 @@ global.app.settings_window_active = false;
 global.app.live_documentation_window_active = false;
 global.app.examples_window_active = false;
 global.app.p5_modules_window_active = false;
+global.app.default_window = {
+    "frame": false,
+    "width": 900,
+    "height": 700,
+    "resizable": true,
+    "min_width": 700,
+    "min_height": 700,
+}
 
 // Write the default settings
 global.app.settings = require('./settings.json');

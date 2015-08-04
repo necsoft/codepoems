@@ -23,14 +23,6 @@ var child;
 
 // Default variables for projects
 var default_project_label = "sketch";
-var default_window_conf = {
-    "frame": false,
-    "width": 900,
-    "height": 700,
-    "resizable": true,
-    "min_width": 700,
-    "min_height": 700,
-}
 
 /*
   initialProject()
@@ -66,7 +58,7 @@ exports.initialProject = function() {
 
     // Open the window
     var gui = window.require("nw.gui");
-    var new_win = gui.Window.open('project.html', default_window_conf);
+    var new_win = gui.Window.open('project.html', global.app.default_window);
 }
 
 /*
@@ -103,7 +95,7 @@ exports.newProject = function() {
 
     // Open the window
     var gui = global.app.focused_win.window.require("nw.gui");
-    var new_win = gui.Window.open('project.html', default_window_conf);
+    var new_win = gui.Window.open('project.html', global.app.default_window);
 }
 
 
@@ -320,7 +312,7 @@ function open_project_window(project) {
 
     // Open the window
     var gui = global.app.focused_win.window.require("nw.gui");
-    var new_win = gui.Window.open('project.html', default_window_conf);
+    var new_win = gui.Window.open('project.html', global.app.default_window);
 
 }
 

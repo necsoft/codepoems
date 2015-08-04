@@ -1204,7 +1204,10 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   content: "\e6bf";
 }
 
-/* line 4, ../sass/screen.scss */
+/*
+  Variables
+ */
+/* line 16, ../sass/screen.scss */
 body {
   padding: 0;
   margin: 0;
@@ -1223,7 +1226,7 @@ body {
 /*
   TOP BLOCK
  */
-/* line 23, ../sass/screen.scss */
+/* line 35, ../sass/screen.scss */
 #mainNav {
   margin: 0;
   padding: 0;
@@ -1233,7 +1236,7 @@ body {
   background-color: #1E1E1E;
 }
 
-/* line 32, ../sass/screen.scss */
+/* line 44, ../sass/screen.scss */
 .button_separator {
   width: 2px;
   margin: 0 5px 0 10px;
@@ -1243,19 +1246,19 @@ body {
   display: inline-block;
 }
 
-/* line 41, ../sass/screen.scss */
+/* line 53, ../sass/screen.scss */
 .primary_icon {
   font-size: 2em;
   margin-right: -5px;
   cursor: pointer;
 }
 
-/* line 47, ../sass/screen.scss */
+/* line 59, ../sass/screen.scss */
 .primary_icon:hover {
   color: #CCC;
 }
 
-/* line 51, ../sass/screen.scss */
+/* line 63, ../sass/screen.scss */
 .secondary_icon {
   font-size: 1em;
   background-color: #2F2F2F;
@@ -1264,41 +1267,41 @@ body {
   vertical-align: super;
 }
 
-/* line 59, ../sass/screen.scss */
+/* line 71, ../sass/screen.scss */
 .secondary_icon:hover {
   background-color: #222;
 }
 
-/* line 63, ../sass/screen.scss */
+/* line 75, ../sass/screen.scss */
 #navIcons {
   height: inherit;
   float: left;
   margin-top: 5px;
 }
-/* line 67, ../sass/screen.scss */
+/* line 79, ../sass/screen.scss */
 #navIcons i {
   cursor: pointer;
 }
 
-/* line 72, ../sass/screen.scss */
+/* line 84, ../sass/screen.scss */
 .rightIcons {
   float: right;
   text-align: right;
   margin-top: 12px;
   margin-right: 5px;
 }
-/* line 77, ../sass/screen.scss */
+/* line 89, ../sass/screen.scss */
 .rightIcons i {
   font-size: 1.2em;
   color: #666;
   cursor: pointer;
 }
-/* line 82, ../sass/screen.scss */
+/* line 94, ../sass/screen.scss */
 .rightIcons i:hover {
   color: #fff;
 }
 
-/* line 87, ../sass/screen.scss */
+/* line 99, ../sass/screen.scss */
 .upnav {
   -webkit-app-region: drag;
   background-color: #383838;
@@ -1307,7 +1310,7 @@ body {
   cursor: pointer;
 }
 
-/* line 95, ../sass/screen.scss */
+/* line 107, ../sass/screen.scss */
 .exit_button, .max_button, .min_button {
   cursor: pointer;
   width: 10px;
@@ -1317,32 +1320,32 @@ body {
   border-radius: 10px;
 }
 
-/* line 104, ../sass/screen.scss */
+/* line 116, ../sass/screen.scss */
 .exit_button {
   background-color: #F26184;
 }
 
-/* line 108, ../sass/screen.scss */
+/* line 120, ../sass/screen.scss */
 .exit_button:hover {
   background-color: #d8416c;
 }
 
-/* line 112, ../sass/screen.scss */
+/* line 124, ../sass/screen.scss */
 .max_button {
   background-color: #75ED64;
 }
 
-/* line 116, ../sass/screen.scss */
+/* line 128, ../sass/screen.scss */
 .max_button:hover {
   background-color: #65d629;
 }
 
-/* line 120, ../sass/screen.scss */
+/* line 132, ../sass/screen.scss */
 .min_button {
   background-color: #FFE422;
 }
 
-/* line 124, ../sass/screen.scss */
+/* line 136, ../sass/screen.scss */
 .min_button:hover {
   background-color: #e8ca18;
 }
@@ -1350,22 +1353,19 @@ body {
 /*
   CENTER BLOCK
  */
-/* line 132, ../sass/screen.scss */
+/* line 144, ../sass/screen.scss */
 #centerBlock {
   width: 100%;
   float: left;
   display: block;
-  float: left;
-  height: 70%;
 }
 
-/* line 141, ../sass/screen.scss */
+/* line 150, ../sass/screen.scss */
 #sidebar {
   float: left;
   width: 198px;
   height: 100%;
   background-color: #222;
-  padding-top: 10px;
   overflow-y: auto;
   overflow-x: hidden;
   position: relative;
@@ -1373,11 +1373,15 @@ body {
   -webkit-user-select: none;
   user-select: none;
 }
-/* line 153, ../sass/screen.scss */
+/* line 162, ../sass/screen.scss */
+#sidebar .sidebarFiles {
+  padding-top: 20px;
+}
+/* line 166, ../sass/screen.scss */
 #sidebar ul {
   cursor: default;
 }
-/* line 156, ../sass/screen.scss */
+/* line 169, ../sass/screen.scss */
 #sidebar ul li {
   font-size: 0.7em;
   color: #999;
@@ -1386,7 +1390,7 @@ body {
   color: #ccc;
   margin: 1px 6px;
 }
-/* line 165, ../sass/screen.scss */
+/* line 178, ../sass/screen.scss */
 #sidebar ul li i {
   font-size: 1.83em;
   vertical-align: middle;
@@ -1394,15 +1398,15 @@ body {
   margin-right: 3px;
   display: inline-block;
 }
-/* line 172, ../sass/screen.scss */
+/* line 185, ../sass/screen.scss */
 #sidebar ul li:hover {
   background-color: #000;
 }
-/* line 202, ../sass/screen.scss */
+/* line 215, ../sass/screen.scss */
 #sidebar ul .groupMainFile, #sidebar ul .groupSecondaryFiles, #sidebar ul .groupImageFiles, #sidebar ul .groupShaderFiles, #sidebar ul .groupPlainFiles, #sidebar ul .groupAudioFiles {
   margin-bottom: 6px;
 }
-/* line 206, ../sass/screen.scss */
+/* line 219, ../sass/screen.scss */
 #sidebar .button_add_file {
   background-color: transparent;
   border: 1px solid #333;
@@ -1417,37 +1421,40 @@ body {
   font-size: 0.7em;
   transition: background-color 0.1s ease;
 }
-/* line 220, ../sass/screen.scss */
+/* line 233, ../sass/screen.scss */
 #sidebar .button_add_file:hover {
   background-color: black;
 }
 
-/* line 225, ../sass/screen.scss */
+/* line 238, ../sass/screen.scss */
 .sidebar_resize_control {
-  background-color: #333;
+  background-color: #303030;
   height: 100%;
   width: 2px;
   float: left;
   cursor: ew-resize;
 }
 
-/* line 233, ../sass/screen.scss */
+/* line 246, ../sass/screen.scss */
 #mainEditor {
   float: left;
   width: 700px;
 }
 
-/* line 239, ../sass/screen.scss */
-.CodeMirror {
-  height: 490px;
-}
-
 /*
   BOTTOM BLOCK
  */
-/* line 247, ../sass/screen.scss */
+/* line 256, ../sass/screen.scss */
+.console_resize_control {
+  width: 100%;
+  height: 2px;
+  background-color: #111;
+  float: left;
+  cursor: ns-resize;
+}
+
+/* line 264, ../sass/screen.scss */
 #consoleWrap {
-  height: 140px;
   position: relative;
   width: 100%;
   overflow-y: scroll;
@@ -1457,24 +1464,24 @@ body {
   user-select: initial;
 }
 
-/* line 258, ../sass/screen.scss */
+/* line 274, ../sass/screen.scss */
 #console {
   float: left;
   width: 100%;
-  border-top: 2px solid #111;
   color: #666;
   font-size: 0.7em;
+  padding-bottom: 35px;
 }
-/* line 264, ../sass/screen.scss */
+/* line 280, ../sass/screen.scss */
 #console p {
   margin-left: 5px;
   margin-top: 5px;
 }
-/* line 268, ../sass/screen.scss */
+/* line 284, ../sass/screen.scss */
 #console .consoleMessage {
   color: #ffffff;
 }
-/* line 271, ../sass/screen.scss */
+/* line 287, ../sass/screen.scss */
 #console .consoleError {
   background-color: #DA3A61;
   color: #fff;
@@ -1486,7 +1493,12 @@ body {
 /*
   Codemirror
  */
-/* line 284, ../sass/screen.scss */
+/* line 300, ../sass/screen.scss */
+.CodeMirror {
+  height: 600px;
+}
+
+/* line 304, ../sass/screen.scss */
 .CodeMirror-hints {
   left: 281.484375px;
   width: 300px;
@@ -1495,12 +1507,12 @@ body {
   border: 1px solid #444;
 }
 
-/* line 292, ../sass/screen.scss */
+/* line 312, ../sass/screen.scss */
 .CodeMirror-hint-active {
   background: #000;
 }
 
-/* line 296, ../sass/screen.scss */
+/* line 316, ../sass/screen.scss */
 .CodeMirror-hint {
   color: #999999;
   font-family: Helvetica;
@@ -1517,30 +1529,30 @@ body {
 /*
   SCROLLBARS
  */
-/* line 313, ../sass/screen.scss */
+/* line 1, ../sass/_scrollbars.scss */
 ::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
   background-color: #222222;
 }
 
-/* line 318, ../sass/screen.scss */
+/* line 6, ../sass/_scrollbars.scss */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
   background-color: #333333;
 }
 
-/* line 324, ../sass/screen.scss */
+/* line 12, ../sass/_scrollbars.scss */
 ::-webkit-scrollbar-thumb {
   background-color: #000000;
 }
 
-/* line 328, ../sass/screen.scss */
+/* line 16, ../sass/_scrollbars.scss */
 ::-webkit-scrollbar-corner, ::-webkit-scrollbar-track-piece {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-/* line 332, ../sass/screen.scss */
+/* line 20, ../sass/_scrollbars.scss */
 ::-webkit-scrollbar {
   background-color: #f0f;
 }

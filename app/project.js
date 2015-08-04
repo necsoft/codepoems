@@ -17,6 +17,10 @@ var win = gui.Window.get();
 // Empty object for this project
 var project = {};
 
+// Resize ratios
+var center_block_ratio = 0.7;
+var console_block_ratio = 0.3;
+
 // CodeMirror editor default config
 var codemirror_config = {
     lineNumbers: true,
@@ -30,7 +34,7 @@ var codemirror_config = {
     theme: "codepoems-dark",
     foldGutter: true,
     tabSize: 2,
-    gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+    gutters: ["CodeMirror-foldgutter", "CodeMirror-linenumbers"],
     viewportMargin: Infinity,
 }
 
@@ -64,16 +68,17 @@ $(document).ready(function() {
     // Codemirror Stuff
     initCodeMirrorDocs();
 
+    // Check the actual size of the windows and set the style for that size
+    responsiveComponents();
+    resizablePanels();
+
     // Create the sidebar
     refreshSidebar();
 
     // Initialize handlers
     ui.setupHandlers(window, win, ctx);
 
-    // Check the actual size of the windows and set the style for that size
-    responsiveComponents();
 
-    resizablePanels();
 
     // Welcome message :)
     writeToConsole("Welcome to Codepoems!", "message");
@@ -105,16 +110,19 @@ $(window).resize(function() {
  */
 
 function responsiveComponents() {
-    var height_topbar = $("#upnav").height() + $("#mainNav").height();
-    $("#centerBlock,.CodeMirror, #mainEditor").height(($(window).height() - height_topbar) * 0.70);
-    $("#consoleWrap").height(($(window).height() - height_topbar) * 0.30);
 
-    // Resize del textarea
+    var h = $(window).height();
+    var h_top_block = $("#upnav").height() + $("#mainNav").height();
+
+    $("#centerBlock,.CodeMirror, #mainEditor").height((h - h_top_block) * center_block_ratio);
+    $("#consoleWrap").height((h - h_top_block) * (console_block_ratio));
+
+    // Resize del width textarea
     $("#mainEditor").width($(window).width() - $("#sidebar").width() - 2);
 }
 
 /*
-  responsiveComponents()
+  resizablePanels()
 
   Check if you are trying to resize some panel.
 
@@ -123,38 +131,61 @@ function responsiveComponents() {
 function resizablePanels() {
 
     var resizing_sidebar;
+    var resizing_console;
 
+    // Handle resize sidebar control
     $(".sidebar_resize_control").mousedown(function() {
         console.log("Tocado el sidebar");
         resizing_sidebar = true;
     });
 
-    $("body").mousemove(function(e) {
-        if (resizing_sidebar) {
-            //console.log("Moviendo!!!!!" + e.pageX);
+    // Handle console sidebar control
+    $(".console_resize_control").mousedown(function() {
+        console.log("Tocado el resize del console");
+        resizing_console = true;
+    });
 
+    // Drag action
+    $("body").mousemove(function(e) {
+
+        // Resize sidebar
+        if (resizing_sidebar) {
             var w = $(window).width();
             var m_x = e.pageX;
-
-
             var sidebar_size = m_x - 2;
             var text_area_size = w - m_x;
-
-
             if (sidebar_size > 180 && sidebar_size < 300) {
                 $("#sidebar").width(sidebar_size);
                 $("#mainEditor").width(text_area_size);
             }
-
-
-
         }
+
+        // Resize console
+        if (resizing_console) {
+            var m_y = e.pageY;
+            var h_top_block = $("#upnav").height() + $("#mainNav").height();
+            var h = $(window).height();
+            var console_size = h - m_y;
+            if (console_size > 40 && console_size < 400) {
+                center_block_ratio = (m_y - h_top_block) / h;
+                console_block_ratio = 1.0 - center_block_ratio;
+                responsiveComponents();
+            }
+        }
+
     })
 
+    // Release drag
     $("body").mouseup(function() {
+        // Release drag sidebar
         if (resizing_sidebar) {
             console.log("Dragueo el sidebar");
             resizing_sidebar = false;
+        };
+        // Release drag console
+        if (resizing_console) {
+            console.log("Dragueo el console");
+            resizing_console = false;
         };
     });
 
@@ -276,7 +307,11 @@ function getPlainFiles() {
 function getBufferedFiles() {
     var the_files = [];
     $.each(project.files, function(i, file) {
-        if (file.type === "main" || file.type === "secondary" || file.type === "shader" || file.type === "txt" || file.type === "json" || file.type === "xml") {
+        if (file.type === "main" ||
+            file.type === "secondary" ||
+            file.type === "shader" ||
+            file.type === "txt" ||
+            file.type === "json" || file.type === "xml") {
             the_files.push(file);
         };
     });
