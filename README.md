@@ -1,9 +1,12 @@
 ![](http://i.imgur.com/LdRYNfs.png?1)
 #Codepoems
-An experimental IDE for the amazing [Processing Language.](https://www.processing.org/). 
-![](http://i.imgur.com/u53Y6J6.png)
+An experimental IDE for the amazing [Processing Language.](https://www.processing.org/).
 
-# Features (some I currently working on)
+![](http://hinecsoft.com/codepoems/assets/screenshot_share_01.png)
+
+# Features
+(Some I currently working on)
+
 *	Live documentation
 *	Autocomplete
 *	Media Viewer
