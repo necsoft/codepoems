@@ -36,6 +36,9 @@ var codemirror_config = {
     tabSize: 2,
     gutters: ["CodeMirror-foldgutter", "CodeMirror-linenumbers"],
     viewportMargin: Infinity,
+    extraKeys: {
+        "Ctrl-Space": "autocomplete"
+    }
 }
 
 // Save this context

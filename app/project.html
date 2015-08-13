@@ -2,12 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Project Name</title>
-  <!-- Codemirror Styles -->
-  <link rel="stylesheet" href="codemirror/codemirror.css">
-  <link rel="stylesheet" href="codemirror/addon/fold/foldgutter.css">
-  <link rel="stylesheet" href="codemirror/addon/dialog/dialog.css">
-  <link rel="stylesheet" href="codemirror/addon/hint/show-hint.css">
+  <title>Codemirror</title>
+  <!-- Codemirror Default Styles -->
+  <link rel="stylesheet" href="../bower_components/codemirror/lib/codemirror.css">
+  <link rel="stylesheet" href="../bower_components/codemirror/addon/fold/foldgutter.css">
+  <link rel="stylesheet" href="../bower_components/codemirror/addon/dialog/dialog.css">
+  <link rel="stylesheet" href="../bower_components/codemirror/addon/hint/show-hint.css">
+  <!-- Themes -->
+  <link rel="stylesheet" href="../app/static/stylesheets/theme_codepoems_dark.css">
+  <link rel="stylesheet" href="../app/static/stylesheets/theme_monokai.css">
   <!-- Codepoems Styles -->
   <link rel="stylesheet" href="static/stylesheets/screen.css">
   <!-- Tooltip style -->
@@ -15,26 +18,29 @@
   <!-- Bower Components -->
   <script src="../bower_components/jquery/dist/jquery.min.js"></script>
   <!-- Codemirror -->
-  <script src="codemirror/codemirror.js"></script>
+  <script src="../bower_components/codemirror/lib/codemirror.js"></script>
   <!-- Inconsolata webfont -->
   <link href='http://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>
   <!-- Codemirror addons -->
-  <script src="codemirror/addon/search/searchcursor.js"></script>
-  <script src="codemirror/addon/search/search.js"></script>
-  <script src="codemirror/addon/fold/foldcode.js"></script>
-  <script src="codemirror/addon/fold/foldgutter.js"></script>
-  <script src="codemirror/addon/fold/brace-fold.js"></script>
-  <script src="codemirror/addon/dialog/dialog.js"></script>
-  <script src="codemirror/addon/edit/matchbrackets.js"></script>
-  <script src="codemirror/addon/edit/closebrackets.js"></script>
-  <script src="codemirror/addon/hint/show-hint.js"></script>
-  <script src="codemirror/addon/selection/active-line.js"></script>
-  <script src="codemirror/addon/tern/tern.js"></script>
-  <script src="codemirror/modes/processing/processing.js"></script>
-  <script src="codemirror/modes/clike/clike.js"></script>
-  <script src="codemirror/modes/javascript/javascript.js"></script>
-  <script src="codemirror/modes/xml/xml.js"></script>
-  <script src="codemirror/keymap/sublime.js"></script>
+  <script src="../bower_components/codemirror/addon/search/searchcursor.js"></script>
+  <script src="../bower_components/codemirror/addon/search/search.js"></script>
+  <script src="../bower_components/codemirror/addon/search/match-highlighter.js"></script>
+  <script src="../bower_components/codemirror/addon/fold/foldcode.js"></script>
+  <script src="../bower_components/codemirror/addon/fold/foldgutter.js"></script>
+  <script src="../bower_components/codemirror/addon/fold/brace-fold.js"></script>
+  <script src="../bower_components/codemirror/addon/dialog/dialog.js"></script>
+  <script src="../bower_components/codemirror/addon/edit/matchbrackets.js"></script>
+  <script src="../bower_components/codemirror/addon/edit/closebrackets.js"></script>
+  <script src="../bower_components/codemirror/addon/hint/show-hint.js"></script>
+  <script src="../bower_components/codemirror/addon/hint/anyword-hint.js"></script>
+  <script src="../bower_components/codemirror/addon/selection/active-line.js"></script>
+  <script src="../bower_components/codemirror/addon/tern/tern.js"></script>
+  <script src="../bower_components/codemirror/mode/clike/clike.js"></script>
+  <script src="../bower_components/codemirror/mode/javascript/javascript.js"></script>
+  <script src="../bower_components/codemirror/mode/xml/xml.js"></script>
+  <script src="../bower_components/codemirror/keymap/sublime.js"></script>
+  <!-- Custom Processing Mode -->
+  <script src="processing-mode/processing.js"></script>
 </head>
 <body>
   <!-- UPNAV -->
@@ -89,6 +95,5 @@
   </div>
   <!-- APP -->
   <script src="project.js"></script>
-  <link rel="stylesheet" href="codemirror/codemirror.css">
 </body>
 </html>
