@@ -6,41 +6,60 @@
 
  */
 
+/*
+
+  Variables
+
+ */
+
+$bg_color: #222;
+$error_bg: rgba(152, 0, 0, 0.1);
+
+// Base colors
+$color01: #F0C674;
+$color02: #81A2BE;
+$color03: #CC6666;
+$color04: #3e999f;
+$color05: #c7d352;
+$color06: #DE935F;
+$color07: #B294BB;
+$color08: #8ABEB7;
+$color09: #E24E80;
 
 /*
 
-  Estructura
+  Structure
 
  */
 
 /* Estructura básica del CodeMirror */
 .cm-s-codepoems-dark.CodeMirror {
-    background: #222;
+    background: $bg_color;
     font-family: 'Inconsolata';
     font-size: 1em;
 }
 
 /* Este es el color de la selección*/
 .cm-s-codepoems-dark div.CodeMirror-selected {
-    background: #373b41 !important;
+    background: scale-lightness($bg_color, 10)!important;
 }
 
 /* El color de fondo de la barra a la izquierda que tiene los numeros */
 .cm-s-codepoems-dark .CodeMirror-gutters {
-    background: #111;
-    border-right: 1px solid #222;
+    background: shade($bg_color, 20);
+    border-right: 1px solid shade($bg_color, 30);
 }
 
 /* Este es el color de la flecha de la barra a la izquierda*/
 .cm-s-codepoems-dark .CodeMirror-guttermarker-subtle {
-    color: #999;
+    color: scale-lightness($bg_color, 10)!important;
 }
 
 /* Este es el color del texto que indica la altura */
 .cm-s-codepoems-dark .CodeMirror-linenumber {
     color: #454545;
     font-size: 0.7em;
-    padding-top:3px;
+    padding-top: 3px;
 }
 
 /* Color del cursor */
@@ -64,7 +83,6 @@
     color: #ccc;
 }
 
-
 /*
 
   Tokens
@@ -73,28 +91,28 @@
 
 /* Foreground */
 .cm-s-codepoems-dark.CodeMirror {
-  color: #C5C8C6;
+    color: #C5C8C6;
 }
 
 /* Color de los strings */
 .cm-s-codepoems-dark span.cm-string {
-    color: #F0C674;
+    color: $color01;
 }
 
 /* Comentarios */
 .cm-s-codepoems-dark span.cm-comment {
-    color: #666;
+    color: scale-lightness($bg_color, 20);
 }
 
 /* Builtin */
 .cm-s-codepoems-dark span.cm-builtin {
-    color: #81A2BE;
+    color: $color02;
     font-weight: bold;
 }
 
-/* Keyword */ 
+/* Keyword */
 .cm-s-codepoems-dark span.cm-keyword {
-    color: #CC6666;
+    color: $color03;
 }
 
 /* Keyword */
@@ -104,61 +122,73 @@
 
 /* Keyword */
 .cm-s-codepoems-dark span.cm-variable-2 {
-    color: #3e999f;
+    color: $color04;
 }
 
 /* Este es el color de los atoms, el true y el false*/
 .cm-s-codepoems-dark span.cm-atom {
-    color: #c7d352;
+    color: $color05;
 }
 
 /* El color de los numeros */
 .cm-s-codepoems-dark span.cm-number {
-    color: #DE935F;
+    color: $color06
 }
 
 /* El color de los operadores */
 .cm-s-codepoems-dark span.cm-operator {
-    color: #c7d352;
+    color: $color05;
 }
 
 /* Este es el color de los blockKeyword*/
 .cm-s-codepoems-dark span.cm-blockKeyword {
-    color: #B294BB;
+    color: $color07;
 }
 
 /* Este es el color de los outerBlockKeyword*/
 .cm-s-codepoems-dark span.cm-outerBlockKeyword {
-    color: #8ABEB7;
+    color: $color08;
 }
 
 /* Contant keywords */
-.cm-s-codepoems-dark span.cm-constantKeyword{
-  color: #E24E80;
-  font-weight: bold;
+.cm-s-codepoems-dark span.cm-constantKeyword {
+    color: $color09;
+    font-weight: bold;
 }
-
 
 /*
   PARA LOS XML Y JSON 
  */
 
-.cm-s-codepoems-dark span.cm-tag {color: #DE935F;}
-.cm-s-codepoems-dark span.cm-link {color: #B294BB;}
-.cm-s-codepoems-dark span.cm-property, .cm-s-codepoems-dark span.cm-attribute {color: #3e999f;}
+.cm-s-codepoems-dark span.cm-tag {
+    color: $color06
+}
 
+.cm-s-codepoems-dark span.cm-link {
+    color: $color07;
+}
+
+.cm-s-codepoems-dark span.cm-property, .cm-s-codepoems-dark span.cm-attribute {
+    color: $color04;
+}
 
 /*
   ERROR
  */
 
-
-.error{
-  border: 2px solid rgba(255, 0, 0, 0.40);
+.error,.CodeMirror-gutter-background {
+    //border: 1px solid rgba(255, 0, 0, 0.1) !important;
+    width:100% !important;
+    left:0 !important;
+    background-color: $error_bg !important;
 }
 
 
+/*
+  ADDON STYLES
+ */
 
-
-
-
+.CodeMirror-foldmarker{
+  color:scale-lightness($bg_color, 30)!important;
+  text-shadow:none;
+}

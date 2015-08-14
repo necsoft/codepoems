@@ -9,26 +9,61 @@
 
 /*
 
+  Variables
+
+ */
+
+$bg_color :#272822;
+
+/* 
+
+  UI
+
+*/
+#sidebar{
+    background-color: shade($bg_color, 20) !important;
+}
+
+#consoleWrap{
+    background-color: shade($bg_color, 10) !important;
+}
+
+#mainNav{
+  background-color: shade($bg_color, 20) !important;
+}
+
+#upnav{
+  
+  background-color: scale-lightness($bg_color, 1)!important;
+}
+
+.sidebar_resize_control {
+    background-color: shade($bg_color, 10) !important;
+}
+
+
+/*
+
   Estructura
 
  */
 
 /* Estructura básica del CodeMirror */
 .cm-s-monokai.CodeMirror {
-    background: #272822;
+    background: $bg_color;
     font-family: 'Inconsolata';
     font-size: 1em;
 }
 
 /* Este es el color de la selección*/
 .cm-s-monokai div.CodeMirror-selected {
-    background: #373b41 !important;
+    background: shade($bg_color, 20)!important;
 }
 
 /* El color de fondo de la barra a la izquierda que tiene los numeros */
 .cm-s-monokai .CodeMirror-gutters {
-    background: #111;
-    border-right: 1px solid #222;
+    background: shade($bg_color, 20);
+    border-right: 1px solid shade($bg_color, 50);
 }
 
 /* Este es el color de la flecha de la barra a la izquierda*/
@@ -39,7 +74,8 @@
 /* Este es el color del texto que indica la altura */
 .cm-s-monokai .CodeMirror-linenumber {
     color: #454545;
-    font-size: 0.7em;
+    font-family: Helvetica;
+    font-size: 0.6em;
     padding-top:3px;
 }
 

@@ -659,8 +659,6 @@ function errorHighlighter(msg) {
     // Search for the location of the error  in the log message
     var r_error_location = /([0-9]+)(:[0-9]+)(:[0-9]+)(:[0-9]+)/;
 
-
-
     // MISSING SEMICOLON ERROR
     if (missing_semicolon.test(msg)) {
         var error_location = msg.match(r_error_location)[0];

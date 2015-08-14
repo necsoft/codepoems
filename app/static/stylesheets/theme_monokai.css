@@ -8,11 +8,46 @@
  */
 /*
 
+  Variables
+
+ */
+/* 
+
+  UI
+
+*/
+/* line 23, ../sass/theme_monokai.scss */
+#sidebar {
+  background-color: #1f201b !important;
+}
+
+/* line 27, ../sass/theme_monokai.scss */
+#consoleWrap {
+  background-color: #23241e !important;
+}
+
+/* line 31, ../sass/theme_monokai.scss */
+#mainNav {
+  background-color: #1f201b !important;
+}
+
+/* line 35, ../sass/theme_monokai.scss */
+#upnav {
+  background-color: #292a24 !important;
+}
+
+/* line 40, ../sass/theme_monokai.scss */
+.sidebar_resize_control {
+  background-color: #23241e !important;
+}
+
+/*
+
   Estructura
 
  */
 /* Estructura básica del CodeMirror */
-/* line 17, ../sass/theme_monokai.scss */
+/* line 52, ../sass/theme_monokai.scss */
 .cm-s-monokai.CodeMirror {
   background: #272822;
   font-family: 'Inconsolata';
@@ -20,53 +55,54 @@
 }
 
 /* Este es el color de la selección*/
-/* line 24, ../sass/theme_monokai.scss */
+/* line 59, ../sass/theme_monokai.scss */
 .cm-s-monokai div.CodeMirror-selected {
-  background: #373b41 !important;
+  background: #1f201b !important;
 }
 
 /* El color de fondo de la barra a la izquierda que tiene los numeros */
-/* line 29, ../sass/theme_monokai.scss */
+/* line 64, ../sass/theme_monokai.scss */
 .cm-s-monokai .CodeMirror-gutters {
-  background: #111;
-  border-right: 1px solid #222;
+  background: #1f201b;
+  border-right: 1px solid #131411;
 }
 
 /* Este es el color de la flecha de la barra a la izquierda*/
-/* line 35, ../sass/theme_monokai.scss */
+/* line 70, ../sass/theme_monokai.scss */
 .cm-s-monokai .CodeMirror-guttermarker-subtle {
   color: #999;
 }
 
 /* Este es el color del texto que indica la altura */
-/* line 40, ../sass/theme_monokai.scss */
+/* line 75, ../sass/theme_monokai.scss */
 .cm-s-monokai .CodeMirror-linenumber {
   color: #454545;
-  font-size: 0.7em;
+  font-family: Helvetica;
+  font-size: 0.6em;
   padding-top: 3px;
 }
 
 /* Color del cursor */
-/* line 47, ../sass/theme_monokai.scss */
+/* line 83, ../sass/theme_monokai.scss */
 .cm-s-monokai .CodeMirror-cursor {
   border-left: 2px solid #fff !important;
 }
 
 /* Este es le color de la linea activa */
-/* line 52, ../sass/theme_monokai.scss */
+/* line 88, ../sass/theme_monokai.scss */
 .cm-s-monokai .CodeMirror-activeline-background {
   background: #272727 !important;
 }
 
 /* Este es el color de los brackets que matchean */
-/* line 57, ../sass/theme_monokai.scss */
+/* line 93, ../sass/theme_monokai.scss */
 .cm-s-monokai .CodeMirror-matchingbracket {
   text-decoration: underline;
   color: white !important;
 }
 
 /* El color de las llaves */
-/* line 63, ../sass/theme_monokai.scss */
+/* line 99, ../sass/theme_monokai.scss */
 .cm-s-monokai span.cm-bracket {
   color: #ccc;
 }
@@ -77,80 +113,80 @@
 
  */
 /* Foreground */
-/* line 75, ../sass/theme_monokai.scss */
+/* line 111, ../sass/theme_monokai.scss */
 .cm-s-monokai.CodeMirror {
   color: #F8F8F2;
 }
 
 /* Color de los strings */
-/* line 80, ../sass/theme_monokai.scss */
+/* line 116, ../sass/theme_monokai.scss */
 .cm-s-monokai span.cm-string {
   color: #FD971F;
 }
 
 /* Comentarios */
-/* line 85, ../sass/theme_monokai.scss */
+/* line 121, ../sass/theme_monokai.scss */
 .cm-s-monokai span.cm-comment {
   color: #75715E;
 }
 
 /* Builtin */
-/* line 90, ../sass/theme_monokai.scss */
+/* line 126, ../sass/theme_monokai.scss */
 .cm-s-monokai span.cm-builtin {
   color: #F92672;
   font-weight: bold;
 }
 
 /* Keyword */
-/* line 96, ../sass/theme_monokai.scss */
+/* line 132, ../sass/theme_monokai.scss */
 .cm-s-monokai span.cm-keyword {
   color: #66D9EF;
 }
 
 /* Keyword */
-/* line 101, ../sass/theme_monokai.scss */
+/* line 137, ../sass/theme_monokai.scss */
 .cm-s-monokai span.cm-variable {
   color: #ccc;
 }
 
 /* Keyword */
-/* line 106, ../sass/theme_monokai.scss */
+/* line 142, ../sass/theme_monokai.scss */
 .cm-s-monokai span.cm-variable-2 {
   color: #3e999f;
 }
 
 /* Este es el color de los atoms, el true y el false*/
-/* line 111, ../sass/theme_monokai.scss */
+/* line 147, ../sass/theme_monokai.scss */
 .cm-s-monokai span.cm-atom {
   color: #c7d352;
 }
 
 /* El color de los numeros */
-/* line 116, ../sass/theme_monokai.scss */
+/* line 152, ../sass/theme_monokai.scss */
 .cm-s-monokai span.cm-number {
   color: #A6E22E;
 }
 
 /* El color de los operadores */
-/* line 121, ../sass/theme_monokai.scss */
+/* line 157, ../sass/theme_monokai.scss */
 .cm-s-monokai span.cm-operator {
   color: #66D9EF;
 }
 
 /* Este es el color de los blockKeyword*/
-/* line 126, ../sass/theme_monokai.scss */
+/* line 162, ../sass/theme_monokai.scss */
 .cm-s-monokai span.cm-blockKeyword {
   color: #AE81FF;
 }
 
 /* Este es el color de los outerBlockKeyword*/
-/* line 131, ../sass/theme_monokai.scss */
+/* line 167, ../sass/theme_monokai.scss */
 .cm-s-monokai span.cm-outerBlockKeyword {
   color: #66D9EF;
 }
 
 /* Contant keywords */
-/* line 136, ../sass/theme_monokai.scss */
+/* line 172, ../sass/theme_monokai.scss */
 .cm-s-monokai span.cm-constantKeyword {
   color: #AE81FF;
   font-weight: bold;
@@ -159,23 +195,23 @@
 /*
   PARA LOS XML Y JSON 
  */
-/* line 146, ../sass/theme_monokai.scss */
+/* line 182, ../sass/theme_monokai.scss */
 .cm-s-monokai span.cm-tag {
   color: #F92672;
 }
 
-/* line 147, ../sass/theme_monokai.scss */
+/* line 183, ../sass/theme_monokai.scss */
 .cm-s-monokai span.cm-link {
   color: #66D9EF;
 }
 
-/* line 148, ../sass/theme_monokai.scss */
+/* line 184, ../sass/theme_monokai.scss */
 .cm-s-monokai span.cm-property, .cm-s-monokai span.cm-attribute {
   color: #A6E22E;
 }
 
 /**/
-/* line 154, ../sass/theme_monokai.scss */
+/* line 190, ../sass/theme_monokai.scss */
 .error {
   border: 2px solid rgba(255, 0, 0, 0.4);
 }

@@ -1302,7 +1302,7 @@ body {
 }
 
 /* line 99, ../sass/screen.scss */
-.upnav {
+#upnav {
   -webkit-app-region: drag;
   background-color: #383838;
   width: 100%;
@@ -1428,7 +1428,7 @@ body {
 
 /* line 238, ../sass/screen.scss */
 .sidebar_resize_control {
-  background-color: #303030;
+  background-color: rgba(0, 0, 0, 0.8);
   height: 100%;
   width: 2px;
   float: left;
