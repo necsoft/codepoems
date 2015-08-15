@@ -190,9 +190,67 @@
 }
 
 /*
+  SEARCH BOX
+ */
+/* line 189, ../sass/theme_codepoems_dark.scss */
+.cm-searching {
+  background-color: rgba(226, 78, 128, 0.1);
+}
+
+/* line 193, ../sass/theme_codepoems_dark.scss */
+.CodeMirror-dialog {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background: inherit;
+  z-index: 15;
+  padding: .1em .8em;
+  overflow: hidden;
+  color: inherit;
+  font-family: 'Inconsolata';
+  font-size: 1em;
+}
+
+/* line 205, ../sass/theme_codepoems_dark.scss */
+.CodeMirror-dialog-top {
+  border-bottom: 1px solid #eee;
+  top: 0;
+}
+
+/* line 210, ../sass/theme_codepoems_dark.scss */
+.CodeMirror-dialog-bottom {
+  border-top: 1px solid #eee;
+  bottom: 0;
+}
+
+/* line 215, ../sass/theme_codepoems_dark.scss */
+.CodeMirror-dialog input {
+  border: none;
+  outline: none;
+  background: transparent;
+  color: inherit;
+  width: 90% !important;
+  font-size: 1em;
+  font-family: 'Inconsolata';
+}
+
+/* line 225, ../sass/theme_codepoems_dark.scss */
+.CodeMirror-dialog-top {
+  border-bottom: 1px solid #3C3C3C;
+  top: 0;
+  padding: 10px 0;
+  background-color: #333;
+}
+
+/* line 232, ../sass/theme_codepoems_dark.scss */
+.CodeMirror-search-hint {
+  display: none;
+}
+
+/*
   ADDON STYLES
  */
-/* line 191, ../sass/theme_codepoems_dark.scss */
+/* line 240, ../sass/theme_codepoems_dark.scss */
 .CodeMirror-foldmarker {
   color: #646464 !important;
   text-shadow: none;

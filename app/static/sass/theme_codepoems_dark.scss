@@ -177,12 +177,61 @@ $color09: #E24E80;
  */
 
 .error,.CodeMirror-gutter-background {
-    //border: 1px solid rgba(255, 0, 0, 0.1) !important;
     width:100% !important;
     left:0 !important;
     background-color: $error_bg !important;
 }
 
+/*
+  SEARCH BOX
+ */
+
+.cm-searching{
+  background-color: rgba($color09, 0.1);
+}
+
+.CodeMirror-dialog {
+  position: absolute;
+  left: 0; right: 0;
+  background: inherit;
+  z-index: 15;
+  padding: .1em .8em;
+  overflow: hidden;
+  color: inherit;
+  font-family:'Inconsolata';
+  font-size:1em;
+}
+
+.CodeMirror-dialog-top {
+  border-bottom: 1px solid #eee;
+  top: 0;
+}
+
+.CodeMirror-dialog-bottom {
+  border-top: 1px solid #eee;
+  bottom: 0;
+}
+
+.CodeMirror-dialog input {
+  border: none;
+  outline: none;
+  background: transparent;
+  color: inherit;
+  width:90% !important;
+  font-size:1em;
+  font-family:'Inconsolata';
+}
+
+.CodeMirror-dialog-top{
+  border-bottom: 1px solid #3C3C3C;
+  top: 0;
+  padding: 10px 0;
+  background-color: #333; 
+}
+
+.CodeMirror-search-hint{
+  display:none;
+}
 
 /*
   ADDON STYLES
@@ -192,3 +241,4 @@ $color09: #E24E80;
   color:scale-lightness($bg_color, 30)!important;
   text-shadow:none;
 }
+
