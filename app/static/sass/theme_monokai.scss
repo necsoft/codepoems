@@ -15,6 +15,16 @@
 
 $bg_color :#272822;
 
+
+$color01: #FD971F;
+$color02: #F92672;
+$color03: #66D9EF;
+$color04: #3e999f;
+$color05: #c7d352;
+$color06: #A6E22E;
+$color07: #AE81FF;
+$color08: #ffffff;
+
 /* 
 
   UI
@@ -114,23 +124,23 @@ $bg_color :#272822;
 
 /* Color de los strings */
 .cm-s-monokai span.cm-string {
-    color: #FD971F;
+    color: $color01;
 }
 
 /* Comentarios */
 .cm-s-monokai span.cm-comment {
-    color: #75715E;
+    color: scale-lightness($bg_color, 20);
 }
 
 /* Builtin */
 .cm-s-monokai span.cm-builtin {
-    color: #F92672;
+    color: $color02;
     font-weight: bold;
 }
 
 /* Keyword */ 
 .cm-s-monokai span.cm-keyword {
-    color: #66D9EF;
+    color: $color03;
 }
 
 /* Keyword */
@@ -140,37 +150,37 @@ $bg_color :#272822;
 
 /* Keyword */
 .cm-s-monokai span.cm-variable-2 {
-    color: #3e999f;
+    color: $color04;
 }
 
 /* Este es el color de los atoms, el true y el false*/
 .cm-s-monokai span.cm-atom {
-    color: #c7d352;
+    color: $color05;
 }
 
 /* El color de los numeros */
 .cm-s-monokai span.cm-number {
-    color: #A6E22E;
+    color: $color06;
 }
 
 /* El color de los operadores */
 .cm-s-monokai span.cm-operator {
-    color: #66D9EF;
+    color: $color03;
 }
 
 /* Este es el color de los blockKeyword*/
 .cm-s-monokai span.cm-blockKeyword {
-    color: #AE81FF;
+    color: $color07;
 }
 
 /* Este es el color de los outerBlockKeyword*/
 .cm-s-monokai span.cm-outerBlockKeyword {
-    color: #66D9EF;
+    color: $color03;
 }
 
 /* Contant keywords */
 .cm-s-monokai span.cm-constantKeyword{
-  color: #AE81FF;
+  color: $color07;
   font-weight: bold;
 }
 
@@ -179,14 +189,18 @@ $bg_color :#272822;
   PARA LOS XML Y JSON 
  */
 
-.cm-s-monokai span.cm-tag {color: #F92672;}
-.cm-s-monokai span.cm-link {color: #66D9EF;}
-.cm-s-monokai span.cm-property, .cm-s-monokai span.cm-attribute {color: #A6E22E;}
+.cm-s-monokai span.cm-tag {color: $color02;}
+.cm-s-monokai span.cm-link {color: $color03;}
+.cm-s-monokai span.cm-property, .cm-s-monokai span.cm-attribute {color: $color06;}
 
 
-/**/
+/*
+  ERROR
+ */
 
-
-.error{
-  border: 2px solid rgba(255, 0, 0, 0.40);
+.error,.CodeMirror-gutter-background {
+    //border: 1px solid rgba(255, 0, 0, 0.1) !important;
+    width:100% !important;
+    left:0 !important;
+    background-color: $error_bg !important;
 }
