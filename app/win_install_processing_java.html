@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Oops!</title>
+  <link rel="stylesheet" href="static/stylesheets/win.css">
+  <link rel="stylesheet" href="static/stylesheets/win_install_processing_java.css">
+</head>
+<body>
+  <h1 class="alertHeading">You must have processing-java installed.</h1>
+  <img src="static/img/install_processing_java.gif"class="exampleGif">
+  <script>
+    // Dependencies
+    var gui = require('nw.gui');
+    var ui = require('./ui.js');
+    var win = gui.Window.get();
+    // Handle the close of the window
+    win.on('close', function() {
+      this.hide();
+      this.close(true);
+      gui.App.closeAllWindows();
+    });
+  </script>
+</body>
+</html>

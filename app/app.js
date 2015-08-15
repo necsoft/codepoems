@@ -9,6 +9,7 @@ var fs = require('fs');
 var readdirp = require('readdirp');
 var ui = require('./ui.js');
 var path = require('path');
+var exec = require('child_process').exec;
 
 // App information
 global.app = {};
@@ -35,7 +36,6 @@ global.app.settings = require('./settings.json');
 
 // Read the example files
 global.app.example_files = [];
-
 readdirp({
     root: './examples/',
     depth: 3
@@ -45,5 +45,36 @@ readdirp({
     };
 });
 
-// Create the initial UI
-ui.setupUi();
+// Create the initial UI if the user has processing-java
+check_processing_java(function(data) {
+    if (data) {
+        ui.setupUi();
+    } else {
+        //alert("You have to install processing-java.");
+        // var gui = window.require("nw.gui");
+        // var win = gui.Window.get();
+        // win.close();
+        ui.installProcessingJava();
+    };
+});
+
+/*
+
+  check_processing_java()
+
+  Check if processing java exists in the 
+
+ */
+
+function check_processing_java(callback) {
+    var child = exec('which ' + 'processing-java');
+    var data = false;
+
+    child.stdout.on('data', function() {
+        data = true;
+    });
+
+    child.on('close', function() {
+        callback(data);
+    });
+}

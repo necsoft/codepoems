@@ -27,6 +27,23 @@ exports.setupUi = function() {
 }
 
 /*
+  installProcessingJava();
+
+  Help window if user doesn't have processing-java
+
+ */
+
+exports.installProcessingJava = function() {
+    var gui = window.require("nw.gui");
+    gui.Window.open('win_install_processing_java.html', {
+        "width": 600,
+        "height": 400,
+        "toolbar": false,
+        "resizable": false
+    });
+}
+
+/*
   setupHandlers()
 
   Setup the initial handlers of the current project.
@@ -202,7 +219,7 @@ exports.refreshSidebarHandlers = function(window, win, ctx) {
 
 function setDefaultSettings() {
     exports.actions_change_font_size(global.app.settings.font_size);
-    global.app.focused_project.ctx.$("head").append('<link rel="stylesheet" title="theme" href="codemirror/themes/' + global.app.settings.theme + '.css">');
+    //global.app.focused_project.ctx.$("head").append('<link rel="stylesheet" title="theme" href="codemirror/themes/' + global.app.settings.theme + '.css">');
     global.app.focused_project.editor.setOption("theme", global.app.settings.theme);
 }
 
@@ -713,8 +730,6 @@ function action_close_secondary_windows() {
 
 exports.refresh_live_documentation = function(selectedText) {
     if (global.app.live_documentation_window) {
-        // console.log(global.app.live_documentation_window);
-        //global.app.live_documentation_window.window.ctx.culo();
         global.app.live_documentation_window.window.searchInDocumentation(selectedText);
     }
 }

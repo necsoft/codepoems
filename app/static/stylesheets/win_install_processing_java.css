@@ -1,0 +1,13 @@
+/* line 1, ../sass/win_install_processing_java.scss */
+.alertHeading {
+  text-align: center;
+  font-size: 1em;
+  margin: 50px;
+}
+
+/* line 7, ../sass/win_install_processing_java.scss */
+.exampleGif {
+  margin: 30px auto;
+  display: block;
+  text-align: center;
+}
