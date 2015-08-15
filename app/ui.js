@@ -161,15 +161,6 @@ exports.setupHandlers = function(window, win, ctx) {
         actions_add_file();
     });
 
-
-    // This is a temporal debug function
-    $button_log_project.click(function() {
-        console.log("global.app.focused_project");
-        console.log(global.app.focused_project);
-        console.log("global.app");
-        console.log(global.app);
-    });
-
 }
 
 
