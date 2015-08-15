@@ -98,6 +98,17 @@ $(document).ready(function() {
         ui.refresh_live_documentation(project.editor.getSelection());
     });
 
+    // Experimento creado para poder indentar
+    CodeMirror.defineExtension("indentDocument", function(from, to) {
+        var cmInstance = this;
+        console.log(cmInstance);
+        this.operation(function() {
+            for (var i = 0; i <= project.editor.doc.size; i++) {
+                cmInstance.indentLine(i, "smart");
+            }
+        });
+    });
+
 });
 
 // Handle the resize of the window

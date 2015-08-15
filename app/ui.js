@@ -70,6 +70,7 @@ exports.setupHandlers = function(window, win, ctx) {
         "Cmd-S": save_keymap,
         "Cmd-N": p5manager.newProject,
         "Cmd-W": actions_quit,
+        "Cmd-T": actions_indent,
         "F12": actions_devTool
     };
 
@@ -723,4 +724,11 @@ exports.refresh_live_documentation = function(selectedText) {
     if (global.app.live_documentation_window) {
         global.app.live_documentation_window.window.searchInDocumentation(selectedText);
     }
+}
+
+
+
+
+function actions_indent() {
+    global.app.focused_project.editor.indentDocument();
 }
