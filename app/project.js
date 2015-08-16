@@ -81,7 +81,15 @@ $(document).ready(function() {
     // Initialize handlers
     ui.setupHandlers(window, win, ctx);
 
-
+    // Prevent drop images in the UI
+    window.addEventListener("dragover", function(e) {
+        e = e || event;
+        e.preventDefault();
+    }, false);
+    window.addEventListener("drop", function(e) {
+        e = e || event;
+        e.preventDefault();
+    }, false);
 
     // Welcome message :)
     writeToConsole("Welcome to Codepoems!", "message");
