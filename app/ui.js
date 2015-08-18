@@ -8,6 +8,7 @@
 
 var gui = window.require("nw.gui");
 var fs = require("fs");
+var path = require("path");
 var p5manager = require('./p5manager.js');
 var win = gui.Window.get();
 var focused_ctx;
@@ -180,6 +181,7 @@ exports.refreshSidebarHandlers = function(window, win, ctx) {
     $button_sidebar_secondary_file = $(".secondaryFile");
     $button_sidebar_shader_file = $(".shaderFile");
     $button_sidebar_plain_file = $(".plainFile");
+    $button_sidebar_image_file = $(".imageFile");
 
     $button_sidebar_main_file.click(function() {
         actions_sidebar_swap_main_file();
@@ -187,15 +189,20 @@ exports.refreshSidebarHandlers = function(window, win, ctx) {
 
     $button_sidebar_secondary_file.click(function() {
         actions_sidebar_swap_secondary_file($(this).index());
-    })
+    });
 
     $button_sidebar_shader_file.click(function() {
         actions_sidebar_swap_shader_file($(this).index());
-    })
+    });
 
     $button_sidebar_plain_file.click(function() {
         actions_sidebar_swap_plain_file($(this).index());
+    });
+
+    $button_sidebar_image_file.click(function() {
+        actions_sidebar_view_image($(this).index());
     })
+
 
 };
 
@@ -647,7 +654,23 @@ function actions_sidebar_swap_plain_file(index) {
     focused_ctx.window.swapDoc("plain", index);
 }
 
+/*
+  actions_sidebar_view_image
 
+  Media viewer action.
+  
+ */
+
+function actions_sidebar_view_image(index) {
+    var images = focused_ctx.window.getImageFiles();
+    var the_image = images[index];
+    var abs_path_to_image = global.app.focused_project.directory + path.sep + the_image.rel_path;
+
+    var gui = global.app.focused_win.window.require("nw.gui");
+    global.app.examples_window = gui.Window.open("file://" + abs_path_to_image, {
+        "toolbar": false,
+    });
+}
 
 /*
   actions_change_font_size();
