@@ -185,7 +185,6 @@
 /* line 179, ../sass/theme_codepoems_dark.scss */
 .error, .CodeMirror-gutter-background {
   width: 100% !important;
-  left: 0 !important;
   background-color: rgba(152, 0, 0, 0.1) !important;
 }
 

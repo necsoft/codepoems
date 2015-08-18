@@ -411,9 +411,11 @@ function initCodeMirrorDocs() {
 
 function swapDoc(type, index) {
     if (type === "main") {
+        clearErrors();
         project.editor.swapDoc(getMainFile().doc);
     }
     if (type === "secondary") {
+        clearErrors();
         project.editor.swapDoc(getSecondaryFiles()[index].doc);
     }
     if (type === "shader") {
