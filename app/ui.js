@@ -586,6 +586,7 @@ function actions_add_file() {
     var start_with_number;
     var is_main_file_name;
     var has_extension;
+    var is_duplicated = false;
 
     // Validates presence
     if (prompt_value === "") {
@@ -623,8 +624,17 @@ function actions_add_file() {
         actions_add_file();
     }
 
+    // Validates duplication
+    for (var i = 0; i < global.app.focused_project.files.length; i++) {
+        if (global.app.focused_project.files[i].name === prompt_value) {
+            is_duplicated = true;
+            focused_ctx.alert("Duplicated file.");
+            actions_add_file();
+        }
+    };
+
     // Validates all
-    if (!is_empty && !start_with_number && !is_main_file_name && has_extension) {
+    if (!is_empty && !start_with_number && !is_main_file_name && has_extension && !is_duplicated) {
         the_extension = prompt_value.split(".")[1];
         global.app.focused_ctx.addFileToProject(prompt_value, the_extension);
     }
