@@ -588,6 +588,7 @@ function actions_add_file() {
     var is_main_file_name;
     var has_extension;
     var is_duplicated = false;
+    var has_spaces = false;
 
     // Validates presence
     if (prompt_value === "") {
@@ -634,8 +635,15 @@ function actions_add_file() {
         }
     };
 
+    // Validate spaces
+    if (prompt_value.indexOf(' ') >= 0) {
+        has_spaces = true;
+        focused_ctx.alert("Name it without spaces.");
+        actions_add_file();
+    };
+
     // Validates all
-    if (!is_empty && !start_with_number && !is_main_file_name && has_extension && !is_duplicated) {
+    if (!is_empty && !start_with_number && !is_main_file_name && has_extension && !is_duplicated && !has_spaces) {
         the_extension = prompt_value.split(".")[1];
         global.app.focused_ctx.addFileToProject(prompt_value, the_extension);
     }
