@@ -10,6 +10,7 @@ var readdirp = require('readdirp');
 var ui = require('./ui.js');
 var path = require('path');
 var exec = require('child_process').exec;
+var rimraf = require('rimraf');
 
 // App information
 global.app = {};
@@ -50,13 +51,12 @@ check_processing_java(function(data) {
     if (data) {
         ui.setupUi();
     } else {
-        //alert("You have to install processing-java.");
-        // var gui = window.require("nw.gui");
-        // var win = gui.Window.get();
-        // win.close();
         ui.installProcessingJava();
     };
 });
+
+// Delete temporals
+rimraf("./app/tmp/", function() {});
 
 /*
 
