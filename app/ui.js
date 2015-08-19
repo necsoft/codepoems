@@ -9,6 +9,7 @@
 var gui = window.require("nw.gui");
 var fs = require("fs");
 var path = require("path");
+var sizeOf = require('image-size');
 var p5manager = require('./p5manager.js');
 var win = gui.Window.get();
 var focused_ctx;
@@ -675,11 +676,16 @@ function actions_sidebar_view_image(index) {
     var images = focused_ctx.window.getImageFiles();
     var the_image = images[index];
     var abs_path_to_image = global.app.focused_project.directory + path.sep + the_image.rel_path;
-
     var gui = global.app.focused_win.window.require("nw.gui");
-    global.app.examples_window = gui.Window.open("file://" + abs_path_to_image, {
-        "toolbar": false,
+
+    sizeOf(abs_path_to_image, function(err, dimensions) {
+        global.app.examples_window = gui.Window.open("file://" + abs_path_to_image, {
+            "toolbar": false,
+            "width": dimensions.width,
+            "height": dimensions.height
+        });
     });
+
 }
 
 /*

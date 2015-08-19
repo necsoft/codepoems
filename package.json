@@ -1,29 +1,30 @@
 {
-    "name": "codepoems",
-    "version": "0.0.1",
-    "description": "This an experimental IDE for Processing.",
-    "main": "app/app.html",
-    "author": "necsoft",
-    "repository": "https://github.com/necsoft/codepoems",
-    "window": {
-        "title": "Codepoems",
-        "always-on-top": true,
-        "toolbar": false,
-        "frame": false,
-        "show": false
-    },
-    "dependencies": {
-        "event-stream": "^3.3.1",
-        "fluidity": "*",
-        "mkdirp": "*",
-        "ncp": "^2.0.0",
-        "ps-node": "0.0.4",
-        "readdirp": "^1.3.0",
-        "rimraf": "^2.3.4",
-        "tree-kill": "^0.1.1"
-    },
-    "scripts": {
-        "build_osx64": "rm -rf build/osx64/ && nwbuild --version 0.12.2 --macIcns ./icon/codepoems.icns --platforms osx64 -o ./build/ ./",
-        "build_win64": "rm -rf build/win64/ && nwbuild --version 0.12.2 --winIco ./icon/codepoems.ico --platforms win64 -o ./build/ ./"
-    }
+  "name": "codepoems",
+  "version": "0.0.1",
+  "description": "This an experimental IDE for Processing.",
+  "main": "app/app.html",
+  "author": "necsoft",
+  "repository": "https://github.com/necsoft/codepoems",
+  "window": {
+    "title": "Codepoems",
+    "always-on-top": true,
+    "toolbar": false,
+    "frame": false,
+    "show": false
+  },
+  "dependencies": {
+    "event-stream": "^3.3.1",
+    "fluidity": "*",
+    "image-size": "^0.3.5",
+    "mkdirp": "*",
+    "ncp": "^2.0.0",
+    "ps-node": "0.0.4",
+    "readdirp": "^1.3.0",
+    "rimraf": "^2.3.4",
+    "tree-kill": "^0.1.1"
+  },
+  "scripts": {
+    "build_osx64": "rm -rf build/osx64/ && nwbuild --version 0.12.2 --macIcns ./icon/codepoems.icns --platforms osx64 -o ./build/ ./",
+    "build_win64": "rm -rf build/win64/ && nwbuild --version 0.12.2 --winIco ./icon/codepoems.ico --platforms win64 -o ./build/ ./"
+  }
 }
