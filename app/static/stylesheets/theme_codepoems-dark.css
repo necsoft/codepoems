@@ -17,7 +17,7 @@
 
  */
 /* Estructura básica del CodeMirror */
-/* line 36, ../sass/theme_codepoems_dark.scss */
+/* line 36, ../sass/theme_codepoems-dark.scss */
 .cm-s-codepoems-dark.CodeMirror {
   background: #222;
   font-family: 'Inconsolata';
@@ -25,26 +25,26 @@
 }
 
 /* Este es el color de la selección*/
-/* line 43, ../sass/theme_codepoems_dark.scss */
+/* line 43, ../sass/theme_codepoems-dark.scss */
 .cm-s-codepoems-dark div.CodeMirror-selected {
   background: #383838 !important;
 }
 
 /* El color de fondo de la barra a la izquierda que tiene los numeros */
-/* line 48, ../sass/theme_codepoems_dark.scss */
+/* line 48, ../sass/theme_codepoems-dark.scss */
 .cm-s-codepoems-dark .CodeMirror-gutters {
   background: #1b1b1b;
   border-right: 1px solid #171717;
 }
 
 /* Este es el color de la flecha de la barra a la izquierda*/
-/* line 54, ../sass/theme_codepoems_dark.scss */
+/* line 54, ../sass/theme_codepoems-dark.scss */
 .cm-s-codepoems-dark .CodeMirror-guttermarker-subtle {
   color: #383838 !important;
 }
 
 /* Este es el color del texto que indica la altura */
-/* line 59, ../sass/theme_codepoems_dark.scss */
+/* line 59, ../sass/theme_codepoems-dark.scss */
 .cm-s-codepoems-dark .CodeMirror-linenumber {
   color: #454545;
   font-size: 0.7em;
@@ -52,26 +52,26 @@
 }
 
 /* Color del cursor */
-/* line 66, ../sass/theme_codepoems_dark.scss */
+/* line 66, ../sass/theme_codepoems-dark.scss */
 .cm-s-codepoems-dark .CodeMirror-cursor {
   border-left: 2px solid #fff !important;
 }
 
 /* Este es le color de la linea activa */
-/* line 71, ../sass/theme_codepoems_dark.scss */
+/* line 71, ../sass/theme_codepoems-dark.scss */
 .cm-s-codepoems-dark .CodeMirror-activeline-background {
   background: #272727 !important;
 }
 
 /* Este es el color de los brackets que matchean */
-/* line 76, ../sass/theme_codepoems_dark.scss */
+/* line 76, ../sass/theme_codepoems-dark.scss */
 .cm-s-codepoems-dark .CodeMirror-matchingbracket {
   text-decoration: underline;
   color: white !important;
 }
 
 /* El color de las llaves */
-/* line 82, ../sass/theme_codepoems_dark.scss */
+/* line 82, ../sass/theme_codepoems-dark.scss */
 .cm-s-codepoems-dark span.cm-bracket {
   color: #ccc;
 }
@@ -82,80 +82,80 @@
 
  */
 /* Foreground */
-/* line 93, ../sass/theme_codepoems_dark.scss */
+/* line 93, ../sass/theme_codepoems-dark.scss */
 .cm-s-codepoems-dark.CodeMirror {
   color: #C5C8C6;
 }
 
 /* Color de los strings */
-/* line 98, ../sass/theme_codepoems_dark.scss */
+/* line 98, ../sass/theme_codepoems-dark.scss */
 .cm-s-codepoems-dark span.cm-string {
   color: #F0C674;
 }
 
 /* Comentarios */
-/* line 103, ../sass/theme_codepoems_dark.scss */
+/* line 103, ../sass/theme_codepoems-dark.scss */
 .cm-s-codepoems-dark span.cm-comment {
   color: #4e4e4e;
 }
 
 /* Builtin */
-/* line 108, ../sass/theme_codepoems_dark.scss */
+/* line 108, ../sass/theme_codepoems-dark.scss */
 .cm-s-codepoems-dark span.cm-builtin {
   color: #81A2BE;
   font-weight: bold;
 }
 
 /* Keyword */
-/* line 114, ../sass/theme_codepoems_dark.scss */
+/* line 114, ../sass/theme_codepoems-dark.scss */
 .cm-s-codepoems-dark span.cm-keyword {
   color: #CC6666;
 }
 
 /* Keyword */
-/* line 119, ../sass/theme_codepoems_dark.scss */
+/* line 119, ../sass/theme_codepoems-dark.scss */
 .cm-s-codepoems-dark span.cm-variable {
   color: #ccc;
 }
 
 /* Keyword */
-/* line 124, ../sass/theme_codepoems_dark.scss */
+/* line 124, ../sass/theme_codepoems-dark.scss */
 .cm-s-codepoems-dark span.cm-variable-2 {
   color: #3e999f;
 }
 
 /* Este es el color de los atoms, el true y el false*/
-/* line 129, ../sass/theme_codepoems_dark.scss */
+/* line 129, ../sass/theme_codepoems-dark.scss */
 .cm-s-codepoems-dark span.cm-atom {
   color: #c7d352;
 }
 
 /* El color de los numeros */
-/* line 134, ../sass/theme_codepoems_dark.scss */
+/* line 134, ../sass/theme_codepoems-dark.scss */
 .cm-s-codepoems-dark span.cm-number {
   color: #DE935F;
 }
 
 /* El color de los operadores */
-/* line 139, ../sass/theme_codepoems_dark.scss */
+/* line 139, ../sass/theme_codepoems-dark.scss */
 .cm-s-codepoems-dark span.cm-operator {
   color: #c7d352;
 }
 
 /* Este es el color de los blockKeyword*/
-/* line 144, ../sass/theme_codepoems_dark.scss */
+/* line 144, ../sass/theme_codepoems-dark.scss */
 .cm-s-codepoems-dark span.cm-blockKeyword {
   color: #B294BB;
 }
 
 /* Este es el color de los outerBlockKeyword*/
-/* line 149, ../sass/theme_codepoems_dark.scss */
+/* line 149, ../sass/theme_codepoems-dark.scss */
 .cm-s-codepoems-dark span.cm-outerBlockKeyword {
   color: #8ABEB7;
 }
 
 /* Contant keywords */
-/* line 154, ../sass/theme_codepoems_dark.scss */
+/* line 154, ../sass/theme_codepoems-dark.scss */
 .cm-s-codepoems-dark span.cm-constantKeyword {
   color: #E24E80;
   font-weight: bold;
@@ -164,17 +164,17 @@
 /*
   PARA LOS XML Y JSON 
  */
-/* line 163, ../sass/theme_codepoems_dark.scss */
+/* line 163, ../sass/theme_codepoems-dark.scss */
 .cm-s-codepoems-dark span.cm-tag {
   color: #DE935F;
 }
 
-/* line 167, ../sass/theme_codepoems_dark.scss */
+/* line 167, ../sass/theme_codepoems-dark.scss */
 .cm-s-codepoems-dark span.cm-link {
   color: #B294BB;
 }
 
-/* line 171, ../sass/theme_codepoems_dark.scss */
+/* line 171, ../sass/theme_codepoems-dark.scss */
 .cm-s-codepoems-dark span.cm-property, .cm-s-codepoems-dark span.cm-attribute {
   color: #3e999f;
 }
@@ -182,7 +182,7 @@
 /*
   ERROR
  */
-/* line 179, ../sass/theme_codepoems_dark.scss */
+/* line 179, ../sass/theme_codepoems-dark.scss */
 .error, .CodeMirror-gutter-background {
   width: 100% !important;
   background-color: rgba(152, 0, 0, 0.1) !important;
@@ -191,12 +191,12 @@
 /*
   SEARCH BOX
  */
-/* line 189, ../sass/theme_codepoems_dark.scss */
+/* line 189, ../sass/theme_codepoems-dark.scss */
 .cm-searching {
   background-color: rgba(226, 78, 128, 0.1);
 }
 
-/* line 193, ../sass/theme_codepoems_dark.scss */
+/* line 193, ../sass/theme_codepoems-dark.scss */
 .CodeMirror-dialog {
   position: absolute;
   left: 0;
@@ -210,19 +210,19 @@
   font-size: 1em;
 }
 
-/* line 205, ../sass/theme_codepoems_dark.scss */
+/* line 205, ../sass/theme_codepoems-dark.scss */
 .CodeMirror-dialog-top {
   border-bottom: 1px solid #eee;
   top: 0;
 }
 
-/* line 210, ../sass/theme_codepoems_dark.scss */
+/* line 210, ../sass/theme_codepoems-dark.scss */
 .CodeMirror-dialog-bottom {
   border-top: 1px solid #eee;
   bottom: 0;
 }
 
-/* line 215, ../sass/theme_codepoems_dark.scss */
+/* line 215, ../sass/theme_codepoems-dark.scss */
 .CodeMirror-dialog input {
   border: none;
   outline: none;
@@ -233,7 +233,7 @@
   font-family: 'Inconsolata';
 }
 
-/* line 225, ../sass/theme_codepoems_dark.scss */
+/* line 225, ../sass/theme_codepoems-dark.scss */
 .CodeMirror-dialog-top {
   border-bottom: 1px solid #3C3C3C;
   top: 0;
@@ -241,7 +241,7 @@
   background-color: #333;
 }
 
-/* line 232, ../sass/theme_codepoems_dark.scss */
+/* line 232, ../sass/theme_codepoems-dark.scss */
 .CodeMirror-search-hint {
   display: none;
 }
@@ -249,7 +249,7 @@
 /*
   ADDON STYLES
  */
-/* line 240, ../sass/theme_codepoems_dark.scss */
+/* line 240, ../sass/theme_codepoems-dark.scss */
 .CodeMirror-foldmarker {
   color: #646464 !important;
   text-shadow: none;

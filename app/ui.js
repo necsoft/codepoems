@@ -60,7 +60,7 @@ exports.setupHandlers = function(window, win, ctx) {
     focused_ctx = ctx;
 
     // Read the settings.json
-    setDefaultSettings();
+    setDefaultSettings($);
 
     global.app.focused_ctx = ctx;
     global.app.focused_win = focused_win;
@@ -217,10 +217,10 @@ exports.refreshSidebarHandlers = function(window, win, ctx) {
 
  */
 
-function setDefaultSettings() {
+function setDefaultSettings($) {
     exports.actions_change_font_size(global.app.settings.font_size);
-    //global.app.focused_project.ctx.$("head").append('<link rel="stylesheet" title="theme" href="codemirror/themes/' + global.app.settings.theme + '.css">');
     global.app.focused_project.editor.setOption("theme", global.app.settings.theme);
+    $("#active_theme").attr("href", "../app/static/stylesheets/theme_" + global.app.settings.theme + ".css");
 }
 
 /*
@@ -720,8 +720,8 @@ exports.actions_change_font_size = function(px) {
 
 exports.actions_change_theme = function(theme) {
     for (var i = 0; i < global.app.projects.length; i++) {
-        global.app.projects[i].project.ctx.$('link[title="theme"]').attr('href', "codemirror/themes/" + theme + ".css");
         global.app.projects[i].project.editor.setOption("theme", theme);
+        global.app.projects[i].project.ctx.$("#active_theme").attr("href", "../app/static/stylesheets/theme_" + theme + ".css");
     }
 }
 
