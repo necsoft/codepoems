@@ -546,9 +546,11 @@ function actions_live_documentation() {
         var gui = global.app.focused_win.window.require("nw.gui");
         global.app.live_documentation_window = gui.Window.open('win_live_documentation.html', {
             "toolbar": false,
-            "width": 430,
-            "height": 600,
-            "resizable": false
+            "width": 500,
+            "min_width": 500,
+            "min_height": 500,
+            "height": 700,
+            "resizable": true
         });
     }
 

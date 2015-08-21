@@ -220,28 +220,53 @@ function escapeRegExp(str) {
 
 function placeDocumentation(data) {
 
+    $(".title_name").fadeIn();
+
     // Clean the div
     $('.title').empty();
     $('.description').empty();
     $('.examples').empty();
+    $('.syntax').empty();
+    //$('.parameters').empty();
+    $('.parameters_table').empty();
 
     // Set the title
     $('.title').text(data.name);
 
     // Set the description
-    $('.description').html(data.description.replace(/\n/g, "<br>"));
+    var description = data.description.replace(/\r?\n/g, '<br>');
+    description = description.replace("<br>", "");
 
+    $('.description').html(description);
 
     // Set the examples + imgs
     for (var i = 0; i < data.examples.length; i++) {
 
+        var text_to_apply = data.examples[i].replace(/\n/g, "<br>");
+        // Remove first break line
+        text_to_apply = text_to_apply.replace("<br>", "");
 
         if (data.examples_img[i]) {
-            $('.examples').append("<div class='example'> <div class='example_img'><img width='100' height='100' src='" + data.examples_img[i] + "'></div> <div class='example_code'><p>" + data.examples[i] + "</p></div></div>");
+            $('.examples').append("<div class='example'><div class='example_img'><img width='100' height='100' src='" + data.examples_img[i] + "'></div> <div class='example_code'><p>" + text_to_apply + "</p></div></div>");
         } else {
-            $('.examples').append("<div class='example'><div class='example_code'><p>" + data.examples[i] + "</p></div></div>");
+            $('.examples').append("<div class='example'><div class='example_code'><p>" + text_to_apply + "</p></div></div>");
         }
+    }
 
+    // Set the syntax
+    var syntax_to_apply = data.syntax.replace(/\n/g, "<br>");
+    $('.syntax').append(syntax_to_apply);
+
+    for (var i = 0; i < data.parameters.length; i++) {
+        $('.parameters_table').append("<tr><td class='td_name'>" + data.parameters[i].name + "</td><td class='td_description'>" + data.parameters[i].description + "</td></tr>");
+    }
+
+    if (data.parameters.length == 0) {
+        $(".title_syntax").fadeOut();
+    }
+
+    if (data.parameters.length == 0) {
+        $(".title_parameters").fadeOut();
     }
 
 }

@@ -125,70 +125,35 @@ select {
   Live Documentation window
  
  */
-/* line 118, ../sass/win.scss */
-.doc_container {
-  padding: 5px;
-}
-
-/* line 122, ../sass/win.scss */
-.title {
-  color: #fff;
-  font-size: 1.5em;
-  font-weight: 100;
-}
-
-/* line 128, ../sass/win.scss */
-.description {
-  font-size: 0.7em;
-}
-
-/* line 132, ../sass/win.scss */
-.example {
-  width: 100%;
-  height: 100px;
-  float: left;
-  margin-bottom: 20px;
-}
-/* line 137, ../sass/win.scss */
-.example .example_img {
-  width: 30%;
-  float: left;
-}
-/* line 141, ../sass/win.scss */
-.example .example_code {
-  float: left;
-  width: 70%;
-}
-
 /*
   
   Scrollbars
 
  */
-/* line 153, ../sass/win.scss */
+/* line 126, ../sass/win.scss */
 ::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
   background-color: #333;
 }
 
-/* line 158, ../sass/win.scss */
+/* line 131, ../sass/win.scss */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
   background-color: #333333;
 }
 
-/* line 164, ../sass/win.scss */
+/* line 137, ../sass/win.scss */
 ::-webkit-scrollbar-thumb {
   background-color: #000000;
 }
 
-/* line 168, ../sass/win.scss */
+/* line 141, ../sass/win.scss */
 ::-webkit-scrollbar-corner, ::-webkit-scrollbar-track-piece {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* line 172, ../sass/win.scss */
+/* line 145, ../sass/win.scss */
 ::-webkit-scrollbar {
   background-color: #f0f;
 }

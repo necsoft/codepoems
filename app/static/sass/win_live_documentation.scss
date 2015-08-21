@@ -1,0 +1,83 @@
+body {
+  padding: 10px 30px;
+}
+
+.title {
+  color: #fff;
+  font-size: 1.5em;
+  font-weight: 100;
+  font-family: 'Arvo', serif;
+}
+
+.title_name{
+  font-size: 0.6em;
+  margin-bottom: 5px;
+  padding: 0;
+  color: #666;
+  /* font-family: Arvo; */
+  letter-spacing: 1px;
+  display:none;
+}
+
+.description {
+  font-size: 0.9em;
+  margin-left: 1.4em;
+  line-height: 1.3em;
+}
+
+.example {
+  width: 100%;
+  float: left;
+  margin-bottom: 20px;
+  border: 1px solid #333;
+  background-color:#272727;
+  padding:5px;
+  .example_img {
+    width: 120px;
+    float: left;
+  }
+  .example_code {
+    float: left;
+    width: 300px;
+    font-family: 'Inconsolata';
+
+    p{
+      margin:0;
+      padding:0;
+    }
+  }
+}
+
+.syntax{
+  font-family: 'Inconsolata';
+  font-size: 0.8em;
+  margin-left: 20px;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+
+.parameters{
+
+  .parameters_table{
+    margin-left: 20px;
+  }
+
+  .td_name{
+    color: #fff;
+    font-size: 0.7em;
+    width: 100px;
+    font-weight: bolder;
+  }
+
+  .td_description{
+    color: #ccc;
+    font-size: 0.8em;
+    font-family: Inconsolata;
+  }
+}
+
+
+.doc_container {
+  padding: 5px;
+}

@@ -1,0 +1,88 @@
+/* line 1, ../sass/win_live_documentation.scss */
+body {
+  padding: 10px 30px;
+}
+
+/* line 5, ../sass/win_live_documentation.scss */
+.title {
+  color: #fff;
+  font-size: 1.5em;
+  font-weight: 100;
+  font-family: 'Arvo', serif;
+}
+
+/* line 12, ../sass/win_live_documentation.scss */
+.title_name {
+  font-size: 0.6em;
+  margin-bottom: 5px;
+  padding: 0;
+  color: #666;
+  /* font-family: Arvo; */
+  letter-spacing: 1px;
+  display: none;
+}
+
+/* line 22, ../sass/win_live_documentation.scss */
+.description {
+  font-size: 0.9em;
+  margin-left: 1.4em;
+  line-height: 1.3em;
+}
+
+/* line 28, ../sass/win_live_documentation.scss */
+.example {
+  width: 100%;
+  float: left;
+  margin-bottom: 20px;
+  border: 1px solid #333;
+  background-color: #272727;
+  padding: 5px;
+}
+/* line 35, ../sass/win_live_documentation.scss */
+.example .example_img {
+  width: 120px;
+  float: left;
+}
+/* line 39, ../sass/win_live_documentation.scss */
+.example .example_code {
+  float: left;
+  width: 300px;
+  font-family: 'Inconsolata';
+}
+/* line 44, ../sass/win_live_documentation.scss */
+.example .example_code p {
+  margin: 0;
+  padding: 0;
+}
+
+/* line 51, ../sass/win_live_documentation.scss */
+.syntax {
+  font-family: 'Inconsolata';
+  font-size: 0.8em;
+  margin-left: 20px;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+/* line 62, ../sass/win_live_documentation.scss */
+.parameters .parameters_table {
+  margin-left: 20px;
+}
+/* line 66, ../sass/win_live_documentation.scss */
+.parameters .td_name {
+  color: #fff;
+  font-size: 0.7em;
+  width: 100px;
+  font-weight: bolder;
+}
+/* line 73, ../sass/win_live_documentation.scss */
+.parameters .td_description {
+  color: #ccc;
+  font-size: 0.8em;
+  font-family: Inconsolata;
+}
+
+/* line 81, ../sass/win_live_documentation.scss */
+.doc_container {
+  padding: 5px;
+}
