@@ -247,7 +247,12 @@ function placeDocumentation(data) {
         text_to_apply = text_to_apply.replace("<br>", "");
 
         if (data.examples_img[i]) {
-            $('.examples').append("<div class='example'><div class='example_img'><img width='100' height='100' src='" + data.examples_img[i] + "'></div> <div class='example_code'><p>" + text_to_apply + "</p></div></div>");
+
+            var external_link = data.examples_img[i].toString();
+            var file_name = external_link.split('https://www.processing.org/reference/images/')[1];
+            var local_path = "../doc/imgs/" + file_name;
+
+            $('.examples').append("<div class='example'><div class='example_img'><img width='100' height='100' src='" + local_path + "'></div> <div class='example_code'><p>" + text_to_apply + "</p></div></div>");
         } else {
             $('.examples').append("<div class='example'><div class='example_code'><p>" + text_to_apply + "</p></div></div>");
         }
