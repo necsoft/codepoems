@@ -768,6 +768,11 @@ function action_close_secondary_windows() {
 }
 
 
+/*
+
+  refresh_live_documentation()
+
+ */
 
 exports.refresh_live_documentation = function(selectedText) {
     if (global.app.live_documentation_window) {
@@ -775,8 +780,11 @@ exports.refresh_live_documentation = function(selectedText) {
     }
 }
 
+/*
 
+  actions_indent()
 
+ */
 
 function actions_indent() {
     global.app.focused_project.editor.indentDocument();
