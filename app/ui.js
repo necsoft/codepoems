@@ -498,7 +498,7 @@ function actions_examples() {
         // Open the window
         var gui = global.app.focused_win.window.require("nw.gui");
         global.app.examples_window = gui.Window.open('win_examples.html', {
-            "toolbar": false,
+            "toolbar": true,
             "width": 430,
             "height": 600,
             "resizable": false

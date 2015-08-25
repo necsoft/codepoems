@@ -1,0 +1,36 @@
+/* line 1, ../sass/win_examples.scss */
+body {
+  padding: 20px;
+}
+
+/* line 5, ../sass/win_examples.scss */
+h1 {
+  color: #fff;
+  font-family: 'Arvo', serif;
+  font-size: 1.3em;
+  font-weight: 100;
+  margin: 4px 0;
+}
+
+/* line 14, ../sass/win_examples.scss */
+h5 {
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* line 21, ../sass/win_examples.scss */
+.example_button {
+  background-color: #282828;
+  margin: 5px 0px;
+  padding: 5px;
+  font-size: 0.8em;
+  cursor: pointer;
+  font-family: Inconsolata;
+}
+
+/* line 30, ../sass/win_examples.scss */
+.example_button:hover {
+  background-color: #333;
+}

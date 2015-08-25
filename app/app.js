@@ -35,16 +35,7 @@ global.app.default_window = {
 // Write the default settings
 global.app.settings = require('./settings.json');
 
-// Read the example files
-global.app.example_files = [];
-readdirp({
-    root: './examples/',
-    depth: 3
-}).on('data', function(entry) {
-    if (entry.parentDir.split(path.sep).length > 2) {
-        global.app.example_files.push(entry.parentDir.toString());
-    };
-});
+read_examples_directory();
 
 // Create the initial UI if the user has processing-java
 check_processing_java(function(data) {
@@ -77,4 +68,55 @@ function check_processing_java(callback) {
     child.on('close', function() {
         callback(data);
     });
+}
+
+/*
+
+  read_examples_directory();
+
+  Reads and classifies the examples directory. 
+
+ */
+
+function read_examples_directory() {
+
+    global.app.examples = [];
+
+    // Read the groups
+    readdirp({
+        root: './examples/',
+        depth: 0,
+        entryType: 'directories'
+    }).on('data', function(entry) {
+
+        var this_group = {};
+        this_group.name = entry.name;
+        this_group.categories = [];
+
+        // Read the categories
+        readdirp({
+            root: entry.fullPath,
+            depth: 0,
+            entryType: 'directories'
+        }).on('data', function(entry) {
+            var this_category = {};
+            this_category.name = entry.name;
+            this_category.sketchs = [];
+            // Read the sketchs
+            readdirp({
+                root: entry.fullPath,
+                depth: 0,
+                entryType: 'directories'
+            }).on('data', function(entry) {
+                var this_sketch = {};
+                this_sketch.name = entry.name;
+                this_sketch.full_path = entry.fullPath;
+                this_category.sketchs.push(this_sketch);
+            });
+            this_group.categories.push(this_category);
+        });
+
+        global.app.examples.push(this_group);
+    });
+
 }
