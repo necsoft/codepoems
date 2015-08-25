@@ -1,32 +1,54 @@
 body{
-  padding:20px;
+  padding:10px;
+  margin:0;
 }
 
 h1{
   color: #fff;
   font-family: 'Arvo', serif;
-  font-size: 1.3em;
+  font-size: 1.8em;
   font-weight: 100;
-  margin: 4px 0;
+  margin: 5px 0;
 }
 
-
-h5{
-  margin: 0;
-  padding: 0;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.example_button {
-  background-color: #282828;
-  margin: 5px 0px;
-  padding: 5px;
-  font-size: 0.8em;
+.examples_category{
+  background-color: #252525;
+  margin-bottom: 4px;
   cursor: pointer;
-  font-family: Inconsolata;
+  padding: 2px 8px;
+
+
+
+  h2{
+    font-size:0.8em;
+    padding: 0;
+    margin: 5px 0;
+    font-family: Arvo;
+    font-weight: 100;
+  }
+
+  .category_sketches{
+    display:none;
+  }
 }
 
-.example_button:hover {
-    background-color: #333;
+.examples_category:hover{
+  background-color:#202020;
+}
+
+.sketch_button{
+  margin: 0;
+  padding: 5px;
+  letter-spacing: 1px;
+  font-size: 0.7em;
+  font-family: Inconsolata;
+  background-color: #2C2C2C;
+  margin-bottom: 2px;
+  color: #FFF;
+  font-weight: 100;
+}
+
+
+.sketch_button:hover{
+  background-color: #111111;
 }

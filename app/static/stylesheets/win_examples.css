@@ -1,36 +1,57 @@
 /* line 1, ../sass/win_examples.scss */
 body {
-  padding: 20px;
+  padding: 10px;
+  margin: 0;
 }
 
-/* line 5, ../sass/win_examples.scss */
+/* line 6, ../sass/win_examples.scss */
 h1 {
   color: #fff;
   font-family: 'Arvo', serif;
-  font-size: 1.3em;
+  font-size: 1.8em;
   font-weight: 100;
-  margin: 4px 0;
+  margin: 5px 0;
 }
 
 /* line 14, ../sass/win_examples.scss */
-h5 {
-  margin: 0;
-  padding: 0;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-/* line 21, ../sass/win_examples.scss */
-.example_button {
-  background-color: #282828;
-  margin: 5px 0px;
-  padding: 5px;
-  font-size: 0.8em;
+.examples_category {
+  background-color: #252525;
+  margin-bottom: 4px;
   cursor: pointer;
-  font-family: Inconsolata;
+  padding: 2px 8px;
+}
+/* line 22, ../sass/win_examples.scss */
+.examples_category h2 {
+  font-size: 0.8em;
+  padding: 0;
+  margin: 5px 0;
+  font-family: Arvo;
+  font-weight: 100;
+}
+/* line 30, ../sass/win_examples.scss */
+.examples_category .category_sketches {
+  display: none;
 }
 
-/* line 30, ../sass/win_examples.scss */
-.example_button:hover {
-  background-color: #333;
+/* line 35, ../sass/win_examples.scss */
+.examples_category:hover {
+  background-color: #202020;
+}
+
+/* line 39, ../sass/win_examples.scss */
+.sketch_button {
+  margin: 0;
+  padding: 5px;
+  letter-spacing: 1px;
+  font-size: 0.7em;
+  font-family: Inconsolata;
+  background-color: #2C2C2C;
+  margin-bottom: 2px;
+  color: #FFF;
+  font-weight: 100;
+}
+
+/* line 52, ../sass/win_examples.scss */
+.sketch_button:hover {
+  background-color: #111111;
 }
