@@ -11,6 +11,7 @@ var ui = require('./ui.js');
 var path = require('path');
 var exec = require('child_process').exec;
 var rimraf = require('rimraf');
+var request = require('request');
 
 // App information
 global.app = {};
@@ -35,7 +36,11 @@ global.app.default_window = {
 // Write the default settings
 global.app.settings = require('./settings.json');
 
+// Read examples directory
 read_examples_directory();
+
+// Download P5M Modules list
+download_p5m_list();
 
 // Create the initial UI if the user has processing-java
 check_processing_java(function(data) {
@@ -119,4 +124,24 @@ function read_examples_directory() {
         global.app.examples.push(this_group);
     });
 
+};
+
+
+/*
+
+  download_p5m_list();
+
+  Download the latest P5M list of Modules.
+
+ */
+
+function download_p5m_list() {
+    global.app.p5m_list = [];
+    var the_file = "http://raw.githubusercontent.com/necsoft/P5M/master/modules.json";
+    request(the_file, function(error, response, body) {
+        if (!error && response.statusCode == 200) {
+            console.log(body);
+            global.app.p5m_list = JSON.parse(body);
+        }
+    });
 }

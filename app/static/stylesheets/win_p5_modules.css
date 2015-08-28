@@ -1,0 +1,44 @@
+/* line 5, ../sass/win_p5_modules.scss */
+body {
+  padding: 5px;
+}
+
+/* line 14, ../sass/win_p5_modules.scss */
+.modules .module:nth-child(even) {
+  background: #282828;
+}
+/* line 15, ../sass/win_p5_modules.scss */
+.modules .module:nth-child(odd) {
+  background: #262626;
+}
+/* line 18, ../sass/win_p5_modules.scss */
+.modules .module {
+  padding: 5px;
+}
+/* line 21, ../sass/win_p5_modules.scss */
+.modules .module h1 {
+  font-size: 1.2em;
+  font-family: 'Arvo', serif;
+  font-weight: 100;
+}
+/* line 28, ../sass/win_p5_modules.scss */
+.modules .module p {
+  font-size: 0.8em;
+  font-family: 'Inconsolata';
+}
+/* line 33, ../sass/win_p5_modules.scss */
+.modules .module .install_button, .modules .module .view_on_github {
+  background-color: #333333;
+  border: 1px solid #222;
+  border-radius: 4px;
+  margin-right: 4px;
+  outline: none;
+  margin: 4px;
+  padding: 6px;
+  color: #fff;
+  cursor: pointer;
+}
+/* line 46, ../sass/win_p5_modules.scss */
+.modules .module button:hover {
+  background-color: #292929;
+}

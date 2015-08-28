@@ -1,0 +1,56 @@
+
+$button_color : #333333;
+
+
+body{
+  padding:5px;
+}
+
+
+.modules{
+
+
+
+  .module:nth-child(even) { background: #282828 };
+  .module:nth-child(odd) { background: #262626};
+
+
+  .module{
+    padding:5px;
+
+    h1{
+      font-size:1.2em;
+      font-family: 'Arvo', serif;
+      font-weight:100;
+    }
+
+
+    p{
+      font-size:0.8em;
+      font-family: 'Inconsolata';
+    }
+
+    .install_button, .view_on_github{
+      background-color:$button_color;
+      border:1px solid #222;
+      border-radius:4px;
+      margin-right:4px;
+      outline:none;
+      margin:4px;
+      padding:6px;
+      color:#fff;
+      cursor:pointer;
+    }
+
+
+    button:hover{
+       background-color:darken($button_color, 4);
+    }
+
+
+
+
+  }
+
+
+}
