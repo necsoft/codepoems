@@ -1207,7 +1207,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 /*
   Variables
  */
-/* line 16, ../sass/screen.scss */
+/* line 11, ../sass/screen.scss */
 body {
   padding: 0;
   margin: 0;
@@ -1226,7 +1226,7 @@ body {
 /*
   TOP BLOCK
  */
-/* line 35, ../sass/screen.scss */
+/* line 30, ../sass/screen.scss */
 #mainNav {
   margin: 0;
   padding: 0;
@@ -1236,7 +1236,7 @@ body {
   background-color: #1E1E1E;
 }
 
-/* line 44, ../sass/screen.scss */
+/* line 39, ../sass/screen.scss */
 .button_separator {
   width: 2px;
   margin: 0 5px 0 10px;
@@ -1246,19 +1246,19 @@ body {
   display: inline-block;
 }
 
-/* line 53, ../sass/screen.scss */
+/* line 48, ../sass/screen.scss */
 .primary_icon {
   font-size: 2em;
   margin-right: -5px;
   cursor: pointer;
 }
 
-/* line 59, ../sass/screen.scss */
+/* line 54, ../sass/screen.scss */
 .primary_icon:hover {
   color: #CCC;
 }
 
-/* line 63, ../sass/screen.scss */
+/* line 58, ../sass/screen.scss */
 .secondary_icon {
   font-size: 1em;
   background-color: #2F2F2F;
@@ -1267,41 +1267,41 @@ body {
   vertical-align: super;
 }
 
-/* line 71, ../sass/screen.scss */
+/* line 66, ../sass/screen.scss */
 .secondary_icon:hover {
   background-color: #222;
 }
 
-/* line 75, ../sass/screen.scss */
+/* line 70, ../sass/screen.scss */
 #navIcons {
   height: inherit;
   float: left;
   margin-top: 5px;
 }
-/* line 79, ../sass/screen.scss */
+/* line 74, ../sass/screen.scss */
 #navIcons i {
   cursor: pointer;
 }
 
-/* line 84, ../sass/screen.scss */
+/* line 79, ../sass/screen.scss */
 .rightIcons {
   float: right;
   text-align: right;
   margin-top: 12px;
   margin-right: 5px;
 }
-/* line 89, ../sass/screen.scss */
+/* line 84, ../sass/screen.scss */
 .rightIcons i {
   font-size: 1.2em;
   color: #666;
   cursor: pointer;
 }
-/* line 94, ../sass/screen.scss */
+/* line 89, ../sass/screen.scss */
 .rightIcons i:hover {
   color: #fff;
 }
 
-/* line 99, ../sass/screen.scss */
+/* line 94, ../sass/screen.scss */
 #upnav {
   -webkit-app-region: drag;
   background-color: #383838;
@@ -1310,7 +1310,7 @@ body {
   cursor: pointer;
 }
 
-/* line 107, ../sass/screen.scss */
+/* line 102, ../sass/screen.scss */
 .exit_button, .max_button, .min_button {
   cursor: pointer;
   width: 10px;
@@ -1320,32 +1320,32 @@ body {
   border-radius: 10px;
 }
 
-/* line 116, ../sass/screen.scss */
+/* line 111, ../sass/screen.scss */
 .exit_button {
   background-color: #F26184;
 }
 
-/* line 120, ../sass/screen.scss */
+/* line 115, ../sass/screen.scss */
 .exit_button:hover {
   background-color: #d8416c;
 }
 
-/* line 124, ../sass/screen.scss */
+/* line 119, ../sass/screen.scss */
 .max_button {
   background-color: #75ED64;
 }
 
-/* line 128, ../sass/screen.scss */
+/* line 123, ../sass/screen.scss */
 .max_button:hover {
   background-color: #65d629;
 }
 
-/* line 132, ../sass/screen.scss */
+/* line 127, ../sass/screen.scss */
 .min_button {
   background-color: #FFE422;
 }
 
-/* line 136, ../sass/screen.scss */
+/* line 131, ../sass/screen.scss */
 .min_button:hover {
   background-color: #e8ca18;
 }
@@ -1353,14 +1353,14 @@ body {
 /*
   CENTER BLOCK
  */
-/* line 144, ../sass/screen.scss */
+/* line 139, ../sass/screen.scss */
 #centerBlock {
   width: 100%;
   float: left;
   display: block;
 }
 
-/* line 150, ../sass/screen.scss */
+/* line 145, ../sass/screen.scss */
 #sidebar {
   float: left;
   width: 198px;
@@ -1373,15 +1373,24 @@ body {
   -webkit-user-select: none;
   user-select: none;
 }
-/* line 162, ../sass/screen.scss */
+/* line 156, ../sass/screen.scss */
 #sidebar .sidebarFiles {
   padding-top: 20px;
 }
-/* line 166, ../sass/screen.scss */
+/* line 160, ../sass/screen.scss */
+#sidebar h5 {
+  font-size: 0.6em;
+  margin: 0;
+  padding: 0;
+  padding-left: 5px;
+  margin-bottom: 5px;
+  color: #666;
+}
+/* line 169, ../sass/screen.scss */
 #sidebar ul {
   cursor: default;
 }
-/* line 169, ../sass/screen.scss */
+/* line 172, ../sass/screen.scss */
 #sidebar ul li {
   font-size: 0.7em;
   color: #999;
@@ -1390,7 +1399,7 @@ body {
   color: #ccc;
   margin: 1px 6px;
 }
-/* line 178, ../sass/screen.scss */
+/* line 181, ../sass/screen.scss */
 #sidebar ul li i {
   font-size: 1.83em;
   vertical-align: middle;
@@ -1398,15 +1407,19 @@ body {
   margin-right: 3px;
   display: inline-block;
 }
-/* line 185, ../sass/screen.scss */
+/* line 188, ../sass/screen.scss */
 #sidebar ul li:hover {
   background-color: #000;
 }
-/* line 215, ../sass/screen.scss */
+/* line 211, ../sass/screen.scss */
+#sidebar ul .moduleFile {
+  color: #999;
+}
+/* line 224, ../sass/screen.scss */
 #sidebar ul .groupMainFile, #sidebar ul .groupSecondaryFiles, #sidebar ul .groupImageFiles, #sidebar ul .groupShaderFiles, #sidebar ul .groupPlainFiles, #sidebar ul .groupAudioFiles {
   margin-bottom: 6px;
 }
-/* line 219, ../sass/screen.scss */
+/* line 228, ../sass/screen.scss */
 #sidebar .button_add_file {
   background-color: transparent;
   border: 1px solid #333;
@@ -1421,12 +1434,12 @@ body {
   font-size: 0.7em;
   transition: background-color 0.1s ease;
 }
-/* line 233, ../sass/screen.scss */
+/* line 242, ../sass/screen.scss */
 #sidebar .button_add_file:hover {
   background-color: black;
 }
 
-/* line 238, ../sass/screen.scss */
+/* line 247, ../sass/screen.scss */
 .sidebar_resize_control {
   background-color: rgba(0, 0, 0, 0.8);
   height: 100%;
@@ -1435,7 +1448,7 @@ body {
   cursor: ew-resize;
 }
 
-/* line 246, ../sass/screen.scss */
+/* line 255, ../sass/screen.scss */
 #mainEditor {
   float: left;
   width: 700px;
@@ -1444,7 +1457,7 @@ body {
 /*
   BOTTOM BLOCK
  */
-/* line 256, ../sass/screen.scss */
+/* line 264, ../sass/screen.scss */
 .console_resize_control {
   width: 100%;
   height: 2px;
@@ -1453,7 +1466,7 @@ body {
   cursor: ns-resize;
 }
 
-/* line 264, ../sass/screen.scss */
+/* line 272, ../sass/screen.scss */
 #consoleWrap {
   position: relative;
   width: 100%;
@@ -1464,7 +1477,7 @@ body {
   user-select: initial;
 }
 
-/* line 274, ../sass/screen.scss */
+/* line 282, ../sass/screen.scss */
 #console {
   float: left;
   width: 100%;
@@ -1472,16 +1485,16 @@ body {
   font-size: 0.7em;
   padding-bottom: 35px;
 }
-/* line 280, ../sass/screen.scss */
+/* line 288, ../sass/screen.scss */
 #console p {
   margin-left: 5px;
   margin-top: 5px;
 }
-/* line 284, ../sass/screen.scss */
+/* line 292, ../sass/screen.scss */
 #console .consoleMessage {
   color: #ffffff;
 }
-/* line 287, ../sass/screen.scss */
+/* line 295, ../sass/screen.scss */
 #console .consoleError {
   background-color: #DA3A61;
   color: #fff;
@@ -1493,12 +1506,12 @@ body {
 /*
   Codemirror
  */
-/* line 300, ../sass/screen.scss */
+/* line 308, ../sass/screen.scss */
 .CodeMirror {
   height: 600px;
 }
 
-/* line 304, ../sass/screen.scss */
+/* line 312, ../sass/screen.scss */
 .CodeMirror-hints {
   left: 281.484375px;
   width: 300px;
@@ -1507,12 +1520,12 @@ body {
   border: 1px solid #444;
 }
 
-/* line 312, ../sass/screen.scss */
+/* line 320, ../sass/screen.scss */
 .CodeMirror-hint-active {
   background: #000;
 }
 
-/* line 316, ../sass/screen.scss */
+/* line 324, ../sass/screen.scss */
 .CodeMirror-hint {
   color: #999999;
   font-family: Helvetica;

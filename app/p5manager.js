@@ -41,6 +41,7 @@ exports.initialProject = function() {
     project.directory = "";
     project.files = [];
 
+
     // Push the main file
     project.files.push({
         type: "main",
@@ -120,9 +121,6 @@ exports.openProject = function(project_path) {
 
 function check_project(p_path, callback) {
 
-    console.log("Estoy chequeandolo");
-    console.log(p_path);
-
     // Parsing the path 
     var p_parsed = path.parse(p_path);
     // Name of the father folder
@@ -136,11 +134,9 @@ function check_project(p_path, callback) {
     fs.access(mainFile, fs.R_OK | fs.W_OK, function(err) {
         if (err) {
             window.alert("This isn't a valid project.");
-            console.log("Es un proyecto invalido");
         } else {
             // If this is a valid project we call analyze_project()
             callback(p_dir, p_father, mainFile);
-            console.log("Es un proyecto valido");
         };
     });
 
@@ -173,7 +169,7 @@ function analyze_project(p_dir, p_father, main_file) {
         fileFilter: ['*.pde'],
         directoryFilter: filtered_folders
     }).on('data', function(entry) {
-        if (entry.name === analyzed_project.name + ".pde") {
+        if (entry.name === analyzed_project.name + ".pde") { // Detect main file
             analyzed_project.files.push({
                 type: "main",
                 name: entry.name,
@@ -182,8 +178,17 @@ function analyze_project(p_dir, p_father, main_file) {
                 saved: true,
                 declared: true
             });
-        } else {
+        } else if (entry.name.indexOf("P5M_") === 0) { // Detect modules
             analyzed_project.files.push({
+                type: "module",
+                name: entry.name,
+                extension: ".pde",
+                rel_path: entry.fullPath.replace(p_dir, ""),
+                saved: true,
+                declared: true
+            });
+        } else {
+            analyzed_project.files.push({ // Detect secondary files
                 type: "secondary",
                 name: entry.name,
                 extension: ".pde",

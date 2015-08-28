@@ -54,6 +54,12 @@ $(document).ready(function() {
     project.running = false;
     project.running_pid = "";
     project.ctx = ctx;
+    project.modules = [];
+
+
+    for (var i = 0; i < getModulesFiles().length; i++) {
+        project.modules.push(getModulesFiles()[i].name.split(".")[0]);
+    }
 
     global.app.focused_project = project;
 
@@ -102,7 +108,6 @@ $(document).ready(function() {
     // Get the selected text
     CodeMirror.on(project.editor, "cursorActivity", function() {
         // Sanitized version
-        // ui.refresh_live_documentation(project.editor.getSelection().replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&"));
         ui.refresh_live_documentation(project.editor.getSelection());
     });
 
@@ -248,6 +253,22 @@ function getSecondaryFiles() {
     return the_files;
 }
 
+/*
+  getModulesFiles()
+
+  Returns the P5M modules.
+ 
+ */
+
+function getModulesFiles() {
+    var the_files = [];
+    $.each(project.files, function(i, file) {
+        if (file.type === "module") {
+            the_files.push(file);
+        };
+    });
+    return the_files;
+}
 
 /*
   getImageFiles()
@@ -541,12 +562,17 @@ function refreshSidebar() {
     $(".sidebarFiles").empty();
 
     // Create the mainFile group
-    $(".sidebarFiles").append('<div class="groupMainFile"></div>');
+    $(".sidebarFiles").append('<div class="groupMainFile"><h5>FILES</h5></div>');
 
     // Create the groups if there are files
     if (getSecondaryFiles().length > 0) {
         $(".sidebarFiles").append('<div class="groupSecondaryFiles"></div>');
     }
+
+    if (getModulesFiles().length > 0) {
+        $(".sidebarFiles").append('<div class="groupModules"><h5>MODULES</h5></div>');
+    }
+
     if (getImageFiles().length > 0) {
         $(".sidebarFiles").append('<div class="groupImageFiles"></div>');
     }
@@ -568,6 +594,12 @@ function refreshSidebar() {
     var secondary_files = getSecondaryFiles();
     for (var i = 0; i < secondary_files.length; i++) {
         $(".groupSecondaryFiles").append("<li class='secondaryFile'><i class='icon-002'></i> " + secondary_files[i].name + "</li>");
+    }
+
+    // Create modules
+    var modules_files = getModulesFiles();
+    for (var i = 0; i < modules_files.length; i++) {
+        $(".groupModules").append("<li class='moduleFile'><i class='icon-001'></i> " + modules_files[i].name.split(".")[0] + "</li>");
     }
 
     // Create the images
@@ -602,6 +634,9 @@ function refreshSidebar() {
     for (var i = 0; i < audio_files.length; i++) {
         $(".groupAudioFiles").append("<li class='audioFile'><i class='icon-007'></i> " + audio_files[i].name + "</li>");
     }
+
+
+
 
     // Refresh the sidebar
     ui.refreshSidebarHandlers(window, win, ctx);
