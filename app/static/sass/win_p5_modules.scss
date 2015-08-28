@@ -1,3 +1,4 @@
+@import "_fonts.scss";
 
 $button_color : #333333;
 
@@ -42,12 +43,22 @@ body{
       cursor:pointer;
     }
 
-
-    button:hover{
-       background-color:darken($button_color, 4);
+    .add_to_poject:hover{
+      background-color:darken($button_color, 4);
     }
 
+    .button_installed{
+      background-color:#75ED64;
+      color:#333;
+    }
 
+    .button_installed{
+      background-color: #75ED64;
+    }
+
+    .button_uninstall{
+      background-color:#F26184;
+    }
 
 
   }

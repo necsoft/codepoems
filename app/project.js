@@ -56,7 +56,6 @@ $(document).ready(function() {
     project.ctx = ctx;
     project.modules = [];
 
-
     for (var i = 0; i < getModulesFiles().length; i++) {
         project.modules.push(getModulesFiles()[i].name.split(".")[0]);
     }
