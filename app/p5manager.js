@@ -613,17 +613,10 @@ exports.saveAsProject = function(save_path, project, ctx) {
 
             // Una vez que se termina de copiar la carpeta, cambia el project.directory,
             // le hago el substring porque le saco el ultimo carecter.
-            console.log("Estoy agregando el project.directory");
             project.directory = main_path.substring(0, main_path.length - 1);
-            console.log(project.directory);
 
-            // Rename al main file
-            console.log("project.directory: " + project.directory);
-            console.log("ctx.getMainFile().name: " + ctx.getMainFile().name);
-            console.log("ctx.getMainFile().rel_path: " + ctx.getMainFile().rel_path);
-
+            //Rename the file
             fs.rename(project.directory + path.sep + ctx.getMainFile().name, project.directory + path.sep + name_saved + ".pde", function(err) {
-
                 if (err) throw err;
                 // Update the main file
                 ctx.getMainFile().name = name_saved + ".pde";
