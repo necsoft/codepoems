@@ -266,12 +266,4 @@ function placeDocumentation(data) {
         $('.parameters_table').append("<tr><td class='td_name'>" + data.parameters[i].name + "</td><td class='td_description'>" + data.parameters[i].description + "</td></tr>");
     }
 
-    if (data.parameters.length == 0) {
-        $(".title_syntax").fadeOut();
-    }
-
-    if (data.parameters.length == 0) {
-        $(".title_parameters").fadeOut();
-    }
-
 }
