@@ -590,6 +590,7 @@ function actions_add_file() {
     var is_main_file_name;
     var has_extension;
     var is_duplicated = false;
+    var is_module = false;
     var has_spaces = false;
 
     // Validates presence
@@ -644,8 +645,16 @@ function actions_add_file() {
         actions_add_file();
     };
 
+
+    // Validates if module name
+    if (prompt_value.indexOf('P5M_') >= 0) {
+        is_module = true;
+        focused_ctx.alert("That's a reserved word for P5M");
+        actions_add_file();
+    }
+
     // Validates all
-    if (!is_empty && !start_with_number && !is_main_file_name && has_extension && !is_duplicated && !has_spaces) {
+    if (!is_empty && !start_with_number && !is_main_file_name && has_extension && !is_duplicated && !has_spaces && !is_module) {
         the_extension = prompt_value.split(".")[1];
         global.app.focused_ctx.addFileToProject(prompt_value, the_extension);
     }
