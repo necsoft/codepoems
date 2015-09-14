@@ -20,8 +20,6 @@ win.on('close', function() {
     this.close(true);
 });
 
-//win.showDevTools();
-
 var doc_data;
 
 $(document).ready(function() {
@@ -32,6 +30,14 @@ $(document).ready(function() {
     });
 
 });
+
+/*
+
+  searchInDocumentation();
+
+  Search for the current selected text.
+
+ */
 
 function searchInDocumentation(selectedText) {
 
@@ -192,7 +198,6 @@ function searchInDocumentation(selectedText) {
         // I have to create a filter for the int / int()
         //
 
-
         // If not a filtered word, test the original one.
         var test_reg = new RegExp(escapeRegExp(selectedText), "g");
         var matches = [];
@@ -213,10 +218,20 @@ function searchInDocumentation(selectedText) {
     }
 }
 
-// escapeRegExp one-line
+// escapeRegExp one-liner
 function escapeRegExp(str) {
     return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
 }
+
+
+
+/* 
+  
+  placeDocumention()
+
+  Show the documentation for the selected data.
+
+*/
 
 function placeDocumentation(data) {
 

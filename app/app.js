@@ -58,7 +58,7 @@ rimraf("./app/tmp/", function() {});
 
   check_processing_java()
 
-  Check if processing java exists in the 
+  Check if processing java exists in the system.
 
  */
 

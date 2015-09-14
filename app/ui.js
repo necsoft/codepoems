@@ -211,9 +211,7 @@ exports.refreshSidebarHandlers = function(window, win, ctx) {
 /*
   setDefaultSettings()
 
-  Set the
-  default settings of the editor, we get this info from the
-   settings.json
+  Set the default settings of the editor, we get this info from the settings.json
 
  */
 

@@ -39,6 +39,14 @@ $(document).ready(function() {
 
 });
 
+/*
+  
+  showList()
+
+  Show the list of modules from https://github.com/necsoft/P5M
+
+ */
+
 function showList() {
 
     // Clean the modules
@@ -89,10 +97,16 @@ function showList() {
         }
     })
 
-
-
 }
 
+/*
+
+  addModuleToProject()
+
+  Inject the module to the project.
+
+
+ */
 
 function addModuleToProject(raw_main, name, project) {
 
