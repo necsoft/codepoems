@@ -183,6 +183,7 @@ exports.refreshSidebarHandlers = function(window, win, ctx) {
     $button_sidebar_shader_file = $(".shaderFile");
     $button_sidebar_plain_file = $(".plainFile");
     $button_sidebar_image_file = $(".imageFile");
+    $button_sidebar_audio_file = $(".audioFile")
 
     $button_sidebar_main_file.click(function() {
         actions_sidebar_swap_main_file();
@@ -203,6 +204,12 @@ exports.refreshSidebarHandlers = function(window, win, ctx) {
     $button_sidebar_image_file.click(function() {
         actions_sidebar_view_image($(this).index());
     })
+
+    $button_sidebar_audio_file.click(function() {
+        actions_sidebar_view_audio($(this).index());
+    });
+
+
 
 
 };
@@ -685,7 +692,7 @@ function actions_sidebar_swap_plain_file(index) {
 /*
   actions_sidebar_view_image
 
-  Media viewer action.
+  Media viewer image action.
   
  */
 
@@ -704,6 +711,28 @@ function actions_sidebar_view_image(index) {
     });
 
 }
+
+/*
+  actions_sidebar_view_audio
+
+  Media viewer audio action.
+  
+ */
+
+function actions_sidebar_view_audio(index) {
+    var audios = focused_ctx.window.getAudioFiles();
+    var the_audio = audios[index];
+    var abs_path_to_audio = global.app.focused_project.directory + path.sep + the_audio.rel_path;
+    var gui = global.app.focused_win.window.require("nw.gui");
+
+    global.app.examples_window = gui.Window.open("file://" + abs_path_to_audio, {
+        "toolbar": false,
+        "width": 300,
+        "height": 90
+    });
+
+}
+
 
 /*
   actions_change_font_size();
