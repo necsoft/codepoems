@@ -422,7 +422,7 @@ function actions_quit() {
 
         });
     } else {
-        var confirm_exit = focused_ctx.confirm("Este proyecto no ha sido guardado, quieres descartarlo?");
+        var confirm_exit = focused_ctx.confirm("Are you sure you want to discard this project?");
         if (confirm_exit) {
             removeThisProject(global.app.focused_project.id, function() {
                 if (global.app.projects.length < 1) {
