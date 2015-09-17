@@ -65,20 +65,6 @@ exports.setupHandlers = function(window, win, ctx) {
     global.app.focused_ctx = ctx;
     global.app.focused_win = focused_win;
 
-    // Keymaps (only for OS X)
-    var map = {
-        "Cmd-R": actions_run,
-        "Cmd-O": actions_open,
-        "Cmd-S": save_keymap,
-        "Cmd-N": p5manager.newProject,
-        "Cmd-W": actions_quit,
-        "Cmd-T": actions_indent,
-        "F12": actions_devTool
-    };
-
-    // Add the actual keymap
-    global.app.focused_project.editor.addKeyMap(map);
-
     /*
       UI selectors
      */
@@ -141,7 +127,7 @@ exports.setupHandlers = function(window, win, ctx) {
     });
 
     $button_new.click(function() {
-        p5manager.newProject();
+        actions_new();
     });
 
     $button_live_documentation.click(function() {
@@ -164,7 +150,97 @@ exports.setupHandlers = function(window, win, ctx) {
         actions_add_file();
     });
 
+    // Set the shortcuts
+    mouseTrapShortcuts($);
+
 }
+
+/*
+
+  mouseTrapShortcuts()
+
+  MouseTrap shortcuts https://craig.is/killing/mice
+
+ */
+
+function mouseTrapShortcuts($) {
+
+    // NEW - Cmd/Crtl + N
+    focused_ctx.window.Mousetrap.bindGlobal('command+n', function(e) {
+        actions_new();
+        return false;
+    });
+
+    // OPEN - Cmd/Crtl + O
+    focused_ctx.window.Mousetrap.bindGlobal('command+o', function(e) {
+        actions_open($);
+        return false;
+    });
+
+    // RUN - Cmd/Crtl + R
+    focused_ctx.window.Mousetrap.bindGlobal('command+r', function(e) {
+        actions_run();
+        return false;
+    });
+
+    // SAVE - Cmd/Crtl + S
+    focused_ctx.window.Mousetrap.bindGlobal('command+s', function(e) {
+        actions_save($);
+        return false;
+    });
+
+    // SAVE AS - Cmd/Crtl + Shift + S
+    focused_ctx.window.Mousetrap.bindGlobal('command+shift+s', function(e) {
+        actions_save_as($);
+        return false;
+    });
+
+    // QUIT - Cmd/Ctrl + Q
+    focused_ctx.window.Mousetrap.bindGlobal('command+q', function(e) {
+        if (focused_ctx.confirm('Are you sure you want to quit Codepoems without save?')) {
+            actions_quit();
+        }
+        return false;
+    });
+
+    // INDENT - Cmd/Ctrl + T
+    focused_ctx.window.Mousetrap.bindGlobal('command+t', function(e) {
+        actions_indent();
+        return false;
+    });
+
+    // DEV TOOL - F12
+    focused_ctx.window.Mousetrap.bindGlobal('f12', function(e) {
+        actions_devTool();
+        return false;
+    });
+
+    // LIVE DOCUMENTATION - Cmd/Ctrl + 1
+    focused_ctx.window.Mousetrap.bindGlobal('command+1', function(e) {
+        actions_live_documentation();
+        return false;
+    });
+
+    // P5M - Cmd/Ctrl + 2
+    focused_ctx.window.Mousetrap.bindGlobal('command+2', function(e) {
+        actions_p5_modules();
+        return false;
+    });
+
+    // EXAMPLES - Cmd/Ctrl + 3
+    focused_ctx.window.Mousetrap.bindGlobal('command+3', function(e) {
+        actions_examples();
+        return false;
+    });
+
+    // SETTINGS - Cmd/Ctrl + 0
+    focused_ctx.window.Mousetrap.bindGlobal('command+0', function(e) {
+        actions_settings();
+        return false;
+    });
+
+}
+
 
 
 /*
@@ -281,25 +357,24 @@ function clipboardFix() {
     } catch (ex) {}
 }
 
-
-/*
-  save_keymap()
-
-  Temporal path for the save keymap.
-
-  */
-
-function save_keymap() {
-    var $ = global.app.focused_ctx.window.$;
-    actions_save($);
-}
-
 /*
   Actions
   
-  Here starts the actions.
+  Here starts the UI actions.
 
   */
+
+/*
+
+  actions_new();
+
+  Starts a new blank project.
+
+ */
+
+function actions_new() {
+    p5manager.newProject();
+}
 
 
 /*
