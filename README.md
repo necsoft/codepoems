@@ -23,6 +23,8 @@ This is my first open source project, I apologize for the newbie stuff. This is 
 # P5M (Processing Modules)
 I'm working with a dependecy injection for Processing called [P5M](https://github.com/necsoft/P5M), this version let's you use these modules in your project.
 
+![](http://i.imgur.com/tXl7eUQ.png)
+
 # Technology Involved
 Codepoems is built using [io.js](https://iojs.org), [nwjs](http://nwjs.io/) and the processing-java CLI.
 
