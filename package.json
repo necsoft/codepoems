@@ -26,6 +26,7 @@
   },
   "scripts": {
     "build_osx64": "rm -rf build/osx64/ && nwbuild --version 0.12.2 --macIcns ./icon/codepoems.icns --platforms osx64 -o ./build/ ./",
+    "build_linux64": "rm -rf build/linux64/ && nwbuild --version 0.12.2 --platforms linux64 -o ./build/ ./",
     "build_win64": "rm -rf build/win64/ && nwbuild --version 0.12.2 --winIco ./icon/codepoems.ico --platforms win64 -o ./build/ ./"
   }
 }
