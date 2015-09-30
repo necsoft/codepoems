@@ -11,3 +11,16 @@
   display: block;
   text-align: center;
 }
+
+/* line 13, ../sass/win_install_processing_java.scss */
+#open_anyways {
+  text-align: center;
+  text-transform: uppercase;
+  color: #999;
+  cursor: pointer;
+}
+
+/* line 20, ../sass/win_install_processing_java.scss */
+#open_anyways:hover {
+  color: #fff;
+}

@@ -39,7 +39,7 @@ exports.installProcessingJava = function() {
     var gui = window.require("nw.gui");
     gui.Window.open('win_install_processing_java.html', {
         "width": 600,
-        "height": 400,
+        "height": 440,
         "toolbar": false,
         "resizable": false
     });
