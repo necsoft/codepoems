@@ -1,1 +1,1 @@
-{"font_size":16,"default_template":"\n// Welcome to codepoems\n\nvoid setup(){\n\tsize(1000,500);\n}\n\nvoid draw(){\n\tcolorMode(HSB);\n\tbackground(random(255),255,255);\n}","theme":"codepoems-dark"}
+{"font_size":16,"default_template":"// Welcome to Codepoems!\n// (This is the default template, you can change it in preferences)\n\nvoid setup(){\n  size(800,800);\n  background(0);\n}\n\nvoid draw(){\n  \n}\n","theme":"codepoems-dark"}
