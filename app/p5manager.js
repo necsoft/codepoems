@@ -422,7 +422,7 @@ function runUndeclaredProject(project, ctx) {
 function runP5process(ctx, project, sketch_dir, build_dir) {
 
     // Spawn processing-java
-    p5process = spawn('processing-java', ['--sketch=' + sketch_dir, '--output=' + build_dir, '--run', '--force'], {
+    p5process = spawn('processing-java', ['--sketch=' + sketch_dir, '--output=' + build_dir, '--force', '--run'], {
         detached: true
     });
 
