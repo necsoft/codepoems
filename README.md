@@ -34,7 +34,7 @@ The current release is only for Mac OS X, but I'm working in a Windows and Linux
 * **[Download Codepoems v0.8.0-alpha for OS X](https://github.com/necsoft/codepoems/releases)**
 
 # Building
-You need to have [node-webkit-builder](https://github.com/mllrsohn/node-webkit-builder) in order to run these commands. The node-webkit-builder creates a builder folder with the packages.
+You need to have [node-webkit-builder](https://github.com/mllrsohn/node-webkit-builder) in order to run these commands. The node-webkit-builder creates a builder folder with the packages. If you want to "compile" on the fly you can check [my sublime-build for Sublime text](https://github.com/necsoft/codepoems/wiki/My-sublime-build-for-nwjs).
 
 #### Building for OSX64
 ```
